@@ -1,0 +1,31 @@
+{
+  "name": "atalasoft-web-document-viewer",
+  "description": "Atalasoft JavaScript library for presenting images and documents, including PDF Forms, on a web page.",
+  "main": [
+    "atalaWebDocumentViewer.js",
+    "atalaWebDocumentViewer.css"
+  ],
+  "keywords": [
+    "Atalasoft",
+    "imaging",
+    "image",
+    "web",
+    "javascript"
+  ],
+  "authors": [
+    "Atalasoft"
+  ],
+  "license": "https://www.atalasoft.com/Pricing/Licensing-Overview",
+  "homepage": "https://www.atalasoft.com/Products/DotImage",
+  "ignore": [
+  "icon.png",
+  "favicon.ico"
+  ],
+  "dependencies": {
+    "jquery-ui": "~1.8.14",
+    "raphael": "^2.1.2",
+    "jquery": "^1.7.1",
+    "jquery.easing": "jquery-easing-original#^1.4.1"
+  },
+  "version": "10.6.19"
+}
