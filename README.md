@@ -1,5 +1,5 @@
 # web-document-viewer
-Atalasoft web document viewer repository is for distribution on bower. 
+Atalasoft Web Document Viewer repository is for distribution on bower. 
 
 ### Installation
 You can install this package locally either with bower.
