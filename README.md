@@ -75,10 +75,10 @@ All installed dependencies should be referenced in the head section.
 <body>
 <form id="atala-form" runat="server">
     <div>
-        <div id="atala-document-toolbar" class="atala-document-toolbar"></div>
+        <div id="atala-document-toolbar"></div>
         <div>
-            <div id="atala-document-thumbs" class="atala-document-thumbs"></div>
-            <div id="atala-document-container" class="atala-document-container"></div>
+            <div id="atala-document-thumbs"></div>
+            <div id="atala-document-container"></div>
         </div>
     </div>
 </form>
