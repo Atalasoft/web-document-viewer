@@ -1,5 +1,10 @@
+<a href="http://www.atalasoft.com/" style="display:inline-block"><img src="http://atalasoft.github.io/public/logo.png" alt="Atalasoft" display="inline" height="200px"></a>
+<a href="https://bower.io/" style="display:inline-block">
+<img src="https://bower.io/img/bower-logo.svg" alt="Bower" display="inline" height="200px"></a> 
+
+
 # Atalasoft Web Document Viewer control
-Atalasoft Web Document Viewer repository is for distribution on bower. 
+[Atalasoft](http://www.atalasoft.com/) Web Document Viewer repository is for distribution on [Bower](https://bower.io/). 
 
 ### Installation
 You can install this package locally either with bower.
@@ -92,7 +97,7 @@ All installed dependencies should be referenced in the head section.
 WDVHandler.ashx as serverurl is the name of the class inherited from IHttpHandler [C#].
 See [NuGet Tutorial I - Web Document Viewer](http://atalasoft.github.io/2016/06/21/nuget-tutorial-wdv/) to deploy server-side using NuGet packages.
 
-### Licencing 
+### Licensing 
 
 To run the projects locally, you need to have DotImage license. There are various way to acquire the license:
 
