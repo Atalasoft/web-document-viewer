@@ -16,7 +16,7 @@ bower install web-document-viewer --save
 # Later, you can use easily update with:
 bower update
 ```
-> Note that web-document-viewer requires jquery, jquery-ui, jquery.easing, raphael packages as dependencies.
+> Note that web-document-viewer requires Jquery, Jquery-ui, Jquery.easing, Raphael packages as dependencies.
 
 ### Licencing 
 
