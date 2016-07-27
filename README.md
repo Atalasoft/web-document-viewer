@@ -18,20 +18,6 @@ bower update
 ```
 > Note that web-document-viewer requires Jquery, Jquery-ui, Jquery.easing, Raphael packages as dependencies.
 
-### Licencing 
-
-To run the demo locally, you need to have DotImage license. There are various way to acquire the license:
-
-Use [DotImage Activation Wizard Visual Studio extension](https://visualstudiogallery.msdn.microsoft.com/88ff07c9-fe68-48bd-bfdc-3fbc8a0ec1db)
-Download complete DotImage installation package from [Atalasoft web site](https://atalasoft.com/). You will be prompted to activate the product during installation
-
-Web Document Viewer object cross browser client-side script. 
-Copyright 2003-2016 Atalasoft Inc. All Rights Reserved.
-
-This source code is property of Atalasoft, Inc. (http://www.atalasoft.com/)
-Permission for usage and modification of this code is only permitted 
-with the purchase of a source code license.
-
 ### Using web-document-viewer
 Here is a sample on how to create client-side view for web-document-viewer.
 All installed dependencies should be referenced in the head section.
@@ -52,8 +38,7 @@ All installed dependencies should be referenced in the head section.
     <style type="text/css">
 		#atala-document-toolbar
 		{
-		    width: 768px;
-		    background-color: #eee;
+		    width: 800px;
 		}
 		
 		#atala-document-thumbs
@@ -67,7 +52,7 @@ All installed dependencies should be referenced in the head section.
 		#atala-document-container
 		{
 			height:600px;
-			width: 618px;
+			width: 600px;
 			display: inline-block;
 		}
 	</style>
@@ -107,6 +92,21 @@ All installed dependencies should be referenced in the head section.
 WDVHandler.ashx as serverurl is the name of the class inherited from IHttpHandler [C#].
 See [NuGet Tutorial I - Web Document Viewer](http://atalasoft.github.io/2016/06/21/nuget-tutorial-wdv/) to deploy server-side using NuGet packages.
 
+### Licencing 
+
+To run the projects locally, you need to have DotImage license. There are various way to acquire the license:
+
+ - Use [DotImage Activation Wizard Visual Studio extension](https://visualstudiogallery.msdn.microsoft.com/88ff07c9-fe68-48bd-bfdc-3fbc8a0ec1db)
+ - Download complete DotImage installation package from [Atalasoft web site](https://atalasoft.com). You will be prompted to activate the product during installation
+
+Web Document Viewer object cross browser client-side script. 
+Copyright 2003-2016 Atalasoft Inc. All Rights Reserved.
+
+This source code is property of Atalasoft, Inc. (http://www.atalasoft.com/)
+Permission for usage and modification of this code is only permitted 
+with the purchase of a source code license.
+
 ### Related Articles
 
-[Introducing NuGet Packages](http://atalasoft.github.io/2016/05/03/introducing-nuget/)
+ - [Introducing NuGet Packages](http://atalasoft.github.io/2016/05/03/introducing-nuget/)
+ - [Introducing Activation Wizard Extension](http://atalasoft.github.io/2016/05/14/introducing-activation-wizard-extension/) 
