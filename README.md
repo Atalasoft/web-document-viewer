@@ -30,6 +30,7 @@ with the purchase of a source code license.
 ### Using web-document-viewer
 Here is a sample on how to create client-side view for web-document-viewer.
 All installed dependencies should be referenced in the head section.
+
 ```html
 <head  runat="server">
     <meta charset="utf-8" />
@@ -108,6 +109,6 @@ All installed dependencies should be referenced in the head section.
 </script>
 </body>
 ```
-
+WDVHandler.ashx as serverurl is the name of the class inherited from IHttpHandler [C#].
 For demo on how to deploy server-side uning NuGet please see [here](http://atalasoft.github.io/2016/06/21/nuget-tutorial-wdv/)
 
