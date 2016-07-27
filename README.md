@@ -1,4 +1,4 @@
-# web-document-viewer
+# Atalasoft Web Document Viewer control
 Atalasoft Web Document Viewer repository is for distribution on bower. 
 
 ### Installation
@@ -19,6 +19,11 @@ bower update
 > Note that web-document-viewer requires Jquery, Jquery-ui, Jquery.easing, Raphael packages as dependencies.
 
 ### Licencing 
+
+To run the demo locally, you need to have DotImage license. There are various way to acquire the license:
+
+Use [DotImage Activation Wizard Visual Studio extension](https://visualstudiogallery.msdn.microsoft.com/88ff07c9-fe68-48bd-bfdc-3fbc8a0ec1db)
+Download complete DotImage installation package from [Atalasoft web site](https://atalasoft.com/). You will be prompted to activate the product during installation
 
 Web Document Viewer object cross browser client-side script. 
 Copyright 2003-2016 Atalasoft Inc. All Rights Reserved.
@@ -45,23 +50,13 @@ All installed dependencies should be referenced in the head section.
 
     <script src="bower_components/atalasoft-web-document-viewer/atalaWebDocumentViewer.js" type="text/javascript"></script>
     <style type="text/css">
-		html, body, form
-	    {	
-			width:780px;
-			margin:0px;
-			padding:0px;
-			font-family: sans-serif;
-		}
-		
 		#atala-document-toolbar
 		{
-		    top:0;
-		    left:0;
 		    width: 768px;
 		    background-color: #eee;
 		}
 		
-		.atala-document-thumbs
+		#atala-document-thumbs
 		{
 		    float:left;
 		    display: inline-block;
@@ -110,5 +105,8 @@ All installed dependencies should be referenced in the head section.
 </body>
 ```
 WDVHandler.ashx as serverurl is the name of the class inherited from IHttpHandler [C#].
-For demo on how to deploy server-side uning NuGet please see [here](http://atalasoft.github.io/2016/06/21/nuget-tutorial-wdv/)
+See [NuGet Tutorial I - Web Document Viewer](http://atalasoft.github.io/2016/06/21/nuget-tutorial-wdv/) to deploy server-side using NuGet packages.
 
+### Related Articles
+
+[Introducing NuGet Packages](http://atalasoft.github.io/2016/05/03/introducing-nuget/)
