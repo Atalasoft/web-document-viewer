@@ -1,4 +1,4 @@
-<a href="http://www.atalasoft.com/" style="display:inline-block"><img src="http://atalasoft.github.io/public/logo.png" alt="Atalasoft" display="inline" height="200px"></a>
+<a href="http://www.atalasoft.com/" style="display:inline-block"><img src="http://atalasoft.github.io/public/butterfly.png" alt="Atalasoft" display="inline" height="200px"></a>
 <a href="https://bower.io/" style="display:inline-block">
 <img src="https://bower.io/img/bower-logo.svg" alt="Bower" display="inline" height="200px"></a> 
 
