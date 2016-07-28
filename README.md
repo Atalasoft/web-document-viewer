@@ -28,7 +28,7 @@ Here is a sample on how to create client-side view for web-document-viewer.
 All installed dependencies should be referenced in the head section.
 
 ```html
-<head  runat="server">
+<head>
     <meta charset="utf-8" />
     <title>Web Document Viewer Sample</title>
     <link href="bower_components/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -63,7 +63,6 @@ All installed dependencies should be referenced in the head section.
 	</style>
 </head>
 <body>
-<form id="atala-form" runat="server">
     <div>
         <div id="atala-document-toolbar"></div>
         <div>
@@ -71,7 +70,6 @@ All installed dependencies should be referenced in the head section.
             <div id="atala-document-container"></div>
         </div>
     </div>
-</form>
 
 <script>
     var _viewer;
