@@ -32,14 +32,14 @@ All installed dependencies should be referenced in the head section.
     <meta charset="utf-8" />
     <title>Web Document Viewer Sample</title>
     <link href="bower_components/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-    <link href="bower_components/atalasoft-web-document-viewer/atalaWebDocumentViewer.css" rel="stylesheet" type="text/css" />
+    <link href="bower_components/web-document-viewer/atalaWebDocumentViewer.css" rel="stylesheet" type="text/css" />
 
     <script src="bower_components/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="bower_components/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
     <script src="bower_components/jquery.easing/jquery.easing.min.js" type="text/javascript"></script>
     <script src="bower_components/raphael/raphael.min.js" type="text/javascript"></script>
 
-    <script src="bower_components/atalasoft-web-document-viewer/atalaWebDocumentViewer.js" type="text/javascript"></script>
+    <script src="bower_components/web-document-viewer/atalaWebDocumentViewer.js" type="text/javascript"></script>
     <style type="text/css">
 		#atala-document-toolbar
 		{
