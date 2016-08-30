@@ -100,7 +100,7 @@ See [NuGet Tutorial I - Web Document Viewer](http://atalasoft.github.io/2016/06/
 To run the projects locally, you need to have a DotImage license. There are various way to acquire the license:
 
  - Use [DotImage Activation Wizard Visual Studio extension](https://visualstudiogallery.msdn.microsoft.com/88ff07c9-fe68-48bd-bfdc-3fbc8a0ec1db)
- - Download a complete DotImage installation package from [Atalasoft web site](https://atalasoft.com). You will be prompted to activate the product during installation
+ - Download a complete DotImage installation package from the [Atalasoft web site](https://atalasoft.com). You will be prompted to activate the product during installation
 
 Web Document Viewer object cross browser client-side script. 
 Copyright 2003-2016 Atalasoft Inc. All Rights Reserved.
