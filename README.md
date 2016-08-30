@@ -7,7 +7,7 @@
 [Atalasoft](http://www.atalasoft.com/) Web Document Viewer repository is for distribution on [Bower](https://bower.io/). 
 
 ### Installation
-You can install this package locally either with bower.
+You can install this package locally with bower.io.
 ```shell
 # To get the latest stable version, use bower from the command line.
 bower install web-document-viewer
@@ -24,7 +24,7 @@ bower update
 > Note that web-document-viewer requires Jquery, Jquery-ui, Jquery.easing, Raphael packages as dependencies.
 
 ### Using web-document-viewer
-Here is a sample on how to create client-side view for web-document-viewer.
+Here is a sample on how to create a client-side view for web-document-viewer.
 All installed dependencies should be referenced in the head section.
 
 ```html
@@ -97,10 +97,10 @@ See [NuGet Tutorial I - Web Document Viewer](http://atalasoft.github.io/2016/06/
 
 ### Licensing 
 
-To run the projects locally, you need to have DotImage license. There are various way to acquire the license:
+To run the projects locally, you need to have a DotImage license. There are various way to acquire the license:
 
  - Use [DotImage Activation Wizard Visual Studio extension](https://visualstudiogallery.msdn.microsoft.com/88ff07c9-fe68-48bd-bfdc-3fbc8a0ec1db)
- - Download complete DotImage installation package from [Atalasoft web site](https://atalasoft.com). You will be prompted to activate the product during installation
+ - Download a complete DotImage installation package from the [Atalasoft web site](https://atalasoft.com). You will be prompted to activate the product during installation
 
 Web Document Viewer object cross browser client-side script. 
 Copyright 2003-2016 Atalasoft Inc. All Rights Reserved.
