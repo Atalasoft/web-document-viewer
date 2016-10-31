@@ -4,8 +4,8 @@
 .atala-ui { font-size: 0.8em; }
 .atala-ui-button { font-size: 0.8em; margin-left:1px; }
 
-.atala-ui-icon { width: 16px; height: 16px; background-image: url('images/atala-ui-icons-16.png'); }
-.ui-state-default .atala-ui-icon { background-image: url('images/atala-ui-icons-16.png'); }
+.atala-ui-icon { width: 16px; height: 16px; background-image: url('images/atala-ui-icons-16.png') !important; }
+.ui-state-default .atala-ui-icon { background-image: url('images/atala-ui-icons-16.png') !important; }
         
 .atala-ui-icon-page-prev { background-position: 0 0; }
 .atala-ui-icon-page-next { background-position: -16px 0; }
@@ -44,9 +44,11 @@
 .atala-ui-form-highlight { background-color: rgb(204, 215, 255) !important; background-color: rgba(204, 215, 255, .7) !important }
 .atala-ui-form-required { border: 3px solid red !important }
 
-.atala_search_container { width: 200px; float: right; }
+.atala_search_container { float: right; overflow: hidden; white-space: nowrap; max-width: 200px;min-width: 120px; }
+.atala_search_container > span { display: table-cell;vertical-align: middle;}
+.atala_search_next, .atala_search_prev { margin: 0; }
+
 .atala_search_input { 
-    width: 100%; 
     border: 1px solid #dedede; 
     border-right: 0; 
     box-sizing: border-box; 
@@ -54,7 +56,7 @@
     background: #fff url(data:image/gif;base64,R0lGODlhBwAHAIAAAP///5KSkiH5BAAAAAAALAAAAAAHAAcAAAIMTICmsGrIXnLxuDMLADs=) no-repeat right -10px center;
     padding: 3px 18px 3px 4px;
     transition: background 0.4s;
-    height: 30px;
+    width: 100%;
 }
 
 .atala_search_input.atala_search_input_clearable  { background-position: right 5px center; }
