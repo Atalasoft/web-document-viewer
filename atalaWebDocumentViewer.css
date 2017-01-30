@@ -44,6 +44,10 @@
 .atala-ui-form-highlight { background-color: rgb(204, 215, 255) !important; background-color: rgba(204, 215, 255, .7) !important }
 .atala-ui-form-required { border: 3px solid red !important }
 
+.atala_page_div {
+    vertical-align: top;    
+}
+
 .atala_search_container { float: right; overflow: hidden; white-space: nowrap; max-width: 200px;min-width: 120px; }
 .atala_search_container > span { display: table-cell;vertical-align: middle;}
 .atala_search_next, .atala_search_prev { margin: 0; }
@@ -73,4 +77,8 @@
 
 .atala_page_loading {
     background: url('images/atala-ui-spinner.gif') center no-repeat;
+}
+
+.atala_thumb_caption, .atala_page_number{
+    font-size: medium
 }
