@@ -66,6 +66,11 @@
 .atala_search_input.atala_search_input_loading {	
 	background: url(data:image/gif;base64,R0lGODlhBwAHAIAAAP///5KSkiH5BAAAAAAALAAAAAAHAAcAAAIMTICmsGrIXnLxuDMLADs=) right 5px center no-repeat, url('images/atala-ui-spinner.gif') right 15px center no-repeat;
 	padding-right: 35px;
+    background-size: auto, 15px;
 	background-color: #fff;
 	transition: background 0	
+}
+
+.atala_page_loading {
+    background: url('images/atala-ui-spinner.gif') center no-repeat;
 }
