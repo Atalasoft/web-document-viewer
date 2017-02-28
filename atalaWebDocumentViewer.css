@@ -89,3 +89,9 @@
 .atala_thumb_caption, .atala_page_number{
     font-size: medium
 }
+
+.atala_drag_placeholder {
+    /* override placeholder width/height using !important modifier if needed */
+    border: 1px solid #BBBBBB;
+    vertical-align: middle;
+}
