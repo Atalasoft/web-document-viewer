@@ -44,7 +44,14 @@
 .atala-ui-form-highlight { background-color: rgb(204, 215, 255) !important; background-color: rgba(204, 215, 255, .7) !important }
 .atala-ui-form-required { border: 3px solid red !important }
 
-.atala_page_div {
+/* set box sizing to default for internal divs since changing to 'border-box' could affect internal sizing calculations */
+.atala_main_container div {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.atala_page_div, .atala_dom_edge_first, .atala_dom_edge_last  {
     vertical-align: top;    
 }
 
@@ -81,4 +88,10 @@
 
 .atala_thumb_caption, .atala_page_number{
     font-size: medium
+}
+
+.atala_drag_placeholder {
+    /* override placeholder width/height using !important modifier if needed */
+    border: 1px solid #BBBBBB;
+    vertical-align: middle;
 }
