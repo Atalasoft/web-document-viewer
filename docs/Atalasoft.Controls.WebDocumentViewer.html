@@ -1,0 +1,8929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge" >
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>WebDocumentViewer - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <img class="logo" src="http://atalasoft.github.io/public/logo.png"></img>
+    <input class="search" type="search" placeholder="Search API Reference"/>
+
+    <h2><a href="index.html">Home</a></h2><h3>Tutorials</h3><ul><li class="item"><a href="tutorial-annotations-burn.html">Burn Annotations</a></li><li class="item"><a href="tutorial-getting-started-web-document-viewer.html">Getting Started with Web Document Viewer</a><ul><li class="item"><a href="tutorial-demo-application.html">Demo Application</a></li><li class="item"><a href="tutorial-demo-application-aspnet-core.html">Demo Application (ASP.NET Core)</a></li></ul></li><li class="item"><a href="tutorial-programming-wdv-server.html">Programming Document Viewer Server</a><ul><li class="item"><a href="tutorial-programming-wdv-server-save-doc.html">Saving Document</a></li></ul></li></ul><h3>Namespaces</h3><ul><li class="item"><a href="Atalasoft.html">Atalasoft</a></li><li class="item"><a href="Atalasoft.Annotations.html">Annotations</a><ul class='members'><li data-type='member' data-name='Atalasoft.Annotations.AnnotationTypes' ><a href="Atalasoft.Annotations.html#.AnnotationTypes">AnnotationTypes</a></li></ul></li><li class="item"><a href="Atalasoft.Controls.html">Controls</a></li><li class="item"><a href="Atalasoft.Utils.html">Utils</a><ul class='members'><li data-type='member' data-name='Atalasoft.Utils.Browser' ><a href="Atalasoft.Utils.html#.Browser">Browser</a></li><li data-type='member' data-name='Atalasoft.Utils.Fitting' ><a href="Atalasoft.Utils.html#.Fitting">Fitting</a></li><li data-type='member' data-name='Atalasoft.Utils.MouseToolCursor' ><a href="Atalasoft.Utils.html#.MouseToolCursor">MouseToolCursor</a></li><li data-type='member' data-name='Atalasoft.Utils.MouseToolType' ><a href="Atalasoft.Utils.html#.MouseToolType">MouseToolType</a></li><li data-type='member' data-name='Atalasoft.Utils.PageSelection' ><a href="Atalasoft.Utils.html#.PageSelection">PageSelection</a></li><li data-type='member' data-name='Atalasoft.Utils.ScrollArea' ><a href="Atalasoft.Utils.html#.ScrollArea">ScrollArea</a></li><li data-type='member' data-name='Atalasoft.Utils.ScrollDirection' ><a href="Atalasoft.Utils.html#.ScrollDirection">ScrollDirection</a></li></ul></li></ul><h3>Classes</h3><ul><li class="item"><a href="Atalasoft.Controls.WebDocumentThumbnailer.html">WebDocumentThumbnailer</a><ul class='methods'><li data-type='method' data-name='Atalasoft.Controls.WebDocumentThumbnailer#activate' ><a href="Atalasoft.Controls.WebDocumentThumbnailer.html#activate">activate</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentThumbnailer#getSelectedPageIndex' ><a href="Atalasoft.Controls.WebDocumentThumbnailer.html#getSelectedPageIndex">getSelectedPageIndex</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentThumbnailer#isActive' ><a href="Atalasoft.Controls.WebDocumentThumbnailer.html#isActive">isActive</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentThumbnailer#scrollToThumb' ><a href="Atalasoft.Controls.WebDocumentThumbnailer.html#scrollToThumb">scrollToThumb</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentThumbnailer#selectThumb' ><a href="Atalasoft.Controls.WebDocumentThumbnailer.html#selectThumb">selectThumb</a></li></ul><ul class='events'><li data-type='event' data-name='Atalasoft.Controls.WebDocumentThumbnailer#event:thumbdragcomplete' ><a href="Atalasoft.Controls.WebDocumentThumbnailer.html#event:thumbdragcomplete">thumbdragcomplete</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentThumbnailer#event:thumbdragend' ><a href="Atalasoft.Controls.WebDocumentThumbnailer.html#event:thumbdragend">thumbdragend</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentThumbnailer#event:thumbdragstart' ><a href="Atalasoft.Controls.WebDocumentThumbnailer.html#event:thumbdragstart">thumbdragstart</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentThumbnailer#event:thumbselected' ><a href="Atalasoft.Controls.WebDocumentThumbnailer.html#event:thumbselected">thumbselected</a></li></ul><ul class='members'></ul></li><li class="item"><a href="Atalasoft.Controls.WebDocumentViewer.html">WebDocumentViewer</a><ul class='methods'><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#bind' ><a href="Atalasoft.Controls.WebDocumentViewer.html#bind">bind</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#dispose' ><a href="Atalasoft.Controls.WebDocumentViewer.html#dispose">dispose</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#empty' ><a href="Atalasoft.Controls.WebDocumentViewer.html#empty">empty</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#fit' ><a href="Atalasoft.Controls.WebDocumentViewer.html#fit">fit</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#getCurrentPageIndex' ><a href="Atalasoft.Controls.WebDocumentViewer.html#getCurrentPageIndex">getCurrentPageIndex</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#getDocumentInfo' ><a href="Atalasoft.Controls.WebDocumentViewer.html#getDocumentInfo">getDocumentInfo</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#getZoom' ><a href="Atalasoft.Controls.WebDocumentViewer.html#getZoom">getZoom</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#isPageLoaded' ><a href="Atalasoft.Controls.WebDocumentViewer.html#isPageLoaded">isPageLoaded</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#isReady' ><a href="Atalasoft.Controls.WebDocumentViewer.html#isReady">isReady</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#next' ><a href="Atalasoft.Controls.WebDocumentViewer.html#next">next</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#openUrl' ><a href="Atalasoft.Controls.WebDocumentViewer.html#openUrl">openUrl</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#previous' ><a href="Atalasoft.Controls.WebDocumentViewer.html#previous">previous</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#reloadPage' ><a href="Atalasoft.Controls.WebDocumentViewer.html#reloadPage">reloadPage</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#reloadPage' ><a href="Atalasoft.Controls.WebDocumentViewer.html#reloadPage">reloadPage</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#save' ><a href="Atalasoft.Controls.WebDocumentViewer.html#save">save</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#scrollBy' ><a href="Atalasoft.Controls.WebDocumentViewer.html#scrollBy">scrollBy</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#scrollTo' ><a href="Atalasoft.Controls.WebDocumentViewer.html#scrollTo">scrollTo</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#setMouseTool' ><a href="Atalasoft.Controls.WebDocumentViewer.html#setMouseTool">setMouseTool</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#showPage' ><a href="Atalasoft.Controls.WebDocumentViewer.html#showPage">showPage</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#trigger' ><a href="Atalasoft.Controls.WebDocumentViewer.html#trigger">trigger</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#unbind' ><a href="Atalasoft.Controls.WebDocumentViewer.html#unbind">unbind</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#zoom' ><a href="Atalasoft.Controls.WebDocumentViewer.html#zoom">zoom</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#zoom' ><a href="Atalasoft.Controls.WebDocumentViewer.html#zoom">zoom</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer#zoomOut' ><a href="Atalasoft.Controls.WebDocumentViewer.html#zoomOut">zoomOut</a></li><li data-type='method' class='deprecated' data-name='Atalasoft.Controls.WebDocumentViewer#createAnnotationOnPage' ><a href="Atalasoft.Controls.WebDocumentViewer.html#createAnnotationOnPage">createAnnotationOnPage</a></li><li data-type='method' class='deprecated' data-name='Atalasoft.Controls.WebDocumentViewer#deleteAnnotationOnPageAtIndex' ><a href="Atalasoft.Controls.WebDocumentViewer.html#deleteAnnotationOnPageAtIndex">deleteAnnotationOnPageAtIndex</a></li><li data-type='method' class='deprecated' data-name='Atalasoft.Controls.WebDocumentViewer#deselectAll' ><a href="Atalasoft.Controls.WebDocumentViewer.html#deselectAll">deselectAll</a></li><li data-type='method' class='deprecated' data-name='Atalasoft.Controls.WebDocumentViewer#getAnnotationsFromPage' ><a href="Atalasoft.Controls.WebDocumentViewer.html#getAnnotationsFromPage">getAnnotationsFromPage</a></li><li data-type='method' class='deprecated' data-name='Atalasoft.Controls.WebDocumentViewer#setAnnotationDefaults' ><a href="Atalasoft.Controls.WebDocumentViewer.html#setAnnotationDefaults">setAnnotationDefaults</a></li><li data-type='method' class='deprecated' data-name='Atalasoft.Controls.WebDocumentViewer#setImages' ><a href="Atalasoft.Controls.WebDocumentViewer.html#setImages">setImages</a></li><li data-type='method' class='deprecated' data-name='Atalasoft.Controls.WebDocumentViewer#setStamps' ><a href="Atalasoft.Controls.WebDocumentViewer.html#setStamps">setStamps</a></li><li data-type='method' class='deprecated' data-name='Atalasoft.Controls.WebDocumentViewer#showPageNumber' ><a href="Atalasoft.Controls.WebDocumentViewer.html#showPageNumber">showPageNumber</a></li></ul><ul class='events'><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:beforehandlerrequest' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:beforehandlerrequest">beforehandlerrequest</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:documentinfochanged' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:documentinfochanged">documentinfochanged</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:documentloaded' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:documentloaded">documentloaded</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:documentsaved' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:documentsaved">documentsaved</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:documentunloaded' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:documentunloaded">documentunloaded</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:error' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:error">error</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:initialized' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:initialized">initialized</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:pagenumberchanged' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:pagenumberchanged">pagenumberchanged</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:pagerecycled' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:pagerecycled">pagerecycled</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:pageresize' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:pageresize">pageresize</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:pageshown' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:pageshown">pageshown</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:pagesizechanged' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:pagesizechanged">pagesizechanged</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:pagetextloaded' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:pagetextloaded">pagetextloaded</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:scriptsloaded' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:scriptsloaded">scriptsloaded</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:scroll' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:scroll">scroll</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:statusmessage' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:statusmessage">statusmessage</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:textselected' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:textselected">textselected</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:zoomchanged' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:zoomchanged">zoomchanged</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer#event:zoomstarted' ><a href="Atalasoft.Controls.WebDocumentViewer.html#event:zoomstarted">zoomstarted</a></li></ul><ul class='members'><li data-type='member' data-name='Atalasoft.Controls.WebDocumentViewer.domattributes' ><a href="Atalasoft.Controls.WebDocumentViewer.html#.domattributes">domattributes</a></li><li data-type='member' data-name='Atalasoft.Controls.WebDocumentViewer.domclasses' ><a href="Atalasoft.Controls.WebDocumentViewer.html#.domclasses">domclasses</a></li><li data-type='member' data-name='Atalasoft.Controls.WebDocumentViewer#annotations' ><a href="Atalasoft.Controls.WebDocumentViewer.html#annotations">annotations</a></li><li data-type='member' data-name='Atalasoft.Controls.WebDocumentViewer#config' ><a href="Atalasoft.Controls.WebDocumentViewer.html#config">config</a></li><li data-type='member' data-name='Atalasoft.Controls.WebDocumentViewer#document' ><a href="Atalasoft.Controls.WebDocumentViewer.html#document">document</a></li><li data-type='member' data-name='Atalasoft.Controls.WebDocumentViewer#text' ><a href="Atalasoft.Controls.WebDocumentViewer.html#text">text</a></li></ul></li><li class="item"><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html">AnnotationController</a><ul class='methods'><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#cancelDraw' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#cancelDraw">cancelDraw</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#createOnPage' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#createOnPage">createOnPage</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#deleteFromPage' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#deleteFromPage">deleteFromPage</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#deselectAll' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#deselectAll">deselectAll</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#deselectAllOnPage' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#deselectAllOnPage">deselectAllOnPage</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#getFromPage' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#getFromPage">getFromPage</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#getSelected' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#getSelected">getSelected</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#hideEditor' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#hideEditor">hideEditor</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#insertLayer' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#insertLayer">insertLayer</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#moveLayer' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#moveLayer">moveLayer</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#removeLayer' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#removeLayer">removeLayer</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#selectAll' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#selectAll">selectAll</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#selectAllOnPage' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#selectAllOnPage">selectAllOnPage</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#setDefaults' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#setDefaults">setDefaults</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#setImages' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#setImages">setImages</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#setStamps' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#setStamps">setStamps</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#showEditor' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#showEditor">showEditor</a></li></ul><ul class='events'><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationclicked' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationclicked">annotationclicked</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationcreated' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationcreated">annotationcreated</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationdeleted' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationdeleted">annotationdeleted</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationdoubleclicked' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationdoubleclicked">annotationdoubleclicked</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationdragend' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationdragend">annotationdragend</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationdragstart' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationdragstart">annotationdragstart</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationdrawend' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationdrawend">annotationdrawend</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationdrawstart' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationdrawstart">annotationdrawstart</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationloaded' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationloaded">annotationloaded</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationmousedown' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationmousedown">annotationmousedown</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationmousedownleft' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationmousedownleft">annotationmousedownleft</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationmousedownright' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationmousedownright">annotationmousedownright</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationmousemove' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationmousemove">annotationmousemove</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationmouseout' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationmouseout">annotationmouseout</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationmouseover' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationmouseover">annotationmouseover</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationmouseup' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationmouseup">annotationmouseup</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationmoved' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationmoved">annotationmoved</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationpinchresize' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationpinchresize">annotationpinchresize</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationrepainted' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationrepainted">annotationrepainted</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationresized' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationresized">annotationresized</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationrightclicked' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationrightclicked">annotationrightclicked</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationrotated' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationrotated">annotationrotated</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationscleared' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationscleared">annotationscleared</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationtouchend' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationtouchend">annotationtouchend</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationtouchmove' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationtouchmove">annotationtouchmove</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:annotationtouchstart' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:annotationtouchstart">annotationtouchstart</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:contextmenu' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:contextmenu">contextmenu</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:layerinserted' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:layerinserted">layerinserted</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:layermoved' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:layermoved">layermoved</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:layerremoved' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:layerremoved">layerremoved</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:layerschanged' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:layerschanged">layerschanged</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~AnnotationController#event:raphaelloaded' ><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#event:raphaelloaded">raphaelloaded</a></li></ul></li><li class="item"><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html">DocumentController</a><ul class='methods'><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~DocumentController#getPageReference' ><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html#getPageReference">getPageReference</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~DocumentController#getPageRotation' ><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html#getPageRotation">getPageRotation</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~DocumentController#insertPage' ><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html#insertPage">insertPage</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~DocumentController#movePage' ><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html#movePage">movePage</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~DocumentController#removePage' ><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html#removePage">removePage</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~DocumentController#rotatePage' ><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html#rotatePage">rotatePage</a></li></ul><ul class='events'><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~DocumentController#event:documentchanged' ><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html#event:documentchanged">documentchanged</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~DocumentController#event:pageinserted' ><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html#event:pageinserted">pageinserted</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~DocumentController#event:pagemoved' ><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html#event:pagemoved">pagemoved</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~DocumentController#event:pageremoved' ><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html#event:pageremoved">pageremoved</a></li><li data-type='event' data-name='Atalasoft.Controls.WebDocumentViewer~DocumentController#event:pagerotated' ><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html#event:pagerotated">pagerotated</a></li></ul></li><li class="item"><a href="Atalasoft.Controls.WebDocumentViewer-TextController.html">TextController</a><ul class='methods'><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController#clearSelection' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController.html#clearSelection">clearSelection</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController#copySelected' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController.html#copySelected">copySelected</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController#getPageText' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController.html#getPageText">getPageText</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController#getSelected' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController.html#getSelected">getSelected</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController#isPageTextLoaded' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController.html#isPageTextLoaded">isPageTextLoaded</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController#reloadPageText' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController.html#reloadPageText">reloadPageText</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController#resetPageText' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController.html#resetPageText">resetPageText</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController#search' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController.html#search">search</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController#selectPageText' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController.html#selectPageText">selectPageText</a></li></ul></li><li class="item"><a href="Atalasoft.Controls.WebDocumentViewer-TextController-TextSearchIterator.html">TextSearchIterator</a><ul class='methods'><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#getCurrentLineText' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController-TextSearchIterator.html#getCurrentLineText">getCurrentLineText</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#getQuery' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController-TextSearchIterator.html#getQuery">getQuery</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#isSearching' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController-TextSearchIterator.html#isSearching">isSearching</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#isValid' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController-TextSearchIterator.html#isValid">isValid</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#next' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController-TextSearchIterator.html#next">next</a></li><li data-type='method' data-name='Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#prev' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController-TextSearchIterator.html#prev">prev</a></li></ul><ul class='members'><li data-type='member' data-name='Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#wrap' ><a href="Atalasoft.Controls.WebDocumentViewer-TextController-TextSearchIterator.html#wrap">wrap</a></li></ul></li></ul><h3>Definitions</h3><ul><li class="item"><a href="AnnotationData.html">AnnotationData</a><ul class='methods'><li data-type='method' data-name='AnnotationData#getPageIndex' ><a href="AnnotationData.html#getPageIndex">getPageIndex</a></li><li data-type='method' data-name='AnnotationData#update' ><a href="AnnotationData.html#update">update</a></li></ul><ul class='members'><li data-type='member' data-name='AnnotationData.burn' ><a href="AnnotationData.html#.burn">burn</a></li><li data-type='member' data-name='AnnotationData.extra' ><a href="AnnotationData.html#.extra">extra</a></li><li data-type='member' data-name='AnnotationData.fill' ><a href="AnnotationData.html#.fill">fill</a></li><li data-type='member' data-name='AnnotationData.height' ><a href="AnnotationData.html#.height">height</a></li><li data-type='member' data-name='AnnotationData.movable' ><a href="AnnotationData.html#.movable">movable</a></li><li data-type='member' data-name='AnnotationData.name' ><a href="AnnotationData.html#.name">name</a></li><li data-type='member' data-name='AnnotationData.outline' ><a href="AnnotationData.html#.outline">outline</a></li><li data-type='member' data-name='AnnotationData.points' ><a href="AnnotationData.html#.points">points</a></li><li data-type='member' data-name='AnnotationData.readonly' ><a href="AnnotationData.html#.readonly">readonly</a></li><li data-type='member' data-name='AnnotationData.resizable' ><a href="AnnotationData.html#.resizable">resizable</a></li><li data-type='member' data-name='AnnotationData.rotatable' ><a href="AnnotationData.html#.rotatable">rotatable</a></li><li data-type='member' data-name='AnnotationData.rotation' ><a href="AnnotationData.html#.rotation">rotation</a></li><li data-type='member' data-name='AnnotationData.selectable' ><a href="AnnotationData.html#.selectable">selectable</a></li><li data-type='member' data-name='AnnotationData.selected' ><a href="AnnotationData.html#.selected">selected</a></li><li data-type='member' data-name='AnnotationData.src' ><a href="AnnotationData.html#.src">src</a></li><li data-type='member' data-name='AnnotationData.text' ><a href="AnnotationData.html#.text">text</a></li><li data-type='member' data-name='AnnotationData.tooltip' ><a href="AnnotationData.html#.tooltip">tooltip</a></li><li data-type='member' data-name='AnnotationData.type' ><a href="AnnotationData.html#.type">type</a></li><li data-type='member' data-name='AnnotationData.username' ><a href="AnnotationData.html#.username">username</a></li><li data-type='member' data-name='AnnotationData.visible' ><a href="AnnotationData.html#.visible">visible</a></li><li data-type='member' data-name='AnnotationData.width' ><a href="AnnotationData.html#.width">width</a></li><li data-type='member' data-name='AnnotationData.x' ><a href="AnnotationData.html#.x">x</a></li><li data-type='member' data-name='AnnotationData.y' ><a href="AnnotationData.html#.y">y</a></li></ul></li><li class="item"><a href="WebDocumentViewerConfig.html">WebDocumentViewerConfig</a><ul class='members'><li data-type='member' data-name='WebDocumentViewerConfig.allowannotations' ><a href="WebDocumentViewerConfig.html#.allowannotations">allowannotations</a></li><li data-type='member' data-name='WebDocumentViewerConfig.allowflick' ><a href="WebDocumentViewerConfig.html#.allowflick">allowflick</a></li><li data-type='member' data-name='WebDocumentViewerConfig.allowforms' ><a href="WebDocumentViewerConfig.html#.allowforms">allowforms</a></li><li data-type='member' data-name='WebDocumentViewerConfig.allowtext' ><a href="WebDocumentViewerConfig.html#.allowtext">allowtext</a></li><li data-type='member' data-name='WebDocumentViewerConfig.annotations' ><a href="WebDocumentViewerConfig.html#.annotations">annotations</a></li><li data-type='member' data-name='WebDocumentViewerConfig.annotationsurl' ><a href="WebDocumentViewerConfig.html#.annotationsurl">annotationsurl</a></li><li data-type='member' data-name='WebDocumentViewerConfig.columns' ><a href="WebDocumentViewerConfig.html#.columns">columns</a></li><li data-type='member' data-name='WebDocumentViewerConfig.direction' ><a href="WebDocumentViewerConfig.html#.direction">direction</a></li><li data-type='member' data-name='WebDocumentViewerConfig.documenturl' ><a href="WebDocumentViewerConfig.html#.documenturl">documenturl</a></li><li data-type='member' data-name='WebDocumentViewerConfig.fitting' ><a href="WebDocumentViewerConfig.html#.fitting">fitting</a></li><li data-type='member' data-name='WebDocumentViewerConfig.forcepagefit' ><a href="WebDocumentViewerConfig.html#.forcepagefit">forcepagefit</a></li><li data-type='member' data-name='WebDocumentViewerConfig.formurl' ><a href="WebDocumentViewerConfig.html#.formurl">formurl</a></li><li data-type='member' data-name='WebDocumentViewerConfig.jpeg' ><a href="WebDocumentViewerConfig.html#.jpeg">jpeg</a></li><li data-type='member' data-name='WebDocumentViewerConfig.maxwidth' ><a href="WebDocumentViewerConfig.html#.maxwidth">maxwidth</a></li><li data-type='member' data-name='WebDocumentViewerConfig.memorythreshold' ><a href="WebDocumentViewerConfig.html#.memorythreshold">memorythreshold</a></li><li data-type='member' data-name='WebDocumentViewerConfig.minwidth' ><a href="WebDocumentViewerConfig.html#.minwidth">minwidth</a></li><li data-type='member' data-name='WebDocumentViewerConfig.mousetool' ><a href="WebDocumentViewerConfig.html#.mousetool">mousetool</a></li><li data-type='member' data-name='WebDocumentViewerConfig.pageborderwidth' ><a href="WebDocumentViewerConfig.html#.pageborderwidth">pageborderwidth</a></li><li data-type='member' data-name='WebDocumentViewerConfig.pagebuffersize' ><a href="WebDocumentViewerConfig.html#.pagebuffersize">pagebuffersize</a></li><li data-type='member' data-name='WebDocumentViewerConfig.pageselectlocation' ><a href="WebDocumentViewerConfig.html#.pageselectlocation">pageselectlocation</a></li><li data-type='member' data-name='WebDocumentViewerConfig.pagespacing' ><a href="WebDocumentViewerConfig.html#.pagespacing">pagespacing</a></li><li data-type='member' data-name='WebDocumentViewerConfig.parent' ><a href="WebDocumentViewerConfig.html#.parent">parent</a></li><li data-type='member' data-name='WebDocumentViewerConfig.persistrotation' ><a href="WebDocumentViewerConfig.html#.persistrotation">persistrotation</a></li><li data-type='member' data-name='WebDocumentViewerConfig.savefileformat' ><a href="WebDocumentViewerConfig.html#.savefileformat">savefileformat</a></li><li data-type='member' data-name='WebDocumentViewerConfig.savepath' ><a href="WebDocumentViewerConfig.html#.savepath">savepath</a></li><li data-type='member' data-name='WebDocumentViewerConfig.scripturl' ><a href="WebDocumentViewerConfig.html#.scripturl">scripturl</a></li><li data-type='member' data-name='WebDocumentViewerConfig.serverurl' ><a href="WebDocumentViewerConfig.html#.serverurl">serverurl</a></li><li data-type='member' data-name='WebDocumentViewerConfig.showbuttontext' ><a href="WebDocumentViewerConfig.html#.showbuttontext">showbuttontext</a></li><li data-type='member' data-name='WebDocumentViewerConfig.showerrors' ><a href="WebDocumentViewerConfig.html#.showerrors">showerrors</a></li><li data-type='member' data-name='WebDocumentViewerConfig.showpageborder' ><a href="WebDocumentViewerConfig.html#.showpageborder">showpageborder</a></li><li data-type='member' data-name='WebDocumentViewerConfig.showpagenumber' ><a href="WebDocumentViewerConfig.html#.showpagenumber">showpagenumber</a></li><li data-type='member' data-name='WebDocumentViewerConfig.showpagenumbertooltip' ><a href="WebDocumentViewerConfig.html#.showpagenumbertooltip">showpagenumbertooltip</a></li><li data-type='member' data-name='WebDocumentViewerConfig.showrotatetools' ><a href="WebDocumentViewerConfig.html#.showrotatetools">showrotatetools</a></li><li data-type='member' data-name='WebDocumentViewerConfig.showscrollbars' ><a href="WebDocumentViewerConfig.html#.showscrollbars">showscrollbars</a></li><li data-type='member' data-name='WebDocumentViewerConfig.showselecttools' ><a href="WebDocumentViewerConfig.html#.showselecttools">showselecttools</a></li><li data-type='member' data-name='WebDocumentViewerConfig.showstatus' ><a href="WebDocumentViewerConfig.html#.showstatus">showstatus</a></li><li data-type='member' data-name='WebDocumentViewerConfig.tabular' ><a href="WebDocumentViewerConfig.html#.tabular">tabular</a></li><li data-type='member' data-name='WebDocumentViewerConfig.toolbarparent' ><a href="WebDocumentViewerConfig.html#.toolbarparent">toolbarparent</a></li><li data-type='member' data-name='WebDocumentViewerConfig.zoom' ><a href="WebDocumentViewerConfig.html#.zoom">zoom</a></li><li data-type='member' class='deprecated' data-name='WebDocumentViewerConfig.rows' ><a href="WebDocumentViewerConfig.html#.rows">rows</a></li></ul></li><li class="item"><a href="WebThumbnailerConfig.html">WebThumbnailerConfig</a><ul class='members'><li data-type='member' data-name='WebThumbnailerConfig.allowdragdrop' ><a href="WebThumbnailerConfig.html#.allowdragdrop">allowdragdrop</a></li><li data-type='member' data-name='WebThumbnailerConfig.backcolor' ><a href="WebThumbnailerConfig.html#.backcolor">backcolor</a></li><li data-type='member' data-name='WebThumbnailerConfig.dragdelay' ><a href="WebThumbnailerConfig.html#.dragdelay">dragdelay</a></li><li data-type='member' data-name='WebThumbnailerConfig.hovercolor' ><a href="WebThumbnailerConfig.html#.hovercolor">hovercolor</a></li><li data-type='member' data-name='WebThumbnailerConfig.maxwidth' ><a href="WebThumbnailerConfig.html#.maxwidth">maxwidth</a></li><li data-type='member' data-name='WebThumbnailerConfig.minwidth' ><a href="WebThumbnailerConfig.html#.minwidth">minwidth</a></li><li data-type='member' data-name='WebThumbnailerConfig.selectedcolor' ><a href="WebThumbnailerConfig.html#.selectedcolor">selectedcolor</a></li><li data-type='member' data-name='WebThumbnailerConfig.selectedhovercolor' ><a href="WebThumbnailerConfig.html#.selectedhovercolor">selectedhovercolor</a></li><li data-type='member' data-name='WebThumbnailerConfig.selectedindex' ><a href="WebThumbnailerConfig.html#.selectedindex">selectedindex</a></li><li data-type='member' data-name='WebThumbnailerConfig.showthumbcaption' ><a href="WebThumbnailerConfig.html#.showthumbcaption">showthumbcaption</a></li><li data-type='member' data-name='WebThumbnailerConfig.thumbcaptionformat' ><a href="WebThumbnailerConfig.html#.thumbcaptionformat">thumbcaptionformat</a></li><li data-type='member' data-name='WebThumbnailerConfig.thumbpadding' ><a href="WebThumbnailerConfig.html#.thumbpadding">thumbpadding</a></li></ul></li></ul><h3>Globals</h3><ul><li class="item"><a href="global.html#AnnotationCallback">AnnotationCallback</a></li><li class="item"><a href="global.html#AnnotationContextMenu">AnnotationContextMenu</a></li><li class="item"><a href="global.html#AnnotationContextMenuCallback">AnnotationContextMenuCallback</a></li><li class="item"><a href="global.html#AnnotationFill">AnnotationFill</a></li><li class="item"><a href="global.html#AnnotationHandler">AnnotationHandler</a></li><li class="item"><a href="global.html#AnnotationLineCap">AnnotationLineCap</a></li><li class="item"><a href="global.html#AnnotationOutline">AnnotationOutline</a></li><li class="item"><a href="global.html#AnnotationsConfig">AnnotationsConfig</a></li><li class="item"><a href="global.html#AnnotationTextConfig">AnnotationTextConfig</a></li><li class="item"><a href="global.html#BeforeHandlerRequestCallback">BeforeHandlerRequestCallback</a></li><li class="item"><a href="global.html#DocumentPageReference">DocumentPageReference</a></li><li class="item"><a href="global.html#ErrorCallback">ErrorCallback</a></li><li class="item"><a href="global.html#GetPageTextCallback">GetPageTextCallback</a></li><li class="item"><a href="global.html#MouseToolConfig">MouseToolConfig</a></li><li class="item"><a href="global.html#NotificationCallback">NotificationCallback</a></li><li class="item"><a href="global.html#OpenUrlCallback">OpenUrlCallback</a></li><li class="item"><a href="global.html#Point">Point</a></li><li class="item"><a href="global.html#ReloadPageTextCallback">ReloadPageTextCallback</a></li><li class="item"><a href="global.html#Request">Request</a></li><li class="item"><a href="global.html#TextMouseToolConfig">TextMouseToolConfig</a></li><li class="item"><a href="global.html#TextSearchCallback">TextSearchCallback</a></li><li class="item"><a href="global.html#TextSearchResult">TextSearchResult</a></li><li class="item"><a href="global.html#ThumbDragCompleteEventArgs">ThumbDragCompleteEventArgs</a></li><li class="item"><a href="global.html#ThumbDragEndCallback">ThumbDragEndCallback</a></li><li class="item"><a href="global.html#ThumbDragEndEventArgs">ThumbDragEndEventArgs</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">WebDocumentViewer</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+            <h2>
+                <span class="ancestors"><a href="Atalasoft.html">Atalasoft</a><a href="Atalasoft.Controls.html">.Controls</a>.</span>
+            
+            WebDocumentViewer
+            </h2>
+            
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    <h4 class="name" id="WebDocumentViewer"><span class="type-signature"></span>new WebDocumentViewer<span class="signature">(settings<span class="signature-attributes">opt</span>, openCallback<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {WebDocumentViewer}</span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Control that views, modifies, and saves documents, annotations and forms.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>[settings]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="WebDocumentViewerConfig.html">WebDocumentViewerConfig</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Object of key value pairs representing initial settings</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[openCallback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#OpenUrlCallback">OpenUrlCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>callback that is called when document load complete(if <a href="WebDocumentViewerConfig.html#.documenturl"><code> documenturl</code></a> is specified).</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A new control with the given settings.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">WebDocumentViewer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html">AnnotationController</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html">DocumentController</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Atalasoft.Controls.WebDocumentViewer-TextController.html">TextController</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+     
+
+    
+
+    
+        
+            <h3 class="subsection-title">Members</h3>
+        
+
+        
+            
+
+    <h4 class="name" id=".domattributes"><span class="type-signature">(static) </span>domattributes<span class="type-signature"> :string</span></h4>
+
+
+
+
+
+<div class="description">
+    <p>Exposes list of well-known attributes that are used to provide additional information for DOM elements</p>
+</div>
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr id=".atala_page_index">
+            
+                <td class="name"><code>atala_page_index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Index of the page currently displayed within the element. applies to elements having <code>.atala_page_div</code> class</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+
+    <h4 class="name" id=".domclasses"><span class="type-signature">(static, readonly) </span>domclasses<span class="type-signature"> :string</span></h4>
+
+
+
+
+
+<div class="description">
+    <p>Exposes the list of internal DOM elements classes that could be used to query and customize UI behavior.</p>
+</div>
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr id=".atala_page_div">
+            
+                <td class="name"><code>atala_page_div</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Page element class. Container for all page elements - image, annotations, forms, text, etc layers.</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_page_loading">
+            
+                <td class="name"><code>atala_page_loading</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Page image container that is in initial image load state</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_page_image_anchor">
+            
+                <td class="name"><code>atala_page_image_anchor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Page image anchor container element class</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_page_image">
+            
+                <td class="name"><code>atala_page_image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Page image element class</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_page_number">
+            
+                <td class="name"><code>atala_page_number</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Page index element class. see <code> showpagenumber</code> config option</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_active_page">
+            
+                <td class="name"><code>atala_active_page</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Active page class</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_active_thumb">
+            
+                <td class="name"><code>atala_active_thumb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Active thumbnail class</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_thumb_caption">
+            
+                <td class="name"><code>atala_thumb_caption</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Thumbnail caption class</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_toolbar">
+            
+                <td class="name"><code>atala_toolbar</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Document toolbar element class</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_annotation_toolbar">
+            
+                <td class="name"><code>atala_annotation_toolbar</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Annotations toolbar element class</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_toolbar_button">
+            
+                <td class="name"><code>atala_toolbar_button</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Toolbar button element class</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_main_container">
+            
+                <td class="name"><code>atala_main_container</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Class of the main outer object that holds the scrollbars</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_scroller">
+            
+                <td class="name"><code>atala_scroller</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Class of the inner object that controls scrolling</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_viewport">
+            
+                <td class="name"><code>atala_viewport</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Class of the inner object that defines the viewable area</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_content">
+            
+                <td class="name"><code>atala_content</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Inner content container object class</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_thumb_draggable">
+            
+                <td class="name"><code>atala_thumb_draggable</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Thumbnailer draggable area</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_drag_placeholder">
+            
+                <td class="name"><code>atala_drag_placeholder</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Placeholder element that is inserted into Thumbnailer to highlight drop location</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_dom_edge_first">
+            
+                <td class="name"><code>atala_dom_edge_first</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Placeholder inserted before page dom object that is used in virtual scrolling</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_dom_edge_last">
+            
+                <td class="name"><code>atala_dom_edge_last</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Placeholder inserted after page dom object that is used in virtual scrolling</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_scroll_horizontal">
+            
+                <td class="name"><code>atala_scroll_horizontal</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Inner horizontal scroll bar object class</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_scroll_vertical">
+            
+                <td class="name"><code>atala_scroll_vertical</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Inner vertical scroll bar object</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_page_label">
+            
+                <td class="name"><code>atala_page_label</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Toolbar span element containing the page number</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_context_menu">
+            
+                <td class="name"><code>atala_context_menu</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Context or dropdown menu element. Could be multiple instances within same viewer DOM sub tree</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_statusbar">
+            
+                <td class="name"><code>atala_statusbar</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Status div</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_save">
+            
+                <td class="name"><code>atala_tool_button_save</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Save Changes&quot; toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_page_prev">
+            
+                <td class="name"><code>atala_tool_button_page_prev</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Previous Page&quot; toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_page_next">
+            
+                <td class="name"><code>atala_tool_button_page_next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Next Page&quot; toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_zoom_out">
+            
+                <td class="name"><code>atala_tool_button_zoom_out</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Zoom Out&quot; toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_zoom_in">
+            
+                <td class="name"><code>atala_tool_button_zoom_in</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Zoom In&quot; toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_fit_none">
+            
+                <td class="name"><code>atala_tool_button_fit_none</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Full Size&quot; toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_fit_best">
+            
+                <td class="name"><code>atala_tool_button_fit_best</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Best Fit&quot; toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_fit_width">
+            
+                <td class="name"><code>atala_tool_button_fit_width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Fit To Width&quot; toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_zoom_area">
+            
+                <td class="name"><code>atala_tool_button_zoom_area</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Zoom Area&quot; toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_rotate_left">
+            
+                <td class="name"><code>atala_tool_button_rotate_left</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Rotate Left&quot; tooltip button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_rotate_right">
+            
+                <td class="name"><code>atala_tool_button_rotate_right</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Rotate Right&quot; tooltip button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_text_tool">
+            
+                <td class="name"><code>atala_tool_button_text_tool</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Text selection&quot; toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_pan_tool">
+            
+                <td class="name"><code>atala_tool_button_pan_tool</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Pan&quot; toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_ellipse_anno">
+            
+                <td class="name"><code>atala_tool_button_ellipse_anno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Draw Ellipse&quot; annotation toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_highlight_anno">
+            
+                <td class="name"><code>atala_tool_button_highlight_anno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Draw Highlight&quot; annotation toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_line_anno">
+            
+                <td class="name"><code>atala_tool_button_line_anno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Draw Line&quot; annotation toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_lines_anno">
+            
+                <td class="name"><code>atala_tool_button_lines_anno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Draw Poly Lines&quot; annotation toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_freehand_anno">
+            
+                <td class="name"><code>atala_tool_button_freehand_anno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Draw Freehand&quot; annotation toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_polygon_anno">
+            
+                <td class="name"><code>atala_tool_button_polygon_anno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Draw Polygon&quot; annotation toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_rect_anno">
+            
+                <td class="name"><code>atala_tool_button_rect_anno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Draw Rectangle&quot; annotation toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_fillrect_anno">
+            
+                <td class="name"><code>atala_tool_button_fillrect_anno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Filled Rectangle&quot; annotation toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_text_anno">
+            
+                <td class="name"><code>atala_tool_button_text_anno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Draw Text&quot; annotation toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_stamp_anno">
+            
+                <td class="name"><code>atala_tool_button_stamp_anno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Add a Stamp&quot; annotation toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_note_anno">
+            
+                <td class="name"><code>atala_tool_button_note_anno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Add a Sticky Note&quot; annotation toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_button_commment_anno">
+            
+                <td class="name"><code>atala_tool_button_commment_anno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>&quot;Add a Comment&quot; annotation toolbar button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_selection_band">
+            
+                <td class="name"><code>atala_tool_selection_band</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Selection Rubberband div object</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_selection_grip">
+            
+                <td class="name"><code>atala_tool_selection_grip</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Selection Rubberband grip div object</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_selection_mask">
+            
+                <td class="name"><code>atala_tool_selection_mask</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Selection Rubberband mask div object</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_tool_selection_tooltip">
+            
+                <td class="name"><code>atala_tool_selection_tooltip</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Selection Rubberband tooltip div object</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_search_container">
+            
+                <td class="name"><code>atala_search_container</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Text search containing div object</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_search_input">
+            
+                <td class="name"><code>atala_search_input</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Text search input box</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_search_next">
+            
+                <td class="name"><code>atala_search_next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Text search next match button</p></td>
+        </tr>
+
+    
+
+        <tr id=".atala_search_prev">
+            
+                <td class="name"><code>atala_search_prev</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Text search previous match button</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+
+    <h4 class="name" id="annotations"><span class="type-signature"></span>annotations<span class="type-signature"> :<a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html">Atalasoft.Controls.WebDocumentViewer~AnnotationController</a></span></h4>
+
+
+
+
+
+<div class="description">
+    <p>Annotations API. Will be available if <a href="WebDocumentViewerConfig.html#.allowannotations"><code> config.allowannotations</code></a> is set to <code>true</code>. Otherwise will be <code>undefined</code></p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+
+    <h4 class="name" id="config"><span class="type-signature"></span>config<span class="type-signature"> :<a href="WebDocumentViewerConfig.html">WebDocumentViewerConfig</a></span></h4>
+
+
+
+
+
+<div class="description">
+    <p>Current control configuration.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+
+    <h4 class="name" id="document"><span class="type-signature"></span>document<span class="type-signature"> :<a href="Atalasoft.Controls.WebDocumentViewer-DocumentController.html">Atalasoft.Controls.WebDocumentViewer~DocumentController</a></span></h4>
+
+
+
+
+
+<div class="description">
+    <p>Document operations API.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+
+    <h4 class="name" id="text"><span class="type-signature"></span>text<span class="type-signature"> :<a href="Atalasoft.Controls.WebDocumentViewer-TextController.html">Atalasoft.Controls.WebDocumentViewer~TextController</a></span></h4>
+
+
+
+
+
+<div class="description">
+    <p>Text selection API.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="reloadPage"><span class="type-signature"></span>reloadPage<span class="signature">(index, annotations<span class="signature-attributes">opt</span>, forms<span class="signature-attributes">opt</span>, params<span class="signature-attributes">opt</span>, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Reloads the specified page. If the thumbnailer is linked with viewer, viewer page is reloaded and callback is called when both viewer and thumbnailer completely reloaded, including image data itself.</p>
+<p>Viewer page won't be reloaded if the viewer is currently controller by other thumbnailer and requested page was not loaded in viewer before. In such case page will be lazy-loaded as usual. If special parameters should be passed, <a href="Atalasoft.Controls.WebDocumentViewer.html#event:beforehandlerrequest"><code> beforehandlerrequest</code></a> event to modify request parameters.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+        <th class="default">Default</th>
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The index of the page to reload.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[annotations]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Url of the annotation xmp file or flag indicating whether to reload annotations of boolean flag indicating whether to load annotations data.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[forms]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Url of the form file or flag indicating whether to reload forms of boolean flag indicating whether to load forms data.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[params]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>A plain object containing optional reload parameters that will be passed to server.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>function that is called when page have been loaded.</p>
+<p>This object will be available on the server side hander as an key-values collection. This allows to pass specific load options for individual pages.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="bind"><span class="type-signature"></span>bind<span class="signature">(event, handler)</span><span class="type-signature"> &rarr; {<a href="Atalasoft.Controls.WebDocumentViewer.html">Atalasoft.Controls.WebDocumentViewer</a>}</span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Attaches a handler to an event.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>the name of the event to bind to.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>handler</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>event handler.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>reference to <code>this</code>.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Atalasoft.Controls.WebDocumentViewer.html">WebDocumentViewer</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="zoom"><span class="type-signature"></span>zoom<span class="signature">(callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Zooms in one level.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Function to execute when the zoom operation is finished</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="zoom"><span class="type-signature"></span>zoom<span class="signature">(zoom, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Asynchronously zooms the viewer to the given zoom over the default zoom duration</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>zoom</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Desired zoom level to zoom to.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>function to execute after the zoom is finished animating.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="dispose"><span class="type-signature"></span>dispose<span class="signature">()</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Removes all DOM elements, internal references, and empties memory intensive objects.
+The WebDocumentViewer will no longer function after a call to this method.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="empty"><span class="type-signature"></span>empty<span class="signature">(callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Resets the viewer to its default state.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#OpenUrlCallback">OpenUrlCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Function to execute when the empty process is finished</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="fit"><span class="type-signature"></span>fit<span class="signature">(fit, pageNumber, callback)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Asynchronously zooms the viewer to fit to a page.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Atalasoft.Utils.html#.Fitting">Fitting</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Type of fitting to fit the page to.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pageNumber</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Page number to fit to.  Note, that it's 1-based.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Function to execute after the fit is done animating.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="unbind"><span class="type-signature"></span>unbind<span class="signature">(event, handler<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="Atalasoft.Controls.WebDocumentViewer.html">Atalasoft.Controls.WebDocumentViewer</a>}</span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Detaches the handler from the event.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>the name of the event to unbind.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[handler]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>the event handler to unbind. If not specified, all handlers are unbound.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>reference to <code>this</code>.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Atalasoft.Controls.WebDocumentViewer.html">WebDocumentViewer</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getCurrentPageIndex"><span class="type-signature"></span>getCurrentPageIndex<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Gets the current page index</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Zero based index of the current page.</p>
+<p>Note, that current page index detection could be affected by <a href="WebDocumentViewerConfig.html#.pageselectlocation"><code>pageselectlocation</code></a> configuration parameter.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getDocumentInfo"><span class="type-signature"></span>getDocumentInfo<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Gets the current document info</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>object indicating document main page size, and number of pages</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getZoom"><span class="type-signature"></span>getZoom<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Gets the current zoom level of the viewer.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="isPageLoaded"><span class="type-signature"></span>isPageLoaded<span class="signature">(index)</span><span class="type-signature"> &rarr; {boolean}</span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Checks whether specified document page have been loaded.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Page index.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p><code>true</code> if page have already been loaded; <code>false</code> otherwise.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="isReady"><span class="type-signature"></span>isReady<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Indicates whether the viewer is ready to receive commands.</p>
+<p>If all dependent JavaScript libraries are included to the web page, control is initialized synchronously.
+Otherwise dependencies are asynchronously loaded automatically using <a href="WebDocumentViewerConfig.html#.scripturl"><code>scripturl</code></a> parameter or from the same url where JQuery library is referenced.
+When all dependent JavaScript libraries are loaded, <a href="Atalasoft.Controls.WebDocumentViewer.html#event:initialized"><code>initialized</code></a> event is fired.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="next"><span class="type-signature"></span>next<span class="signature">(n, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Scrolls to the next viewable page.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>n</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Number of pages to scroll forward.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Function to execute when the scroll operation is finished.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="openUrl"><span class="type-signature"></span>openUrl<span class="signature">(documenturl<span class="signature-attributes">opt</span>, annotationsurl<span class="signature-attributes">opt</span>, formurl<span class="signature-attributes">opt</span>, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Opens the document at the given urls.
+It's possible to call this method multiple times for the same document to load document and the forms or annotations data separately.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>[documenturl]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>url of the document file with respect to the <code> config.serverurl</code>.</p>
+<p>If set to empty string, call is equivalent to <a href="Atalasoft.Controls.WebDocumentViewer.html#empty"><code>empty</code></a>.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[annotationsurl]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>url of the annotation xmp file with respect to the <a href="WebDocumentViewerConfig.html#.serverurl"><code> config.serverurl</code></a>.</p>
+<p><em>Note</em>, If empty string is passed, annotations from the previous document are cleared. if not passed or <code>undefined</code>, annotations from the previously opened document are preserved.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[formurl]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>url of the form file with respect to the @link WebDocumentViewerConfig.serverurl| config.serverurl}.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#OpenUrlCallback">OpenUrlCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Function to execute when the open operation is finished.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="previous"><span class="type-signature"></span>previous<span class="signature">(n, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Scrolls to the previous viewable page.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>n</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Number of pages to scroll backward.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Function to execute when the scroll operation is finished.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="trigger"><span class="type-signature"></span>trigger<span class="signature">(event, parameters<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="Atalasoft.Controls.WebDocumentViewer.html">Atalasoft.Controls.WebDocumentViewer</a>}</span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers the event.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>the name of the event to trigger.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[parameters]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>the event data.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>reference to <code>this</code>.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Atalasoft.Controls.WebDocumentViewer.html">WebDocumentViewer</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="reloadPage"><span class="type-signature"></span>reloadPage<span class="signature">(index, annotations<span class="signature-attributes">opt</span>, forms<span class="signature-attributes">opt</span>, params<span class="signature-attributes">opt</span>, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Reloads the specified page.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+        <th class="default">Default</th>
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The index of the page to reload.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[annotations]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Url of the annotation xmp file or flag indicating whether to reload annotations of boolean flag indicating whether to load annotations data.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[forms]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Url of the form file or flag indicating whether to reload forms of boolean flag indicating whether to load forms data.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[params]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>A plain object containing optional parameters that will be passed to server.</p>
+<p>Params could contain any application specific information that should be passed to server.
+For example, this could be the aggregated list of the parameters that was used in <a href="Atalasoft.Controls.WebDocumentViewer.html#reloadPage"><code>reloadPage</code></a> calls for different pages.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>function that is called when page have been loaded.</p>
+<p>This object will be available on the server side hander as an key-values collection. This allows to pass specific load options for individual pages.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="save"><span class="type-signature"></span>save<span class="signature">(subpath<span class="signature-attributes">opt</span>, saveformat<span class="signature-attributes">opt</span>, params<span class="signature-attributes">opt</span>, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Saves the client changes in this document to the pre defined save folder or to the given path.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>[subpath]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Relative path to save to starting from <code> savepath</code>. Must be writable.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[saveformat]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Save file format. If specified, the value overrides <code> savefileformat</code> form config.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[params]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>A plain object containing optional reload parameters that will be passed to server.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>to execute when the save has finished</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>var _viewer = new Atalasoft.Controls.WebDocumentViewer({		parent: $('#atala-document-container-left'),		toolbarparent: $('#atala-document-toolbar-left'),		serverurl: 'WebDocumentHandler.ashx',		savepath: 'Save/',		savefileformat: 'pdf'});// document will be saved to the subpath subfolder. So if the savepath configuration// parameter was set to Save/ then the save path will be Save/subpath. The format to save the file to will// be taken from the configuration parameter savefileformat (in this example, 'pdf').// This means that the file in pdf format will be saved in Save/subpath folder. _viewer.save(‘subpath’) // saves to ‘Save/subpath’ in ‘pdf’ format// document will be saved to ‘Save/’ foler in ‘tif’ format._viewer.save(‘’, ‘tif’)</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="scrollBy"><span class="type-signature"></span>scrollBy<span class="signature">(dx, dy, ani<span class="signature-attributes">opt</span>, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Scrolls by the given deltas, does not account for zoom, i.e. <code>dx</code> and <code>dy</code> values are passed in window coordinate space.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+        <th class="default">Default</th>
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Indicating delta of the x axis.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Indicating delta of the y axis .</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[ani]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Indicating whether to animate this scroll.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Function to execute when the scroll operation is finished.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="scrollTo"><span class="type-signature"></span>scrollTo<span class="signature">(x, y, ani<span class="signature-attributes">opt</span>, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Scrolls to the given coordinates, does not account for zoom, i.e. <code>x</code> and <code>y</code> values are passed in window coordinate space.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+        <th class="default">Default</th>
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Indicating the coordinate of the x axis.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Indicating the coordinate of the y axis.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[ani]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Indicating whether to animate this scroll.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>function to execute when the scroll operation is finished.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="showPage"><span class="type-signature"></span>showPage<span class="signature">(index, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Scrolls the viewer to the given page index and executes the callback when finished.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Index of the page to show.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Function to execute after this operation is done.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="setMouseTool"><span class="type-signature"></span>setMouseTool<span class="signature">(tool)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Sets the current mouse tool</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tool</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Atalasoft.Utils.html#.MouseToolType">MouseToolType</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Type of the tool to set.</p>
+<p>Mouse tool configuration could be passed using <a href="WebDocumentViewerConfig.html#.mousetool"><code> mousetool</code></a> configuration option.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="zoomOut"><span class="type-signature"></span>zoomOut<span class="signature">(callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Zooms out one level.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Function to execute when the zoom operation is finished.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="setImages"><span class="type-signature"></span>setImages<span class="signature">()</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>Please use <a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#setImages"><code>annotations.setImages</code></a> instead.</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="setStamps"><span class="type-signature"></span>setStamps<span class="signature">()</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>Please use <a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#setStamps"><code>annotations.setStamps</code></a> instead.</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="setAnnotationDefaults"><span class="type-signature"></span>setAnnotationDefaults<span class="signature">()</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>Please use <a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#setDefaults"><code>annotations.setDefaults</code></a> instead.</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="showPageNumber"><span class="type-signature"></span>showPageNumber<span class="signature">(pageNumber, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Scrolls the viewer to the given page number and executes the callback when finished.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pageNumber</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Number of the page to show. Note that page number is expected 1-based.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>[callback]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NotificationCallback">NotificationCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>function to execute after this operation is done</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>Please use <a href="Atalasoft.Controls.WebDocumentViewer.html#showPage"><code>showPage</code></a> instead.</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="createAnnotationOnPage"><span class="type-signature"></span>createAnnotationOnPage<span class="signature">()</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>Please use <a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#createOnPage"><code>annotations.createOnPage</code></a> instead.</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getAnnotationsFromPage"><span class="type-signature"></span>getAnnotationsFromPage<span class="signature">()</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>Please use <a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#getFromPage"><code>annotations.getFromPage</code></a> instead.</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="deselectAll"><span class="type-signature"></span>deselectAll<span class="signature">()</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>Please use <a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#deselectAll"><code>annotations.deselectAll</code></a> instead.</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="deleteAnnotationOnPageAtIndex"><span class="type-signature"></span>deleteAnnotationOnPageAtIndex<span class="signature">()</span><span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>Please use <a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#deleteFromPage"><code>annotations.deleteFromPage</code></a> instead.</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Events</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:beforehandlerrequest"><span class="type-signature"></span>beforehandlerrequest<span class="type-signature"> :<a href="global.html#BeforeHandlerRequestCallback">BeforeHandlerRequestCallback</a></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers before a request is sent to the server.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The event object.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Request">Request</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The request object.</p>
+<p>This event could be used to override or extend request parameters which is exposed through <code>event.request.data</code>.
+Requests could be distinguished using <code>event.request.type</code> field. For supperted request types see <a href="global.html#Request"><code>Request</code></a> structure.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:documentinfochanged"><span class="type-signature"></span>documentinfochanged<span class="type-signature"> :<a href="global.html#NotificationCallback">NotificationCallback</a></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when the document info has changed, usually after a new document is opened.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:documentloaded"><span class="type-signature"></span>documentloaded<span class="type-signature"> :<a href="global.html#NotificationCallback">NotificationCallback</a></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when the document is done loading.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:documentsaved"><span class="type-signature"></span>documentsaved<span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers after a response from the server while saving the document.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The event object.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>success</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Flag indicating whether save were successful.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:documentunloaded"><span class="type-signature"></span>documentunloaded<span class="type-signature"> :<a href="global.html#NotificationCallback">NotificationCallback</a></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when the document has been unloaded from the control.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:error"><span class="type-signature"></span>error<span class="type-signature"> :<a href="global.html#ErrorCallback">ErrorCallback</a></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when the control has encountered and error. Populated keys: e.name, e.message</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The event object.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The error type identifier.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The error clarification message.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:initialized"><span class="type-signature"></span>initialized<span class="type-signature"> :<a href="global.html#NotificationCallback">NotificationCallback</a></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when the control has completed asynchronous initialization.</p>
+<p>Asynchronous initialization happens when some dependent scripts are not included to web page and control trying to load them on background.
+In case of synchronous initialization, this event won't be fired. <a href="Atalasoft.Controls.WebDocumentViewer.html#isReady"><code> isReady</code></a> method could be used after construction to check whether control is initialized.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:pagenumberchanged"><span class="type-signature"></span>pagenumberchanged<span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when the page number has changed. Populated keys: e.number</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The event object.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:pagerecycled"><span class="type-signature"></span>pagerecycled<span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when the control has recycled a pageDiv object.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The event object.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Index of the recycled page.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:pageresize"><span class="type-signature"></span>pageresize<span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when the control has resized a pageDiv object.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The event object.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Index of the resized page.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Width of the page after resize.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Height of the recycled page.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:pageshown"><span class="type-signature"></span>pageshown<span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when the control has shown a page in the viewable area.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The event object.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Index of the page.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:pagesizechanged"><span class="type-signature"></span>pagesizechanged<span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when the page size returned from the server is different than expected. The expected page size is the size returned from server along with other doument info.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The event object.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Index of the resized page.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Width of the page after resize.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Height of the recycled page.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Difference with the previous(expected) page width. Scaled images are compared.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Difference with the previous(expected) page height. Scaled images are compared.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:pagetextloaded"><span class="type-signature"></span>pagetextloaded<span class="type-signature"> :LoadPageTextCallback</span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when page text loaded.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The event object.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>index of the page for which text data has been loaded.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:scriptsloaded"><span class="type-signature"></span>scriptsloaded<span class="type-signature"> :<a href="global.html#NotificationCallback">NotificationCallback</a></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when dependencies have finished loading.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:scroll"><span class="type-signature"></span>scroll<span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers for every pixel movement registered by the scrollable area.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The event object.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Horizontal scroll position.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Vertical scroll position.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Distance scrolled horizontally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Distance scrolled vertically.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:statusmessage"><span class="type-signature"></span>statusmessage<span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when the control has updated the status bar.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The event object.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The status message.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:textselected"><span class="type-signature"></span>textselected<span class="type-signature"> :<a href="global.html#NotificationCallback">NotificationCallback</a></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when UI text selection complete.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:zoomchanged"><span class="type-signature"></span>zoomchanged<span class="type-signature"></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when the zoom level of the control has changed.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th class="name">Name</th>
+        
+
+        <th class="type">Type</th>
+
+        
+
+        <th class="description last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>The event object.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>zoom</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><p>Current doucment zoom value.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:zoomstarted"><span class="type-signature"></span>zoomstarted<span class="type-signature"> :<a href="global.html#NotificationCallback">NotificationCallback</a></span>
+	</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Triggers when a zoom operation has been started.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+</article>
+
+</section>
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Copyright 2003 - 2017<?js?>  Atalasoft, Inc. All Rights Reserved.
+
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/atalasoft-jsdoc.js"></script>
+</body>
+</html>
