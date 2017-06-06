@@ -22,10 +22,10 @@
   "favicon.ico"
   ],
   "dependencies": {
-    "jquery-ui": "~1.8.23",
+    "jquery-ui": "^1.8.23",
     "raphael": "^2.1.2",
-    "jquery": "^1.7.1",
-    "jquery.easing": "jquery-easing-original#^1.4.1"
+    "jquery": ">=1.7.1",
+    "jquery-easing-original": "^1.3.0"
   },
-  "version": "10.7.8"
+  "version": "10.7.10"
 }
