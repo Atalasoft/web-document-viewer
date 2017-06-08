@@ -55,6 +55,11 @@ h1.page-title {
   margin: 1em 30px;
 }
 
+h1.product-title {
+  font-size: 22px;
+  text-align: center;
+}
+
 h2 {
   font-size: 24px;
   margin: 1.5em 0 .3em;
@@ -657,7 +662,6 @@ nav .logo {
 
 nav .search {
   width: 100%;
-  margin-top: 20px;
 }
 
 dt.tag-todo {

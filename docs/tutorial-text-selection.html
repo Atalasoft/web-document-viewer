@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge" >
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Tutorial: Demo Application - Documentation</title>
+    <title>Tutorial: Document Text Selection - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -36,7 +36,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Tutorial: Demo Application</h1>
+    <h1 class="page-title">Tutorial: Document Text Selection</h1>
     
 
     <section>
@@ -44,102 +44,77 @@
 <header>
     
 
-    <h2>Demo Application</h2>
+    <h2>Document Text Selection</h2>
 </header>
 
 <article>
-    <p>﻿This guide takes you through setting up a basic web page containing an embedded Web Document
-Viewer and displaying an initial document in it.</p>
-<h2>Set up a project</h2><p>In Visual Studio, create a new Web Site using the ASP.NET Empty Web Site template.</p>
-<p>Immediately, you should open your project's Property Pages to set up the necessary references and
-project options. Two changes must be made here.</p>
-<ul>
-<li>In the References menu, add a new reference to DotImage WebControls (.NET 2.0) . This component
-was made available when you installed Atalasoft DotImage. Dependencies will automatically be
-included in your project.</li>
-<li>In the Build menu, change your Target Framework to .NET Framework 3.5 . This will force your project
-to reopen, as well as populate your web.config.<h2>Third Party Dependencies</h2>The Web Document Viewer has a number of dependencies on third party libraries that should be properly
-included in the web page. It is especially important in the case of NuGet deployment, because user can
-update NuGet dependencies individually (for example, update jQuery to a newer version).</li>
-</ul>
-<p>Here is the list of JavaScript libraries Web Document Viewer relies on:</p>
-<ul>
-<li>jquery</li>
-<li>jquery.easing</li>
-<li>jquery-ui</li>
-<li>raphael</li>
-</ul>
-<p>You need to explicitly include both JavaScript and CSS resources to a web page. A typical example looks
-like this (versions and locations of the components could be different in your case):</p>
-<pre class="prettyprint source lang-html"><code>&lt;link href=&quot;Content/themes/base/all.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; />
-&lt;link href=&quot;Scripts/atalaWebDocumentViewer.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; />
-&lt;script src=&quot;Scripts/jquery-1.12.4.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
-&lt;script src=&quot;Scripts/jquery.easing.1.3.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
-&lt;script src=&quot;Scripts/jquery-ui-1.12.0.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
-&lt;script src=&quot;Scripts/raphael-min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
-&lt;script src=&quot;Scripts/atalaWebDocumentViewer.js&quot; type=&quot;text/javascript&quot;>&lt;/script></code></pre><h2>Add project resources</h2><p>Your project will need a copy of the Web Document Viewer resources, which includes client-side
-javascript and styles. These resources were installed with Atalasoft DotImage. The default install
-location for these is in <code>C:\Program Files (x86)\Atalasoft\DotImage 11.0\bin\WebResources
-\WebDocViewer</code>.</p>
-<p>Copy the WebDocViewer directory into the root of your project.</p>
-<p>We'll also create a default location to store images that will be displayed by the viewer. Create a new
-directory called Images in the root of your project, and add an image or document of your choice to
-this directory that you want displayed by default. We'll assume that the image you've added is called
-Example.tif.</p>
-<h2>Add a handler for the viewer</h2><p>The document viewer will communicate with a separate handler on your website.</p>
-<p>Add a new Generic Handler to your project. We'll assume that this file is called <code>WebDocViewer.ashx</code>.</p>
-<p>Visual Studio adds a default implementation of a web handler. Replace the entire contents of the file with
-the following piece of code.</p>
-<pre class="prettyprint source lang-csharp"><code>&lt;%@ WebHandler Language=&quot;C#&quot; Class=&quot;WebDocViewerHandler&quot; %>
-using System;
-using System.Web;
-using Atalasoft.Imaging.WebControls;
-public class WebDocViewerHandler : WebDocumentRequestHandler
-{}</code></pre><p>The document viewer will communicate with a separate handler on your website. The handler will be a
-class deriving from WebDocumentRequestHandler, which in turn derives from IHttpHandler.</p>
-<p>Default server side behavior can be customized by subscribing and handling events exposed by
-<code>WebDocumentRequestHandler</code>. See the <strong>TODO: need to place correct link to API reference</strong> <a href="">API reference</a> for details.</p>
-<h2>Add a web page</h2><p>In a real deployment, you will want to insert the web document viewer into your own web page, but for this
-example we will work with a new page.</p>
-<p>Add a new Web Form to your project. We'll assume that this file is called Default.aspx. Visual Studio will
-automatically create a code behind for this file called Default.aspx.cs, but you will not need to change it.</p>
-<p>A Web Document Viewer needs three chunks of code to load resources, create a viewing area, and
-initialize that area.</p>
-<p>To load the necessary resources for creating web document viewer objects, add the following lines of
-HTML in your document's head.</p>
-<p>Some of the resources included contain explicit version numbers which may change in future releases.
-Make sure the version numbers referenced in your src attributes match the files in the WebResources
-directories.</p>
-<pre class="prettyprint source lang-HTML"><code>&lt;script src=&quot;WebDocViewer/jquery-1.7.1.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
-&lt;script src=&quot;WebDocViewer/atalaWebDocumentViewer.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
-&lt;link href=&quot;WebDocViewer/jquery-ui-1.8.14.custom.css&quot; rel=&quot;Stylesheet&quot; type=&quot;text/css&quot; />
-&lt;link href=&quot;WebDocViewer/atalaWebDocumentViewer.css&quot; rel=&quot;Stylesheet&quot; type=&quot;text/css&quot; /></code></pre><p>Next, add the following HTML into your document's body to create the document viewing area. The div
-tags can be customized. In this example, the height and width have been constrained.</p>
-<pre class="prettyprint source lang-HTML"><code>&lt;div id=&quot;_toolbar1&quot; class=&quot;atala-document-toolbar&quot; style=&quot;width: 670px;&quot;>&lt;/div>
-&lt;div id=&quot;_container1&quot; class=&quot;atala-document-container&quot; style=&quot;width: 670px; height: 500px;&quot;>&lt;/div></code></pre><p>Finally, add the following chunk of JavaScript for initializing your viewer. The constructor accepts various
-configuration options that affect the viewer's behavior or initial state. A minimum configuration is provided
-to tell the viewer where it should create the viewer (pointing to the div tags we added), where its web
-handler is located, and what image should be displayed initially.</p>
-<pre class="prettyprint source lang-JavaScript"><code>&lt;script type=&quot;text/javascript&quot; language=&quot;javascript&quot;>
-    var _docUrl = 'Images/Example.tif';
-    var _serverUrl = 'WebDocViewer.ashx';
-    var _viewer = new Atalasoft.Controls.WebDocumentViewer({
-        'parent': $('#_container1'), // parent container to put the viewer in
-        'toolbarparent': $('#_toolbar1'), // parent container to put the viewer toolbar in
-        'serverurl': _serverUrl, // server handler url to send image requests to
-        'documenturl': _docUrl // document url relative to the server handler url
+    <p>Web Document Viewer supports optional text layer on top of the displayed documents. End user could select and copy document text or search through document text using default WDV UI. Alternatively <a href="Atalasoft.Controls.WebDocumentViewer-TextController.html"><code> corresponding APIs</code></a> are available for application.</p>
+<h3>Enabling Text Layer Support</h3><p>Text selection support is disabled by default. To enable it, <a href="WebDocumentViewerConfig.html#.allowtext"><code> allowtext</code></a> config option should be set to true during WDV construction. </p>
+<p>After that JavaScript control will start requesting text data from server and will add additional toolbox button will be added to switch input mode to text selection or back to regular &quot;pan&quot; mode. End user will be able to switch input mode to text </p>
+<p>Text selection input mode is independent from any other viewer operations, i.e. it's not possible to interact with annotations or PDF forms unless input mode is switched back.</p>
+<p><img src="img/wdv-text-columns.png" alt="text columns"></p>
+<p>Text selection have several related configuration options that allow to modify default behavior. For details see <a href="WebDocumentViewerConfig.html#.mousetool"><code> config.mousetool.text</code></a> documentation.</p>
+<p>For example, to enable copying selected text by ctrl+c, <a href="WebDocumentViewerConfig.html#.mousetool"><code> config.mousetool.hookcopy</code></a> should be used.</p>
+<h4>Document Text Search</h4><p>Additionally document search UI could be turned on using <a href="WebDocumentViewerConfig.html#.mousetool"><code> config.mousetool.text.allowsearch</code></a> config option.</p>
+<p>If enabled, default text search UI controls will be added to document toolbar. Note that default search is implemented using public API and could easily be rewritten by the application if UI appearance or business logic should be changes. </p>
+<h4>Document Text Search API</h4><p>Text search is asynchronous operation in wdv. Each <a href="Atalasoft.Controls.WebDocumentViewer-TextController.html#search"><code>search</code></a> method call starts new operation and abandon all previous search operations. </p>
+<p>Executing search through API also triggers highlighting search results in UI and selecting current search match. </p>
+<p>Search results are passed to application through @link Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator| TextSearchIterator} that is passed as a  parameter to <a href="global.html#TextSearchCallback"><code> callback</code></a> function provided by application when calling corresponding APIs. That iterator could be used to advance current match back and forth and thus  proceed search.</p>
+<p>For example, </p>
+<pre class="prettyprint source lang-javascript"><code>    var _viewer = new Atalasoft.Controls.WebDocumentViewer({
+        //.... configuration omitted
     });
-&lt;/script></code></pre><h2>Deploying to IIS</h2><p>At this point your web site is ready to build and use. If you are deploying to IIS, you will need to make sure
-the following items are taken care of.</p>
+
+    // cache the current iterator.  
+    var _currentIterator; 
+    // search starting from the beginning or the document, i.e. from page 0.
+    _viewer.text.search('find me', 0, onNextMatch);
+
+    // this demonstrates &quot;find next action&quot;
+    function onFindNext() {
+        if (_currentIterator && _currentIterator.isValid()) {
+            _currentIterator.next(onNextMatch);
+        } 
+    }
+
+    // this demonstrates &quot;find previous action&quot;
+    function onFindPrevious() {
+        if (_currentIterator && _currentIterator.isValid()) {
+            _currentIterator.prev(onNextMatch);
+        } 
+    }
+
+    // callback signature is the same for search, next and prev functions.
+    function onNextMatch(iterator, match) {
+        // check that our search is not abandoned yet.
+        if (iterator.isValid()) {
+            //  cache active iterator.
+            _currentIterator = iterator;
+            // select first found result with word precision. If match.word parameter is omitted, whole line will be selected.
+            _viewer.text.selectPageText(match.page, match.region, match.line, match.word);
+        }
+    }</code></pre><p>See <a href="Atalasoft.Controls.WebDocumentViewer-TextController.html#search"><code>search</code></a> API for details.</p>
+<h3>Text selection Document Types</h3><p>From a text selection point of view, thee are three classes of documents.</p>
+<h4>PDF documents</h4><p>Pdf documents are separated in two classes.</p>
 <ul>
-<li>Copy your project to a path within your IIS document root.</li>
-<li>Get a server license for Atalasoft DotImage, and put it in a location where it can be found. The best
-place to put your license file is in your project's Bin directory.</li>
-<li>In IIS Manager, convert your project directory to an Application and assign it to an Application Pool.</li>
-<li>Check the settings of the Application Pool you used, and make sure Enable 32-Bit Applications is set to
-True. This will ensure your application is consistent with the assemblies you used.</li>
+<li><p>Documents that do not have a text layer. They should be treated as regular images.</p>
+</li>
+<li><p>Documents that do have a text layer. Atalasoft DotImage provides out of the box extraction support and an extraction API. This behavior is available if the PDF text extraction (TextExtract) licensing flag is enabled.</p>
+<p>Note, that for large PDF files, or files containing a complicated structure or a lot of symbols, extraction could take some time. This may cause delays on the client side between presenting page the image to end user and getting page text loaded, i.e. &quot;loading&quot; cursor will be shown when attempting to select text on the page that didn't load text yet. Thus, for such documents, developers should consider pre-generating extraction data, since this would improve overall performance.</p>
+</li>
 </ul>
-<p>At this point, you should be able to navigate to your page in a browser, and see a loaded document.</p>
+<h4>MS Office documents</h4><p> MS Office documents can be rendered using two dotImage decoders: OfficeAdapterDecoder and OfficeDecoder.</p>
+<ul>
+<li><p>OfficeDecoder Supports both rendering and text extraction. For this decoder Atalasoft DotImage provides out of the text selection support.</p>
+</li>
+<li><p>OfficeAdapterDecoder Uses MS Office Automation for documents rendering. For this decoder output images that should be treated as regular images.</p>
+</li>
+</ul>
+<h4>Regular Images</h4><p> Text data should be provided by the application, for example extracted by OCR engines. Since OCR is
+ a performance-consuming operation, and not intended to run on web server, it doesn't make much sense to provide out of the box extraction support.</p>
+<p> OCR engine output could be translated to the Atalasoft DotImage object model using the
+ Atalasoft.Imaging.WebControls.OCR.JsonTranslator class.  Keep in mind that if an OCR engine performs internal image transformations, extracted text coordinates could differ from actual text position on the source image.</p>
+<p> See <a href="tutorial-programming-wdv-server.html">Programming Document Viewer Server</a> tutorial for details how to provide document text data using WebDocumentRequestHandler.PageTextRequested event.</p>
 </article>
 
 </section>
