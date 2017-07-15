@@ -83,7 +83,7 @@ This could be done in two ways: </p>
 <pre class="prettyprint source lang-javascript"><code>_viewer.bind(&quot;contextmenu&quot;, function (event, annotation, menu) {            
     var menuItemTitle = !annotation.burn ? &quot;Burn&quot; : &quot;Not Burn&quot;;
     menu[menuItemTitle] = function (annotation) {
-        annotation.burn = !burn;
+        annotation.burn = !annotation.burn;
         annotation.update();
     };
 });</code></pre></li>

@@ -48,6 +48,7 @@ h1 {
   font-weight: 300;
   font-size: 48px;
   margin: 1em 0 .5em;
+  line-height: 100%;
 }
 
 h1.page-title {

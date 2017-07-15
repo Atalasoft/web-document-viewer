@@ -1,99 +1,64 @@
-<a href="http://www.atalasoft.com/" style="display:inline-block"><img src="http://atalasoft.github.io/public/butterfly.png" alt="Atalasoft" display="inline" height="200px"></a>
-<a href="https://bower.io/" style="display:inline-block">
-<img src="https://bower.io/img/bower-logo.svg" alt="Bower" display="inline" height="200px"></a> 
-
-
 # Atalasoft Web Document Viewer control
-[Atalasoft](http://www.atalasoft.com/) Web Document Viewer repository is for distribution on [Bower](https://bower.io/). 
+[![Bower version](https://badge.fury.io/bo/web-document-viewer.svg)](https://badge.fury.io/bo/web-document-viewer)
+[![NuGet version](https://badge.fury.io/nu/Atalasoft.Web.Document.Viewer.svg)](https://badge.fury.io/nu/Atalasoft.Web.Document.Viewer)
+
+The WebDocumentViewer(aka WDV) and WebDocumentThumbnailer(aka WDT) are JavaScript based image viewing controls that could be easily created by adding fex snippets of HTML and JavaScript on your web page and a separate bare-bones requests handler on the server side.
+
+### Introduction
+
+There currently is a gap of functionality on the internet in that browsers currently only display "web native" image formats (PNG, JPEG, GIF, and SVG). Popular multipage document formats like PDF, TIFF and Office formats (like Excel and Word), all cannot be displayed natively on a web page. Atalasoft web controls solves this problem and provide JavaScript APIs to build viewer apps that:
+
+* Work on every HTML5 browser (including mobile browsers).
+* Display different types of images. PDF, TIFF, PNG, JPEG, BMP, GIF, PCX, PSD, PCD, RAW, WMF/EMF, TGA, JBIG2, Jpeg2000, DICOM, DWG, Xps, etc.
+* Modify document structure and save modified documents.
+* Enable annotations, thumbnails, and mobile support for a document.
+* Display and fill PDF forms.
+* Support text selection basing on PDF text layer or OCR data.
+* Effectively work with big documents - make it possible to stream individual pages on demand without downloading the entire document first.
+* Can be embedded into an existing web page or application.
 
 ### Installation
-You can install this package locally with bower.io.
-```shell
-# To get the latest stable version, use bower from the command line.
+
+#### Bower
+```bash
 bower install web-document-viewer
-
-# To get the specific 10.7.0 version use:
-bower install web-document-viewer#10.7.0
-
-# To save the bower settings for future use:
-bower install web-document-viewer --save
-
-# Later, you can use easily update with:
-bower update
 ```
-> Note that web-document-viewer requires Jquery, Jquery-ui, Jquery.easing, Raphael packages as dependencies.
 
-### Using web-document-viewer
-Here is a sample on how to create a client-side view for web-document-viewer.
-All installed dependencies should be referenced in the head section.
-
-```html
-<head>
-    <meta charset="utf-8" />
-    <title>Web Document Viewer Sample</title>
-    <link href="bower_components/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-    <link href="bower_components/web-document-viewer/atalaWebDocumentViewer.css" rel="stylesheet" type="text/css" />
-
-    <script src="bower_components/jquery/jquery.min.js" type="text/javascript"></script>
-    <script src="bower_components/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="bower_components/jquery.easing/jquery.easing.min.js" type="text/javascript"></script>
-    <script src="bower_components/raphael/raphael.min.js" type="text/javascript"></script>
-
-    <script src="bower_components/web-document-viewer/atalaWebDocumentViewer.js" type="text/javascript"></script>
-    <style type="text/css">
-		#atala-document-toolbar
-		{
-		    width: 800px;
-		}
-		
-		#atala-document-thumbs
-		{
-		    float:left;
-		    display: inline-block;
-		    width:150px;
-		    height:600px;
-		}	
-		
-		#atala-document-container
-		{
-			height:600px;
-			width: 600px;
-			display: inline-block;
-		}
-	</style>
-</head>
-<body>
-    <div>
-        <div id="atala-document-toolbar"></div>
-        <div>
-            <div id="atala-document-thumbs"></div>
-            <div id="atala-document-container"></div>
-        </div>
-    </div>
-
-<script>
-    var _viewer;
-    var _thumbs;
-
-    (function() {
-        _viewer = new Atalasoft.Controls.WebDocumentViewer({
-            parent: $('#atala-document-container'),
-            toolbarparent: $('#atala-document-toolbar'),
-            serverurl: 'WDVHandler.ashx',
-            savepath: 'Save/',
-        });
-
-        _thumbs = new Atalasoft.Controls.WebDocumentThumbnailer({
-            parent: $('#atala-document-thumbs'),
-            serverurl: 'WDVHandler.ashx',
-            viewer: _viewer
-        });
-    })();
-</script>
-</body>
+#### Nuget
+```bash
+PM> Install-Package Atalasoft.Web.Document.Viewer
 ```
-WDVHandler.ashx as serverurl is the name of the class inherited from IHttpHandler [C#].
-See [NuGet Tutorial I - Web Document Viewer](http://atalasoft.github.io/2016/06/21/nuget-tutorial-wdv/) to deploy server-side using NuGet packages.
+
+#### NPM
+```bash
+npm install web-document-viewer
+```
+
+### Backend Overview
+
+Atalasoft HTML5 imaging controls are support following server environments
+
+* ASP.NET
+
+    Server side functionality is exposed using separate HttpHandler.
+    See [ASP.NET demo application](https://atalasoft.github.io/web-document-viewer/tutorial-demo-application.html) tutorial for details.
+
+- ASP.NET Core on full .net platform
+
+    Server side functionality is exposed using WebDocumentViewerMiddleware that is registered to handle WDV requests.
+    See [ASP.NET Core demo application](https://atalasoft.github.io/web-document-viewer/tutorial-demo-application-aspnet-core.html) tutorial for details.
+
+
+### Frontend Overview
+
+WebDocumentViewer and WebDocumentThumbnailer requires Jquery, Jquery UI, JQuery Easing libraries. If annotations support are enabled, Raphael.js library is also required.
+
+JQuery should be included into web page by the application. If some of the other dependent libraries don't exist in the web page scope, controls are trying to automatically load them(using file names from dotImage web resources bundle shipped by installer).
+When controls are delivered by NuGet or Bower it's required to manually deploy them on the page(since file names could differ for different versions).
+
+### Sample application
+You can find a [demo application](https://github.com/Atalasoft/web-document-viewer-demo) shows basic usage of Web Document Viewer component of DotImage product.
+Live version of the demo is hosted on Azure: http://atalasoft-viewer-demo.azurewebsites.net/
 
 ### Licensing 
 
@@ -102,14 +67,12 @@ To run the projects locally, you need to have a DotImage license. There are vari
  - Use [DotImage Activation Wizard Visual Studio extension](https://visualstudiogallery.msdn.microsoft.com/88ff07c9-fe68-48bd-bfdc-3fbc8a0ec1db)
  - Download a complete DotImage installation package from the [Atalasoft web site](https://atalasoft.com). You will be prompted to activate the product during installation
 
-Web Document Viewer object cross browser client-side script. 
-Copyright 2003-2016 Atalasoft Inc. All Rights Reserved.
-
-This source code is property of Atalasoft, Inc. (http://www.atalasoft.com/)
+This source code is property of Atalasoft, Inc. (http://www.atalasoft.com/)  
 Permission for usage and modification of this code is only permitted 
 with the purchase of a source code license.
 
 ### Related Articles
-
+ - [Web Document Viewer documentation](https://atalasoft.github.io/web-document-viewer/)
  - [Introducing NuGet Packages](http://atalasoft.github.io/2016/05/03/introducing-nuget/)
  - [Introducing Activation Wizard Extension](http://atalasoft.github.io/2016/05/14/introducing-activation-wizard-extension/) 
+ - [NuGet Tutorial I - Web Document Viewer](http://atalasoft.github.io/2016/06/21/nuget-tutorial-wdv/)

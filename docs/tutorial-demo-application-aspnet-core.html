@@ -62,28 +62,28 @@ deploy. Once you have succeeded building the example project, you can begin modi
 <li>WebDocumentViewer resources files.</li>
 </ul>
 <p><em><strong>Note</strong></em> <code>It's highly recommended to use Visual Studio 2017 for this demo.</code></p>
-<p>Start by creating a new <code>ASP.NET Core Web Application (.NET Framework)</code> in Visual Studio targeting .NET 4.5.2.</p>
+<p>Start by creating a new <code>ASP.NET Core Web Application (.NET Framework)</code> in Visual Studio targeting .NET 4.5.2 or newer.</p>
 <p><em><strong>Note</strong></em> <code>In the following instructions the project is called WebDocumentViewerBasic.</code></p>
 <p>Choose <code>Empty</code> template on the following window</p>
-<p><img src="img/EmptyTemplate.png" alt=""></p>
+<p><img src="img/wdv-empty-template.png" alt=""></p>
 <p>Visual Studio automatically will create you a project with &quot;Hello world&quot; application. It already has a <code>Startup</code> class and
-all necessary Nuget packages for running this application is self-hosted, of course, you can use IIS Express instead. </p>
-<h3>Add Nuget packages for server-side</h3><p>Add the Nuget package <code>Atalasoft.DotImage.WebControls.Core.x86</code> it automatically downloads all necessary
+all necessary NuGet packages for running this application is self-hosted, of course, you can use IIS Express instead. </p>
+<h3>Add NuGet packages for server-side</h3><p>Add the NuGet package <code>Atalasoft.DotImage.WebControls.Core.x86</code> <strong>&lt;THERE SHOULD BE A LINK TO NUGET FEED&gt;</strong> it automatically downloads all necessary
 dependencies on other DotImage and ASP.NET Core components. If you plan to run your application on a 64-bit server,
-you should use the package <code>Atalasoft.DotImage.WebControls.Core.x64</code>.</p>
-<p>Since the Web Document Viewer use a file system to access to the images to show on the page,
-you also need the package <code>Microsoft.AspNetCore.StaticFiles</code>.</p>
+you should use the package <code>Atalasoft.DotImage.WebControls.Core.x64</code><strong>&lt;THERE SHOULD BE A LINK TO NUGET FEED&gt;</strong>.</p>
+<p>Since the Web Document Viewer uses a file system to access the images to show on the page,
+you also need the package <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles">Microsoft.AspNetCore.StaticFiles</a>.</p>
 <h3>Add Bower packages for client-side</h3><p>First of all, you need to manually a <code>Bower configuration file</code> from the template with the same name.
 By default, this file will be called <code>bower.json</code>, it also adds a file <code>.bowerrc</code> which will contain
 a directory where all packages will be stored.</p>
 <p>Now you can add a Bower package <code>web-document-viewer</code>, it also automatically adds all
 necessary dependencies.</p>
-<h3>Prepare <code>Startup</code> class</h3><p>Before we can use DotImage middlewares, we need to configure our application for them.</p>
-<h4><code>Configure</code> method</h4><p>How was mentioned before, Web Document Viewer needs to access to the file system.
+<h3>Prepare Startup class</h3><p>Before we can use DotImage middlewares, we need to configure our application for them.</p>
+<h4>Configure method</h4><p>How was mentioned before, Web Document Viewer needs to access to the file system.
 So, we need to add middlewares to work with files. To do this, you need to add following strings in the <code>Startup.Configure</code> method:</p>
 <pre class="prettyprint source lang-csharp"><code>app.UseDefaultFiles();
 app.UseStaticFiles();</code></pre><p>Also, you need to delete &quot;Hello world&quot; code string, since we don't need it.</p>
-<p>The other thing we need to do, is to add <code>PdfDecoder</code>, our server will be use it for rendering PDF files.
+<p>The other thing we need to do is to add a <code>PdfDecoder</code>. Our server will use it for rendering PDF files.
 You can do this by writing the next code:</p>
 <pre class="prettyprint source lang-csharp"><code>RegisteredDecoders.Decoders.Add(new PdfDecoder());</code></pre><h2>Set up server-side components</h2><h3>Add the Web Document Viewer middleware</h3><p>The Web Document Viewer middleware is responsible for communicating with the Web Document Viewer
 embedded in your page.</p>
@@ -94,18 +94,17 @@ embedded in your page.</p>
 <h3>Include the web resources</h3><p>Add the following script and link tags in your page's head section to include the necessary Web Document Viewer code and dependencies.</p>
 <pre class="prettyprint source lang-html"><code>&lt;head>
     &lt;!-- Scripts for Web Viewing -->
-    &lt;script src=&quot;lib/jquery/jquery.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
+    &lt;script src=&quot;lib/jquery/dist/jquery.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
     &lt;script src=&quot;lib/jquery-ui/jquery-ui.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
     &lt;script src=&quot;lib/raphael/raphael.min.js&quot;>&lt;/script>
     &lt;script src=&quot;lib/web-document-viewer/atalaWebDocumentViewer.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
 
     &lt;!-- Style for Web Viewer -->
-    &lt;link href=&quot;lib/jquery-ui/themes/base/jquery.ui.all.css&quot; rel=&quot;stylesheet&quot;/>
-    &lt;link href=&quot;lib/web-document-viewer/atalaWebDocumentViewer.css&quot; rel=&quot;stylesheet&quot;/>
-
-&lt;/head></code></pre><h3>Configure the control</h3><p>The web viewing control need to be initialized and configured to set up connections to the right middleware,
+    &lt;link href=&quot;lib/jquery-ui/themes/base/jquery-ui.min.css&quot; rel=&quot;stylesheet&quot; />
+    &lt;link href=&quot;lib/web-document-viewer/atalaWebDocumentViewer.css&quot; rel=&quot;stylesheet&quot; />
+&lt;/head></code></pre><h3>Configure the control</h3><p>The web viewing control needs to be initialized and configured to set up connections to the right middleware,
 specify behavior for events, and so forth.
-This can be done with another block of JavaScript, either included or pasted directly within your page's head somewhere
+It can be done with another block of JavaScript, either included or pasted directly within your page's head somewhere
 below the added dependencies.</p>
 <pre class="prettyprint source lang-html"><code>    &lt;script type=&quot;text/javascript&quot;>
 
@@ -153,7 +152,7 @@ below the added dependencies.</p>
 However, this example represents the minimal configuration necessary for web document viewer.
 Additional information can be found in the <a href="https://atalasoft.github.io/2016/06/21/nuget-tutorial-wdv/">blog post</a> about Web Document Viewer.</p>
 <h3>Add the UI</h3><p>Insert the following HTML code to your project to create a basic viewer UI.
-This includes the Web Document Viewer, drop-down box to choose file to show.</p>
+It includes the Web Document Viewer, drop-down box to choose a file to show.</p>
 <pre class="prettyprint source lang-html"><code>    &lt;h1>Kofax Web Document Viewer Demo&lt;/h1>
     &lt;form id=&quot;WDVForm&quot; runat=&quot;server&quot;>
         Select File to display:
@@ -170,13 +169,13 @@ This includes the Web Document Viewer, drop-down box to choose file to show.</p>
 
         &lt;div id=&quot;status&quot;>&lt;/div>
 
-    &lt;/form></code></pre><h2>Tune-up application by your demands</h2><p>Unlike the classic ASP.NET model handlers, DotImage middlewares for ASP.NET Core don't provide any settings for compression and response caching.
-Because we want to help you build an application, where you can decide what are you want to do, what additional features you want to use. 
-So, Web Document Viewer middleware forced to not add any cache control headers, and also doesn't try to use GZip or Deflate algorithms for compression.
-However, you can simply enable these feature by using Microsoft Nuget packages <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/">Microsoft.AspNetCore.ResponseCaching</a> and
-<a href="https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/">Micrsoft.AspNetCore.ResponseCompression</a>.</p>
+    &lt;/form></code></pre><h2>Tune-up application by your demands</h2><p>Unlike the classic ASP.NET model handlers, DotImage middlewares for ASP.NET Core doesn't provide any settings for compression and response caching.
+Because, we want to help you build an application, where you can decide what are you want to do, what additional features you want to use. 
+So, Web Document Viewer middleware forced not to add any cache control headers, and also doesn't try to use GZip or Deflate algorithms for compression.
+However, you can simply enable these feature by using Microsoft NuGet packages <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/">Microsoft.AspNetCore.ResponseCaching</a> and
+<a href="https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/">Microsoft.AspNetCore.ResponseCompression</a>.</p>
 <h3>Response caching</h3><p>Using the <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/">Microsoft.AspNetCore.ResponseCaching</a> package and this <a href="https://docs.microsoft.com/en-us/aspnet/core/performance/caching/middleware">MSDN article</a>
-you can simply add a new middlewares to enable response caching in this sample.</p>
+you can simply add new middlewares to enable response caching in this sample.</p>
 <pre class="prettyprint source lang-csharp"><code>public void ConfigureServices(IServiceCollection services)
 {
     ...
@@ -208,12 +207,12 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 
         wdvApp.RunWebDocumentViewerMiddleware();
     });
-}</code></pre><p><em><strong>Note</strong></em> <code>It's not neccessary to add a 'Vary' header.</code></p>
+}</code></pre><p><em><strong>Note</strong></em> <code>It's not necessary to add a 'Vary' header.</code></p>
 <p>What's important that you don't need to specify <code>VaryByQueryKeys</code> property for Atalasoft query parameters. 
-Because, <code>WebDocumentViewer</code> middleware detects caching feature and setups this property by adding (not rewriting)
-all atalasoft query parameters to the collection.</p>
-<h3>Response compression</h3><p>Response compression is another usefule feature that you can setup pretty simple, by adding a Nuget package and writing some lines of code to setup it.
-We need the <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/">Micrsoft.AspNetCore.ResponseCompression</a> package
+Because <code>WebDocumentViewer</code> middleware detects caching feature and setups this property by adding (not rewriting)
+all necessary query parameters to the collection.</p>
+<h3>Response compression</h3><p>Response compression is another useful feature that you can setup pretty simple, by adding a NuGet package and writing some lines of code to setup it.
+We need the <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/">Microsoft.AspNetCore.ResponseCompression</a> package
 and this <a href="https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression">article</a> as a reference guide.</p>
 <pre class="prettyprint source lang-csharp"><code>public void ConfigureServices(IServiceCollection services)
 {
@@ -244,11 +243,105 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 
         wdvApp.RunWebDocumentViewerMiddleware();
     });
-}</code></pre><p>Well.. custom middleware is empty! But in the MSDN article you've been told that you need to add a &quot;Vary&quot; header.
+}</code></pre><p>Well.. custom middleware is empty! But in the MSDN article, you've been told that you need to add a &quot;Vary&quot; header.
 It's because DotImage always adds this header for you. 
-But don't be afraid, if you add this header before DotImage, we don't brake your application, and don't rewrite it with our value.</p>
-<h2>Summary</h2><p>In this tutorial we create from scratch a simple application that contain Atalasoft DotImage Web Document Viewer with caching and compression.
-To do this, we use only one line of code that enables Web Document middleware in the ASP.NET Core pipeline.</p>
+But don't be afraid, if you add this header before DotImage, we don't break your application, and don't rewrite it with our value.</p>
+<h3>CORS support</h3><p>One more feature that could be very useful is the CORS (Cross-Origin Requests). Hopefully, Microsoft for this feature support has
+a NuGet package the <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.Cors">Microsoft.AspNetCore.Cors</a>. And also, they have an MSDN 
+<a href="https://docs.microsoft.com/en-us/aspnet/core/security/cors">article</a> with instructions how to use it.</p>
+<p>Well, it's quite easy to use we need to add CORS support</p>
+<pre class="prettyprint source lang-csharp"><code>public void ConfigureServices(IServiceCollection services)
+{
+    services.AddCors();
+}</code></pre><p>And setup it in the request pipeline</p>
+<pre class="prettyprint source lang-csharp"><code>public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+{
+...
+    // Shows UseCors with CorsPolicyBuilder.
+    app.UseCors(builder =>
+       builder.WithOrigins(&quot;http://...&quot;));
+
+...
+}</code></pre><h4>Web Document Viewer CORS demonstration</h4><p>To demonstrate how it works, the project <code>WebDocumentViewerCors</code> was created. It's a copied original project, but without any additional features,
+like compression and response caching. The most different parts contained in the <code>Main</code> method:</p>
+<pre class="prettyprint source lang-csharp"><code>        public static void Main(string[] args)
+        {
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+#if !DEBUG
+                // I want to use specific host and port number,
+                // when we launch this application built in
+                // 'Release' configuration.
+                .UseUrls($&quot;http://localhost:5000&quot;)
+#endif
+                .UseIISIntegration()
+                .UseStartup&lt;Startup>()
+                .UseApplicationInsights()
+                .Build();
+
+            host.Run();
+        }</code></pre><p>The <code>Startup</code> class, where methods <code>ConfigureServices</code> and <code>Configure</code> has the next lines:</p>
+<pre class="prettyprint source lang-csharp"><code>public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddCors();
+    }
+
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+    {
+        ... 
+        app.UseCors(builder => builder
+                // This adress can be found in Properties/launchSettings.json
+                // Comment this line, to disable CORS support for this origin, so your browser
+                // will show an error in its console about it.
+                .WithOrigins(&quot;http://localhost:37510&quot;)
+                // For this demo we allow any header, but you can setup your own and specific headers
+                .AllowAnyHeader() 
+                // For this demo we allow any method, however you can use more strict conditions
+                .AllowAnyMethod()) 
+            .UseDefaultFiles()
+            .UseStaticFiles();
+        ...
+    }
+}</code></pre><p>Also, we need slightly adjust our client JavaScript code. We need to change a <code>servevrurl</code> property for WebDocumentViewer control, so the JS API will
+send requests to the different domain:</p>
+<pre class="prettyprint source lang-javascript"><code>        // Initialize Web Viewing
+        $(function () {
+            try {
+                // Initialize Web Document Viewer
+                _viewer = new Atalasoft.Controls.WebDocumentViewer({
+                    ...
+                    serverurl: 'http://localhost:5000/wdv'
+                });
+
+                ...
+
+            } catch (error) {
+                appendStatus(&quot;Thrown error: &quot; + error.description);
+            }
+        });</code></pre><p>Also, our project contains one more interesting file <code>FolderProfile.pubxml</code> which placed in the folder <code>Properties/PublishProfiles</code>. It's an XML file
+that provides information about publishing profile. By default, it builds project in the <code>Release</code> configuration and publishes a web application to the 
+local folder <code>bin\Release\PublishOutput</code>.</p>
+<p><em><strong>Note</strong></em> <code>This demo project will not work properly in the Internet Explorer because it does not consider the port when comparing origins.</code></p>
+<p>To see how demo application works, you should do next:</p>
+<ul>
+<li>Publish this application - at this step, demo project will be built in <code>RELEASE</code> configuration, and all its contents with all necessary dependencies
+will be copied to the `bin\Release\PublishOutput' folder.</li>
+<li>Open the output folder and launch <code>WebDocumentViewerCors.exe</code> - it launches a console application, that hosts your application 
+on the <code>http://localhost:5000</code> endpoint.</li>
+<li>Return to the Visual Studio and start a debug session for <code>WebDocumentViewerCors</code> project in the <code>DEBUG</code> configuration - your local
+browser should open the page with the sample</li>
+<li>Open <code>Developer Tools</code> for the sample page in a browser and select <code>Network</code> tab.</li>
+<li>On the opened page click <code>Save Changes</code> button on the Web Document Viewer tool bar.</li>
+<li>In the <code>Network</code> tab in browser Developer tools, you should see the next request for <code>ataladocsave</code> method (Headers highlighted by red are CORS specific):</li>
+</ul>
+<p><img src="img/wdv-cors-success.png" alt=""></p>
+<p>In the code before, I propose to comment line <code>WithOrigins(...)</code>. If you do this and repeat all steps to launch sample, then, after click on <code>Save Changes</code> button,
+you will see the next image:</p>
+<p><img src="img/wdv-cors-fail.png" alt=""></p>
+<p>It happens because your published server doesn't allow requests from any origin. And browsers, like Chrome, will show you the error in console, despite on response code 204.</p>
 </article>
 
 </section>
