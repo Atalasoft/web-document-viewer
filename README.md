@@ -1,6 +1,7 @@
 # Atalasoft Web Document Viewer control
-[![Bower version](https://badge.fury.io/bo/web-document-viewer.svg)](https://badge.fury.io/bo/web-document-viewer)
+[![npm version](https://badge.fury.io/js/web-document-viewer.svg)](https://badge.fury.io/js/web-document-viewer)
 [![NuGet version](https://badge.fury.io/nu/Atalasoft.Web.Document.Viewer.svg)](https://badge.fury.io/nu/Atalasoft.Web.Document.Viewer)
+[![Bower version](https://badge.fury.io/bo/web-document-viewer.svg)](https://badge.fury.io/bo/web-document-viewer)
 
 The WebDocumentViewer(aka WDV) and WebDocumentThumbnailer(aka WDT) are JavaScript based image viewing controls that could be easily created by adding fex snippets of HTML and JavaScript on your web page and a separate bare-bones requests handler on the server side.
 
