@@ -51,7 +51,7 @@
     box-sizing: content-box;
 }
 
-.atala_page_div, .atala_dom_edge_first, .atala_dom_edge_last  {
+.atala_page_div, .atala_dom_edge_first, .atala_dom_edge_last {
     vertical-align: top;    
 }
 
