@@ -49,7 +49,7 @@
 21 silly publish      raphael: '^2.1.4' },
 21 silly publish   readme: '# Atalasoft Web Document Viewer control\r\n[![npm version](https://badge.fury.io/js/web-document-viewer.svg)](https://badge.fury.io/js/web-document-viewer)\r\n[![NuGet version](https://badge.fury.io/nu/Atalasoft.Web.Document.Viewer.svg)](https://badge.fury.io/nu/Atalasoft.Web.Document.Viewer)\r\n[![Bower version](https://badge.fury.io/bo/web-document-viewer.svg)](https://badge.fury.io/bo/web-document-viewer)\r\n\r\nThe WebDocumentViewer(aka WDV) and WebDocumentThumbnailer(aka WDT) are JavaScript based image viewing controls that could be easily created by adding fex snippets of HTML and JavaScript on your web page and a separate bare-bones requests handler on the server side.\r\n\r\n### Introduction\r\n\r\nThere currently is a gap of functionality on the internet in that browsers currently only display "web native" image formats (PNG, JPEG, GIF, and SVG). Popular multipage document formats like PDF, TIFF and Office formats (like Excel and Word), all cannot be displayed natively on a web page. Atalasoft web controls solves this problem and provide JavaScript APIs to build viewer apps that:\r\n\r\n* Work on every HTML5 browser (including mobile browsers).\r\n* Display different types of images. PDF, TIFF, PNG, JPEG, BMP, GIF, PCX, PSD, PCD, RAW, WMF/EMF, TGA, JBIG2, Jpeg2000, DICOM, DWG, Xps, etc.\r\n* Modify document structure and save modified documents.\r\n* Enable annotations, thumbnails, and mobile support for a document.\r\n* Display and fill PDF forms.\r\n* Support text selection basing on PDF text layer or OCR data.\r\n* Effectively work with big documents - make it possible to stream individual pages on demand without downloading the entire document first.\r\n* Can be embedded into an existing web page or application.\r\n\r\n### Installation\r\n\r\n#### Bower\r\n```bash\r\nbower install web-document-viewer\r\n```\r\n\r\n#### Nuget\r\n```bash\r\nPM> Install-Package Atalasoft.Web.Document.Viewer\r\n```\r\n\r\n#### NPM\r\n```bash\r\nnpm install web-document-viewer\r\n```\r\n\r\n### Backend Overview\r\n\r\nAtalasoft HTML5 imaging controls are support following server environments\r\n\r\n* ASP.NET\r\n\r\n    Server side functionality is exposed using separate HttpHandler.\r\n    See [ASP.NET demo application](https://atalasoft.github.io/web-document-viewer/tutorial-demo-application.html) tutorial for details.\r\n\r\n- ASP.NET Core on full .net platform\r\n\r\n    Server side functionality is exposed using WebDocumentViewerMiddleware that is registered to handle WDV requests.\r\n    See [ASP.NET Core demo application](https://atalasoft.github.io/web-document-viewer/tutorial-demo-application-aspnet-core.html) tutorial for details.\r\n\r\n\r\n### Frontend Overview\r\n\r\nWebDocumentViewer and WebDocumentThumbnailer requires Jquery, Jquery UI, JQuery Easing libraries. If annotations support are enabled, Raphael.js library is also required.\r\n\r\nJQuery should be included into web page by the application. If some of the other dependent libraries don\'t exist in the web page scope, controls are trying to automatically load them(using file names from dotImage web resources bundle shipped by installer).\r\nWhen controls are delivered by NuGet or Bower it\'s required to manually deploy them on the page(since file names could differ for different versions).\r\n\r\n### Sample application\r\nYou can find a [demo application](https://github.com/Atalasoft/web-document-viewer-demo) shows basic usage of Web Document Viewer component of DotImage product.\r\nLive version of the demo is hosted on Azure: http://atalasoft-viewer-demo.azurewebsites.net/\r\n\r\n### Licensing \r\n\r\nTo run the projects locally, you need to have a DotImage license. There are various way to acquire the license:\r\n\r\n - Use [DotImage Activation Wizard Visual Studio extension](https://visualstudiogallery.msdn.microsoft.com/88ff07c9-fe68-48bd-bfdc-3fbc8a0ec1db)\r\n - Download a complete DotImage installation package from the [Atalasoft web site](https://atalasoft.com). You will be prompted to activate the product during installation\r\n\r\nThis source code is property of Atalasoft, Inc. (http://www.atalasoft.com/)  \r\nPermission for usage and modification of this code is only permitted \r\nwith the purchase of a source code license.\r\n\r\n### Related Articles\r\n - [Web Document Viewer documentation](https://atalasoft.github.io/web-document-viewer/)\r\n - [Introducing NuGet Packages](http://atalasoft.github.io/2016/05/03/introducing-nuget/)\r\n - [Introducing Activation Wizard Extension](http://atalasoft.github.io/2016/05/14/introducing-activation-wizard-extension/) \r\n - [NuGet Tutorial I - Web Document Viewer](http://atalasoft.github.io/2016/06/21/nuget-tutorial-wdv/)\r\n',
 21 silly publish   readmeFilename: 'README.md',
-21 silly publish   gitHead: '36971b649cf4282ae9e720b3a6f73123b147798e',
+21 silly publish   gitHead: '51447b4f28d472c70a450e49a1a51d5874f56f5a',
 21 silly publish   _id: 'web-document-viewer@11.0.0',
 21 silly publish   _shasum: 'b12e8bdd109aa7eb69647c5a24777989d0949def',
 21 silly publish   _from: '.' }
@@ -70,26 +70,26 @@
 29 silly publish uploading C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache\web-document-viewer\11.0.0\package.tgz
 30 verbose request uri https://registry.npmjs.org/web-document-viewer
 31 verbose request sending authorization for write operation
-32 info attempt registry request try #1 at 2:38:51 PM
+32 info attempt registry request try #1 at 2:48:28 PM
 33 verbose request using bearer token for auth
-34 verbose request id 80486cdbb404f49d
+34 verbose request id 980c7c942570a865
 35 http request PUT https://registry.npmjs.org/web-document-viewer
 36 http 403 https://registry.npmjs.org/web-document-viewer
 37 verbose headers { 'content-type': 'application/json',
 37 verbose headers   'cache-control': 'max-age=300',
-37 verbose headers   'content-length': '92',
+37 verbose headers   'content-length': '113',
 37 verbose headers   'accept-ranges': 'bytes',
-37 verbose headers   date: 'Tue, 03 Oct 2017 21:38:51 GMT',
+37 verbose headers   date: 'Tue, 03 Oct 2017 21:48:28 GMT',
 37 verbose headers   via: '1.1 varnish',
 37 verbose headers   connection: 'keep-alive',
-37 verbose headers   'x-served-by': 'cache-lax8632-LAX',
+37 verbose headers   'x-served-by': 'cache-lax8620-LAX',
 37 verbose headers   'x-cache': 'MISS',
 37 verbose headers   'x-cache-hits': '0',
-37 verbose headers   'x-timer': 'S1507066732.702902,VS0,VE195',
+37 verbose headers   'x-timer': 'S1507067308.354890,VS0,VE316',
 37 verbose headers   vary: 'Accept-Encoding, Accept' }
 38 verbose request invalidating C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache\registry.npmjs.org\web-document-viewer on PUT
 39 error publish Failed PUT 403
-40 verbose stack Error: You cannot publish over the previously published version 11.0.0. : web-document-viewer
+40 verbose stack Error: You do not have permission to publish "web-document-viewer". Are you logged in as the correct user? : web-document-viewer
 40 verbose stack     at makeError (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:302:12)
 40 verbose stack     at CachingRegistryClient.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:290:14)
 40 verbose stack     at Request._callback (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:210:14)
@@ -108,7 +108,7 @@
 46 error node v6.11.4
 47 error npm  v3.10.10
 48 error code E403
-49 error You cannot publish over the previously published version 11.0.0. : web-document-viewer
+49 error You do not have permission to publish "web-document-viewer". Are you logged in as the correct user? : web-document-viewer
 50 error If you need help, you may report this error at:
 50 error     <https://github.com/npm/npm/issues>
 51 verbose exit [ 1, true ]
