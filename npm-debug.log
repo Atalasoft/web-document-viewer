@@ -1,0 +1,116 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'publish' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.4
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: 'C:\\web-document-viewer-github',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache\web-document-viewer\11.0.0\package.tgz not in flight; packing
+9 verbose correctMkdir C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+10 verbose makeDirectory C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache creation not in flight; initializing
+11 verbose makeCacheDir UID & GID are irrelevant on win32
+12 info lifecycle web-document-viewer@11.0.0~prepublish: web-document-viewer@11.0.0
+13 silly lifecycle web-document-viewer@11.0.0~prepublish: no script for prepublish, continuing
+14 verbose tar pack [ 'C:\\Users\\gilbert.ruiz\\AppData\\Roaming\\npm-cache\\web-document-viewer\\11.0.0\\package.tgz',
+14 verbose tar pack   'C:\\web-document-viewer-github' ]
+15 verbose tarball C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache\web-document-viewer\11.0.0\package.tgz
+16 verbose folder C:\web-document-viewer-github
+17 verbose addLocalTarball adding from inside cache C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache\web-document-viewer\11.0.0\package.tgz
+18 verbose correctMkdir C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+19 silly cache afterAdd web-document-viewer@11.0.0
+20 verbose afterAdd C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache\web-document-viewer\11.0.0\package\package.json not in flight; writing
+21 verbose correctMkdir C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+22 verbose afterAdd C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache\web-document-viewer\11.0.0\package\package.json written
+23 silly publish { name: 'web-document-viewer',
+23 silly publish   version: '11.0.0',
+23 silly publish   description: 'Atalasoft JavaScript library for presenting images and documents, including PDF Forms, on a web page.',
+23 silly publish   main: 'atalaWebDocumentViewer.js',
+23 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+23 silly publish   repository:
+23 silly publish    { type: 'git',
+23 silly publish      url: 'git+https://github.com/Atalasoft/web-document-viewer.git' },
+23 silly publish   keywords: [ 'Atalasoft', 'imaging', 'image', 'web', 'javascript' ],
+23 silly publish   author: { name: 'Atalasoft', url: 'https://atalasoft.com' },
+23 silly publish   license: 'SEE LICENSE IN LICENSE',
+23 silly publish   bugs: { url: 'https://github.com/Atalasoft/web-document-viewer/issues' },
+23 silly publish   homepage: 'https://github.com/Atalasoft/web-document-viewer#readme',
+23 silly publish   dependencies:
+23 silly publish    { jquery: '>=1.11.0',
+23 silly publish      'jquery-ui': '^1.10.4',
+23 silly publish      'jquery.easing': '^1.3.0',
+23 silly publish      raphael: '^2.1.4' },
+23 silly publish   readme: '# Atalasoft Web Document Viewer control\r\n[![npm version](https://badge.fury.io/js/web-document-viewer.svg)](https://badge.fury.io/js/web-document-viewer)\r\n[![NuGet version](https://badge.fury.io/nu/Atalasoft.Web.Document.Viewer.svg)](https://badge.fury.io/nu/Atalasoft.Web.Document.Viewer)\r\n[![Bower version](https://badge.fury.io/bo/web-document-viewer.svg)](https://badge.fury.io/bo/web-document-viewer)\r\n\r\nThe WebDocumentViewer(aka WDV) and WebDocumentThumbnailer(aka WDT) are JavaScript based image viewing controls that could be easily created by adding fex snippets of HTML and JavaScript on your web page and a separate bare-bones requests handler on the server side.\r\n\r\n### Introduction\r\n\r\nThere currently is a gap of functionality on the internet in that browsers currently only display "web native" image formats (PNG, JPEG, GIF, and SVG). Popular multipage document formats like PDF, TIFF and Office formats (like Excel and Word), all cannot be displayed natively on a web page. Atalasoft web controls solves this problem and provide JavaScript APIs to build viewer apps that:\r\n\r\n* Work on every HTML5 browser (including mobile browsers).\r\n* Display different types of images. PDF, TIFF, PNG, JPEG, BMP, GIF, PCX, PSD, PCD, RAW, WMF/EMF, TGA, JBIG2, Jpeg2000, DICOM, DWG, Xps, etc.\r\n* Modify document structure and save modified documents.\r\n* Enable annotations, thumbnails, and mobile support for a document.\r\n* Display and fill PDF forms.\r\n* Support text selection basing on PDF text layer or OCR data.\r\n* Effectively work with big documents - make it possible to stream individual pages on demand without downloading the entire document first.\r\n* Can be embedded into an existing web page or application.\r\n\r\n### Installation\r\n\r\n#### Bower\r\n```bash\r\nbower install web-document-viewer\r\n```\r\n\r\n#### Nuget\r\n```bash\r\nPM> Install-Package Atalasoft.Web.Document.Viewer\r\n```\r\n\r\n#### NPM\r\n```bash\r\nnpm install web-document-viewer\r\n```\r\n\r\n### Backend Overview\r\n\r\nAtalasoft HTML5 imaging controls are support following server environments\r\n\r\n* ASP.NET\r\n\r\n    Server side functionality is exposed using separate HttpHandler.\r\n    See [ASP.NET demo application](https://atalasoft.github.io/web-document-viewer/tutorial-demo-application.html) tutorial for details.\r\n\r\n- ASP.NET Core on full .net platform\r\n\r\n    Server side functionality is exposed using WebDocumentViewerMiddleware that is registered to handle WDV requests.\r\n    See [ASP.NET Core demo application](https://atalasoft.github.io/web-document-viewer/tutorial-demo-application-aspnet-core.html) tutorial for details.\r\n\r\n\r\n### Frontend Overview\r\n\r\nWebDocumentViewer and WebDocumentThumbnailer requires Jquery, Jquery UI, JQuery Easing libraries. If annotations support are enabled, Raphael.js library is also required.\r\n\r\nJQuery should be included into web page by the application. If some of the other dependent libraries don\'t exist in the web page scope, controls are trying to automatically load them(using file names from dotImage web resources bundle shipped by installer).\r\nWhen controls are delivered by NuGet or Bower it\'s required to manually deploy them on the page(since file names could differ for different versions).\r\n\r\n### Sample application\r\nYou can find a [demo application](https://github.com/Atalasoft/web-document-viewer-demo) shows basic usage of Web Document Viewer component of DotImage product.\r\nLive version of the demo is hosted on Azure: http://atalasoft-viewer-demo.azurewebsites.net/\r\n\r\n### Licensing \r\n\r\nTo run the projects locally, you need to have a DotImage license. There are various way to acquire the license:\r\n\r\n - Use [DotImage Activation Wizard Visual Studio extension](https://visualstudiogallery.msdn.microsoft.com/88ff07c9-fe68-48bd-bfdc-3fbc8a0ec1db)\r\n - Download a complete DotImage installation package from the [Atalasoft web site](https://atalasoft.com). You will be prompted to activate the product during installation\r\n\r\nThis source code is property of Atalasoft, Inc. (http://www.atalasoft.com/)  \r\nPermission for usage and modification of this code is only permitted \r\nwith the purchase of a source code license.\r\n\r\n### Related Articles\r\n - [Web Document Viewer documentation](https://atalasoft.github.io/web-document-viewer/)\r\n - [Introducing NuGet Packages](http://atalasoft.github.io/2016/05/03/introducing-nuget/)\r\n - [Introducing Activation Wizard Extension](http://atalasoft.github.io/2016/05/14/introducing-activation-wizard-extension/) \r\n - [NuGet Tutorial I - Web Document Viewer](http://atalasoft.github.io/2016/06/21/nuget-tutorial-wdv/)\r\n',
+23 silly publish   readmeFilename: 'README.md',
+23 silly publish   gitHead: 'f1904907bac20c5e49beb7b8eb0a4838ea7b25d2',
+23 silly publish   _id: 'web-document-viewer@11.0.0',
+23 silly publish   _shasum: 'b12e8bdd109aa7eb69647c5a24777989d0949def',
+23 silly publish   _from: '.' }
+24 verbose getPublishConfig undefined
+25 silly mapToRegistry name web-document-viewer
+26 silly mapToRegistry using default registry
+27 silly mapToRegistry registry https://registry.npmjs.org/
+28 silly mapToRegistry data Result {
+28 silly mapToRegistry   raw: 'web-document-viewer',
+28 silly mapToRegistry   scope: null,
+28 silly mapToRegistry   escapedName: 'web-document-viewer',
+28 silly mapToRegistry   name: 'web-document-viewer',
+28 silly mapToRegistry   rawSpec: '',
+28 silly mapToRegistry   spec: 'latest',
+28 silly mapToRegistry   type: 'tag' }
+29 silly mapToRegistry uri https://registry.npmjs.org/web-document-viewer
+30 verbose publish registryBase https://registry.npmjs.org/
+31 silly publish uploading C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache\web-document-viewer\11.0.0\package.tgz
+32 verbose request uri https://registry.npmjs.org/web-document-viewer
+33 verbose request sending authorization for write operation
+34 info attempt registry request try #1 at 2:14:24 PM
+35 verbose request using bearer token for auth
+36 verbose request id 4b228c023665eba4
+37 http request PUT https://registry.npmjs.org/web-document-viewer
+38 http 403 https://registry.npmjs.org/web-document-viewer
+39 verbose headers { 'content-type': 'application/json',
+39 verbose headers   'cache-control': 'max-age=300',
+39 verbose headers   'content-length': '92',
+39 verbose headers   'accept-ranges': 'bytes',
+39 verbose headers   date: 'Tue, 03 Oct 2017 21:14:25 GMT',
+39 verbose headers   via: '1.1 varnish',
+39 verbose headers   connection: 'keep-alive',
+39 verbose headers   'x-served-by': 'cache-lax8624-LAX',
+39 verbose headers   'x-cache': 'MISS',
+39 verbose headers   'x-cache-hits': '0',
+39 verbose headers   'x-timer': 'S1507065265.906703,VS0,VE243',
+39 verbose headers   vary: 'Accept-Encoding, Accept' }
+40 verbose request invalidating C:\Users\gilbert.ruiz\AppData\Roaming\npm-cache\registry.npmjs.org\web-document-viewer on PUT
+41 error publish Failed PUT 403
+42 verbose stack Error: You cannot publish over the previously published version 11.0.0. : web-document-viewer
+42 verbose stack     at makeError (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:302:12)
+42 verbose stack     at CachingRegistryClient.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:290:14)
+42 verbose stack     at Request._callback (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:210:14)
+42 verbose stack     at Request.self.callback (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:187:22)
+42 verbose stack     at emitTwo (events.js:106:13)
+42 verbose stack     at Request.emit (events.js:191:7)
+42 verbose stack     at Request.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1048:10)
+42 verbose stack     at emitOne (events.js:96:13)
+42 verbose stack     at Request.emit (events.js:188:7)
+42 verbose stack     at IncomingMessage.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:969:12)
+43 verbose statusCode 403
+44 verbose pkgid web-document-viewer
+45 verbose cwd C:\web-document-viewer-github
+46 error Windows_NT 6.1.7601
+47 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "publish"
+48 error node v6.11.4
+49 error npm  v3.10.10
+50 error code E403
+51 error You cannot publish over the previously published version 11.0.0. : web-document-viewer
+52 error If you need help, you may report this error at:
+52 error     <https://github.com/npm/npm/issues>
+53 verbose exit [ 1, true ]
