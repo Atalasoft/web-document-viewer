@@ -68,9 +68,9 @@ deploy. Once you have succeeded building the example project, you can begin modi
 <p><img src="img/wdv-empty-template.png" alt=""></p>
 <p>Visual Studio automatically will create you a project with &quot;Hello world&quot; application. It already has a <code>Startup</code> class and
 all necessary NuGet packages for running this application is self-hosted, of course, you can use IIS Express instead. </p>
-<h3>Add NuGet packages for server-side</h3><p>Add the NuGet package <code>Atalasoft.DotImage.WebControls.Core.x86</code> <strong>&lt;THERE SHOULD BE A LINK TO NUGET FEED&gt;</strong> it automatically downloads all necessary
+<h3>Add NuGet packages for server-side</h3><p>Add the NuGet package <a href="https://www.nuget.org/packages/Atalasoft.dotImage.WebControls.Core.x86/">Atalasoft.dotImage.WebControls.Core.x86</a> it automatically downloads all necessary
 dependencies on other DotImage and ASP.NET Core components. If you plan to run your application on a 64-bit server,
-you should use the package <code>Atalasoft.DotImage.WebControls.Core.x64</code><strong>&lt;THERE SHOULD BE A LINK TO NUGET FEED&gt;</strong>.</p>
+you should use the package <a href="https://www.nuget.org/packages/Atalasoft.dotImage.WebControls.Core.x64/">Atalasoft.dotImage.WebControls.Core.x64</a>.</p>
 <p>Since the Web Document Viewer uses a file system to access the images to show on the page,
 you also need the package <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles">Microsoft.AspNetCore.StaticFiles</a>.</p>
 <h3>Add Bower packages for client-side</h3><p>First of all, you need to manually a <code>Bower configuration file</code> from the template with the same name.
@@ -97,6 +97,7 @@ embedded in your page.</p>
     &lt;script src=&quot;lib/jquery/dist/jquery.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
     &lt;script src=&quot;lib/jquery-ui/jquery-ui.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
     &lt;script src=&quot;lib/raphael/raphael.min.js&quot;>&lt;/script>
+    &lt;script src=&quot;lib/clipboard/dist/clipboard.min.js&quot;>&lt;/script>
     &lt;script src=&quot;lib/web-document-viewer/atalaWebDocumentViewer.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
 
     &lt;!-- Style for Web Viewer -->
