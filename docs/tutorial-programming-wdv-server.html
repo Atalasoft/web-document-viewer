@@ -214,7 +214,8 @@ private void OnImageRequested(object sender, ImageRequestedEventArgs imageReques
             }
         }
     }
-}</code></pre><p>In the example above we are changing region detection method to <code>TextRegionDetectionMode.BlockDetection</code> which means that text objects will be grouped into regions based on the distance between them. The boundaries of the text objects will be inflated by the <code>BlockDetectionDistance</code> times the average block character size in corresponding dimension. The intersecting bocks will be grouped into single segment.</p>
+}
+</code></pre><p>In the example above we are changing region detection method to <code>TextRegionDetectionMode.BlockDetection</code> which means that text objects will be grouped into regions based on the distance between them. The boundaries of the text objects will be inflated by the <code>BlockDetectionDistance</code> times the average block character size in corresponding dimension. The intersecting bocks will be grouped into single segment.</p>
 <p>Such algorithm heavily depends on the document structure, for example for columns layout text objects should be joined primarily in a vertical direction(reading direction), and on the same time for table layout text objects should be joined in horizontal direction, even though horizontal distance between them is usually bigger then vertical.</p>
 <p>Such blocks detection algorithm depends on the document structure and so it became useful when application deals with the set of documents having similar structure or documents could be divided to the finite set of classes according to their structure.</p>
 <h2><code>WebDocumentRequestHandler.DocumentSave</code></h2><p>This event is fired before document save operation is performed.</p>
