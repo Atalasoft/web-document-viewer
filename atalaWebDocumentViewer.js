@@ -105,7 +105,7 @@ Forms:{},/**
 Text:{},/**
      * @namespace Atalasoft.Utils
      */
-Utils:{}});!function(){Atalasoft.Controls.Version=[11,0,0,458];var t={instanceCounter:0};/**
+Utils:{}});!function(){Atalasoft.Controls.Version=[11,0,0,478];var t={instanceCounter:0};/**
          * Control that views, modifies, and saves documents, annotations and forms.
          * @param {WebDocumentViewerConfig} [settings] Object of key value pairs representing initial settings
          * @param {OpenUrlCallback} [openCallback] callback that is called when document load complete(if {@link WebDocumentViewerConfig.documenturl| documenturl} is specified).
@@ -550,7 +550,6 @@ annotations:{/**
                  * @property {AnnotationData[]} [defaults] - Pre defined annotations to be drawn with the mouse.
                  * @property {AnnotationData[]} [stamps] - Pre defined stamp annotations to be drawn with the mouse.
                  * @property {AnnotationData[]} [images] - Pre defined image annotations to be drawn with the mouse.
-                 * @property {AnnotationData[]} [custom] - Custom annotation types.
                  * @property {boolean} [saveusername] - Indicates whether the server handler will save the username property when saving all
                  */
 /**
@@ -920,11 +919,11 @@ rotatePage:D,/**
              * @function
              *
              * @example
-             * // rotates pages with indexes 0 and 3 on 90 degrees
+             * <caption>Rotate pages with indexes 0 and 3 on 90 degrees</caption>
              * viewer.document.rotatePages([0, 3], 90)
              *
              * @example
-             * // rotates page with index 0 on 180 degrees and page with index 3 on 90 degrees
+             * <caption>Rotate page with index 0 on 180 degrees and page with index 3 on 90 degrees</caption>
              * viewer.document.rotatePages([0, 3], [180, 90])
              */
 rotatePages:C,/**
@@ -1008,10 +1007,7 @@ lines:"lines",/**
 freehand:"freehand",/**
      * Polygon annotation. Similar to `lines` but represents enclosed shape.
      */
-polygon:"polygon",/**
-     * Custom annotation type. Behavior is defined by the application.
-     */
-custom:"custom"},/**
+polygon:"polygon"},/**
  * The current browser metadata.
  * @type {Atalasoft.Utils.BrowserMetadata}
  */
@@ -1684,7 +1680,7 @@ burn:!1,/**
              * @property {string} [tooltip] - Annotation tooltip.
              */
 tooltip:"",/**
-             * @property {string} name - Annotation type title. This will be shown as a caption for toolbar buttons representing "extended" types annotations. This applies to `stamp`, `image` and `custom` types of annotation. I.e. name should be set to annotations defined by application using {@link WebDocumentViewerConfig.annotations| annotations.stamps}, {@link WebDocumentViewerConfig.annotations| annotations.images} and {@link WebDocumentViewerConfig.annotations| annotations.custom}.
+             * @property {string} name - Annotation type title. This will be shown as a caption for toolbar buttons representing "extended" types annotations. This applies to `stamp` and `image` types of annotation. I.e. name should be set to annotations defined by application using {@link WebDocumentViewerConfig.annotations| annotations.stamps} and {@link WebDocumentViewerConfig.annotations| annotations.images}.
              */
 name:"",/**
              * @property {string} [username] - Corresponds to server side `AnnotationData.UserName` property.
@@ -2130,18 +2126,7 @@ allowdragdrop:!1,/**
          *
          * This delay is intended to support "pan" behavior when UI drag&drop support is enabled.
          *
-         * @example
-        * <caption>It's recommended to increase this value on touch device. For example </caption>
-        *  _thumbs = new Atalasoft.Controls.WebDocumentThumbnailer({
-        *  	parent: $(".atala-document-thumbs"),
-        *  	serverurl: _serverUrl, // server handler url to send image requests to
-        *  	documenturl: _docUrl, // + _docFile, 	// document url relative to the server handler url
-        * 	allowannotations: true,
-        *  	allowdragdrop: true,
-        * 	dragdelay: Atalasoft.Utils.Browser.Mobile.Any() ? 750 : 250,
-        *  	viewer: _viewer
-        *  });
-        */
+         */
 dragdelay:250,/**
          * @property {number} [selectedindex=0] - Index of the initially selected page. This page will be selected after each new document will be loaded.
          */
@@ -2161,10 +2146,10 @@ selectedcolor:"#E0872D",/**
          * @property {string} [selectedhovercolor='#FFC060'] - Selected thumbnail :hover background color.
          */
 selectedhovercolor:"#FFC060",/**
-         * @property {Atalasoft.Utils.SelectionMode} - defines the WDT selection mode.
+         * @property {Atalasoft.Utils.SelectionMode} [selectionmode=SingleSelect] - Defines the WDT selection mode.
          */
 selectionmode:Atalasoft.Utils.SelectionMode.SingleSelect,/**
-         * @property {Atalasoft.Utils.SelectedItemsOrder} - defines the order in which selected pages are to be processed.
+         * @property {Atalasoft.Utils.SelectedItemsOrder} [selecteditemsorder=ItemIndexOrder] - Defines the order in which selected pages are to be processed.
          */
 selecteditemsorder:Atalasoft.Utils.SelectedItemsOrder.ItemIndexOrder},vn={type:"Atalasoft.Controls.WebDocumentThumbnailer",debug:!0,showpageborder:!0,forcepagefit:!0,toolbarparent:Nt("<div/>")},_n={/**
          * Triggers when thumbnail is selected.

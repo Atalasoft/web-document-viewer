@@ -98,6 +98,13 @@
 
 
         
+            <h3>Example</h3>
+            
+        <p class="code-caption">It's recommended to increase this value on touch device. For example </p>
+    
+    <pre class="prettyprint"><code> _thumbs = new Atalasoft.Controls.WebDocumentThumbnailer({   parent: $(".atala-document-thumbs"),   serverurl: _serverUrl, // server handler url to send image requests to   documenturl: _docUrl, // + _docFile, 	// document url relative to the server handler url   allowannotations: true,   allowdragdrop: true,   dragdelay: Atalasoft.Utils.Browser.Mobile.Any() ? 750 : 250,   viewer: _viewer });</code></pre>
+
+        
     
     </div>
 
@@ -149,56 +156,6 @@
     </thead>
 
     <tbody>
-    
-
-        <tr id=".selecteditemsorder">
-            
-                <td class="name"><code></code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Atalasoft.Utils.html#.SelectedItemsOrder">SelectedItemsOrder</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>defines the order in which selected pages are to be processed.</p></td>
-        </tr>
-
-    
-
-        <tr id=".selectionmode">
-            
-                <td class="name"><code></code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Atalasoft.Utils.html#.SelectionMode">SelectionMode</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>defines the WDT selection mode.</p></td>
-        </tr>
-
     
 
         <tr id=".selectedhovercolor">
@@ -442,6 +399,60 @@
             
 
             <td class="description last"><p>Index of the initially selected page. This page will be selected after each new document will be loaded.</p></td>
+        </tr>
+
+    
+
+        <tr id=".selecteditemsorder">
+            
+                <td class="name"><code>[selecteditemsorder]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Atalasoft.Utils.html#.SelectedItemsOrder">SelectedItemsOrder</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                    ItemIndexOrder
+                
+                </td>
+            
+
+            <td class="description last"><p>Defines the order in which selected pages are to be processed.</p></td>
+        </tr>
+
+    
+
+        <tr id=".selectionmode">
+            
+                <td class="name"><code>[selectionmode]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Atalasoft.Utils.html#.SelectionMode">SelectionMode</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                    SingleSelect
+                
+                </td>
+            
+
+            <td class="description last"><p>Defines the WDT selection mode.</p></td>
         </tr>
 
     
