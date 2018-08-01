@@ -105,7 +105,7 @@ Forms:{},/**
 Text:{},/**
      * @namespace Atalasoft.Utils
      */
-Utils:{}});!function(){Atalasoft.Controls.Version=[11,0,0,478];var t={instanceCounter:0};/**
+Utils:{}});!function(){Atalasoft.Controls.Version=[11,0,0,498];var t={instanceCounter:0};/**
          * Control that views, modifies, and saves documents, annotations and forms.
          * @param {WebDocumentViewerConfig} [settings] Object of key value pairs representing initial settings
          * @param {OpenUrlCallback} [openCallback] callback that is called when document load complete(if {@link WebDocumentViewerConfig.documenturl| documenturl} is specified).
