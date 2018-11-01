@@ -78,11 +78,11 @@ The WebDocumentViewer(aka WDV) and WebDocumentThumbnailer(aka WDT) are JavaScrip
 <p>When the Web Document Viewer is constructed with the <a href="WebDocumentViewerConfig.html#.savepath"><code> savepath</code></a> property configured to a relative path on the server, a save button will automatically appear in the upper left corner of the toolbar. When allowannotations is set to true, additional buttons that allow users to draw annotations will also appear in the toolbar.</p>
 <p>When you click the Save button, the annotation data for the entire document is sent back to the server, serialized, and then saved in XMP format in the directory specified by the savepath property in the constructor. The file name matches the name of the document open in the Web Document Viewer when the annotations are saved; in the case that Example.tif is opened, annotated, and then saved, the resulting annotation data file is named Example.xmp.</p>
 <p>Loading annotations requires a call to a public <a href="Atalasoft.Controls.WebDocumentViewer.html#openUrl"><code> JavaScript method</code></a> supported by the viewer, and cannot be done through the toolbar. </p>
-<h3>jQuery UI styling</h3><p>The control's toolbar is styled with jQuery UI by default. You can download new themes from http://jqueryui.com/themeroller/ and include them in your web page after the required JavaScript and css includes for the viewer. In order to prevent viewer styling from overriding styling on the rest of your page, some jQuery UI styling is further customized by jQuery UI CSS classes prefixed with <code>atala-</code>. These classes can be overridden to change default styling of the control and toolbar.</p>
+<h3>jQuery UI styling</h3><p>The control's toolbar is styled with jQuery UI by default. You can download new themes from https://jqueryui.com/themeroller/ and include them in your web page after the required JavaScript and css includes for the viewer. In order to prevent viewer styling from overriding styling on the rest of your page, some jQuery UI styling is further customized by jQuery UI CSS classes prefixed with <code>atala-</code>. These classes can be overridden to change default styling of the control and toolbar.</p>
 <h2>Troubleshoot</h2><ul>
 <li><p>If images don't show up, and you receive an alert that there was an image error, the license file might not have been found by the handler. Try placing the license file in the bin folder of the Web Site.</p>
 </li>
-<li><p>If problems still persist, please contact our <a href="http://www.atalasoft.com/support/">Support Team</a>.</p>
+<li><p>If problems still persist, please contact our <a href="https://www.atalasoft.com/support/">Support Team</a>.</p>
 </li>
 </ul>
 </article>

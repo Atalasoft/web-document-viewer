@@ -73,25 +73,35 @@ dependencies on other DotImage and ASP.NET Core components. If you plan to run y
 you should use the package <a href="https://www.nuget.org/packages/Atalasoft.dotImage.WebControls.Core.x64/">Atalasoft.dotImage.WebControls.Core.x64</a>.</p>
 <p>Since the Web Document Viewer uses a file system to access the images to show on the page,
 you also need the package <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles">Microsoft.AspNetCore.StaticFiles</a>.</p>
-<h3>Add Bower packages for client-side</h3><p>First of all, you need to manually a <code>Bower configuration file</code> from the template with the same name.
-By default, this file will be called <code>bower.json</code>, it also adds a file <code>.bowerrc</code> which will contain
-a directory where all packages will be stored.</p>
-<p>Now you can add a Bower package <code>web-document-viewer</code>, it also automatically adds all
-necessary dependencies.</p>
+<h3>Add Bower packages for client-side</h3><p>First of all, you need to manually add two empty javascript files to the project root. First of them is <code>bower.json</code> and it will contains
+our project bower dependencies. The second one is <code>.bowerrc</code>, we need it to configure where we want store bower packages and from where they should
+be downloaded.</p>
+<p>Now we should fill these javascript files. We will start from <code>.bowerrc</code> file, in this file we add the folder where bower should download all packages and, since Microsoft doesn't update their bower executable, we need to manually setup where packages should be found. The result file will be looked like this</p>
+<pre class="prettyprint source lang-javascript"><code>{
+  &quot;directory&quot;: &quot;wwwroot/lib&quot;,
+  &quot;registry&quot;: &quot;https://registry.bower.io&quot;
+}</code></pre><p>Now you can add a Bower package <code>web-document-viewer</code>, it also automatically adds all necessary dependencies. To do this, open the <code>bower.json</code> file, and write its contents like this</p>
+<pre class="prettyprint source lang-javascript"><code>{
+  &quot;name&quot;: &quot;asp.net&quot;,
+  &quot;private&quot;: true,
+  &quot;dependencies&quot;: {
+    &quot;web-document-viewer&quot;: &quot;~11.0.0&quot; 
+  }
+}</code></pre><p>In this file we setup package name, made it private, in order to do not publish it accindentally, and added a one dependency to a <a href="https://github.com/Atalasoft/web-document-viewer">web-document-viewer</a> package. The <code>~</code> symbol before the version allows us to download latest patch version of the package.</p>
 <h3>Prepare Startup class</h3><p>Before we can use DotImage middlewares, we need to configure our application for them.</p>
 <h4>Configure method</h4><p>How was mentioned before, Web Document Viewer needs to access to the file system.
-So, we need to add middlewares to work with files. To do this, you need to add following strings in the <code>Startup.Configure</code> method:</p>
+So, we need to add middlewares to work with files. To do this, you need to add following strings at the beginning of <code>Startup.Configure</code> method in <code>Startup.cs</code> file:</p>
 <pre class="prettyprint source lang-csharp"><code>app.UseDefaultFiles();
 app.UseStaticFiles();</code></pre><p>Also, you need to delete &quot;Hello world&quot; code string, since we don't need it.</p>
 <p>The other thing we need to do is to add a <code>PdfDecoder</code>. Our server will use it for rendering PDF files.
-You can do this by writing the next code:</p>
+You can do this by writing the next code at the beginning of <code>Program.Main</code> method in <code>Program.cs</code> file:</p>
 <pre class="prettyprint source lang-csharp"><code>RegisteredDecoders.Decoders.Add(new PdfDecoder());</code></pre><h2>Set up server-side components</h2><h3>Add the Web Document Viewer middleware</h3><p>The Web Document Viewer middleware is responsible for communicating with the Web Document Viewer
 embedded in your page.</p>
-<p>Add a new line of code to the <code>Startup.Configure</code> method:</p>
+<p>Add a new line of code at the end of <code>Startup.Configure</code> method:</p>
 <pre class="prettyprint source lang-csharp"><code>app.Map(&quot;/wdv&quot;, wdvApp => { wdvApp.RunWebDocumentViewerMiddleware(); });</code></pre><p>That's all! If you want to customize this middleware, you can choose another overload of the method
 <code>RunWebDocumentViewerMiddleware</code> that accepts implementation of the interface <code>IWebDocumentViewerCallbacks</code>.</p>
-<h2>Set up the viewer control</h2><p>The setup for web document viewing just requires placing some JavaScript, CSS, and HTML into your page.</p>
-<h3>Include the web resources</h3><p>Add the following script and link tags in your page's head section to include the necessary Web Document Viewer code and dependencies.</p>
+<h2>Set up the viewer control</h2><p>The setup for web document viewing just requires placing some JavaScript, CSS, and HTML into your page. And the first step is to add the new page to your web application. To do this, add a new HTML file with name <code>index.html</code> to the <code>wwwroot</code> folder.</p>
+<h3>Include the web resources</h3><p>Open <code>index.html</code> and replace its <code>head</code> section with the following script and link tags to include the necessary Web Document Viewer code and dependencies.</p>
 <pre class="prettyprint source lang-html"><code>&lt;head>
     &lt;!-- Scripts for Web Viewing -->
     &lt;script src=&quot;lib/jquery/dist/jquery.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
@@ -105,8 +115,7 @@ embedded in your page.</p>
     &lt;link href=&quot;lib/web-document-viewer/atalaWebDocumentViewer.css&quot; rel=&quot;stylesheet&quot; />
 &lt;/head></code></pre><h3>Configure the control</h3><p>The web viewing control needs to be initialized and configured to set up connections to the right middleware,
 specify behavior for events, and so forth.
-It can be done with another block of JavaScript, either included or pasted directly within your page's head somewhere
-below the added dependencies.</p>
+It can be done with another block of JavaScript, either included or pasted directly within your page's head below the previously added dependencies.</p>
 <pre class="prettyprint source lang-html"><code>    &lt;script type=&quot;text/javascript&quot;>
 
         var _viewer;
@@ -151,16 +160,19 @@ below the added dependencies.</p>
 
     &lt;/script></code></pre><p>Several additional options and handlers can be specified in the initialization routines for viewing.
 However, this example represents the minimal configuration necessary for web document viewer.
-Additional information can be found in the <a href="https://atalasoft.github.io/2016/06/21/nuget-tutorial-wdv/">blog post</a> about Web Document Viewer.</p>
-<h3>Add the UI</h3><p>Insert the following HTML code to your project to create a basic viewer UI.
+Additional information can be found in the <a href="https://atalasoft.github.io/2018/10/11/nuget-tutorial-wdv/">blog post</a> about Web Document Viewer.</p>
+<h3>Add the UI</h3><p>Replace the empty <code>body</code> section with the following HTML to create a basic viewer UI.
 It includes the Web Document Viewer, drop-down box to choose a file to show.</p>
-<pre class="prettyprint source lang-html"><code>    &lt;h1>Kofax Web Document Viewer Demo&lt;/h1>
+<pre class="prettyprint source lang-html"><code>&lt;body>
+    &lt;h1>Kofax Web Document Viewer Demo&lt;/h1>
     &lt;form id=&quot;WDVForm&quot; runat=&quot;server&quot;>
         Select File to display:
 
         &lt;select ID=&quot;FileSelectionList&quot; onchange=&quot;loadFile();&quot;>
+            &lt;!-- See the NOTE below -->
             &lt;option value=&quot;images/Test.tif&quot;>Test.tif&lt;/option>
             &lt;option value=&quot;images/Test.pdf&quot;>Test.pdf&lt;/option>
+            &lt;!-- END NOTE -->
         &lt;/select>
 
         &lt;div>
@@ -169,9 +181,11 @@ It includes the Web Document Viewer, drop-down box to choose a file to show.</p>
         &lt;/div>
 
         &lt;div id=&quot;status&quot;>&lt;/div>
-
     &lt;/form>
-</code></pre><h2>Tune-up application by your demands</h2><p>Unlike the classic ASP.NET model handlers, DotImage middlewares for ASP.NET Core doesn't provide any settings for compression and response caching.
+&lt;/body>
+</code></pre><p><em><strong>Note</strong></em> <code>The option tags 'value' property points to real files in 'wwwroot\images' folder. Thus, you need to add manually files with the same names to
+this folder.</code></p>
+<h2>Tune-up application by your demands</h2><p>Unlike the classic ASP.NET model handlers, DotImage middlewares for ASP.NET Core doesn't provide any settings for compression and response caching.
 Because, we want to help you build an application, where you can decide what are you want to do, what additional features you want to use. 
 So, Web Document Viewer middleware forced not to add any cache control headers, and also doesn't try to use GZip or Deflate algorithms for compression.
 However, you can simply enable these feature by using Microsoft NuGet packages <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/">Microsoft.AspNetCore.ResponseCaching</a> and
