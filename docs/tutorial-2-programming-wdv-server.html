@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge" >
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>WebDocumentViewerConfig - Documentation</title>
+    <title>Tutorial: Programming Document Viewer Server - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -36,1263 +36,193 @@
 
 <div id="main">
     
-    <h1 class="page-title">WebDocumentViewerConfig</h1>
+    <h1 class="page-title">Tutorial: Programming Document Viewer Server</h1>
     
 
-    
-
-
-
-
-<section>
+    <section>
 
 <header>
     
+    <ul>
+        <li><a href="tutorial-2-1-programming-wdv-server-save-doc.html">Saving Document</a></li>
+    </ul>
     
+
+    <h2>Programming Document Viewer Server</h2>
 </header>
 
 <article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Represents <a href="Atalasoft.Controls.WebDocumentViewer.html"><code>WebDocumentViewer</code></a> configuration.</p></div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-        
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th class="name">Name</th>
-        
-
-        <th class="type">Type</th>
-
-        
-        <th class="default">Default</th>
-        
-
-        <th class="description last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr id=".parent">
-            
-                <td class="name"><code>parent</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>jQuery object that the control will contain the control.</p></td>
-        </tr>
-
-    
-
-        <tr id=".serverurl">
-            
-                <td class="name"><code>serverurl</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Url location to the server handler.</p></td>
-        </tr>
-
-    
-
-        <tr id=".pagespacing">
-            
-                <td class="name"><code>[pagespacing]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    4
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the distance (in pixels) between pages displayed.</p></td>
-        </tr>
-
-    
-
-        <tr id=".allowannotations">
-            
-                <td class="name"><code>[allowannotations]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Turns annotation support on or off.
-This affects both UI annotations toolbar appearance and corresponding API methods behavior.
-If set to <code>false</code>, <a href="Atalasoft.Controls.WebDocumentViewer.html#annotations"><code>WebDocumentViewer.annotations</code></a> will be set to <code>null</code> and annotation-related methods of <code>WebDocumentViewer</code> will throw errors.</p></td>
-        </tr>
-
-    
-
-        <tr id=".allowforms">
-            
-                <td class="name"><code>[allowforms]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Turns forms support on or off.</p></td>
-        </tr>
-
-    
-
-        <tr id=".allowtext">
-            
-                <td class="name"><code>[allowtext]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Turns text selection support on or off.</p></td>
-        </tr>
-
-    
-
-        <tr id=".annotations">
-            
-                <td class="name"><code>[annotations]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#AnnotationsConfig">AnnotationsConfig</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Annotations specific config options, including predefined configurations for particular annotation types.</p></td>
-        </tr>
-
-    
-
-        <tr id=".annotationsurl">
-            
-                <td class="name"><code>[annotationsurl]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Identifier of the annotation data (an .xmp file on the server) that should be displayed along with the displayed document.</p>
-<p> By default <code>annotationsurl</code> is treated as an url to the serialized annotations data file on server(usually .xmp). Application could customize server behavior and in this case <code>annotationsurl</code> could contain arbitrary string.</p>
-<p> This property on the <a href="Atalasoft.Controls.WebDocumentViewer.html#config"><code>viewer.config</code></a> is updated internally each time new document is opened.</p></td>
-        </tr>
-
-    
-
-        <tr id=".columns">
-            
-                <td class="name"><code>[columns]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Number of columns to show when displaying tabular pages, -1 is automatic.</p></td>
-        </tr>
-
-    
-
-        <tr id=".direction">
-            
-                <td class="name"><code>[direction]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Atalasoft.Utils.html#.ScrollDirection">ScrollDirection</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    Vertical
-                
-                </td>
-            
-
-            <td class="description last"><p>Scroll direction of the viewer.</p>
-<p>i.e. controls whether document pages positioned in vertical or horizontal direction.</p></td>
-        </tr>
-
-    
-
-        <tr id=".documenturl">
-            
-                <td class="name"><code>[documenturl]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Identifier of the document (that is on the server) to be displayed when the document is first opened.</p>
-<p>By default <code>documenturl</code> is treated as an url to the image file on server. Application could customize server behavior and in this case <code>documenturl</code> could contain arbitrary string.
-If this parameter is specified, document will be opened right after viewer initialization completes. Otherwise document should be opened using <code> openUrl</code> method.</p>
-<p>This property on the <a href="Atalasoft.Controls.WebDocumentViewer.html#config"><code>viewer.config</code></a> is updated internally each time new document is opened.</p></td>
-        </tr>
-
-    
-
-        <tr id=".fitting">
-            
-                <td class="name"><code>[fitting]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Atalasoft.Utils.html#.Fitting">Fitting</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    Width
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the initial page image fit when document is opened in the viewer.</p>
-<p>Usually it makes sense to set initial fit to viewer width for vertical scrolling <a href="WebDocumentViewerConfig.html#.direction"><code>direction</code></a> and to height for horizontal.</p></td>
-        </tr>
-
-    
-
-        <tr id=".forcepagefit">
-            
-                <td class="name"><code>[forcepagefit]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether document pages should be unified basing on the expected document page size.</p>
-<p>Expected page size is sent by server when opening new document. By default it's the size of the first page in document, but any values could be provided when default behavior is overridden by application.</p>
-<p>It's recommended to set this option to <code>true</code> for most documents.</p>
-<p>Setting this property to true have following benefits:</p>
+    <h2>Web Document Viewer Server Side programming model</h2><p><code>Atalasoft.Imaging.WebControls.WebDocumentRequestHandler</code> HttpHandler is responsible for WDV and WDT backend logic. 
+The default handler is completely functional and could be used out of the box to setup document imaging controls displaying documents from the server file system.</p>
+<p>To customize default behavior it's recommended for application to</p>
 <ul>
-<li><p>Pages looks similar even for documents containing pages with having different sizes(or different DPI). Aspect ratio is preserved when calculating unification zoom ratio, so pages are not completely same. But in most cases they would have same width or height.</p>
+<li><p>for ASP.NET application - derive it's own class from <code>Atalasoft.Imaging.WebControls.WebDocumentRequestHandler</code> and subscribe to base class events.</p>
 </li>
-<li><p>Pages are requested on demand, so size of each individual page is not known util it's loaded from server. Thus when pages having different sizes are inserted into DOM, their sizes are different from expected. This would cause resizing of the DOM elements and thus cause visual shifts of the images. Especially such effect could be noticeable on big images, when rendering and load time is bigger then usual.</p>
+<li><p>for ASP.NET Core application - to register WebDocumentViewerMiddleware and provide <code>IWebDocumentViewerCallbacks</code> implementation as the <code>RunWebDocumentViewerMiddleware</code> method parameter. You can derive it's own class from <code>Atalasoft.Imaging.WebControls.Core.WebDocumentViewerCallbacks</code>, which, in fact, is default implementation of the <code>IWebDocumentViewerCallbacks</code> interface.</p>
 </li>
 </ul>
-<p>Setting this option to false is helpful when document having pages both &quot;small&quot; and &quot;big&quot; pages and those pages should be displayed as is, without additional zoom. For example, when driver license and scanned pages are displayed as a single document.</p></td>
-        </tr>
-
-    
-
-        <tr id=".formurl">
-            
-                <td class="name"><code>[formurl]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Identifier of the annotation data PDF form data (.pdf file on the server) that should be displayed along with the displayed document.</p>
-<p>In most cases this option should be omitted, so forms will be loaded from the PDF document specified by <code> documenturl</code></p>
-<p>This property on the <a href="Atalasoft.Controls.WebDocumentViewer.html#config"><code>viewer.config</code></a> is updated internally each time new document is opened.</p></td>
-        </tr>
-
-    
-
-        <tr id=".jpeg">
-            
-                <td class="name"><code>[jpeg]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Allows page images to be returned as jpeg instead of png.</p></td>
-        </tr>
-
-    
-
-        <tr id=".maxwidth">
-            
-                <td class="name"><code>[maxwidth]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    3000
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the maximum amount of pixel width allowed for zooming in.</p>
-<p> This property is intended to limit size of the images data transferred over the wire on big zoom values.</p></td>
-        </tr>
-
-    
-
-        <tr id=".memorythreshold">
-            
-                <td class="name"><code>[memorythreshold]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    500000000
-                
-                </td>
-            
-
-            <td class="description last"><p>Maximum number of bytes in memory before larger memory objects are recycled.</p>
-<p> DOM image objects are cached internally. This option allows to control memory usage on the browser page. Note, that estimated image sizes are not exactly match actual values - estimation is based on the expected document images color format and size. So actual memory usage in browser process could differ from the configured value.</p></td>
-        </tr>
-
-    
-
-        <tr id=".minwidth">
-            
-                <td class="name"><code>[minwidth]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    150
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the minimum amount of pixel width allowed for zooming out.</p></td>
-        </tr>
-
-    
-
-        <tr id=".mousetool">
-            
-                <td class="name"><code>[mousetool]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#MouseToolConfig">MouseToolConfig</a></span>
-|
-
-<span class="param-type"><a href="Atalasoft.Utils.html#.MouseToolType">MouseToolType</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the mouse tools settings. Could be set to Atalasoft.Utils.MouseToolType if no advanced settings specified.</p>
-<p>Mouse tool identifies how user mouse or touch actions ar interpreted. For example, this could be Pan tool to scroll pages, Zoom-Area tool to select image region and zoom to it, Text tool to select and copy document text, etc.</p>
-<p>Active mouse tool could be changed using <code> setMouseTool</code> method.</p></td>
-        </tr>
-
-    
-
-        <tr id=".pageborderwidth">
-            
-                <td class="name"><code>[pageborderwidth]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    1
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the pixel border width around each page in a document.</p></td>
-        </tr>
-
-    
-
-        <tr id=".pagebuffersize">
-            
-                <td class="name"><code>[pagebuffersize]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>The number of pages to keep in memory while scrolling. Negative values will automatically calculate the optimal number based on available screen space. Values lower than can be displayed will be ignored, and higher values will cause a degradation in performance.</p></td>
-        </tr>
-
-    
-
-        <tr id=".pageselectlocation">
-            
-                <td class="name"><code>[pageselectlocation]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Atalasoft.Utils.html#.PageSelection">PageSelection</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the location to determine the current page number.</p>
-<p>Current page number is displayed on the document toolbar, and also current page is used in some operation in default UI, like page rotation is applied to the current page or in <code> next</code>, <code> previous</code>, <code> showPage</code> methods.</p></td>
-        </tr>
-
-    
-
-        <tr id=".allowflick">
-            
-                <td class="name"><code>[allowflick]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Turns flick scrolling support on or off.</p></td>
-        </tr>
-
-    
-
-        <tr id=".persistrotation">
-            
-                <td class="name"><code>[persistrotation]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether to persist page rotation on document save.</p>
-<p>I.e of set to <code>false</code>, rotation applied in 'view-only' mode and ignored when document is saved.</p></td>
-        </tr>
-
-    
-
-        <tr id=".savefileformat">
-            
-                <td class="name"><code>[savefileformat]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the default file format for the document that will be used when saving multipage document to the server.</p>
-<p>The following formats are supported: pdf, tiff (or tif), jpeg (or jpg), png, bmp, tga, pcx, psd, tla, wbmp, emf, wmf.</p>
-<p>If set, this value is used when document save is performed using default UI or when <code> save</code> is called without save format parameter passed.</p>
-<p>If not specified, document is saved in it's own format. Note that it's not possible to save multipage documents(for example when document pages was added using JavaScript API) to the single page image format by default. Server behavior on save could be highly customized.</p></td>
-        </tr>
-
-    
-
-        <tr id=".savepath">
-            
-                <td class="name"><code>[savepath]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the path that the document, annotation data, and form data will be saved to on the server.</p></td>
-        </tr>
-
-    
-
-        <tr id=".scripturl">
-            
-                <td class="name"><code>[scripturl]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Url location to the server where all JavaScript files are put when not in the default location.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showbuttontext">
-            
-                <td class="name"><code>[showbuttontext]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>If the toolbar is displayed, this can be used to hide or show the button text for the toolbar items.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showerrors">
-            
-                <td class="name"><code>[showerrors]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether error messages are allowed to show up in the console instead of being caught.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showpageborder">
-            
-                <td class="name"><code>[showpageborder]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether a black border will be added around each page in the displayed document.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showpagenumber">
-            
-                <td class="name"><code>[showpagenumber]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether a page number will be added to the bottom left of each page.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showpagenumbertooltip">
-            
-                <td class="name"><code>[showpagenumbertooltip]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether a tooltip containing estimated current page number should be shown during fast scrolling.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showrotatetools">
-            
-                <td class="name"><code>[showrotatetools]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether page and annotations rotation UI handles and buttons are shown.</p>
-<p>Annotation rotation could be explicitly enabled or disabled for individual types of annotations using <a href="WebDocumentViewerConfig.html#.annotations"><code>annotations.defaults</code></a>.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showscrollbars">
-            
-                <td class="name"><code>[showscrollbars]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether scrollbars will be shown.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showselecttools">
-            
-                <td class="name"><code>[showselecttools]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether rubberband selection tools are shown in the toolbar.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showstatus">
-            
-                <td class="name"><code>[showstatus]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether status messages will be output to an area in the toolbar.</p></td>
-        </tr>
-
-    
-
-        <tr id=".tabular">
-            
-                <td class="name"><code>[tabular]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether pages should be displayed in a tabular(grid) fashion, rather than one row or column.</p></td>
-        </tr>
-
-    
-
-        <tr id=".toolbarparent">
-            
-                <td class="name"><code>[toolbarparent]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the jQuery object where the toolbar will be created.</p></td>
-        </tr>
-
-    
-
-        <tr id=".upload">
-            
-                <td class="name"><code>[upload]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#FileUploadConfig">FileUploadConfig</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the file upload settings. If this section is not specified, the upload functionality is disabled.</p></td>
-        </tr>
-
-    
-
-        <tr id=".zoom">
-            
-                <td class="name"><code>[zoom]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Sets the initial zoom level of the document. Ignored when fitting set to anything besides Fitting.None.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-
-    
+<p><code>WebDocumentRequestHandler</code> default behavior relies on globally registered image decoders when opening image documents. 
+Those decoders are available through <code>Atalasoft.Imaging.Codec.RegisteredDecoders</code> class so the application control which types of the documents are supported by WDV.
+Note that by default PDF and Office decoders are not added to <code>RegisteredDecoders</code>, so that should be done by the application to support those types of documents.</p>
+<pre class="prettyprint source lang-c#"><code>    public class WebDocViewerHandler : Atalasoft.Imaging.WebControls.WebDocumentRequestHandler
+    {
+        static WebDocViewerHandler()
+        {
+            Atalasoft.Imaging.Codec.RegisteredDecoders.Decoders.Add(new Atalasoft.Imaging.Codec.Pdf.PdfDecoder());
+            Atalasoft.Imaging.Codec.RegisteredDecoders.Decoders.Add(new Atalasoft.Imaging.Codec.Office.OfficeDecoder());
+        }
+    }</code></pre><h2>Document Lifecycle Events</h2><p>Displaying document in WDV consist of multiple operations, each of which is represented with corresponding WebDocumentRequestHandler event that could be used for behavior customization.</p>
+<p>Below is the common order of document lifetime events.</p>
+<h3><code>WebDocumentRequestHandler.DocumentInfoRequested</code></h3><p>Occurs when document is being opened, for example by calling <code> openUrl</code> method or passing <a href="WebDocumentViewerConfig.html#.documenturl"><code> document identifier</code></a> to control constructor.</p>
+<p>The purpose of this step is to load document metadata. No images are requested here.</p>
+<p> There are two required metadata property that should be filled</p>
+<ul>
+<li><p><code>DocumentInfoRequestedEventArgs.PageCount</code>
+Count of the pages in the document. Page images will be loaded on demand when control will be scrolled to corresponding position.</p>
+</li>
+<li><p><code>DocumentInfoRequestedEventArgs.PageSize</code>
+Estimated size of the document pages. It's used to calculate scrollbars, zoom values, indexes of the page to display when scrolling into unloaded area.
+It's not required that all document page have same size. When image data is loaded control will adjust it's internal state. But it's recommended to set this size close to majority of the document pages. If not set explicitly, size of the firs document page is taken for this property.</p>
+</li>
+</ul>
+<p>Default implementation is trying to map <code>DocumentInfoRequestedEventArgs.FilePath</code> to the file on the server file system, find appropriate decoder to read the image and fill required metadata.</p>
+<p><strong><em>Note, since DotImage 11.1 default implementation forbids absolute paths including network shares.</em></strong>
+It's application responsibility to include them if needed.</p>
+<p>Application could override default behavior by either directly setting document metadata to <code>DocumentInfoRequestedEventArgs</code> or by modifying <code>DocumentInfoRequestedEventArgs.FilePath</code> point to file on the server file system.
+In this case, <code>documenturl</code> value passed from the JavaScript could have arbitrary application specific values, for example id of the document in the database of even base64 encoded json.</p>
+<p>There are additional optional document metadata properties that could be set by event handler. For example,</p>
+<ul>
+<li><p><code>DocumentInfoRequestedEventArgs.AnnotationFilePath</code></p>
+<p> Similar to <code>DocumentInfoRequestedEventArgs.FilePath</code> but applies to annotations file.</p>
+</li>
+<li><p><code>DocumentInfoRequestedEventArgs.AnnotationLayers</code></p>
+<p> Allows to set annotations data using object model. If layers is not set by handler and  <code>AnnotationFilePath</code> is present, default handler implementation will try to deserialize annotations from the specified file.</p>
+<p> This property could be used to provide annotations from external source, for example to load from database, create on fly or to convert from application-specific format.</p>
+</li>
+<li><p><code>DocumentInfoRequestedEventArgs.IsVector</code></p>
+<p>Flag indicating whether document images could be scaled to zoom values greater then 1.</p>
+</li>
+<li><p><code>DocumentInfoRequestedEventArgs.FormFilePath</code></p>
+</li>
+<li><p><code>DocumentInfoRequestedEventArgs.PdfDocument</code></p>
+<p>Similar to annotations data source but applies to pdf forms.
+It's recommended to omit those properties and proceed with default behavior. In this case, <code>DocumentInfoRequestedEventArgs.FilePath</code> will be treated as PDF forms data source it's a PDF file.</p>
+<p>Although it's possible to load pdf forms data from external PDF documents, saving forms back to original document could cause forms structure conflict, or just missing form fields.</p>
+<p>Additionally if <code>DocumentInfoRequestedEventArgs.PdfDocument</code> is provided by the handler, <code>PageCount</code> and <code>PageSize</code> will be automatically extracted from it.</p>
+</li>
+<li><p><code>DocumentInfoRequestedEventArgs.ThumbCaptionFormat</code></p>
+<p>Could be used to specify thumbnail captions mask that will be used in WDT to generate thumbnail caption.
+Default <code>DocumentInfoRequestedEventArgs.ThumbCaptionFormat</code> value is the value passed from JavaScript side(as configured in WDT).
+There are two optional tokens allowed in the format string.</p>
+<ul>
+<li>{0} - will be substituted with page number.</li>
+<li>{1} - will be substituted with the document file name.</li>
+</ul>
+</li>
+</ul>
+<p>Application could add additional document-specific static information if needed.</p>
+<h3><code>WebDocumentRequestHandler.AnnotationDataRequested/PdfFormRequested</code></h3><p>Those event are similar and used to request annotations and forms data respectively.
+They could be thrown either along with <code>DocumentInfoRequested</code> if <code>AnnotationLayers</code> and <code>PdfDocument</code> are not provided by the application. Or they could be fired if forms and annotations data is requested separately from opening document.</p>
+<h3><code>WebDocumentRequestHandler.ImageRequested</code></h3><p>This event is fired each time control requires page image.
+Default implementation is trying to map <code>ImageRequestedEventArgs.FilePath</code> to the file on the server file system and get image for the requested document page, using requested zoom value.</p>
+<p>Application could either set <code>ImageRequestedEventArgs.Image</code> property to provide prepared image for sending back to browser, or override <code>ImageRequestedEventArgs.FilePath</code> to point to particular image file according to application logic.</p>
+<p>Note that this event will be fired if page reload is requested via <code> reloadPage</code> call.
+In this case <code>ImageRequestedEventArgs.Params</code> will contain parameters passed by from JavaScript side. And thus it's possible to modify document image on fly.</p>
+<p>For example following snippet demonstrates fow to change page color format on fly.</p>
+<pre class="prettyprint source lang-javascript"><code>// assume we have combo box with list of available color format and user could choose desired.
+let colorFormat = cbFormat.val();
+
+// request only page image reload
+viewer.reloadPage(index,
+    false, // don't need to modify annotations
+    false, // don't need to reset filled pdf forms
+    {
+        format: colorFormat
+    },
+    function() {
+        console.log('page reloaded');
+    });</code></pre><pre class="prettyprint source lang-c#"><code>public WebDocViewerHandler()
+{
+    // subscribe WDV backend handler to handle image request.
+    ImageRequested += OnImageRequested;
+}
+
+// simple implementation that opens image through `Workspace` class which relies on `RegisteredDecoder` collection internally.
+private void OnImageRequested(object sender, ImageRequestedEventArgs imageRequestedEventArgs)
+{
+    string format;
+    // if no format requested - don't change imageRequestedEventArgs and thus proceed with default behavior
+    if (imageRequestedEventArgs.Params.TryGetValue(&quot;format&quot;, out format))
+    {
+        var path = HttpContext.Current.Server.MapPath(imageRequestedEventArgs.FilePath);
+        if (File.Exists(path))
+        {
+            using (var ws = new Workspace())
+            {
+                ws.AutoDispose = true;
+                ws.Open(path);
+                ws.Image = ws.Images[imageRequestedEventArgs.FrameIndex];
+                if (ws.Image.ColorDepth != bppParsed)
+                {
+                    // assume MapPixelFormat maps application format identifier to `PixelFormat`
+                    imageRequestedEventArgs.Image = ws.Image.GetChangedPixelFormat(MapPixelFormat(format));
+                }
+            }
+        }
+    }
+}</code></pre><h3><code>WebDocumentRequestHandler.PageTextRequested</code></h3><p> Occurs when text data requested for the page. This event could be used to customize built-in text data extraction, or pass pre-generated text data to the WDV.</p>
+<p> As with other similar events above, event arguments allow to modify path to document file path by changing <code>PageTextRequestedEventArgs.FilePath</code> or provide prepared text data using <code>PageTextRequestedEventArgs.Page</code> for object model and <code>PageTextRequestedEventArgs.JsonData</code> serialized json representation.</p>
+<p>Default implementation support on-fly text data extraction only for PDF and MS Office documents. For image documents it's expected that application will prepare OCR data outside of WDV scope, transform it to <code>Atalasoft.Imaging.WebControls.Text.PageObject</code> and pass to viewer control when requester.</p>
+<p>It's also possible to modify text extraction algorithm for PDF and Office documents.</p>
+<h5>Text selection model</h5><p>The main problem with text extraction is to correctly organize text into regions. Region, in terms of WDV is a set of text lines, within which selection is performed independently from other text objects on the page.</p>
+<p>For example, if we have two text columns each of which is a separate region.</p>
+<p><img src="img/wdv-text-columns.png" alt="text columns"></p>
+<p>Text selection within first column won't select any text on the second one.</p>
+<p>But if selection starts within first column, and ends within second one, then all text from selection start point up to end of region will be selected for the first column and all text from the beginning of the region up to selection end point will be selected for the second column, as shown on the picture above.</p>
+<p>By default, text segmentation relies on the implementation on the underlying extraction engine segmentation and on practice splits text into lines making each line to be a separate segment. It works well fo plain text documents, but could be not completely suitable for documents having complex structure, like tables, columns, forms.</p>
+<h5>Modifying text segmentation</h5><p>It's possible to change default text segmentation in <code>WebDocumentRequestHandler.PageTextRequested</code> event handler using <code>Atalasoft.Imaging.WebControls.Text.SegmentedTextTranslator</code> class.</p>
+<pre class="prettyprint source lang-c#"><code>private void OnPageTextRequested(object sender, PageTextRequestedEventArgs pageTextRequestedEventArgs)
+{
+    var serverPath = HttpContext.Current.Server.MapPath(pageTextRequestedEventArgs.FilePath);
+    if (File.Exists(serverPath))
+    {
+        using (var stream = File.OpenRead(serverPath))
+        {
+            try
+            {
+                var decoder = RegisteredDecoders.GetDecoder(stream) as ITextFormatDecoder;
+                if (decoder != null)
+                {
+                    using (var extractor = new SegmentedTextTranslator(decoder.GetTextDocument(stream)))
+                    {
+                        // change default segmentation method.
+                        extractor.RegionDetection = TextRegionDetectionMode.BlockDetection;
+
+                        // each block boundaries inflated to one average character
+                        // width and two average character height.
+                        // All intersecting blocks are combined into single segment.
+                        // Having vertical ratio bigger then horizontal behaves better on column-layout documents.
+                        extractor.BlockDetectionDistance = new System.Drawing.SizeF(1, 2);
+                        pageTextRequestedEventArgs.Page = extractor.ExtractPageText(pageTextRequestedEventArgs.Index);
+                    }
+                }
+            }
+            catch (ImageReadException imagingException)
+            {
+                // RegisteredDecoders.GetDecoder could throws exception if no appropriate decoder were found.
+                Debug.WriteLine(&quot;Text extraction: image type is not recognized. {0}&quot;, imagingException);
+            }
+        }
+    }
+}
+</code></pre><p>In the example above we are changing region detection method to <code>TextRegionDetectionMode.BlockDetection</code> which means that text objects will be grouped into regions based on the distance between them. The boundaries of the text objects will be inflated by the <code>BlockDetectionDistance</code> times the average block character size in corresponding dimension. The intersecting bocks will be grouped into single segment.</p>
+<p>Such algorithm heavily depends on the document structure, for example for columns layout text objects should be joined primarily in a vertical direction(reading direction), and on the same time for table layout text objects should be joined in horizontal direction, even though horizontal distance between them is usually bigger then vertical.</p>
+<p>Such blocks detection algorithm depends on the document structure and so it became useful when application deals with the set of documents having similar structure or documents could be divided to the finite set of classes according to their structure.</p>
+<h2><code>WebDocumentRequestHandler.DocumentSave</code></h2><p>This event is fired before document save operation is performed.</p>
+<p>Save workflow is quite complex in case if document have pages from the other documents that has inserted using JavaScript API. Such scenarios will be discussed in details in a <a href="tutorial-programming-wdv-server-save-doc.html">DocumentSave</a> tutorial.</p>
 </article>
 
 </section>
-
-
-
-
 
 </div>
 

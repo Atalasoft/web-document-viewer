@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge" >
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>WebDocumentViewerConfig - Documentation</title>
+    <title>Tutorial: Draw Annotations - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -36,1263 +36,154 @@
 
 <div id="main">
     
-    <h1 class="page-title">WebDocumentViewerConfig</h1>
+    <h1 class="page-title">Tutorial: Draw Annotations</h1>
     
 
-    
-
-
-
-
-<section>
+    <section>
 
 <header>
     
-    
+
+    <h2>Draw Annotations</h2>
 </header>
 
 <article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Represents <a href="Atalasoft.Controls.WebDocumentViewer.html"><code>WebDocumentViewer</code></a> configuration.</p></div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-        
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th class="name">Name</th>
-        
-
-        <th class="type">Type</th>
-
-        
-        <th class="default">Default</th>
-        
-
-        <th class="description last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr id=".parent">
-            
-                <td class="name"><code>parent</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>jQuery object that the control will contain the control.</p></td>
-        </tr>
-
-    
-
-        <tr id=".serverurl">
-            
-                <td class="name"><code>serverurl</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Url location to the server handler.</p></td>
-        </tr>
-
-    
-
-        <tr id=".pagespacing">
-            
-                <td class="name"><code>[pagespacing]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    4
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the distance (in pixels) between pages displayed.</p></td>
-        </tr>
-
-    
-
-        <tr id=".allowannotations">
-            
-                <td class="name"><code>[allowannotations]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Turns annotation support on or off.
-This affects both UI annotations toolbar appearance and corresponding API methods behavior.
-If set to <code>false</code>, <a href="Atalasoft.Controls.WebDocumentViewer.html#annotations"><code>WebDocumentViewer.annotations</code></a> will be set to <code>null</code> and annotation-related methods of <code>WebDocumentViewer</code> will throw errors.</p></td>
-        </tr>
-
-    
-
-        <tr id=".allowforms">
-            
-                <td class="name"><code>[allowforms]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Turns forms support on or off.</p></td>
-        </tr>
-
-    
-
-        <tr id=".allowtext">
-            
-                <td class="name"><code>[allowtext]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Turns text selection support on or off.</p></td>
-        </tr>
-
-    
-
-        <tr id=".annotations">
-            
-                <td class="name"><code>[annotations]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#AnnotationsConfig">AnnotationsConfig</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Annotations specific config options, including predefined configurations for particular annotation types.</p></td>
-        </tr>
-
-    
-
-        <tr id=".annotationsurl">
-            
-                <td class="name"><code>[annotationsurl]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Identifier of the annotation data (an .xmp file on the server) that should be displayed along with the displayed document.</p>
-<p> By default <code>annotationsurl</code> is treated as an url to the serialized annotations data file on server(usually .xmp). Application could customize server behavior and in this case <code>annotationsurl</code> could contain arbitrary string.</p>
-<p> This property on the <a href="Atalasoft.Controls.WebDocumentViewer.html#config"><code>viewer.config</code></a> is updated internally each time new document is opened.</p></td>
-        </tr>
-
-    
-
-        <tr id=".columns">
-            
-                <td class="name"><code>[columns]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Number of columns to show when displaying tabular pages, -1 is automatic.</p></td>
-        </tr>
-
-    
-
-        <tr id=".direction">
-            
-                <td class="name"><code>[direction]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Atalasoft.Utils.html#.ScrollDirection">ScrollDirection</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    Vertical
-                
-                </td>
-            
-
-            <td class="description last"><p>Scroll direction of the viewer.</p>
-<p>i.e. controls whether document pages positioned in vertical or horizontal direction.</p></td>
-        </tr>
-
-    
-
-        <tr id=".documenturl">
-            
-                <td class="name"><code>[documenturl]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Identifier of the document (that is on the server) to be displayed when the document is first opened.</p>
-<p>By default <code>documenturl</code> is treated as an url to the image file on server. Application could customize server behavior and in this case <code>documenturl</code> could contain arbitrary string.
-If this parameter is specified, document will be opened right after viewer initialization completes. Otherwise document should be opened using <code> openUrl</code> method.</p>
-<p>This property on the <a href="Atalasoft.Controls.WebDocumentViewer.html#config"><code>viewer.config</code></a> is updated internally each time new document is opened.</p></td>
-        </tr>
-
-    
-
-        <tr id=".fitting">
-            
-                <td class="name"><code>[fitting]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Atalasoft.Utils.html#.Fitting">Fitting</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    Width
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the initial page image fit when document is opened in the viewer.</p>
-<p>Usually it makes sense to set initial fit to viewer width for vertical scrolling <a href="WebDocumentViewerConfig.html#.direction"><code>direction</code></a> and to height for horizontal.</p></td>
-        </tr>
-
-    
-
-        <tr id=".forcepagefit">
-            
-                <td class="name"><code>[forcepagefit]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether document pages should be unified basing on the expected document page size.</p>
-<p>Expected page size is sent by server when opening new document. By default it's the size of the first page in document, but any values could be provided when default behavior is overridden by application.</p>
-<p>It's recommended to set this option to <code>true</code> for most documents.</p>
-<p>Setting this property to true have following benefits:</p>
+    <p>﻿Web Document Viewer (WDV) supports annotating documents using toolbar buttons. It also possible to do, using the corresponding API. In this short tutorial it will be shown.</p>
+<h2>API</h2><p>API for annotations drawing consists from two methods:</p>
 <ul>
-<li><p>Pages looks similar even for documents containing pages with having different sizes(or different DPI). Aspect ratio is preserved when calculating unification zoom ratio, so pages are not completely same. But in most cases they would have same width or height.</p>
-</li>
-<li><p>Pages are requested on demand, so size of each individual page is not known util it's loaded from server. Thus when pages having different sizes are inserted into DOM, their sizes are different from expected. This would cause resizing of the DOM elements and thus cause visual shifts of the images. Especially such effect could be noticeable on big images, when rendering and load time is bigger then usual.</p>
-</li>
+<li><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#drawAnnotation"><code>drawAnnotation</code></a> - this method accepts an annotation configuration object and setups viewer's viewport to create an annotation.</li>
+<li><a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#cancelDraw"><code>cancelDraw</code></a> - this method cancels the annotation draw operation and return viewer to previous tool.</li>
 </ul>
-<p>Setting this option to false is helpful when document having pages both &quot;small&quot; and &quot;big&quot; pages and those pages should be displayed as is, without additional zoom. For example, when driver license and scanned pages are displayed as a single document.</p></td>
-        </tr>
-
-    
-
-        <tr id=".formurl">
-            
-                <td class="name"><code>[formurl]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Identifier of the annotation data PDF form data (.pdf file on the server) that should be displayed along with the displayed document.</p>
-<p>In most cases this option should be omitted, so forms will be loaded from the PDF document specified by <code> documenturl</code></p>
-<p>This property on the <a href="Atalasoft.Controls.WebDocumentViewer.html#config"><code>viewer.config</code></a> is updated internally each time new document is opened.</p></td>
-        </tr>
-
-    
-
-        <tr id=".jpeg">
-            
-                <td class="name"><code>[jpeg]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Allows page images to be returned as jpeg instead of png.</p></td>
-        </tr>
-
-    
-
-        <tr id=".maxwidth">
-            
-                <td class="name"><code>[maxwidth]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    3000
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the maximum amount of pixel width allowed for zooming in.</p>
-<p> This property is intended to limit size of the images data transferred over the wire on big zoom values.</p></td>
-        </tr>
-
-    
-
-        <tr id=".memorythreshold">
-            
-                <td class="name"><code>[memorythreshold]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    500000000
-                
-                </td>
-            
-
-            <td class="description last"><p>Maximum number of bytes in memory before larger memory objects are recycled.</p>
-<p> DOM image objects are cached internally. This option allows to control memory usage on the browser page. Note, that estimated image sizes are not exactly match actual values - estimation is based on the expected document images color format and size. So actual memory usage in browser process could differ from the configured value.</p></td>
-        </tr>
-
-    
-
-        <tr id=".minwidth">
-            
-                <td class="name"><code>[minwidth]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    150
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the minimum amount of pixel width allowed for zooming out.</p></td>
-        </tr>
-
-    
-
-        <tr id=".mousetool">
-            
-                <td class="name"><code>[mousetool]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#MouseToolConfig">MouseToolConfig</a></span>
-|
-
-<span class="param-type"><a href="Atalasoft.Utils.html#.MouseToolType">MouseToolType</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the mouse tools settings. Could be set to Atalasoft.Utils.MouseToolType if no advanced settings specified.</p>
-<p>Mouse tool identifies how user mouse or touch actions ar interpreted. For example, this could be Pan tool to scroll pages, Zoom-Area tool to select image region and zoom to it, Text tool to select and copy document text, etc.</p>
-<p>Active mouse tool could be changed using <code> setMouseTool</code> method.</p></td>
-        </tr>
-
-    
-
-        <tr id=".pageborderwidth">
-            
-                <td class="name"><code>[pageborderwidth]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    1
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the pixel border width around each page in a document.</p></td>
-        </tr>
-
-    
-
-        <tr id=".pagebuffersize">
-            
-                <td class="name"><code>[pagebuffersize]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>The number of pages to keep in memory while scrolling. Negative values will automatically calculate the optimal number based on available screen space. Values lower than can be displayed will be ignored, and higher values will cause a degradation in performance.</p></td>
-        </tr>
-
-    
-
-        <tr id=".pageselectlocation">
-            
-                <td class="name"><code>[pageselectlocation]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Atalasoft.Utils.html#.PageSelection">PageSelection</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the location to determine the current page number.</p>
-<p>Current page number is displayed on the document toolbar, and also current page is used in some operation in default UI, like page rotation is applied to the current page or in <code> next</code>, <code> previous</code>, <code> showPage</code> methods.</p></td>
-        </tr>
-
-    
-
-        <tr id=".allowflick">
-            
-                <td class="name"><code>[allowflick]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Turns flick scrolling support on or off.</p></td>
-        </tr>
-
-    
-
-        <tr id=".persistrotation">
-            
-                <td class="name"><code>[persistrotation]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether to persist page rotation on document save.</p>
-<p>I.e of set to <code>false</code>, rotation applied in 'view-only' mode and ignored when document is saved.</p></td>
-        </tr>
-
-    
-
-        <tr id=".savefileformat">
-            
-                <td class="name"><code>[savefileformat]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the default file format for the document that will be used when saving multipage document to the server.</p>
-<p>The following formats are supported: pdf, tiff (or tif), jpeg (or jpg), png, bmp, tga, pcx, psd, tla, wbmp, emf, wmf.</p>
-<p>If set, this value is used when document save is performed using default UI or when <code> save</code> is called without save format parameter passed.</p>
-<p>If not specified, document is saved in it's own format. Note that it's not possible to save multipage documents(for example when document pages was added using JavaScript API) to the single page image format by default. Server behavior on save could be highly customized.</p></td>
-        </tr>
-
-    
-
-        <tr id=".savepath">
-            
-                <td class="name"><code>[savepath]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the path that the document, annotation data, and form data will be saved to on the server.</p></td>
-        </tr>
-
-    
-
-        <tr id=".scripturl">
-            
-                <td class="name"><code>[scripturl]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Url location to the server where all JavaScript files are put when not in the default location.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showbuttontext">
-            
-                <td class="name"><code>[showbuttontext]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>If the toolbar is displayed, this can be used to hide or show the button text for the toolbar items.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showerrors">
-            
-                <td class="name"><code>[showerrors]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether error messages are allowed to show up in the console instead of being caught.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showpageborder">
-            
-                <td class="name"><code>[showpageborder]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether a black border will be added around each page in the displayed document.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showpagenumber">
-            
-                <td class="name"><code>[showpagenumber]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether a page number will be added to the bottom left of each page.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showpagenumbertooltip">
-            
-                <td class="name"><code>[showpagenumbertooltip]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether a tooltip containing estimated current page number should be shown during fast scrolling.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showrotatetools">
-            
-                <td class="name"><code>[showrotatetools]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether page and annotations rotation UI handles and buttons are shown.</p>
-<p>Annotation rotation could be explicitly enabled or disabled for individual types of annotations using <a href="WebDocumentViewerConfig.html#.annotations"><code>annotations.defaults</code></a>.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showscrollbars">
-            
-                <td class="name"><code>[showscrollbars]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether scrollbars will be shown.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showselecttools">
-            
-                <td class="name"><code>[showselecttools]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether rubberband selection tools are shown in the toolbar.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showstatus">
-            
-                <td class="name"><code>[showstatus]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether status messages will be output to an area in the toolbar.</p></td>
-        </tr>
-
-    
-
-        <tr id=".tabular">
-            
-                <td class="name"><code>[tabular]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether pages should be displayed in a tabular(grid) fashion, rather than one row or column.</p></td>
-        </tr>
-
-    
-
-        <tr id=".toolbarparent">
-            
-                <td class="name"><code>[toolbarparent]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the jQuery object where the toolbar will be created.</p></td>
-        </tr>
-
-    
-
-        <tr id=".upload">
-            
-                <td class="name"><code>[upload]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#FileUploadConfig">FileUploadConfig</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the file upload settings. If this section is not specified, the upload functionality is disabled.</p></td>
-        </tr>
-
-    
-
-        <tr id=".zoom">
-            
-                <td class="name"><code>[zoom]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Sets the initial zoom level of the document. Ignored when fitting set to anything besides Fitting.None.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-
-    
+<p>Next types will be helpful for us when we will create an annotation configuration</p>
+<ul>
+<li><a href="AnnotationData.html"><code>AnnotationData</code></a> - represents generic annotation data object.</li>
+<li><a href="Atalasoft.Annotations.html#.AnnotationTypes"><code>AnnotationTypes</code></a> - enum represnting supported by WDV annotation types.</li>
+</ul>
+<h2>Usage</h2><p>This tutorial is based on previously created web application with ASP.NET Core support, if you don't have it, then read before the tutorial <a href="tutorial-1-2-demo-application-aspnet-core.html">Demo Application (ASP.NET Core)</a>. Alternatively, you can use your own web application and modify it.</p>
+<p>In this tutorial I will show you, how to add a button on a page, to draw a red rectangle annotation on your document, while you don't want to configure default annotation behavior in WDV.</p>
+<h3>Add new button</h3><p>First of all, we need a button, to do this, I'll add a small piece of HTML code so the result HTML layout of my application will be looked like this:</p>
+<pre class="prettyprint source lang-html"><code>&lt;body>
+    &lt;h1>Kofax Web Document Viewer Demo&lt;/h1>
+    &lt;form id=&quot;WDVForm&quot; runat=&quot;server&quot;>
+        Select File to display:
+
+        &lt;select ID=&quot;FileSelectionList&quot; onchange=&quot;loadFile();&quot;>
+            &lt;option value=&quot;images/Test.tif&quot;>Test.tif&lt;/option>
+            &lt;option value=&quot;images/Test.pdf&quot;>Test.pdf&lt;/option>
+        &lt;/select>
+
+        &lt;!-- TUTORIAL Here we create a new button -->
+        &lt;button type=&quot;button&quot; onclick=&quot;drawRedRectangle();&quot; style=&quot;margin-left: 10px&quot;>Draw red rectangle!&lt;/button>
+        &lt;!-- TUTORIAL -->
+
+        &lt;div>
+            &lt;div class=&quot;atala-document-toolbar&quot; style=&quot;width: 800px;&quot;>&lt;/div>
+            &lt;div class=&quot;atala-document-container&quot; style=&quot;width: 800px; height: 600px;&quot;>&lt;/div>
+        &lt;/div>
+
+        &lt;div id=&quot;status&quot;>&lt;/div>
+
+
+    &lt;/form>
+&lt;/body></code></pre><p>Now if you launch your application you will see that a new button placed near the files combobox. But nothing happens on click, and we need to implement new function <code>drawRedRectangle</code> that we mentioned as a click handler in our button.</p>
+<h3>Implement button click handler</h3><p>The click handler is a very simple function, its code represented below:</p>
+<pre class="prettyprint source lang-javascript"><code>function drawRedRectangle() {
+    var annotationConfig = {
+        // Specify the annotation type
+        type: Atalasoft.Annotations.AnnotationTypes.rectangle, 
+
+        // Specify how annotation will be filled, in our case it's just red.
+        //
+        // NOTE, that 'opacity' explicitly set to &quot;1&quot;, this is because,
+        // WDV will mix this annotation config with its default presets,
+        // and for 'rectangle' annotation the default 'fill' has 'opacity' equals to 0.
+        fill: { color: 'red', opacity: 1 }, 
+
+        // Specify how annotation line will be looked, again, in our case it's just red.
+        // Alternatively we can set color to 'null' in order to make it invsible.
+        outline: { color: 'red' },
+
+        // Just disable rotation for our annotation, because we don't want to use in this application.
+        rotatable: false 
+    }
+    //call the method drawAnnotation and pass there our annotation config.
+    _viewer.annotations.drawAnnotation(annotationConfig);
+}</code></pre><p>We need to add this function in our application and to do this, we paste it at the end of our inline script block on a page. So the result will be looked like this:</p>
+<pre class="prettyprint source lang-html"><code>&lt;head>
+    &lt;!-- Scripts for Web Viewing -->
+    &lt;script src=&quot;lib/jquery/dist/jquery.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
+    &lt;script src=&quot;lib/jquery-ui/jquery-ui.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
+    &lt;script src=&quot;lib/raphael/raphael.min.js&quot;>&lt;/script>
+    &lt;script src=&quot;lib/web-document-viewer/atalaWebDocumentViewer.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
+
+    &lt;!-- Style for Web Viewer -->
+    &lt;link href=&quot;lib/jquery-ui/themes/base/jquery-ui.min.css&quot; rel=&quot;stylesheet&quot; />
+    &lt;link href=&quot;lib/web-document-viewer/atalaWebDocumentViewer.css&quot; rel=&quot;stylesheet&quot; />
+
+    &lt;script type=&quot;text/javascript&quot;>
+
+        var _viewer;
+
+        // Show status and error messages
+        function appendStatus(msg) {
+            var stat = $(&quot;#status&quot;);
+            stat.append(msg + &quot;&lt;br>&quot;);
+        }
+
+        // Initialize Web Viewing
+        $(function () {
+            try {
+                // Initialize Web Document Viewer
+                _viewer = new Atalasoft.Controls.WebDocumentViewer({
+                    parent: $('.atala-document-container'),
+                    toolbarparent: $('.atala-document-toolbar'),
+                    'allowforms': true,
+                    allowannotations: true,
+                    allowtext: true,
+                    'savepath': '.',
+                    'annotations': {
+                        'atala_iuname': 'mm'
+                    },
+                    serverurl: 'wdv'
+                });
+
+                // Uncomment the following 2 lines if the toolbar buttons should be displayed without text
+                //$('.atala-ui-button .ui-button-text').html('&nbsp;');
+                //$('.atala-ui-button').css({ height: '28px', width: '28px' });
+
+                loadFile();
+
+            } catch (error) {
+                appendStatus(&quot;Thrown error: &quot; + error.description);
+            }
+        });
+
+
+        function loadFile() {
+            _viewer.OpenUrl($('#FileSelectionList').val(),'');
+        }
+
+        //TUTORIAL Here we add button click handler
+        function drawRedRectangle() {
+            var annotationConfig = {
+                type: Atalasoft.Annotations.AnnotationTypes.rectangle, // we should specify the annotation type
+                fill: { color: 'red' }, // specify how annotation will be filled, in our case it's just red
+                outline: { color: 'red' } , // specify how annotation line will be looked, again, in our case it's just red
+                rotatable: false // just disable rotation for our annotation, because we don't want to use in this application.
+            };
+
+            //call the method drawAnnotation and pass there our annotation config.
+            _viewer.annotations.drawAnnotation(annotationConfig);
+        }
+        //TUTORIAL
+
+    &lt;/script>
+
+&lt;/head></code></pre><p>And that's it! Now if you launch your application again and then click the button, then you can start draw annotation on the viewer the same way as you clicked on a toolbar button with annotation.</p>
+<p><img src="img/wdv-draw-annotation.png" alt="Red Rectangle annotation drawn"></p>
 </article>
 
 </section>
-
-
-
-
 
 </div>
 

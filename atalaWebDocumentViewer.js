@@ -8,780 +8,1071 @@
 //  with the purchase of a source code license.
 //-------------------------------------------------------------------------------------------------
 
-"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},_createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),Atalasoft;!function(e){var t;!function(e){var t=function(){function e(t){_classCallCheck(this,e),this.viewer=t}return _createClass(e,[{key:"isViewerActive",value:function(){return!(!this.viewer||!this.currentThumb)}},{key:"isThumbnailerActive",value:function(e){return e&&!!this.currentThumb&&this.currentThumb.get()===e.get()}},{key:"activateThumbnailer",value:function(e,t,r,n,o){var a=this.isThumbnailerActive(e);(!a||o)&&(this.currentThumb&&!a&&this.currentThumb.detachViewer(),this.currentThumb=e,this.viewer&&this.viewer.isInitialized()&&(this.viewer.switchDocument(t,r,n),this.currentThumb.activateViewer()))}},{key:"closeDocument",value:function(e,t){e=e||this.currentThumb;var r=this.isThumbnailerActive(e);r&&(e.detachViewer(),this.currentThumb=null),this.viewer&&this.viewer.isInitialized()&&t&&this.viewer.closeDocument(t,r)}}]),e}();e.DocumentStateManager=t}(t=e.Controls||(e.Controls={}))}(Atalasoft||(Atalasoft={}));var Atalasoft;!function(e){e.$=jQuery;var t=void 0;!function(t){/**
-         * @private
-         */
-function r(e,r,n){return r||(r={x:0,y:0}),t.Browser.Explorer?(null===e&&(e=event),"CSS1Compat"===document.compatMode?(r.x=e.x+document.documentElement.scrollLeft,r.y=e.y+document.documentElement.scrollTop):(r.x=e.x+document.body.scrollLeft,r.y=e.y+document.body.scrollTop)):(r.x=e.pageX,r.y=e.pageY),n&&(r.x-=n.offsetLeft,r.y-=n.offsetTop),r}/**
-         * @private
-         */
-function n(r,n,o){n||(n={x:0,y:0});var a=r.originalEvent,i=t.Browser.Explorer&&parseInt(t.Browser.Version,10)<=9;if(!r.offsetX&&!r.offsetY||i)if(t.Browser.Explorer&&!i)a instanceof MouseEvent?(n.x=a.x,n.y=a.y):(n.x=0,n.y=0);else{var u=null,s=r.target,f=t.Browser.Features.Touch&&a instanceof TouchEvent&&1===a.touches.length?a.touches[0]:null;null!==f&&(s=document.elementFromPoint(f.clientX,f.clientY));var c=e.$(s),l={pageX:0,pageY:0};null!==f?(l.pageX=f.pageX,l.pageY=f.pageY):a instanceof MouseEvent&&(l.pageX=a.pageX,l.pageY=a.pageY),l.pageX||l.pageY||(l.pageX=r.pageX,l.pageY=r.pageY),r.target.raphael?u=c.parents("div:eq(0)").offset():(r.target.raphaelParent||c.parents("svg").length>0)&&(u=c.parents("svg").parents("div:eq(0)").offset()),u||(u=c.offset()),u?(n.x=l.pageX-u.left,n.y=l.pageY-u.top):(n.x=l.pageX,n.y=l.pageY)}else if(t.Browser.Firefox){var h=r.target.raphelParent?e.$(r.target).parents("svg").offset():e.$(r.target.offsetParent||r.target.parentNode).offset();h?(n.x=r.pageX-h.left,n.y=r.pageY-h.top):(n.x=r.pageX,n.y=r.pageY)}else if(a.currentTarget===a.target||o)t.Browser.Explorer&&parseInt(t.Browser.Version,10)<10&&a instanceof MouseEvent?(n.x=a.x,n.y=a.y):(n.x=r.offsetX,n.y=r.offsetY);else if(a.currentTarget.offsetLeft||a.currentTarget.offsetTop||!a.currentTarget.ownerSVGElement)n.x=a.currentTarget.offsetLeft+r.offsetX,n.y=a.currentTarget.offsetTop+r.offsetY;else{var p=t.Browser.Explorer?a.currentTarget.ownerSVGElement.getBBox():a.currentTarget.getBBox();n.x=Math.round(p.x),n.y=Math.round(p.y)}return n}function o(){h()}/**
-         * Gets the normalized offsetLeft and offsetTop from an SVG element
-         * with respect to its parent jQuery object
-         * @private
-         * @param objSVG: object, svg object from the dom
-         * @param parent: object, jQuery object representing the parent DOM node
-         */
-function a(t,r){var n={left:0,top:0};if(t instanceof HTMLElement)n.left=t.offsetLeft,n.top=t.offsetTop;else{var o=e.$(t).offset(),a=r.offset();o&&a&&(n.left=o.left-a.left,n.top=o.top-a.top)}return n}/**
-         * @private
-         */
-function i(t){var r=e.$('script[src*="'+t+'"]');if(r.length>0){var n=r.attr("src");return n?n.replace(t,""):""}return""}/**
-         * @private
-         */
-function u(e,t,r,n,o){var a=Math.max(e,r),i=Math.min(e,r),u=Math.max(t,n),s=Math.min(t,n);return{x:a-i,y:u-s,dx:o?o.left-i:0,dy:o?o.top-s:0,left:i,right:a,top:s,bottom:u}}/**
+"use strict";var Atalasoft,_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},_get=function e(t,a,l){null===t&&(t=Function.prototype);var o=Object.getOwnPropertyDescriptor(t,a);if(void 0===o){var n=Object.getPrototypeOf(t);return null===n?void 0:e(n,a,l)}if("value"in o)return o.value;var s=o.get;return void 0!==s?s.call(l):void 0},_createClass=function(){function l(e,t){for(var a=0;a<t.length;a++){var l=t[a];l.enumerable=l.enumerable||!1,l.configurable=!0,"value"in l&&(l.writable=!0),Object.defineProperty(e,l.key,l)}}return function(e,t,a){return t&&l(e.prototype,t),a&&l(e,a),e}}();function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,a=Array(e.length);t<e.length;t++)a[t]=e[t];return a}return Array.from(e)}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}!function(e){!function(e){var t,s=void 0;function a(e){var t=new n,a=function(e,t){console.error("The dependency verification for '"+e+"' has failed. "+t)},l=o(t,"undefined"==typeof jQuery?null:jQuery,s.Jquery,a);return e.checkjQueryOnly||(l&&(l=o(t,jQuery.ui,s.JqueryUI,a)),e.checkRaphael&&(l=o(t,"undefined"==typeof Raphael?null:Raphael,s.RaphaelJS,a)&&l),e.checkClipboard&&(l=o(t,"undefined"==typeof ClipboardJS?null:ClipboardJS,s.Clibpoard,a,function(e,t){})&&l)),l}function o(e,t,a,l,o){var n=e.checkDependency(t,a);return n.success?(o&&o(a,n.reason),!0):(l(a,n.reason),!1)}(t=s||(s={})).Jquery="jQuery",t.JqueryUI="jQuery UI",t.RaphaelJS="Raphaël",t.Clibpoard="clipboard.js",e.checkJQueryDepependency=function(){return a({checkjQueryOnly:!0,checkRaphael:!1,checkClipboard:!1})},e.checkViewerDependencies=function(e,t){return a({checkjQueryOnly:!1,checkRaphael:e||t,checkClipboard:t})};var n=function(){function n(){_classCallCheck(this,n)}return _createClass(n,[{key:"checkDependency",value:function(e,t){var a=n.requiredDependencies.filter(function(e){return e.name===t})[0],l={dependency:a,success:!1,reason:"Dependency is not loaded or not found."};if(e){var o="";switch(e.fn&&e.fn.jquery?o=e.fn.jquery:e.version&&(o=e.version),t){case s.Clibpoard:l.success=!0,l.reason="WDV can't verify the version of the dependency.";break;case s.Jquery:case s.JqueryUI:case s.RaphaelJS:this.hasNewerVersion(o,a.version)?(l.success=!0,l.reason=""):l.reason="Dependency has a lower version ("+o+") than required."}}return 0<l.reason.length&&(l.reason+=" The minimal required version is '"+a.version+"'."),l}},{key:"hasNewerVersion",value:function(e,t){if(/^[0-9]+\.[0-9]+\.[0-9]+(-([A-Za-z0-9-]+\.?)+)?(\+([A-Za-z0-9-]+\.?)+)?$/.test(e)){for(var a=/^[0-9]+\.[0-9]+\.[0-9]+/,l=function(e){return a.exec(e)[0].split(".").map(function(e){return parseInt(e)})},o=l(e),n=l(t),s=0;s<3;s++){if(o[s]<n[s])return!1;if(o[s]>n[s])return!0}var i=e.replace(a,"");return 0===i.length||"+"===i[0]}return!1}}]),n}();n.requiredDependencies=[{name:s.Jquery,version:"1.12.4"},{name:s.JqueryUI,version:"1.12.1"},{name:s.RaphaelJS,version:"2.1.0"},{name:s.Clibpoard,version:"2.0.0"}]}(e.Utils||(e.Utils={}))}(Atalasoft||(Atalasoft={})),function(e){var t,a;t=e.Controls||(e.Controls={}),a=function(){function t(e){_classCallCheck(this,t),this.viewer=e,this.currentThumb=null}return _createClass(t,[{key:"isViewerActive",value:function(){return!(!this.viewer||!this.currentThumb)}},{key:"isThumbnailerActive",value:function(e){return e&&!!this.currentThumb&&this.currentThumb.get()===e.get()}},{key:"activateThumbnailer",value:function(e,t,a,l,o){var n=this.isThumbnailerActive(e);n&&!o||(this.currentThumb&&!n&&this.currentThumb.detachViewer(),this.currentThumb=e,this.viewer&&this.viewer.isInitialized()&&(this.viewer.switchDocument(t,a,l),this.currentThumb.activateViewer()))}},{key:"closeDocument",value:function(e,t){e=e||this.currentThumb;var a=this.isThumbnailerActive(e);a&&(e.detachViewer(),this.currentThumb=null),this.viewer&&this.viewer.isInitialized()&&t&&this.viewer.closeDocument(t,a)}}]),t}(),t.DocumentStateManager=a}(Atalasoft||(Atalasoft={})),function(h){h.$="undefined"==typeof jQuery?null:jQuery;!function(p){
+/**
          * Creates a rectangle object.
          * @private
          */
-function s(e,t,r,n){return{x:e,y:t,width:r,height:n}}/**
+function n(e,t,a,l){return{x:e,y:t,width:a,height:l}}
+/**
          * Calculates rectangle bounds for the clockwise page rotation to the specified angle.
          * @private
          * @param rect
          * @param page
          * @param angle positive number, must be exactly divisible by 90.
          */
-function f(e,t,r){if(0===r)return e;r=(r-r%90)%360;var n=e.x,o=e.y;switch(r){case 90:n=t.height-e.y-e.height,o=e.x;break;case 180:n=t.width-e.x-e.width,o=t.height-e.y-e.height;break;case 270:n=e.y,o=t.width-e.x-e.width}return s(n,o,90===r||270===r?e.height:e.width,90===r||270===r?e.width:e.height)}/**
+function l(e,t,a){if(0===a)return e;a=(a-a%90)%360;var l=e.x,o=e.y;switch(a){case 90:l=t.height-e.y-e.height,o=e.x;break;case 180:l=t.width-e.x-e.width,o=t.height-e.y-e.height;break;case 270:l=e.y,o=t.width-e.x-e.width}return n(l,o,90===a||270===a?e.height:e.width,90===a||270===a?e.width:e.height)}p.getMousePosition=
+/**
+         * @private
+         */
+function(e,t,a){return t||(t={x:0,y:0}),p.Browser.Explorer?(null===e&&(e=event),"CSS1Compat"===document.compatMode?(t.x=e.x+document.documentElement.scrollLeft,t.y=e.y+document.documentElement.scrollTop):(t.x=e.x+document.body.scrollLeft,t.y=e.y+document.body.scrollTop)):(t.x=e.pageX,t.y=e.pageY),a&&(t.x-=a.offsetLeft,t.y-=a.offsetTop),t},p.getMousePositionJquery=
+/**
+         * @private
+         */
+function(e,t,a){t||(t={x:0,y:0});var l=e.originalEvent,o=p.Browser.Explorer&&parseInt(p.Browser.Version,10)<=9;if(!e.offsetX&&!e.offsetY||o)if(p.Browser.Explorer&&!o)l instanceof MouseEvent?(t.x=l.x,t.y=l.y):(t.x=0,t.y=0);else{var n=null,s=e.target;l instanceof TouchEvent&&1===l.touches.length&&(s=document.elementFromPoint(l.touches[0].clientX,l.touches[0].clientY));var i=p.Browser.Features.Touch&&l instanceof TouchEvent?l.touches[0]:null,r=h.$(s),u={pageX:0,pageY:0};null!==i?(u.pageX=i.pageX,u.pageY=i.pageY):l instanceof MouseEvent&&(u.pageX=l.pageX,u.pageY=l.pageY),u.pageX||u.pageY||(u.pageX=e.pageX,u.pageY=e.pageY),e.target.raphael?n=r.parents("div:eq(0)").offset():(e.target.raphaelParent||0<r.parents("svg").length)&&(n=r.parents("svg").parents("div:eq(0)").offset()),n||(n=r.offset()),t.y=n?(t.x=u.pageX-n.left,u.pageY-n.top):(t.x=u.pageX,u.pageY)}else if(p.Browser.Firefox){var d=e.target.raphelParent?h.$(e.target).parents("svg").offset():h.$(e.target.offsetParent||e.target.parentNode).offset();t.y=d?(t.x=e.pageX-d.left,e.pageY-d.top):(t.x=e.pageX,e.pageY)}else if(l.currentTarget===l.target||a)p.Browser.Explorer&&parseInt(p.Browser.Version,10)<10&&l instanceof MouseEvent?(t.x=l.x,t.y=l.y):(t.x=e.offsetX,t.y=e.offsetY);else if(l.currentTarget.offsetLeft||l.currentTarget.offsetTop||!l.currentTarget.ownerSVGElement)t.x=l.currentTarget.offsetLeft+e.offsetX,t.y=l.currentTarget.offsetTop+e.offsetY;else{var c=p.Browser.Explorer?l.currentTarget.ownerSVGElement.getBBox():l.currentTarget.getBBox();t.x=Math.round(c.x),t.y=Math.round(c.y)}return t},p.getSVGOffset=
+/**
+         * Gets the normalized offsetLeft and offsetTop from an SVG element
+         * with respect to its parent jQuery object
+         * @private
+         * @param objSVG: object, svg object from the dom
+         * @param parent: object, jQuery object representing the parent DOM node
+         */
+function(e,t){var a={left:0,top:0};if(e instanceof HTMLElement)a.left=e.offsetLeft,a.top=e.offsetTop;else{var l=h.$(e).offset(),o=t.offset();l&&o&&(a.left=l.left-o.left,a.top=l.top-o.top)}return a},p.getJSPath=
+/**
+         * @private
+         */
+function(e){var t=h.$('script[src*="'+e+'"]');if(0<t.length){var a=t.attr("src");return a?a.replace(e,""):""}return""},p.CalcDistance=
+/**
+         * @private
+         */
+function(e,t,a,l,o){var n=Math.max(e,a),s=Math.min(e,a),i=Math.max(t,l),r=Math.min(t,l);return{x:n-s,y:i-r,dx:o?o.left-s:0,dy:o?o.top-r:0,left:s,right:n,top:r,bottom:i}},p.makeRect=n,p.rotateRect=l,p.rotatePoint=
+/**
          * Calculates new point coordinates for the clockwise page rotation to the specified angle.
          * @private
          * @param point
          * @param page
          * @param angle positive number, must be exactly divisible by 90.
          */
-function c(e,t,r){return f({x:e.x,y:e.y,width:0,height:0},t,r)}/**
+function(e,t,a){return l({x:e.x,y:e.y,width:0,height:0},t,a)},p.__rf=
+/**
          * just a simple function to return false without writing it repeatedly
          * @private
          */
-function l(){return!1}/**
+function(){return!1},p.__ef=
+/**
          * just a simple empty function
          * @private
          */
-function h(){}/**
+function(){},p.__sp=
+/**
          * just a simple event handler to stop the propagation of an event.
          * @private
          */
-function p(e){e.stopPropagation()}/**
+function(e){e.stopPropagation()},p.__functionFromArray=
+/**
          * Creates a function that wraps multiple functions into one
          * @private
          * @param arr: array of functions
          * @param arguments to pass to called functions
          */
-function g(e){return function(){for(;e.length;){var t=e.shift();t&&t.apply(this,arguments)}}}/**
+function(t){return function(){for(;t.length;){var e=t.shift();e&&e.apply(this,arguments)}}},p.__htmlTransformStyle=
+/**
          * @private
          */
-function y(){var t=void 0;if("undefined"==typeof t){var r=e.$("<div/>").appendTo("body"),n=e.$('<v:shape id="vml_flag1" adj="1" />').appendTo(r);n.css("behavior","url(#default#VML)"),t=n[0]?"object"===_typeof(n[0].adj):!0,r.remove()}return t}/**
+function(e){return{" transform":e,"-moz-transform":e,"-webkit-transform":e,"-o-transform":e,"-ms-transform":e}},p.__calcPathBounds=
+/**
          * @private
          */
-function v(e){return{" transform":e,"-moz-transform":e,"-webkit-transform":e,"-o-transform":e,"-ms-transform":e}}/**
+function(e,a){var l={x:0,y:0,width:0,height:0};return e&&e.length&&(a=a||Raphael.matrix(),l.x=a.x(e[0].x,e[0].y),l.y=a.y(e[0].x,e[0].y),e.forEach(function(e){var t={x:a.x(e.x,e.y),y:a.y(e.x,e.y)};l.x=t.x<l.x?t.x:l.x,l.y=t.y<l.y?t.y:l.y,l.width=t.x>l.width?t.x:l.width,l.height=t.y>l.height?t.y:l.height}),l.width-=l.x,l.height-=l.y),l},p.flattenVersionSting=
+/**
          * @private
          */
-function m(e,t){var r={x:0,y:0,width:0,height:0};return e&&e.length?(t=t||Raphael.matrix(),r.x=t.x(e[0].x,e[0].y),r.y=t.y(e[0].x,e[0].y),e.forEach(function(e){var n={x:t.x(e.x,e.y),y:t.y(e.x,e.y)};r.x=n.x<r.x?n.x:r.x,r.y=n.y<r.y?n.y:r.y,r.width=n.x>r.width?n.x:r.width,r.height=n.y>r.height?n.y:r.height}),r.width-=r.x,r.height-=r.y,r):r}/**
+function(e){var a=0;return(""+e).replace("_",".").replace(/[^0-9.]/g,"").split(".").forEach(function(e,t){a+=Number(e)/Math.pow(10,3*t)}),a},p.ParseInt=
+/**
          * @private
          */
-function d(e){var t=0,r=(""+e).replace("_",".").replace(/[^0-9.]/g,"").split(".");return r.forEach(function(e,r){t+=Number(e)/Math.pow(10,3*r)}),t}/**
+function(e){if("string"==typeof e){var t=e.trim(),a=parseInt(t);if(/^([\+|-]?[0-9]+)$/.test(t))return a}return"number"!=typeof e?null:e},p.IsInteger=
+/**
          * @private
          */
-function x(e){if("string"==typeof e){var t=e.trim(),r=parseInt(t);if(/^([\+|-]?[0-9]+)$/.test(t))return r}return"number"!=typeof e?null:e}t.getMousePosition=r,t.getMousePositionJquery=n,t.__loadDependencies=o,t.getSVGOffset=a,t.getJSPath=i,t.CalcDistance=u,t.makeRect=s,t.rotateRect=f,t.rotatePoint=c,t.__rf=l,t.__ef=h,t.__sp=p,t.__functionFromArray=g,t.__supportsVML=y,t.__htmlTransformStyle=v,t.__calcPathBounds=m,t.flattenVersionSting=d,t.ParseInt=x}(t=e.Utils||(e.Utils={}))}(Atalasoft||(Atalasoft={}));var Atalasoft;!function(e){var t=void 0;!function(t){function r(t){function r(e){var t=e.width()||a.pageSize.width,r=e.height()||a.pageSize.height;return t*r*a.colorDepth/8*a.compression}var n=e.$({}),o=[],a={colorDepth:8,compression:1,highWaterMark:5e8,pageSize:{width:800,height:1132}},i=0,u=function(){function t(r){_classCallCheck(this,t),r&&e.$.extend(a,r)}return _createClass(t,[{key:"dispose",value:function(){this.clearEntries()}},{key:"bind",value:function(){return n.bind.apply(n,arguments),this}},{key:"unbind",value:function(){return n.unbind.apply(n,arguments),this}},{key:"trigger",value:function(){return n.trigger.apply(n,arguments),this}},{key:"allocate",value:function(e){return o.push(e),i+=r(e),i>a.highWaterMark&&this.trigger("exceededhighwatermark"),i}},{key:"deallocateOldestEntry",value:function(){var e=o.shift();return void 0!==e&&this.deallocate(e),e}},{key:"clearEntries",value:function(){o.length=0,i=0}},{key:"deallocate",value:function(e){return i-=r(e),0>i&&(i=0),i}},{key:"typeOf",get:function(){return"Atalasoft.Document.MemoryTacker"}},{key:"colorDepth",set:function(e){a.colorDepth=e},get:function(){return a.colorDepth}},{key:"highWatermark",set:function(e){a.highWaterMark=e},get:function(){return a.highWaterMark}},{key:"pageSize",set:function(e){a.pageSize={width:e.width,height:e.height}},get:function(){return a.pageSize}}]),t}();return new u(t)}t.MemoryTracker=r}(t=e.Document||(e.Document={}))}(Atalasoft||(Atalasoft={}));
-"use strict";var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t};!function(){function t(t){for(var e=0,o=(""+t).replace("_",".").replace(/[^0-9.]/g,"").split("."),n=0;n<o.length;++n)e+=Number(o[n])/Math.pow(10,3*n);return e}var e="1.7.1";if("undefined"==typeof jQuery)throw"jQuery not found. The WebDocumentViewer requires jQuery version "+e+" or later.";if(t(jQuery().jquery)<t(e))throw"Early jQuery version found: "+jQuery().jquery+", version expected: "+e;jQuery.isFunction(jQuery.fn.parseVersionFloat)||(jQuery.parseVersionFloat=t,jQuery.fn.parseVersionFloat=t)}();/**
- *  Main Atalasoft Namespace definition(s)
+function(e){return isFinite(e)&&!(e%1)}}(h.Utils||(h.Utils={}))}(Atalasoft||(Atalasoft={})),function(a){var e,t;e=a.Document||(a.Document={}),t=function(){function t(e){_classCallCheck(this,t),this.jqe=a.$({}),this.memoryEntries=[],this.config={colorDepth:8,compression:1,highWaterMark:5e8,pageSize:{width:800,height:1132}},this.bytesInUse=0,e&&a.$.extend(this.config,e)}return _createClass(t,[{key:"dispose",value:function(){this.clearEntries()}},{key:"bind",value:function(){return this.jqe.bind.apply(this.jqe,arguments),this}},{key:"unbind",value:function(){return this.jqe.unbind.apply(this.jqe,arguments),this}},{key:"trigger",value:function(e){return this.jqe.trigger.apply(this.jqe,arguments),this}},{key:"allocate",value:function(e){return this.memoryEntries.push(e),this.bytesInUse+=this.calcBytes(e),this.bytesInUse>this.config.highWaterMark&&this.trigger("exceededhighwatermark"),this.bytesInUse}},{key:"deallocateOldestEntry",value:function(){var e=this.memoryEntries.shift();return void 0!==e&&this.deallocate(e),e}},{key:"clearEntries",value:function(){this.memoryEntries.length=0,this.bytesInUse=0}},{key:"deallocate",value:function(e){return this.bytesInUse-=this.calcBytes(e),this.bytesInUse<0&&(this.bytesInUse=0),this.bytesInUse}},{key:"calcBytes",value:function(e){return(e.width()||this.config.pageSize.width)*(e.height()||this.config.pageSize.height)*this.config.colorDepth/8*this.config.compression}},{key:"typeOf",get:function(){return"Atalasoft.Document.MemoryTacker"}},{key:"colorDepth",set:function(e){this.config.colorDepth=e},get:function(){return this.config.colorDepth}},{key:"highWatermark",set:function(e){this.config.highWaterMark=e},get:function(){return this.config.highWaterMark}},{key:"pageSize",set:function(e){this.config.pageSize={width:e.width,height:e.height}},get:function(){return this.config.pageSize}}]),t}(),e.MemoryTracker=t}(Atalasoft||(Atalasoft={})),function(l){!function(e){var a=function(){function a(e,t){_classCallCheck(this,a),this.control=e,this.allowMultipleFiles=t,this.enterLeaveLevel=0,this.dragEffect=""}return _createClass(a,[{key:"onDragEnter",value:function(e){""===this.dragEffect&&0===this.enterLeaveLevel&&(this.dragEffect=this.calcDragEffect(e.dataTransfer)),e.dataTransfer.dropEffect=this.dragEffect,this.enterLeaveLevel++}},{key:"onDrop",value:function(e){"none"!==this.dragEffect&&this.control.processFiles(this.getFilesFromDataTransfer(e.dataTransfer)),this.resetState()}},{key:"onDragLeave",value:function(e){this.enterLeaveLevel--,0===this.enterLeaveLevel&&(this.dragEffect="")}},{key:"onDragOver",value:function(e){e.dataTransfer.dropEffect=this.dragEffect}},{key:"calcDragEffect",value:function(e){if(this.control.uploadRequested)return"none";return(l.Utils.Browser.Firefox?2===e.types.length&&e.types.some(function(e){return"Files"===e}):1===e.types.length&&"Files"===e.types[0])&&(this.allowMultipleFiles||1===e.items.length)?"copy":"none"}},{key:"processDragAndDropEvent",value:function(e){e.preventDefault();var t=e.originalEvent;if(t instanceof DragEvent)switch(t.type){case"dragenter":this.onDragEnter(t);break;case"dragover":this.onDragOver(t);break;case"drop":this.onDrop(t);break;case"dragleave":this.onDragLeave(t)}}},{key:"getFilesFromDataTransfer",value:function(e){for(var t=[],a=0;a<e.files.length;a++)t.push(e.files[a]);return t}},{key:"resetState",value:function(){this.dragEffect="",this.enterLeaveLevel=0}}]),a}();e.DragAndDropHandler=a;var t=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return _inherits(t,a),_createClass(t,[{key:"onDragEnter",value:function(e){}},{key:"onDragOver",value:function(e){}},{key:"onDragLeave",value:function(e){}},{key:"onDrop",value:function(e){this.control.uploadRequested||1===e.dataTransfer.types.length&&"Files"===e.dataTransfer.types[0]&&(this.allowMultipleFiles||1===e.dataTransfer.files.length)&&this.control.processFiles(this.getFilesFromDataTransfer(e.dataTransfer))}}]),t}();e.DragAndDropHandlerIE=t}(l.Upload||(l.Upload={}))}(Atalasoft||(Atalasoft={})),function(e){var t,a;t=e.Upload||(e.Upload={}),a=function(){function a(e,t){_classCallCheck(this,a),this.filename=e,this.statusText=t,this.cancel=!1,this.progressCounter=0}return _createClass(a,[{key:"handler",value:function(e){this.isUploadStartEventData(e)?e.fileinfo.filename===this.filename&&this.cancel&&(e.fileinfo.cancel=!0):e.uploadinfo.filename===this.filename&&(this.cancel&&(e.uploadinfo.cancel=!0),this.progressCounter%5==0&&this.statusText.text("Uploading ("+(e.uploadinfo.uploadedbytes/e.uploadinfo.totalbytes*100).toFixed(0)+" %)"),this.progressCounter++)}},{key:"isUploadStartEventData",value:function(e){return void 0!==e.fileinfo}}]),a}(),t.FileUploadProgressHandler=a}(Atalasoft||(Atalasoft={})),function(i){var r,e;r=i.Upload||(i.Upload={}),e=function(){function n(e){var a=this;_classCallCheck(this,n),this.controller=e,this.callbackToManipulateParentUi=function(){},this.isVisible=!1,this.progressHandlers=[],this.uploadRequested=!1,this.reinitNeeded=!1,this.processFileFinishedUpload=function(e){},this.openFileDlgChangeHandler=function(){var e=a.openFileDlgBtn[0].files;a.processFiles(a.convertFileListToFilesArray(e)),a.openFileForm[0].reset()},this.handleUploadFinished=function(){a.uiShouldBeClosedAfterUpload?a.controller.finish(!1):(a.control.find("."+r.UploadControlCssClasses.CancelButton).css("display","none"),a.control.find("."+r.UploadControlCssClasses.CloseButton).css("display",""))},this.processProgressHandlers=function(t){a.progressHandlers.forEach(function(e){return e.handler(t)})};var t=i.$("<div/>").addClass(r.UploadControlCssClasses.Control).css("flex-flow","column").css("height","100%").css("width","100%").addClass("ui-widget"),l=i.$("<div/>").addClass(r.UploadControlCssClasses.AreaContainer).css("display","flex").css("flex-flow","column").css("flex","1 1 auto").css("align-content","center").css("overflow","auto"),o=i.$("<div/>").addClass(r.UploadControlCssClasses.ButtonsContainer).css("flex","0 1 auto");t.append(l),t.append(o),this.control=t,this.openFileDlgBtn=i.$("<input/>").attr("type","file").change(this.openFileDlgChangeHandler),this.openFileForm=i.$("<form/>").css("display","none"),this.openFileDlgBtn.appendTo(this.openFileForm),this.openFileForm.appendTo(this.control),this.allowedDragAndDrop=!1,this.uiShouldBeClosedAfterUpload=!1}return _createClass(n,[{key:"init",value:function(e,t){this.openFileDlgBtn.attr("accept",t.allowedFileTypes);var a=i.$(this.control.children("."+r.UploadControlCssClasses.ButtonsContainer));if(this.initArea(t),this.initButtons(a,t),this.control.css("display","none"),this.control.appendTo(e),this.allowedDragAndDrop=t.allowDragDrop,this.uiShouldBeClosedAfterUpload=t.closeUiAfterUpload,this.allowedDragAndDrop){var l=i.Utils.Browser.Explorer?new r.DragAndDropHandlerIE(this,t.allowMultipleFiles):new r.DragAndDropHandler(this,t.allowMultipleFiles);this.area.on("dragenter",function(e){l.processDragAndDropEvent(e)}).on("dragover",function(e){l.processDragAndDropEvent(e)}).on("drop",function(e){l.processDragAndDropEvent(e)}).on("dragleave",function(e){l.processDragAndDropEvent(e)})}}},{key:"activate",value:function(e){this.callbackToManipulateParentUi=e,this.allowedDragAndDrop?(this.callbackToManipulateParentUi(!1),this.show()):this.openFileDlgBtn.click()}},{key:"close",value:function(){this.unbindEvents(),this.hide()}},{key:"getControlDom",value:function(){return this.control}},{key:"initButtons",value:function(e,t){var a=this,l=i.$("<div/>").addClass(r.UploadControlCssClasses.Buttons).css("float","right"),o=i.$("<button/>").addClass(r.UploadControlCssClasses.Button).addClass(r.UploadControlCssClasses.AddButton).button({label:"Add..."}).click(function(e){e.preventDefault(),a.openFileDlgBtn.click()}),n=i.$("<button/>").addClass(r.UploadControlCssClasses.Button).addClass(r.UploadControlCssClasses.CloseButton).button({label:"Close"}).css("display","none").click(function(e){e.preventDefault(),a.close()}),s=i.$("<button/>").addClass(r.UploadControlCssClasses.Button).addClass(r.UploadControlCssClasses.CancelButton).button({label:"Cancel"}).click(function(e){e.preventDefault(),a.controller.abort(),a.close()});(t.allowMultipleFiles||t.allowDragDrop)&&l.prepend(o),l.append(s),t.closeUiAfterUpload||l.append(n),l.appendTo(e)}},{key:"initAreaImpl",value:function(e,t,a){var l=i.$("<div/>").addClass(e).addClass(r.UploadControlCssClasses.TextElement);return this.initAreaContents(l,t,a),l}},{key:"initAreaContents",value:function(e,t,a){var l=i.$("<div/>").addClass(t?r.UploadControlCssClasses.FileProgressImage:r.UploadControlCssClasses.DragAndDropImage),o=i.$("<span/>").addClass(t?r.UploadControlCssClasses.FileProgress:r.UploadControlCssClasses.DragAndDrop).text(a);e.append(l).append(o)}},{key:"reinitArea",value:function(e,t){var a=this.area.children().first();return a.children().remove(),this.initAreaContents(a,e,t),a}},{key:"processFiles",value:function(e){if(!this.uploadRequested)if(0<e.length){var t=this.filterFiles(e);0<t.length&&(this.allowedDragAndDrop||(this.callbackToManipulateParentUi(!1),this.show()),this.addFilesToUi(t))}else this.allowedDragAndDrop||this.controller.abort()}},{key:"filterFiles",value:function(e,t){for(var a=this.controller.filterFiles(e,void 0===t?[]:t),l=[],o=0;o<e.length;o++)a[0]===e[o].name?a.shift():l.push(e[o]);return l}},{key:"bindEvents",value:function(){this.controller.bind({fileuploadstarted:this.processProgressHandlers,fileuploadfinished:this.processFileFinishedUpload,fileuploaderror:this.processFileFinishedUpload,fileuploading:this.processProgressHandlers,uploadfinished:this.handleUploadFinished})}},{key:"unbindEvents",value:function(){this.controller.unbind({fileuploadstarted:this.processProgressHandlers,fileuploadfinished:this.processFileFinishedUpload,fileuploaderror:this.processFileFinishedUpload,fileuploading:this.processProgressHandlers,uploadfinished:this.handleUploadFinished})}},{key:"show",value:function(){this.control.css("display","flex"),this.controlParent.children().first().css("display","none"),this.isVisible=!0}},{key:"hide",value:function(){this.control.css("display","none"),this.controlParent.children().first().css("display","block"),this.isVisible=!1,this.progressHandlers.length=0,this.callbackToManipulateParentUi(!0),this.callbackToManipulateParentUi=function(){},this.uploadRequested=!1,this.reinitNeeded=this.allowedDragAndDrop,this.switchButtonEnabledState(r.UploadControlCssClasses.AddButton,!0),this.uiShouldBeClosedAfterUpload||(this.control.find("."+r.UploadControlCssClasses.CloseButton).css("display","none"),this.control.find("."+r.UploadControlCssClasses.CancelButton).css("display",""))}},{key:"convertSize",value:function(e){for(var t=e,a=0;1024<t;)t/=1024,a++;return t.toFixed(2)+" "+["B","KB","MB","GB","TB"][a]}},{key:"addProgressHandler",value:function(e,t){this.progressHandlers.push(new r.FileUploadProgressHandler(e,t))}},{key:"removeProgressHandler",value:function(t){var e=this.progressHandlers.filter(function(e){return e.filename===t})[0];null!==e&&this.progressHandlers.splice(this.progressHandlers.indexOf(e),1)}},{key:"cancelUpload",value:function(t){var e=this.progressHandlers.filter(function(e){return e.filename===t})[0];null!=e&&(e.cancel=!0)}},{key:"convertFileListToFilesArray",value:function(e){for(var t=[],a=0;a<e.length;a++)t.push(e[a]);return t}},{key:"switchButtonEnabledState",value:function(e,t){var a=t?"enable":"disable";this.control.find("."+e).button(a)}},{key:"isFileSuccessEventData",value:function(e){return void 0!==e.filepath}},{key:"controlParent",get:function(){return this.control.parent()}},{key:"area",get:function(){return i.$(this.control.children("."+r.UploadControlCssClasses.AreaContainer))}}]),n}(),r.UploadBaseControl=e}(Atalasoft||(Atalasoft={})),function(e){var t,a;t=e.Upload||(e.Upload={}),(a=t.UploadControlCssClasses||(t.UploadControlCssClasses={})).Button="atala-upload-button",a.DragAndDrop="atala-upload-drag-and-drop",a.DragAndDropImage="atala-upload-drag-and-drop-image",a.FileProgress="atala-upload-progress-file",a.FileProgressImage="atala-upload-progress-file-image",a.MultipleFilesHeaderRow="atala-upload-files-header-row",a.MultipleFilesHeader="atala-upload-files-header",a.TextElement="atala-upload-text-element",a.Control="atala-upload-control",a.AreaContainer="atala-upload-flex-area",a.AreaNonTable="atala-upload-flex-area-non-table",a.AreaSingleFile="atala-upload-single-file",a.AreaSingleFileNoDragDrop="atala-upload-single-file-no-drag-drop",a.AreaMultipleFile="atala-upload-multiple-files",a.AreaMultipleFileDragDrop="atala-upload-multiple-files-drag-and-drop",a.ButtonsContainer="atala-upload-flex-buttons",a.Buttons="atala-upload-buttons",a.CloseButton="atala-upload-close-button",a.CancelButton="atala-upload-cancel-button",a.OkButton="atala-upload-ok-button",a.AddButton="atala-upload-add-button",a.MultipleFilesHeaderName="atala-upload-files-header-name",a.MultipleFilesHeaderSize="atala-upload-files-header-size",a.MultipleFilesHeaderStatus="atala-upload-files-header-status",a.MultipleFilesRow="atala-upload-files-row",a.MultipleFilesCell="atala-upload-files-cell",a.MultipleFilesCellName="atala-upload-files-cell-name",a.MultipleFilesCellSize="atala-upload-files-cell-size",a.MultipleFilesCellStatus="atala-upload-files-cell-status",a.MultipleFilesCellCancelButton="atala-upload-files-cancel-button"}(Atalasoft||(Atalasoft={})),function(F){!function(a){var e=function(){function l(e,t){var s=this;_classCallCheck(this,l),this.uploadButton=null,this.uploadControlField=null,this.state=i.Idle,this.filesToUpload=[],this.uploadingFiles=[],this.hasErrors=!1,this.wasCanceled=!1,this.uploadCallback=null,this.abort=function(){s.state===i.Uploading&&(s.hasErrors=!0,s.wasCanceled=!0,s.state=i.Canceling,s.abortActiveRequests()),s.finish(!0)},this.finish=function(e){(s.config.closeUiAfterUpload||e)&&s.uploadControl.close()},this.onFileUploadStarted=function(e,t){if(s.state===i.Canceling)return!1;var a={type:"fileuploadstarted",fileinfo:{filename:e,size:t,cancel:!1}};return s.trigger(a),!a.fileinfo.cancel},this.onFileUploadFinished=function(e,t){if(!e.success||e.canceled||void 0!==e.error){var a={type:"fileuploaderror",errorinfo:{filename:t,canceled:e.canceled,customData:e.customData}};s.hasErrors=!0,a.errorinfo.canceled?s.wasCanceled=!0:a.errorinfo.error=e.error,s.trigger(a)}else s.trigger({type:"fileuploadfinished",filepath:e.filename,filename:t,customData:e.customData});s.tryToFinishUpload(t)},this.onFileUploadFailed=function(e,t,a){var l={type:"fileuploaderror",errorinfo:{filename:a,canceled:"abort"===e}};s.hasErrors=!0,l.errorinfo.canceled?s.wasCanceled=!0:(l.errorinfo.error=e,t&&(l.errorinfo.error+=": "+t)),s.trigger(l),s.tryToFinishUpload(a)},this.onUploadStarted=function(){var e={type:"uploadstarted",info:{cancel:!1}};return s.trigger(e),!e.info.cancel},this.onUploadFinished=function(){var e={type:"uploadfinished",canceled:s.wasCanceled,success:!s.hasErrors};s.trigger(e)},this.onFileUploading=function(t,e,a){if(s.state===i.Canceling)return!1;var l=s.uploadingFiles.filter(function(e){return e.filename===t});if(0===l.length||1<l.length)return!0;var o=l[0];if(o.canceled)return!0;var n={type:"fileuploading",uploadinfo:{filename:t,uploadedbytes:e,totalbytes:a,cancel:!1}};return s.trigger(n),o.canceled=n.uploadinfo.cancel,!n.uploadinfo.cancel},this.trigger=e.trigger,this.sendRequest=t.makeHandlerRequest,this.bind=e.bind,this.unbind=e.unbind;var a=e.config;this.config={serverUrl:e.config.serverurl,enabled:!1!==a.upload.enabled,allowMultipleFiles:!!a.upload.allowmultiplefiles,allowedFileTypes:a.upload.allowedfiletypes,allowDragDrop:!!a.upload.allowdragdrop,allowedMaxFileSize:a.upload.allowedmaxfilesize,uploadPath:a.upload.uploadpath,uiParent:e.config.parent,filesUploadConcurrency:e.config.upload.filesuploadconcurrency,closeUiAfterUpload:e.config.upload.closeuiafterupload}}return _createClass(l,[{key:"dispose",value:function(){}},{key:"uploadWithUi",value:function(e){this.uploadControl.activate(e)}},{key:"uploadFiles",value:function(e,t,a){var l=this;if(this.checkControllerState()&&this.checkIfUploadDisabled()&&this.checkFilesToUpload(e)&&this.checkUploadPath(t)&&this.checkCallback(a)){if(this.state=i.Uploading,!this.fireUploadStartedEvent())return this.abort(),void this.tryToFinishUpload();for(e.forEach(function(e){return l.uploadFileOnServer(t,e)});this.uploadingFiles.length<this.config.filesUploadConcurrency&&0<this.filesToUpload.length;)this.startFileUpload(this.filesToUpload.pop());"function"==typeof a&&(this.uploadCallback=a)}}},{key:"uploadFile",value:function(e,t,a){this.uploadFiles([e],t,a)}},{key:"uploadFileOnServer",value:function(e,t){var a={atala_upath:this.config.uploadPath,atala_subpath:e},l=F.$.extend(!0,{},a,{atala_filename:t.name,atala_filetype:t.type}),o={type:"fileupload",serverurl:this.config.serverUrl,query:"?atalafileupload=",method:"POST",data:l,file:t,cancel:!1};this.filesToUpload.push(o)}},{key:"startFileUpload",value:function(e){this.onFileUploadStarted(e.file.name,e.file.size)?this.uploadingFiles.push({filename:e.file.name,canceled:!1,jqxhr:this.sendRequest(e,this.onFileUploadFinished,this.onFileUploadFailed,this.onFileUploading)}):this.onFileUploadFailed("abort","",e.file.name)}},{key:"fireUploadStartedEvent",value:function(){return this.onUploadStarted()}},{key:"checkControllerState",value:function(){return!(this.state===i.Uploading||this.state===i.Canceling&&0<this.uploadingFiles.length)||(this.throwError("checkControllerState","Web Document Viewer already performs an upload operation and can start the another one. Please try again later"),!1)}},{key:"checkUploadPath",value:function(e){return!e||"string"==typeof e||(this.throwError("checkUploadPath","uploadpath object '"+e+"' is not a string. Please check your input parameters and try again."),!1)}},{key:"checkIfUploadDisabled",value:function(){return!!this.config.enabled||(this.throwError("checkUploadEnabled","Upload is not enabled in this Web Document Viewer instance. Please check the viewer configuration and try again."),!1)}},{key:"checkFilesToUpload",value:function(e){if(!Array.isArray(e))return this.throwError("checkFilesToUpload","The parameter is not an array. Please check your input parameters."),!1;for(var t=0;t<e.length;t++){var a=e[t];if(!(a instanceof File))return this.throwError("checkFilesToUpload","An object "+a+" doesn't implement File interface object. Please check your input parameters and try again."),!1}return!0}},{key:"checkAlreadyAddedFiles",value:function(e){if(!e)return!0;if(!Array.isArray(e))return this.throwError("checkAlreadyAddedFiles","The parameter is not an array. Please check your input data."),!1;for(var t=0;t<e.length;t++){var a=e[t];if("string"!=typeof a)return this.throwError("checkAlreadyAddedFiles","An object "+a+" doesn't implement File interface object. Please check your input parameters."),!1}return!0}},{key:"checkCallback",value:function(e){return!e||"function"==typeof e||(this.throwError("checkCallback","callback object '"+e+"' is not a function. Please check your input parameters and try again."),!1)}},{key:"throwError",value:function(e,t){this.trigger({type:"throwerror",name:e,msg:t})}},{key:"tryToFinishUpload",value:function(t){t&&this.uploadingFiles.splice(this.uploadingFiles.indexOf(this.uploadingFiles.filter(function(e){return e.filename===t})[0]),1),0<this.filesToUpload.length?this.startFileUpload(this.filesToUpload.pop()):0===this.uploadingFiles.length&&(this.state!==i.Idle&&(this.state=i.Idle,this.onUploadFinished(),null!==this.uploadCallback&&this.uploadCallback()),this.hasErrors=!1,this.wasCanceled=!1)}},{key:"filterFilesPublic",value:function(e,t,a){var l=[];if(this.checkIfUploadDisabled()&&this.checkFilesToUpload(e)&&this.checkAlreadyAddedFiles(t)&&this.checkCallback(a)){var o=void 0;o=t?this.filterFiles(e,t):this.filterFiles(e,[]),l=e.filter(function(t){return!o.some(function(e){return e===t.name})}),"function"==typeof a&&a()}return l}},{key:"filterFiles",value:function(e,t){for(var a=[],l=this.config.allowedFileTypes.toLowerCase().split(","),o=t.map(function(e){return e}),n=e.length,s=0;s<n;s++){var i=e[s],r=i.name,u=F.Utils.FileUploadRejectReason.None;if(i.size>this.config.allowedMaxFileSize)a.push(r),u=F.Utils.FileUploadRejectReason.Size;else{for(var d=!1,c=o.length,p=0;p<c;p++)if(o[p]===r){d=!0;break}if(d)a.push(r),u=F.Utils.FileUploadRejectReason.Name;else{for(var h=r.split(".").pop(),f="."+(h?h.toLowerCase():""),g=i.type.toLowerCase(),C=!1,y=0;y<l.length;y++){var v=l[y];if(v===f||""===v.trim()){C=!0;break}var m=v.split("/"),k=g.split("/");if(2===m.length&&2===k.length&&m[0]===k[0]&&(m[1]===k[1]||"*"===m[1])){C=!0;break}}C||(a.push(r),u=F.Utils.FileUploadRejectReason.Type)}}this.onFileAddedToUpload(i,u),o.push(r)}return a}},{key:"abortActiveRequests",value:function(){this.uploadingFiles.forEach(function(e){return e.jqxhr.abort()})}},{key:"onFileAddedToUpload",value:function(e,t){var a={type:"fileaddedtoupload",filename:e.name,success:0===t,reason:t};this.trigger(a)}},{key:"getUploadControl",value:function(){return this.uploadControl.getControlDom()}
+/**
+                 *
+                 * Creates a jQuery UI upload control.
+                 * @param {any} parent - parent object to append to.
+                 */},{key:"createUploadControl",value:function(e){var t=void 0;return(t=this.config.allowMultipleFiles?new a.UploadMultilpeFilesControl(this):new a.UploadSingleFileControl(this)).init(e,this.config),t}},{key:"uploadControl",get:function(){return null===this.uploadControlField&&(this.uploadControlField=this.createUploadControl(this.config.uiParent)),this.uploadControlField}}]),l}();a.UploadController=e;var t,i=void 0;(t=i||(i={}))[t.Idle=0]="Idle",t[t.Canceling=1]="Canceling",t[t.Uploading=2]="Uploading"}(F.Upload||(F.Upload={}))}(Atalasoft||(Atalasoft={})),function(r){var u,e;u=r.Upload||(r.Upload={}),(e=function(e){function i(e){_classCallCheck(this,i);var t=_possibleConstructorReturn(this,(i.__proto__||Object.getPrototypeOf(i)).call(this,e));return t.files=[],t.uploadElems=[],t.processFileFinishedUpload=function(e){t.isFileSuccessEventData(e)?t.markStatusFinished(e.filename,!0):t.markStatusFinished(e.errorinfo.filename,!1,e.errorinfo.canceled)},t}return _inherits(i,u.UploadBaseControl),_createClass(i,[{key:"init",value:function(e,t){_get(i.prototype.__proto__||Object.getPrototypeOf(i.prototype),"init",this).call(this,e,t),this.openFileDlgBtn.attr("multiple",!0)}},{key:"initArea",value:function(e){var t=void 0;e.allowDragDrop?((t=this.initAreaImpl(u.UploadControlCssClasses.AreaMultipleFile,!1,"Drop files here")).addClass(u.UploadControlCssClasses.AreaMultipleFileDragDrop),this.area.addClass(u.UploadControlCssClasses.AreaNonTable)):(t=r.$("<div/>").addClass(u.UploadControlCssClasses.AreaMultipleFile).addClass(u.UploadControlCssClasses.TextElement),this.initFilesTable(t)),t.appendTo(this.area)}},{key:"initFilesTable",value:function(e){this.area.removeClass(u.UploadControlCssClasses.AreaNonTable);var t=r.$("<div/>").addClass(u.UploadControlCssClasses.MultipleFilesHeaderRow).addClass("ui-widget-header"),a=r.$("<div/>").addClass(u.UploadControlCssClasses.MultipleFilesHeaderName).addClass(u.UploadControlCssClasses.MultipleFilesHeader).text("Name"),l=r.$("<div/>").addClass(u.UploadControlCssClasses.MultipleFilesHeaderSize).addClass(u.UploadControlCssClasses.MultipleFilesHeader).text("Size"),o=r.$("<div/>").addClass(u.UploadControlCssClasses.MultipleFilesHeaderStatus).addClass(u.UploadControlCssClasses.MultipleFilesHeader).text("Status");t.append(a).append(l).append(o).appendTo(e),this.table=e}},{key:"initButtons",value:function(e,t){var a=this;_get(i.prototype.__proto__||Object.getPrototypeOf(i.prototype),"initButtons",this).call(this,e,t);var l=e.children().first(),o=r.$("<button/>").addClass(u.UploadControlCssClasses.OkButton).button({label:"OK"}).addClass(u.UploadControlCssClasses.Button).click(function(e){e.preventDefault(),a.bindEvents(),a.uploadRequested=!0,a.switchButtonEnabledState(u.UploadControlCssClasses.AddButton,!1),a.switchButtonEnabledState(u.UploadControlCssClasses.OkButton,!1),a.controller.uploadFiles(a.files)});l.children("."+u.UploadControlCssClasses.AddButton).first().after(o)}},{key:"processFiles",value:function(e){if(this.isVisible){if(this.uploadRequested)return;if(0<e.length){var t=this.filterFiles(e,this.files.map(function(e){return e.name}));0<t.length&&(this.switchButtonEnabledState(u.UploadControlCssClasses.OkButton,!0),this.addFilesToUi(t))}}else _get(i.prototype.__proto__||Object.getPrototypeOf(i.prototype),"processFiles",this).call(this,e)}},{key:"addFilesToUi",value:function(e){var t,a;if(this.allowedDragAndDrop&&void 0===this.table){var l=this.area.children().first();l.children().remove(),l.removeClass(u.UploadControlCssClasses.AreaMultipleFileDragDrop),this.initFilesTable(l)}for(var o=[],n=0;n<e.length;n++)o.push(this.addRowToFilesTable(e[n]));(t=this.files).push.apply(t,_toConsumableArray(e)),(a=this.table).append.apply(a,o)}},{key:"addRowToFilesTable",value:function(t){var a=this,l=t.name,o=i.rowTemplate.clone();r.$("."+u.UploadControlCssClasses.MultipleFilesCellName,o).text(l),r.$("."+u.UploadControlCssClasses.MultipleFilesCellSize,o).text(this.convertSize(t.size));var n=r.$("."+u.UploadControlCssClasses.FileProgress,o),s=r.$("."+u.UploadControlCssClasses.MultipleFilesCellCancelButton,o).click(function(e){e.preventDefault(),a.uploadRequested?(a.cancelUpload(l),s.css("display","none"),n.text("Canceled")):(a.files.splice(a.files.indexOf(t,0),1),a.removeProgressHandler(l),o.remove(),0===a.files.length&&(a.controller.abort(),a.close()))});return this.addProgressHandler(t.name,n),this.addFinishHandler(t.name,n,s),o}},{key:"show",value:function(){this.switchButtonEnabledState(u.UploadControlCssClasses.OkButton,!this.allowedDragAndDrop),this.reinitNeeded&&(this.reinitArea(!1,"Drop files here").addClass(u.UploadControlCssClasses.AreaMultipleFileDragDrop),this.area.addClass(u.UploadControlCssClasses.AreaNonTable),this.table=void 0),_get(i.prototype.__proto__||Object.getPrototypeOf(i.prototype),"show",this).call(this)}},{key:"hide",value:function(){_get(i.prototype.__proto__||Object.getPrototypeOf(i.prototype),"hide",this).call(this),this.files.length=0,void(this.uploadElems.length=0)!==this.table&&this.table.children(".atala-upload-files-row").remove()}},{key:"addFinishHandler",value:function(e,t,a){this.uploadElems.push({filename:e,statusTextElem:t,cancelUploadBtn:a})}},{key:"markStatusFinished",value:function(t,e){var a=2<arguments.length&&void 0!==arguments[2]&&arguments[2],l=this.uploadElems.filter(function(e){return e.filename===t})[0];null!=l&&(l.cancelUploadBtn.css("display","none"),e?l.statusTextElem.text("Finished"):a?l.statusTextElem.text("Canceled"):l.statusTextElem.text("Error"))}}],[{key:"getFileRowTemplate",value:function(){var e=r.$('<div class="'+u.UploadControlCssClasses.MultipleFilesRow+'">\n<div class="'+u.UploadControlCssClasses.MultipleFilesCell+" "+u.UploadControlCssClasses.MultipleFilesCellName+'"/>\n<div class="'+u.UploadControlCssClasses.MultipleFilesCell+" "+u.UploadControlCssClasses.MultipleFilesCellSize+'"/>\n<div class="'+u.UploadControlCssClasses.MultipleFilesCell+" "+u.UploadControlCssClasses.MultipleFilesCellStatus+'">\n<span class="'+u.UploadControlCssClasses.FileProgress+'">Upload pending</span>\n<button title="Removes file from upload queue" class="atala-ui-button '+u.UploadControlCssClasses.MultipleFilesCellCancelButton+'"/>\n</div>\n</div>');return r.$("."+u.UploadControlCssClasses.MultipleFilesCellCancelButton,e).button({icon:"atala-ui-icon atala-ui-icon-upload-cancel",showLabel:!1}),e}},{key:"rowTemplate",get:function(){return null===this.rowTemplateField&&(this.rowTemplateField=this.getFileRowTemplate()),this.rowTemplateField}}]),i}()).rowTemplateField=null,u.UploadMultilpeFilesControl=e}(Atalasoft||(Atalasoft={})),function(e){var o,t;o=e.Upload||(e.Upload={}),t=function(e){function l(e){_classCallCheck(this,l);var t=_possibleConstructorReturn(this,(l.__proto__||Object.getPrototypeOf(l)).call(this,e));return t.progressCounter=0,t.fileName="",t.uploadProgressSpan=null,t.uploadProgressImage=null,t.processFileFinishedUpload=function(e){t.isFileSuccessEventData(e)?t.uploadProgressSpan.text("Upload finished"):e.errorinfo.canceled?t.uploadProgressSpan.text("Upload canceled"):t.uploadProgressSpan.text("An error occured during upload"),t.uploadProgressImage.css("display","none")},t}return _inherits(l,o.UploadBaseControl),_createClass(l,[{key:"initArea",value:function(e){var t=o.UploadControlCssClasses.AreaSingleFile,a="Uploading...";e.allowDragDrop&&(a="Drop file here");var l=this.initAreaImpl(t,!e.allowDragDrop,a);e.allowDragDrop||(this.uploadProgressSpan=l.children("."+o.UploadControlCssClasses.FileProgress).first(),this.uploadProgressImage=l.children("."+o.UploadControlCssClasses.FileProgressImage).first(),l.addClass(o.UploadControlCssClasses.AreaSingleFileNoDragDrop)),l.appendTo(this.area),this.area.addClass(o.UploadControlCssClasses.AreaNonTable)}},{key:"addFilesToUi",value:function(e){this.allowedDragAndDrop&&this.reinitArea(!0,"Uploading..."),this.uploadRequested=!0,this.fileName=e[0].name,this.addProgressHandler(this.fileName,this.uploadProgressSpan),this.bindEvents(),this.switchButtonEnabledState(o.UploadControlCssClasses.AddButton,!1),this.controller.uploadFile(e[0])}},{key:"show",value:function(){this.reinitNeeded&&this.reinitArea(!1,"Drop file here"),_get(l.prototype.__proto__||Object.getPrototypeOf(l.prototype),"show",this).call(this)}},{key:"hide",value:function(){_get(l.prototype.__proto__||Object.getPrototypeOf(l.prototype),"hide",this).call(this),null!==this.uploadProgressImage&&this.uploadProgressImage.css("display","")}},{key:"reinitArea",value:function(e,t){var a=_get(l.prototype.__proto__||Object.getPrototypeOf(l.prototype),"reinitArea",this).call(this,e,t);e?(this.uploadProgressSpan=a.children("."+o.UploadControlCssClasses.FileProgress).first(),this.uploadProgressImage=a.children("."+o.UploadControlCssClasses.FileProgressImage).first(),a.addClass(o.UploadControlCssClasses.AreaSingleFileNoDragDrop)):(a.removeClass(o.UploadControlCssClasses.AreaSingleFileNoDragDrop),this.uploadProgressSpan=null,this.uploadProgressImage=null)}}]),l}(),o.UploadSingleFileControl=t}(Atalasoft||(Atalasoft={})),function(n){!function(e){var t=function(){function e(){_classCallCheck(this,e),this.mobile=new a,this.features=new o,this.layout=new l,this.Edge&&(this.bv=navigator.userAgent.match(/(?:Edge).[\d\.]*/)),this.bv||(this.bv=navigator.userAgent.match(/(?:MSIE|Firefox|Chrome|Safari|Opera| rv|Edge).[\d\.]*/))}return _createClass(e,[{key:"Explorer",get:function(){return 0<=navigator.userAgent.indexOf("MSIE")||0<=navigator.userAgent.indexOf("Trident")}},{key:"Explorer8",get:function(){return this.Explorer&&8===parseInt(this.Version,10)}},{key:"Firefox",get:function(){return 0<=navigator.userAgent.indexOf("Firefox")||0<=navigator.userAgent.indexOf("Minefield")}},{key:"Safari",get:function(){return 0<=navigator.userAgent.indexOf("Safari")&&navigator.userAgent.indexOf("Chrome")<0&&navigator.userAgent.indexOf("Edge")<0}},{key:"Opera",get:function(){return 0<=navigator.userAgent.indexOf("Opera")}},{key:"Chrome",get:function(){return 0<=navigator.userAgent.indexOf("Safari")&&0<=navigator.userAgent.indexOf("Chrome")&&navigator.userAgent.indexOf("Edge")<0}},{key:"Edge",get:function(){return 0<=navigator.userAgent.indexOf("Safari")&&0<=navigator.userAgent.indexOf("Chrome")&&0<=navigator.userAgent.indexOf("Edge")}
+/**
+                 * @private
+                 */},{key:"Features",get:function(){return this.features}
+/**
+                 * @private
+                 */},{key:"Layout",get:function(){return this.layout}},{key:"Mobile",get:function(){return this.mobile}},{key:"Version",get:function(){return this.bv?this.bv[0].replace(/\D*/,""):null}}]),e}();e.BrowserImpl=t;var a=function(){function e(){_classCallCheck(this,e)}return _createClass(e,[{key:"Any",value:function(){return this.iOS||this.Android||this.IEMobile}},{key:"iOS",get:function(){return!!navigator.userAgent.match(/(iPad|iPhone|iPod)/i)}},{key:"Android",get:function(){return!!navigator.userAgent.match(/(Android)/i)}},{key:"IEMobile",get:function(){return!!navigator.userAgent.match(/(IEMobile)/i)}}]),e}(),l=function(){function e(){_classCallCheck(this,e),this.blv=navigator.userAgent.match(/(?:Gecko|Presto|Trident|WebKit).[\d\.]*/)}return _createClass(e,[{key:"Gecko",get:function(){return!!navigator.userAgent.match(/(Gecko)/i)}},{key:"Presto",get:function(){return!!navigator.userAgent.match(/(Presto)/i)}},{key:"Trident",get:function(){return!!navigator.userAgent.match(/(Trident)/i)}},{key:"Webkit",get:function(){return!!navigator.userAgent.match(/(WebKit)/i)}},{key:"Version",get:function(){return this.blv?this.blv[0].replace(/\D*/,""):null}}]),e}(),o=function(){function e(){_classCallCheck(this,e),this.supportsVml=e.supportsVML()}return _createClass(e,[{key:"SVG",get:function(){return!(!window.SVGAngle&&!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure","1.1"))}},{key:"Touch",get:function(){return!!("ontouchstart"in window)}},{key:"VML",get:function(){return this.supportsVml}},{key:"foreignObject",get:function(){return document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Extensibility","1.1")}},{key:"Compatibility",get:function(){return void 0!==document.documentMode&&7===document.documentMode}},{key:"FlexBox",get:function(){return"flex"in document.documentElement.style||"WebkitFlex"in document.documentElement.style||"msFlex"in document.documentElement.style}}],[{key:"supportsVML",value:function(){var e=void 0;if(void 0===e){var t=n.$("<div/>").appendTo("body"),a=n.$('<v:shape id="vml_flag1" adj="1" />').appendTo(t);a.css("behavior","url(#default#VML)"),e=!a[0]||"object"===_typeof(a[0].adj),t.remove()}return e}}]),e}()}(n.Utils||(n.Utils={}))}(Atalasoft||(Atalasoft={}));
+"use strict";var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t};
+/**
+ * Main Atalasoft Namespace definition(s)
  *  @namespace Atalasoft
- */
-var Atalasoft=jQuery.extend(!0,Atalasoft,{/**
+ */Atalasoft={
+/**
+     * @private
+     */
+$:Atalasoft.$,
+/**
      * @namespace Atalasoft.Annotations
      */
-Annotations:{},/**
+Annotations:Atalasoft.Annotations||{},
+/**
      * Contains Atalasoft imaging controls.
      * @namespace Atalasoft.Controls
      */
-Controls:{},/**
+Controls:Atalasoft.Controls||{},
+/**
      * @namespace Atalasoft.Document
      * @private
      */
-Document:{},/**
+Document:Atalasoft.Document||{},
+/**
      * @namespace Atalasoft.Forms
      * @private
      */
-Forms:{},/**
+Forms:Atalasoft.Forms||{},
+/**
      * @namespace Atalasoft.Text
      * @private
      */
-Text:{},/**
+Text:Atalasoft.Text||{},
+/**
      * @namespace Atalasoft.Utils
      */
-Utils:{}});!function(){Atalasoft.Controls.Version=[11,0,0,517];var t={instanceCounter:0};/**
-         * Control that views, modifies, and saves documents, annotations and forms.
-         * @param {WebDocumentViewerConfig} [settings] Object of key value pairs representing initial settings
-         * @param {OpenUrlCallback} [openCallback] callback that is called when document load complete(if {@link WebDocumentViewerConfig.documenturl| documenturl} is specified).
-         * @class
-         * @returns {WebDocumentViewer} A new control with the given settings.
-         */
-Atalasoft.Controls.WebDocumentViewer=function(e,o){/**
-         * @member {Atalasoft.Controls.WebDocumentViewer~AnnotationController} annotations - Annotations API. Will be available if {@link WebDocumentViewerConfig.allowannotations| config.allowannotations} is set to `true`. Otherwise will be `undefined`
-         * @instance
-         * @memberOf Atalasoft.Controls.WebDocumentViewer
+Utils:Atalasoft.Utils||{},
+/**
+     * @namespace Atalasoft.Upload
+     * @private
+     */
+Upload:Atalasoft.Upload||{}},Atalasoft.Controls.Version=[11,1,0,321];var _Statics={instanceCounter:0};
+/**
+  * Control that views, modifies, and saves documents, annotations and forms.
+  * @param {WebDocumentViewerConfig} [settings] Object of key value pairs representing initial settings
+  * @param {OpenUrlCallback} [openCallback] callback that is called when document load complete(if {@link WebDocumentViewerConfig.documenturl| documenturl} is specified).
+  * @class
+  * @returns {WebDocumentViewer} A new control with the given settings.
+  */Atalasoft.Controls.WebDocumentViewer=function(t,n){if(!Atalasoft.Utils.checkJQueryDepependency())return null;var e,V=Atalasoft.$,c={typeOf:t.type||"Atalasoft.Controls.WebDocumentViewer"},H="Atalasoft.Controls.WebDocumentThumbnailer"===c.typeOf,s="",M=150,d=500,w="atala-ui-icon",o=document.createElement("div"),i=V({}),a=V({}),l=new Atalasoft.Controls.DocumentStateManager({get:function(){return c},isInitialized:je,switchDocument:Ae,closeDocument:Ce}),b={
+/** Main outer object that holds the scrollbars */
+main:null,
+/** Toolbar wrapper object */
+toolbar:null,
+/** Inner object that controls scrolling */
+scroller:null,
+/** Inner object that defines the viewable area */
+viewport:null,
+/** Inner content container object */
+content:null,
+/** Inner horizontal scroll bar object */
+scrollH:null,
+/** Inner vertical scroll bar object */
+scrollV:null,
+/** Edge objects of viewable area */
+edges:[],
+/** Image objects already requested */
+loadedImgs:[],
+/** Page wrapper objects recycle pool */
+pageDivs:[],
+/** Span tag containing the page number */
+pageLabel:null,
+/** Status div */
+status:null,
+/** Upload control*/
+uploadCtrl:null},I={annotations:null,document:null,forms:null,mouseTool:null,memory:null,text:null,upload:null},u=Atalasoft.Utils.Fitting,k=Atalasoft.Utils.ScrollDirection,r=Atalasoft.Utils.MouseToolType,E={size:{width:0,height:0},sizes:[{width:0,height:0}],smallest:{width:0,height:0},count:0,number:-1,numberoutof:-1,buffer:3,dpi:96,vector:!1,caption:"",customData:null},S={prpr:0,batchoperation:0,loading:!1,zooming:!1,initialized:!1,newpagedivsize:null,newpagedivfullzoom:1,scrollPos:{x:0,y:0,t:0},scrollBuffer:null,scrollTimeout:null,activepage:null,nextImageCacheIndex:0},U=Atalasoft.Controls.WebDocumentViewer.domclasses,h=Atalasoft.Controls.WebDocumentViewer.domattributes,g={
+/**
+         * @typedef {Object} Request
+         * @property {string} method - The request HTTP method.
+         * @property {Object} data - The request parameters that will be send to server.
+         * @property {string} type - The request type identifier.
+         * Supported request types are:
+         *
+         * |Identifier| Description|
+         * | ----- | ------- |
+         * |`docinfo` | Document info request. Maps to `DocumentInfoRequested` server event.|
+         * |`docpage` | Document page request. Could be issued multiple times - it's expected that page will be served from browser cache for the same query. Maps to `ImageRequested` server event.|
+         * |`docsave` | Document save request. Maps to `DocumentSave` server event.|
+         * |`annodata` | Annotation data request. Maps to `AnnotationDataRequested` server event.|
+         * |`formdata` | Forms data request. Maps to `PdfFormRequested` server event.|
+         * |`pagetextdata` | Maps to `PageTextRequested` server event.|
+         * |`fileupload`| User file upload. Maps to `FileUpload` and `FileUploaded` server events.|
          */
 /**
-         * @member {Atalasoft.Controls.WebDocumentViewer~DocumentController} document - Document operations API.
-         * @instance
-         * @memberOf Atalasoft.Controls.WebDocumentViewer
+         * @typedef {Object} DocumentInfo
+         * @property {number} count - The document pages count.
+         * @property {number} dpi - The document pages dpi.
+         * @property {Object} size - The document pages size.
+         * @property {number} size.height - The document pages height.
+         * @property {number} size.width - The document pages width.
+         * @property {boolean} vector - Flag indicating whether or not document is vector graphic.
          */
 /**
-         * @member {Atalasoft.Controls.WebDocumentViewer~TextController} text - Text selection API.
-         * @instance
-         * @memberOf Atalasoft.Controls.WebDocumentViewer
-         */
-function n(){return{get:function(){return Pn},isInitialized:cn,switchDocument:So,closeDocument:Bo}}function i(){cn()||(Wn=a(),Rn=r()),Atalasoft.Utils._scriptLoader=Atalasoft.Utils.__loadDependencies(jn.scripturl,jn.allowannotations,w);var t={_config:jn,_id:An,_dom:Sn,_document:Sn.loadedImgs,_pages:Sn.pageDivs,_state:Rn,_internalEvents:kn,_controllers:Bn,createDOM:b,createDiv:y,createDialog:C,createDropDownButton:H,createDropDownMenu:M,createMenu:V,drawAnnotation:Co,redrawVisiblePages:Xo,adjustVisiblePages:bo,startDomManipulation:lo,endDomManipulation:so,redrawPageFromIndex:Ko,makeHandlerRequest:en,getPageScale:Po,getPageSize:ce,getSourcePageSize:se,getPageRotation:To,getViewerTransform:Ao,isPageInView:to,findPageFromIndex:eo,showPagePoint:oo};Bn.document=new Atalasoft.Document.ManipulationController(Pn,t,An),Pn.document=Bn.document.__exposedApi,jn.allowannotations?(Bn.annotations=new Atalasoft.Annotations.AnnotationController(Pn,t,Tn),Pn.annotations=Bn.annotations.__exposedApi):(Pn.deselectAll=Io,Pn.createAnnotationOnPage=Io,Pn.getAnnotationsFromPage=Io,Pn.deleteAnnotationOnPageAtIndex=Io,Pn.setAnnotationDefaults=Io,Pn.setImages=Io,Pn.setStamps=Io),jn.allowforms&&!Bn.forms&&(Bn.forms=new Atalasoft.Forms.FormController(Pn,t),Pn.forms=Bn.forms.__exposedApi),jn.allowtext&&!Atalasoft.Utils.Browser.Explorer8&&(Bn.text=new Atalasoft.Text.TextController(Pn,t,jn.mousetool?jn.mousetool.text:{}),Pn.text=Bn.text.__exposedApi);var e="undefined"==typeof Dn.easing||"undefined"==typeof Dn.ui||jn.allowannotations&&"undefined"==typeof Raphael;e?Atalasoft.Utils._scriptLoader&&Atalasoft.Utils._scriptLoader.bind({scriptsloaded:l}):l()}function a(){return{size:{width:0,height:0},sizes:[{width:0,height:0}],smallest:{width:0,height:0},count:0,number:-1,numberoutof:-1,buffer:3,dpi:96,vector:!1,caption:""}}function r(){return{prpr:0,batchoperation:0,loading:!1,zooming:!1,initialized:!1,newpagedivsize:null,newpagedivfullzoom:1,scrollPos:{x:0,y:0,t:0},scrollBuffer:null,scrollTimeout:null,activepage:null,nextImageCacheIndex:0}}function l(){Rn.initialized===!1&&(Rn.initialized=!0,xn({throwerror:x,pagedivsresized:h,documentchanged:Wo,pagesizechanged:g}),jn.parent?(jn.parent instanceof jQuery||(jn.parent=Dn(jn.parent)),jn.parent.length||w("InitError","Parent element not found.")):w("InitError","No parent element given."),Sn.toolbar=D(jn.toolbarparent||jn.parent),Sn.toolbar.addClass(On.atala_toolbar),Sn.main=y(jn.parent),Sn.main.addClass(On.atala_main_container),Sn.scroller=y(Sn.main),Sn.scroller.addClass(On.atala_scroller),Sn.main.bind({selectstart:m}),Sn.toolbar.attr("id",An+"_toolbar"),Sn.main.attr("id",An+"_main"),Sn.scroller.attr("id",An+"_scroller"),Sn.main.css({height:"100%",width:"100%",position:"relative"}),Sn.scroller.css({height:"100%",width:"100%",position:"relative"}),Sn.viewport=y(Sn.scroller,An+"_vp"),Sn.viewport.css({overflow:"hidden",fontSize:0,"touch-action":"none"}),Sn.viewport.addClass(On.atala_viewport),Sn.viewport.attr("tabindex",-1),Sn.edges[0]=F(Sn.viewport,An+"_e0"),Sn.edges[0].addClass(On.atala_dom_edge_first),Sn.content=y(Sn.viewport,An+"_ct"),Sn.content.addClass(On.atala_content),Sn.content.css({"-ms-touch-action":"none",fontSize:0,overflow:"hidden"}),jn.direction===Ln.Horizontal&&Sn.content.css({display:"inline-block"}),Sn.edges[1]=F(Sn.viewport,An+"_e1"),Sn.edges[1].addClass(On.atala_dom_edge_last),Atalasoft.Utils.Browser.Features.Compatibility&&w("InitError","Compatibility Mode is not supported."),Atalasoft.Utils.Browser.Mobile.Any()?Sn.scroller.css({overflow:"hidden"}):jn.showscrollbars?(Sn.scroller.css({overflow:"auto"}),Sn.scrollH=O(Sn.main,Ln.Horizontal),Sn.scrollH.attr("id",An+"_sH"),Sn.scrollH.addClass(On.atala_scroll_horizontal),Sn.scrollV=O(Sn.main,Ln.Vertical),Sn.scrollV.attr("id",An+"_sV"),Sn.scrollV.addClass(On.atala_scroll_vertical)):Sn.scroller.css({overflow:"hidden"}),Bn.mouseTool=new Atalasoft.Controls.ToolController(Pn,{_internalEvents:kn,_controllers:Bn,zoomStart:co,zoom:uo,zoomEnd:ho,getActivePage:ke,raiseDrawLayer:ko,resetDrawLayer:Eo,getViewerTransform:Ao},Sn.viewport,Sn.scroller,Dn.extend({allowflick:jn.allowflick},jn.mousetool)),Bn.memory=new Atalasoft.Document.MemoryTracker({highWaterMark:jn.memorythreshold}),Bn.memory.bind({exceededhighwatermark:d}),Bn.annotations&&Bn.annotations.setViewPort(Sn.viewport),yn("initialized"),c(),Dn(document).ready(p))}function s(){var e=jn.parent.attr("id")+"_wdv";for(++t.instanceCounter;document.getElementById(e+t.instanceCounter);)++t.instanceCounter;An=e+t.instanceCounter}function c(){Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8?Sn.viewport.css({"float":"left"}):(jn.direction===Ln.Horizontal&&Sn.viewport.css({"white-space":"nowrap"}),Sn.viewport.css({display:"table-cell"})),N(Sn.scroller),Sn.scrollH&&Sn.edges[1].height(Sn.scrollH.scrollbarHeight()),Bn.mouseTool.setTool(Fn.Pan,Fn.None),(jn.documenturl||jn.annotationsurl||jn.formurl)&&mn(jn.documenturl,jn.annotationsurl,jn.formurl,o)}/**
-         * Removes all DOM elements, internal references, and empties memory intensive objects.
-         * The WebDocumentViewer will no longer function after a call to this method.
-         * @instance
-         * @memberOf Atalasoft.Controls.WebDocumentViewer
-         * @function dispose
-         */
-function u(){if(!Tn&&En&&En.closeDocument(),ln(),Sn.main&&Sn.main.remove(),Sn.toolbar&&(Sn.toolbar.remove(),Sn.toolbar.annoToolbar&&Sn.toolbar.annoToolbar.remove()),Sn.search&&Sn.search.dispose(),Sn.main=null,Sn.toolbar=null,Sn.scroller=null,Sn.viewport=null,Sn.content=null,Sn.scrollH=null,Sn.scrollV=null,Sn.loadedImgs.length=0,Sn.pageDivs.length=0,Sn.pageLabel=null,Sn.status=null,Sn.search=null,Sn.edges){for(var t=0;t<Sn.edges.length;t++)Sn.edges[t]=null;Sn.edges=[]}for(var e in Bn)Bn.hasOwnProperty(e)&&null!==Bn[e]&&(Bn[e].dispose(),Bn[e]=null);Wn=a(),Rn=r()}function d(){var t=Bn.memory.deallocateOldestEntry();Z(t[0]),t._cacheIndex>=0&&(Sn.loadedImgs[t._cacheIndex]=null,t._cacheIndex=-1),t.remove(),t.length=0,t=null}function h(t){Rn.newpagedivsize={height:t.height,width:t.width},Rn.newpagedivfullzoom=t.fullzoom,jn.minwidth=t.minwidth,jn.zoom=t.fullzoom,Wo()}function g(t){var e=!1;(Wn.smallest.width<=0||t.width<Wn.smallest.width)&&(Wn.smallest.width=t.width,e=!0),(Wn.smallest.height<=0||t.height<Wn.smallest.height)&&(Wn.smallest.height=t.height,e=!0),Tn||(Pe(t.dx,t.dy),e&&j(X())>Sn.pageDivs.length&&Wo(t))}function f(t,e,o,n){var i=e.getPageSize(t.index,An);if(!i){var a=e.getPageFitMultiplier(t.index,An),r=a,l={width:t.width,height:t.height};1===r&&jn.forcepagefit&&(l.width!==o.width||l.height!==o.height)&&l.width>0&&l.height>0&&(r=l.width/o.width>l.height/o.height?o.width/l.width:o.height/l.height,e.setPageFitMultiplier(t.index,r,An)),e.setPageSize(t.index,Dn.extend({},l),An),n&&(l.width*=jn.zoom*r,l.height*=jn.zoom*r,i=Dn.extend({},Wn.size),i.width*=jn.zoom*a,i.height*=jn.zoom*a,t.dx=l.width-i.width,t.dy=l.height-i.height,g(t))}}function p(){Atalasoft.Utils.Browser.Mobile.Any()?Dn(window).on({orientationchange:ao}):Dn(window).on({resize:ao}),Sn.scroller.scroll(Ve),W(Wn.buffer)}function m(t){var e=t.target||t.srcElement;return Atalasoft.Utils.Browser.Explorer8?Atalasoft.Utils.__rf():"TEXTAREA"!==e.nodeName&&"INPUT"!==e.nodeName&&"text"!==e.type?Atalasoft.Utils.__rf():e.attributes.selectable&&"false"===e.attributes.selectable.value?Atalasoft.Utils.__rf():void 0}function _(t){return function(e){e.preventDefault(),yn(t,arguments)}}function v(t,e){return function(o){try{o.currentTarget=e&&e.length>0?e[0]:o.currentTarget,t&&t(o)}catch(n){me(n.message)}}}function w(t,e){if(jn.showerrors)throw"undefined"==typeof e?t:t+": "+e;me(t+": "+e),yn({type:"error",name:t,message:e})}function x(t){w(t.name,t.msg)}function b(t,e,o,n){var i=Dn("<"+t+"></"+t+">");return e&&e.append&&i.appendTo(e),o&&i.attr("id",o),n&&i.html(n),i}function y(t,e,o){return b("div",t,e,o)}function z(t){var e=Dn('<div style="width:100%; height:100%; position:absolute; left: 0px; top: 0px; background: #F00; opacity:0.0;"></div>');if(Atalasoft.Utils.Browser.Explorer)if(parseInt(Atalasoft.Utils.Browser.Version,10)<=8)e.css({filter:"alpha(opacity=0)"});else if(10===parseInt(Atalasoft.Utils.Browser.Version,10)){var o=!1;e.reflow=function(){if(o)e.empty();else{var t=Dn("<hr/>");e.append(t)}o=!o}}return e.toFront=function(){e.css({"z-index":"10"}),e.reflow&&e.reflow()},e.reset=function(){e.css({"z-index":""}),e.reflow&&e.reflow()},t&&t.prepend(e),e}function D(t){var e=P(t);return jn.allowannotations&&(e.annoToolbar=T(t),e.annoToolbar.addClass(On.atala_annotation_toolbar)),jn.showstatus&&(Sn.status=Dn('<div id="'+An+'_status" style="display:inline"></div>'),Sn.status.addClass(On.atala_statusbar),e.append("Status:"),e.append(Sn.status)),jn.allowtext&&jn.mousetool.text.allowsearch&&(Sn.search=new S({parent:e})),e}function P(t){var e={id:An+"_toolbar",parent:t,children:[{type:"button",id:"Button_PagePrev",cls:On.atala_tool_button_page_prev,icon:"page-prev",tooltip:"Previous Page",text:null,onclick:function(){gn()}},{type:"pagelabel",id:"Label_PageNumber",cls:On.atala_page_label},{type:"button",id:"Button_PageNext",cls:On.atala_tool_button_page_next,icon:"page-next",tooltip:"Next Page",text:null,onclick:function(){hn()}},{type:"button",id:"Button_ZoomOut",cls:On.atala_tool_button_zoom_out,icon:"zoom-out",tooltip:"Zoom Out",text:"",onclick:function(){pn()}},{type:"button",id:"Button_ZoomIn",cls:On.atala_tool_button_zoom_in,icon:"zoom-in",tooltip:"Zoom In",text:"",onclick:function(){fn()}},{type:"button",id:"Button_FitNone",cls:On.atala_tool_button_fit_none,icon:"zoom-full",tooltip:"Full Size",text:"",onclick:function(){go(1)}},{type:"button",id:"Button_FitBest",cls:On.atala_tool_button_fit_best,icon:"fit-best",tooltip:"Best Fit",text:"",onclick:function(){yo(Un.Best)}},{type:"button",id:"Button_FitWidth",cls:On.atala_tool_button_fit_width,icon:"fit-width",tooltip:"Fit To Width",text:"",onclick:function(){yo(Un.Width)}}]};return jn.showselecttools&&e.children.splice(5,0,{type:"button",id:"Button_ZoomArea",cls:On.atala_tool_button_zoom_area,icon:"zoom-area",tooltip:"Zoom Area",text:"",onclick:B}),jn.allowtext&&(e.children.splice(3,0,{type:"button",id:"Button_Text",cls:On.atala_tool_button_text_tool,icon:"text-tool",tooltip:"Text Selection",text:"",onclick:function(){Bn.mouseTool.setTool(Fn.Text)}}),e.children.splice(3,0,{type:"button",id:"Button_Text",cls:On.atala_tool_button_pan_tool,icon:"pan-tool",tooltip:"Pan",text:"",onclick:function(){Bn.mouseTool.setTool(Fn.Pan)}})),jn.showrotatetools&&(e.children.push({type:"button",id:"Button_RotateLeft",cls:On.atala_tool_button_rotate_left,icon:"rotate-left",tooltip:"Rotate Left",text:"",onclick:U(270)}),e.children.push({type:"button",id:"Button_RotateRight",cls:On.atala_tool_button_rotate_right,icon:"rotate-right",tooltip:"Rotate Right",text:"",onclick:U(90)})),jn.savepath.length>0&&e.children.unshift({type:"button",id:"Button_Save",cls:On.atala_tool_button_save,icon:"save",tooltip:"Save Changes",text:null,onclick:function(){_n()}}),A(e)}function T(t){var e={id:An+"_toolbar",parent:t,children:[{type:"button",id:"Button_Ellipse",cls:On.atala_tool_button_ellipse_anno,icon:"ellipse",tooltip:"Draw Ellipse",text:"",onclick:Co},{type:"button",id:"Button_Highlight",cls:On.atala_tool_button_highlight_anno,icon:"highlight",tooltip:"Draw Highlight",text:"",onclick:Co},{type:"button",id:"Button_Line",cls:On.atala_tool_button_line_anno,icon:"line",tooltip:"Draw Line",text:"",onclick:Co},{type:"button",id:"Button_Lines",cls:On.atala_tool_button_lines_anno,icon:"lines",tooltip:"Draw Poly Lines",text:"",onclick:Co},{type:"button",id:"Button_Freehand",cls:On.atala_tool_button_freehand_anno,icon:"freehand",tooltip:"Draw Freehand",text:"",onclick:Co},{type:"button",id:"Button_Rectangle",cls:On.atala_tool_button_rect_anno,icon:"rectangle",tooltip:"Draw Rectangle",text:"",onclick:Co},{type:"button",id:"Button_Text",cls:On.atala_tool_button_text_anno,icon:"text",tooltip:"Draw Text",text:"",onclick:Co}]};return A(e)}function A(t){var e=y(t.parent),o=An+"_toolbar";e.buttons=[];for(var n=0;t.children&&n<t.children.length;n++){var i=null;switch(t.children[n].type){case"button":if(!Atalasoft.Utils.Browser.Features.Touch||"lines"!==t.children[n].icon){t.children[n].id=o+"_"+t.children[n].id;var a=E(t.children[n],e);a.addClass(On.atala_toolbar_button),i=a,e.buttons.push(a)}break;case"pagelabel":Sn.pageLabel=b("span",e,o+"_"+t.children[n].id),i=Sn.pageLabel}i&&t.children[n].cls&&i.addClass(t.children[n].cls)}return e}function V(t){var e=Dn("<ul/>");e.css({fontSize:"medium"}),e.addClass(On.atala_context_menu);for(var o in t)if(t.hasOwnProperty(o)){var n="1.12",i=Atalasoft.Utils.flattenVersionSting(Dn.ui.version)>=Atalasoft.Utils.flattenVersionSting(n)?"div":"a",a=Dn("<li><"+i+' href="#"> '+o+" </"+i+"></li>");Atalasoft.Utils.Browser.Features.Touch&&!Atalasoft.Utils.Browser.Mobile.iOS&&a.bind({touchend:t[o]}),a.click(t[o]),a.appendTo(e)}return e.menu(),e}function C(t,e,o){var n=Dn('<div title="'+e+'" />');return o&&n.append(o),n.dialog(),n}function H(t){var e=b("span",Sn.toolbar.annoToolbar);return E(t,e),k(e,t.id+"_Drop","ui-icon-triangle-1-s","Click To Choose",null,function(){var t=Dn(this).next();if(t.is(":visible"))return t.hide(),!1;var e=t.prev().prev().parent();return t.menu().show().css({position:"absolute",top:0,left:0,"min-width":e.width()+"px","z-index":11}).position({my:"left top",at:"left bottom",of:e}),!1}),e.buttonset(),e}function M(t,e,o){for(var n=Dn(t.children().first()),i={},a=0;a<o.length;a++)i[o[a].name]=I(n,e,o[a]);n.menu=V(i),t.append(n.menu),n.menu.hide()}function I(t,e,o){var n="menuselect"+e.icon+o.name,i=function(){return t.button("option","label","Draw "+o.name),t.data("_annoConfig",o),t.click(e.onclick),t.menu.hide(),t.trigger("click"),!1};return xn(n,v(i,t)),i}function k(t,e,o,n,i,a){var r=Dn('<button id="'+e+'" title="'+n+'">'+(i||n)+"</button>");return a&&r.click(a),r.button({icons:{primary:o},text:null!=i&&jn.showbuttontext}),r.addClass("atala-ui-button"),t&&r.appendTo(t),r}function E(t,e){var o="menuclick"+t.icon,n=k(e,t.id,Hn+" "+Hn+"-"+t.icon,t.tooltip,t.text,_(o));return n.data("_config",t),xn(o,v(t.onclick,n)),n}function S(t){function e(){p=y().addClass(On.atala_search_container),m=Dn('<input type="text" placeholder="Search..." />').addClass(On.atala_search_input).addClass("ui-widget"),m.bind({keydown:i,"input propertychange":n});var t=b("span",p).css({width:"100%"});t.append(m);var e=b("span",p);_=k(e,null,Hn+" "+Hn+"-search-next","Next",null,d(a)).addClass(On.atala_search_next),v=k(e,null,Hn+" "+Hn+"-search-prev","Previous",null,d(r)).addClass(On.atala_search_prev),p.on("mousemove","."+w.clearable,g).on("touchstart click","."+w.onclear,f),x.append(p),x.append(Dn('<div style="clear:both;"></div>'))}function o(){m.unbind({keypress:i,"input propertychange":n}),p.off("mousemove","."+w.clearable,g).off("touchstart click","."+w.onclear,f),z&&z.dispose(),p.remove()}function n(){var t=m.val();return t?m.addClass(w.clearable):m.removeClass(w.clearable),t&&z&&z.isValid()&&t===z.getQuery()?!0:(clearTimeout(D),z=null,t&&t.length>=3?(u(!0),D=setTimeout(function(){z=Bn.text.search(t,vn(),s),c(!0)},jn.mousetool.text.searchdelay),!1):(l(),void 0))}function i(t){var e=m.val();return 13===t.keyCode&&z&&e&&z.isValid()&&z.getQuery()===e?(t.shiftKey?r():a(),!1):13!==t.keyCode||z&&z.isValid()?27===t.keyCode?(l(),f(),!1):(Atalasoft.Utils.Browser.Explorer&&Atalasoft.Utils.Browser.Version<=9&&(8===t.keyCode||46===t.keyCode)&&(clearTimeout(D),D=setTimeout(function(){n()},jn.mousetool.text.searchdelay)),void 0):(n(),!1)}function a(){z&&(c(!0),z.next(s))}function r(){z&&(c(!0),z.prev(s))}function l(){z=null,Bn.text.search(""),c(!1),u(!0)}function s(t,e){t.isValid()&&(c(!1),t.wrap=jn.mousetool.text.wrapsearch,e||u(e))}function c(t){h(w.loading,t)}function u(t){h(w.inputEmpty,!t)}function d(t){return function(e){e.preventDefault(),t&&t()}}function h(t,e){e?m.addClass(t):m.removeClass(t)}function g(t){h(w.onclear,this.offsetWidth-18<t.clientX-this.getBoundingClientRect().left)}function f(t){t&&t.preventDefault(),m.removeClass(w.clearable).removeClass(w.onclear).val("").change(),n()}var p,m,_,v,w={clearable:"atala_search_input_clearable",onclear:"atala_search_input_clear_hover",inputEmpty:"atala_search_input_empty",loading:"atala_search_input_loading"},x=t.parent||Sn.toolbar,z=null,D=null;e(),this.dispose=o}function B(){jn.allowannotations&&Pn.annotations.cancelDraw(),Bn.mouseTool.setTool(Fn.ZoomArea)}function U(t){return function(){var e=L(Wn),o=e[0],n=[];e.forEach(function(e){return n.push(Bn.document.getPageRotation(e)+t)}),Bn.document.rotatePages(e,n,function(){var t=Po(o),e=ce(o),n=jn.direction===Ln.Vertical?e.height*t:0;no(jn.pageselectlocation,Atalasoft.Utils.PageSelection.Center)||no(jn.pageselectlocation,Atalasoft.Utils.PageSelection.MiddleLeft)?n/=2:no(jn.pageselectlocation,Atalasoft.Utils.PageSelection.TopLeft)&&(n=0);var i={x:jn.direction===Ln.Vertical?0:n,y:jn.direction===Ln.Vertical?n:0};oo(o,i,jn.pageselectlocation,!0)})}}function L(t){return[t.number-1]}function F(t,e){var o=Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8,n=y(t,e);return jn.direction===Ln.Vertical?(n.height(1),n.css({display:"block"})):jn.direction===Ln.Horizontal&&(n.width(1),n.css({display:"inline-block",overflow:"hidden"})),n._zoom=1,jn.backcolor&&n.css({backgroundColor:jn.backcolor}),o&&n.html("&nbsp;"),n}function W(t){function e(t){return function(){Fe(t)}}if("undefined"==typeof t){var o=j(Tn&&Rn.newpagedivsize&&jn.zoom>0&&isFinite(jn.zoom)?jn.zoom:X());Wn.buffer<o&&(Wn.buffer=o),Wn.buffer=Math.min(Wn.buffer,Bn.document.getPageCount()),t=Wn.buffer}if(Sn.pageDivs.length<t)for(var n=Sn.pageDivs.length;t>n;n++)Sn.pageDivs[n]=y(),Sn.pageDivs[n].addClass(On.atala_page_div),jn.showselecttools&&(Sn.pageDivs[n]._rubberband=new Atalasoft.Controls.RubberBandTool(Pn,{},Sn.pageDivs[n],{getViewportSize:de,getMaxZoom:K,getPageOffsets:ne,raiseDrawLayer:ko,resetDrawLayer:Eo})),Sn.pageDivs[n].bind({touchstart:e(Sn.pageDivs[n]),mousedown:e(Sn.pageDivs[n])}),Bn.annotations&&Bn.annotations.addDrawingSurface(Sn.pageDivs[n]),(jn.showselecttools||jn.allowannotations||jn.allowforms||jn.allowtext)&&(Sn.pageDivs[n]._draw=z(Sn.pageDivs[n])),Bn.forms&&!Tn&&Bn.forms.addFormLayer(Sn.pageDivs[n]),Bn.text&&!Tn&&Bn.text.addTextLayer(Sn.pageDivs[n]);else if(Sn.pageDivs.length>t)for(;Sn.pageDivs.length>t&&0!==Sn.pageDivs.length;){var i=Sn.pageDivs.pop();i._rubberband&&i._rubberband.dispose(),Bn.annotations&&Bn.annotations.removeDrawingSurface(i),Bn.forms&&!Tn&&Bn.forms.removeFormLayer(i),Bn.text&&!Tn&&Bn.text.removeTextLayer(i),i&&Ne(i),i=null}}function R(t,e,o,n){function i(){return L._page?L._page._index:Bn.document.getPageIndexByImageIndex(L._index)}function a(){return L._domEl}function r(t){return Bn.document.getPageFitMultiplier("undefined"!=typeof t?t:i())}function l(t,e){return t="undefined"==typeof t?jn.zoom:t,t*r(e)}function s(t){return Bn.document.setPageFitMultiplier(i(),t)}function c(){var t=ce(i())||Wn.size;return{height:t.height,width:t.width}}/**
-            * Returns physical size of the image without client transformations applied(like view rotation)
-            */
-function u(){var t=c();return 90===L._viewrotation||270===L._viewrotation?B(t):t}function d(t,e){return e=e||c(),{height:Math.round(e.height*l(t)),width:Math.round(e.width*l(t))}}function h(){L.bind(O);var t=jn.pageborderwidth,e={bottom:0,top:0,right:0,left:0};L._loaded=!1,L._reqzoom=-1,(jn.direction===Ln.Vertical||jn.tabular)&&(e.bottom=jn.pagespacing),(jn.direction===Ln.Horizontal||jn.tabular)&&(e.right=jn.pagespacing);var o=a();jn.showpageborder&&o.css({"border-bottom":t+"px solid black","border-right":t+"px solid black","border-top":t+"px solid silver","border-left":t+"px solid silver","margin-bottom":e.bottom+"px","margin-right":e.right+"px"}),o.css({display:"inline-block"}),o.addClass(On.atala_page_loading),g()}function g(t){var o=i(),n=Wn.vector&&(!e||!e.uri),a=n?l():Math.min(l(),1),r=Bn.document.getPageRotation(o);if(t||a!==L._zoom||L._rotation!==r){var s=Dn.extend({atala_docurl:e?e.uri:L.documenturl,atala_doczoom:a,atala_thumbpadding:!1},R);r&&(s.atala_angle=r),jn.jpeg&&(s.atala_jpeg=!0);var c={type:"docpage",serverurl:jn.serverurl,query:"?ataladocpage="+(null===e?L._index:void 0!==e.index?e.index:e),method:"GET",data:s,cancel:!1,info:L};L._reqzoom=a,L._reqangle=r,en(c,f,f)}}function f(){L._loaded||L._domEl.removeClass(On.atala_page_loading),L._loaded=!0,L._zoom=L._reqzoom,L._rotation=L._reqangle;var t=i();if(t>=0){if(L._rotation!==Bn.document.getPageRotation(t))return g(),void 0;k(),L.parent().length>0?_():F&&L._page&&L._page.nullinserted&&(je(L._page,L,t,!0),_()),E(L._viewrotation);var e=Wn.vector?l():Math.min(l(),1);b()&&L._zoom<e*W&&!Q(L._zoom,e)&&x(!1)}C()}function p(){L._loaded&&_()}function m(t){t&&(t.removeAttr("width height"),t.css({width:"auto",height:"auto"}))}function _(){m(L);var t=L.prop("naturalWidth")||0,e=L.prop("naturalHeight")||0,o=t||L.width(),n=e||L.height(),r=c(),s=l(),h=!1;if(0!==o&&0!==n){L._size.width=Math.round(o/L._zoom),L._size.height=Math.round(n/L._zoom),(90===L._viewrotation||270===L._viewrotation)&&(L._size=B(L._size)),(L._size.width!==Wn.size.width||L._size.height!==Wn.size.height)&&(Q(L._size.width,r.width)&&Q(L._size.height,r.height)||(h=!0,Bn.document.setPageSize(i(),L._size))),jn.forcepagefit?A():(L._zoom!==jn.zoom||h||0!==L._viewrotation)&&P();var g=d();h&&L.trigger({type:"pagesizechanged",image:L,index:i(),width:L._size.width,height:L._size.height,dx:Math.round(g.width-r.width*s),dy:Math.round(g.height-r.height*s)}),L.trigger({type:"pageresize",image:L,index:i(),width:g.width,height:g.height})}else if(F){var f=u(),p=V(f);return f.width*=p,f.height*=p,a().css(f),L.trigger({type:"pageresize",image:L,index:i(),width:f.width,height:f.height}),void 0}}function v(){L.unbind(O),L._page=null,L=null}function x(t,e){b()&&!L._size.isEmpty()?("function"==typeof e&&U.push(e),L._prevzoom=L._reqzoom,t&&!Rn.loading?L.animate({height:Math.round(L._size.height*l()),width:Math.round(L._size.width*l())},{duration:Vn,easing:"easeOutQuad",complete:D,queue:!1}):(P(),D())):"function"==typeof e&&e.call(this,L)}function b(){if(!L._loaded)return!1;var t=!Wn.vector&&1===L._reqzoom&&1===L._prevzoom&&l()>1,e=Q(L._reqzoom,l())||t;if(!e){var o=Math.abs(L._reqzoom*L._size.width-l()*L._size.width),n=Math.abs(L._reqzoom*L._size.height-l()*L._size.height);1>o&&1>n&&(e=!0)}return!e||z()}function z(){return!Q(L._scaledzoom,l())}function D(){L.trigger({type:"pagezoom",index:i(),height:Math.round(L._size.height*l()),width:Math.round(L._size.width*l()),prevzoom:L._prevzoom,zoom:l()}),0===Rn.prpr?g():C()}function P(){var t=.01,e=d(void 0,u()),o=d(),n=L.prop("naturalWidth")||0,a=L.prop("naturalHeight")||0,r=n&&Math.abs(n-e.width)/e.width<t,s=a&&Math.abs(a-e.height)/e.height<t;r&&s||(L.height(e.height),L.width(e.width)),L._domEl.width(o.width),L._domEl.height(o.height),L._scaledzoom=l(),E(L._viewrotation),io(i(),o.width,o.height)}function T(){C();var t=i();w("ImageError","Image at frameIndex "+t+" failed to load.")}function A(){var t=V();s(t/jn.zoom),P()}function V(t){var e=1;t=t||L._size;var o={width:jn.forcepagesize.width*(Tn?1:jn.zoom),height:jn.forcepagesize.height*(Tn?1:jn.zoom)};return(o.width<1||o.height<1)&&(o.width=Wn.size.width*jn.zoom,o.height=Wn.size.height*jn.zoom),e=t.width/o.width>t.height/o.height?o.width/t.width:o.height/t.height}function C(){U.length>0&&G(U,L)}function H(){var t=Bn.document.getPageRotation(i());return 0===L._viewrotation&&t!==L._rotation||0!==L._viewrotation}function M(){var t=Bn.document.getPageRotation(i());return 0===L._viewrotation&&t!==L._rotation||0!==L._viewrotation&&(L._viewrotation+L._rotation)%360!==t}function I(t){if("function"==typeof t&&U.push(t),H()){var e=Bn.document.getPageRotation(i());if(M()&&L&&L._loaded&&L._page&&(e=(360+e-L._rotation)%360,E(e),_()),0===Rn.prpr&&L._loaded)return g(),void 0}C()}function k(){L._viewrotation=0}function E(t){F&&0!==t&&(L.remove(void 0,!0),L._page.nullinserted=!0);var e=u(),o=d(void 0,e),n=0,i=0,r="";(90===t||270===t)&&(n=(o.height-o.width)/2,Tn&&e.width<e.height&&(n=0),i=(o.width-o.height)/2,o=B(o)),0!==t?(r+=" translate("+n+"px,"+i+"px)",r+="rotate("+t+"deg)",L.css(Atalasoft.Utils.__htmlTransformStyle(r))):L.css(Atalasoft.Utils.__htmlTransformStyle("")),a().css({width:o.width,height:o.height}),L._viewrotation=t}function S(t,e){"function"==typeof t&&(e=t,t={}),R=Dn.extend(!0,{},t),R.atala_cb=Math.floor(1e9*Math.random()),"function"==typeof e&&U.push(e),g(!0)}function B(t){var e=t.width;return t.width=t.height,t.height=e,t}"function"==typeof o&&(n=o,o=void 0);var U="function"==typeof n?[n]:[],L=Dn(new Image),F=Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<=8,W=.9,R=Dn.extend(!0,{atala_cb:void 0},o||{});L._domEl=y(),L._domEl.addClass(On.atala_page_image_anchor),L.addClass(On.atala_page_image),F||L._domEl.append(L);var O={load:f,error:T,inserted:p};return L._binds=O,L.documenturl=jn.documenturl,L._index=e?e.mapsto:t,L._loaded=!1,L._size={width:0,height:0,isEmpty:function(){return 0===this.width&&0===this.height}},L._zoom=-1,L._prevzoom=L._zoom,L._scaledzoom=-1,L._rotation=0,L._viewrotation=0,L.dispose=v,L.zoom=x,L.needsZoom=b,L.getSize=c,L.getScaledSize=d,L.getFitZoom=l,L.getFitMultiplier=r,L.needsRotate=H,L.rotate=I,L.getDomElement=a,L.invalidate=S,h(),L}function O(t,e){function o(t){h._pagenum=t}function n(){return h.height()-h[0].clientHeight}function i(t){h._scrollSize=t}function a(t){h._ratio=t}function r(){if(!h.propagationPaused()){clearTimeout(h._tooltip._timeout),Sn.scroller.stop(),Sn.scroller.pauseEventPropagation(!0);var t={};h._direction===Ln.Vertical?(Sn.scroller.scrollTop(h[0].scrollTop*h._ratio),h._pagenum=s(h,h[0].scrollTop),t.right=h.width()+10+"px",t.top=16+Math.round((h[0].offsetHeight-48)/h[0].scrollHeight*h[0].scrollTop)+"px"):h._direction===Ln.Horizontal&&(Sn.scroller.scrollLeft(h[0].scrollLeft*h._ratio),h._pagenum=s(h,h[0].scrollLeft),t.bottom=h.height()+10+"px",t.left=16+Math.round((h[0].offsetWidth-48)/h[0].scrollWidth*h[0].scrollLeft)+"px"),h._direction===jn.direction&&jn.showpagenumbertooltip&&("none"===h._tooltip.css("display")&&(h._tooltip.css(t),h._tooltip.show()),jn.showpagenumbertooltip&&h._tooltip.html("Page "+h._pagenum),h._tooltip._timeout=setTimeout(l,1e3))}}function l(){h._tooltip.hide(),Wn.number===h._pagenum||to(h._pagenum)||Ue(h._pagenum),Xo()}function s(t,e){if(jn.forcepagefit){e*=t._ratio;var o=t._direction===Ln.Vertical?{x:0,y:e}:{x:e,y:0};return te(o.x,o.y)+1}return Math.floor(e/(t._max/Bn.document.getPageCount()))+1}var c=Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8,u="overflow:scroll; position:absolute; background-color:Transparent;",d=y(t);d.css({position:"absolute",display:"none","background-color":"white"});var h=null,g=!1;return e===Ln.Horizontal?((c||Atalasoft.Utils.Browser.Firefox)&&(u=u.replace("overflow","overflow-x")),h=Dn('<div style="'+u+'bottom:0px; left:0px; width:100%;z-index:10"></div>').appendTo(t),h._tray=Dn('<div style="height:1px;"></div>').appendTo(h)):((c||Atalasoft.Utils.Browser.Firefox)&&(u=u.replace("overflow","overflow-y"),u+="width:"+(ue()+1)+"px;",g=!0),h=Dn('<div style="'+u+'top:0px; right:0px; height:100%;z-index:10"></div>').appendTo(t),h._explicitSize=g,h._tray=Dn('<div style="width:1px;"></div>').appendTo(h)),N(h),h._ratio=1,h._direction=e,h._tooltip=d,h._pagenum=-1,h._scrollSize=0,h.pageNum=o,h.scrollbarHeight=n,h.scrollSize=i,h.ratio=a,h.bind({scroll:r}),h}function q(t){t&&t._tooltip&&(clearTimeout(t._tooltip._timeout),t._tooltip.hide())}function N(t){function e(){t.unbind(o),t.resumeEventPropagation()}var o={scroll:e};t._pauseEP=0,t.propagationPaused=function(){return t._pauseEP>0},t.pauseEventPropagation=function(e){t._pauseEP++,e&&t.bind(o)},t.resumeEventPropagation=function(){t._pauseEP>0&&t._pauseEP--}}function j(t){var e=de(),o=$(0,t);o.width=Wn.smallest.width>0&&Wn.smallest.width<o.width&&!Tn?Wn.smallest.width:o.width,o.height=Wn.smallest.height>0&&Wn.smallest.height<o.height&&!Tn?Wn.smallest.height:o.height;var n,i=Math.ceil(e.width/o.width)+2,a=Math.ceil(e.height/o.height)+2;return jn.tabular?(jn.direction===Ln.Vertical&&jn.columns>0?i=jn.columns:jn.direction===Ln.Horizontal&&jn.rows>0&&(a=jn.rows),n=i*a):jn.direction===Ln.Vertical?n=a:jn.direction===Ln.Horizontal&&(n=i),n}function Q(t,e){return t+.001>e&&e>t-.001}function Z(t){try{t.parentNode&&t.parentNode.removeChild(t),Mn.appendChild(t),Mn.innerHTML=""}catch(e){}}function G(t){for(var e=Array.prototype.slice.call(arguments,1);t.length;)t.shift().apply(this,e)}function X(){return 0!==Wn.size.width?jn.minwidth/Wn.size.width:1}function K(){return 0!==Wn.size.width?jn.maxwidth/Wn.size.width:1}function $(t,e,o){if(Bn.document.getPageCount()<=0)return{width:0,height:0};if(o="undefined"==typeof o?!0:o,Rn.newpagedivsize){var n={width:Rn.newpagedivsize.width,height:Rn.newpagedivsize.height},i=jn.showpageborder&&o?2*jn.pageborderwidth:0,a=(e||jn.zoom)/Rn.newpagedivfullzoom;return n.height=Math.round(n.height*a)+i,n.width=Math.round(n.width*a)+i,n}return J(t,e||jn.zoom,jn.showpageborder&&o)}function J(t,e,o){var n=Dn.extend({},ce(t)),i=o?2*jn.pageborderwidth:0;return e*=Do(t),n.height=Math.round(n.height*e)+i,n.width=Math.round(n.width*e)+i,n}function Y(t,e){return ne(null,t,e).index}function te(t,e){var o=de(),n={x:t+jn.pageselectlocation.x*o.width,y:e+jn.pageselectlocation.y*o.height};return Y(n.x,n.y)}function ee(t,e){for(var o={left:0,top:0},n=t;null!=n&&n!==e;n=n.offsetParent)o.left+=n.offsetLeft,o.top+=n.offsetTop;return o}function oe(){if(Zn.isEmpty()||Zn.zoom!==jn.zoom){var t=ne(null,null,null,jn.zoom);Zn.height=t.height,Zn.width=t.width,Zn.zoom=jn.zoom}return Zn}function ne(t,e,o,n){return ie(0,t,e,o,n)}function ie(t,e,o,n,i){if(jn.tabular)return ae(t,e,o,n,i);var a=Bn.document.getPageCount();t=t?t:0,e=e||0===e?e:a;var r={height:0,width:0,index:t};if(jn.direction===Ln.Vertical)for(var l=null,s=t;a>s&&e>s&&(r.height+(l=$(s,i).height)<=n||null==n);s++)r.height+=l+jn.pagespacing,r.index++;else if(jn.direction===Ln.Horizontal)for(var c=null,u=t;a>u&&e>u&&(r.width+(c=$(u,i).width)<=o||null==o);u++)r.width+=c+jn.pagespacing,r.index++;return r.index>=a&&a>0&&(r.index=a-1),r}function ae(t,e,o,n,i){if(t>e)return{width:0,height:0,index:e};var a=re(t,o,n,i),r=re(e,o,n,i);return r.height=jn.direction===Ln.Vertical?r.height-a.height:r.height,r.width=jn.direction===Ln.Horizontal?r.width-a.width:r.width,r}function re(t,e,o,n){var i=Bn.document.getPageCount(),a={height:0,width:0,index:0},r=le(n);t=null==t?t=i:t;var l,s;jn.direction===Ln.Vertical?(l=r||1,s=Math.ceil(i/l)):jn.direction===Ln.Horizontal&&(s=r||1,l=Math.ceil(i/s));var c=$(0,n);c.width+=jn.pagespacing,c.height+=jn.pagespacing;var u=null==o?Math.floor(t/l):Math.floor(o/c.height),d=null==e?t%l:Math.ceil(e/c.width);return a.height=u*c.height,a.width=d*c.width,a.index=u*l+d,a.index>=i&&i>0&&(a.index=i-1),a}function le(t){var e=1;if(jn.tabular){var o=jn.pagespacing||0,n=$(0,t);jn.direction===Ln.Vertical?(e=Math.floor(Sn.content.width()/n.width),e=Math.min(e,Math.floor((Sn.content.width()-e*o)/n.width))):jn.direction===Ln.Horizontal&&(e=Math.floor(Sn.content.height()/n.height),e=Math.min(e,Math.floor((Sn.content.height()-e*o)/n.height)))}return e||1}function se(t,e){var o=ce(t),n=To(t)+(e||0);return n%180===0?o:{width:o.height,height:o.width}}function ce(t){var e=Bn.document.getPageSize(t);return e?e:Wn.size}function ue(){var t=y(Dn("body")),e=y(t);t.css({width:"50px",height:"50px",overflow:"hidden",position:"absolute",visibility:"hidden"}),e.css({width:"100px",height:"100px"});var o=t.width();t.css({"overflow-y":"scroll"});var n=o-t[0].clientWidth;return Dn(t).remove(),n}function de(){return{width:Sn.scrollV?Sn.main.width()-Sn.scrollV.width():Sn.main.width(),height:Sn.scrollH?Sn.main.height()-Sn.scrollH.scrollbarHeight():Sn.main.height()}}function he(){var t=de(),e=jn.showpageborder?2*jn.pageborderwidth:0,o={width:t.width-e,height:t.height-e};return jn.tabular&&(jn.columns>1&&(o.width=Math.floor((t.width-(jn.pagespacing+e)*jn.columns)/jn.columns)),jn.rows>1&&(o.height=Math.floor((t.height-(jn.pagespacing+e)*jn.rows)/jn.rows))),o}function ge(t,e){var o={status:"fail",started:!1,reason:t};return"function"==typeof e&&e.call(),o}function fe(t,e,o,n,i,a){var r=ee(t,e);return r.left<=i&&r.left+t.clientWidth>=o&&r.top<=a&&r.top+t.clientHeight>=n}function pe(t,e,o){return e<t.length?(t.splice(o,0,t.splice(e,1)[0]),!0):!1}function me(t){jn.showstatus&&Sn.status&&Sn.status.html(t),yn({type:"statusmessage",message:t})}function _e(t,e){var o;if(1===t.length&&"object"===_typeof(t[0]))o=t[0];else if("string"==typeof t[0]){o={};var n=null;3===t.length?n=t[2]:2===t.length&&(n=t[1]);for(var i=t[0].indexOf(" ")>-1?t[0].split(" "):[t[0]],a=0;a<i.length;a++)o[i[a]]=n}for(var r in o)if(o.hasOwnProperty(r)){var l=null;if(r in Nn?l=Nn:Pn&&r in Pn.annotations.events?l=Pn.annotations.events:Pn&&r in Pn.forms.events?l=Pn.forms.events:Pn&&r in Pn.document.events&&(l=Pn.document.events),null==l&&(l=Nn),null==l[r]&&e)l[r]=[o[r]];else if(e)l[r].push(o[r]);else if(o[r])for(var s=0;s<l[r].length;s++)l[r][s]===o[r]&&l[r].splice(s,1);else l[r].length=0}}function ve(){jn.direction=jn.direction===Ln.Vertical||jn.direction===Ln.Horizontal?jn.direction:Ln.Vertical,jn.fitting=jn.fitting===Un.None||jn.fitting===Un.Best||jn.fitting===Un.Width||jn.fitting===Un.Height?jn.fitting:Un.Width,jn.pageborderwidth=xe(jn.pageborderwidth)?parseInt(jn.pageborderwidth,10):1,jn.pagespacing=xe(jn.pagespacing)?parseInt(jn.pagespacing,10):4,jn.showpageborder=jn.showpageborder?!0:!1,jn.showpagenumber=jn.showpagenumber?!0:!1,jn.showstatus=jn.showstatus?!0:!1,jn.zoom=xe(jn.zoom,!0)?parseFloat(jn.zoom):1,jn.scripturl=we(jn.scripturl)?jn.scripturl:jn.scripturl+"/"}function we(t){return t.length>0?-1!==t.indexOf("/",t.length-1)||-1!==t.indexOf("\\",t.length-1)?!0:!1:!0}function xe(t,e){return e?isFinite(parseFloat(t)):isFinite(parseInt(t,10))}function be(t,e,o,n,i){if(null==i&&"function"==typeof n&&(i=n,n=null),t=null==t?Sn.scroller.scrollLeft():t,e=null==e?Sn.scroller.scrollTop():e,jn.direction===Ln.Horizontal){if(t>Sn.viewport.width()){var a=oe();if(t<a.width&&Sn.content.width()>0){var r=a.width-(Sn.edges[0].width()+Sn.content.width());Sn.edges[1].width(r)}}}else if(jn.direction===Ln.Vertical&&e>Sn.viewport.height()){var l=oe();if(e<l.height&&Sn.content.height()>0){var s=l.height-(Sn.edges[0].height()+Sn.content.height());Sn.edges[1].height(s)}}Sn.scroller.stop(),!o||Rn.loading||Rn.scrollPos.x===t&&Rn.scrollPos.y===e?(Sn.scroller.scrollLeft(t),Sn.scroller.scrollTop(e),"function"==typeof i&&i.call()):Dn.when(Sn.scroller.animate({scrollLeft:t,scrollTop:e},{duration:n||Cn,easing:"easeOutQuad",queue:!1})).done(i)}function ye(t,e,o,n,i){var a=Sn.scroller.scrollLeft()+t,r=Sn.scroller.scrollTop()+e;be(a,r,o,n,i)}function ze(t,e){var o=ne(Wn.number+t-1);be(o.width,o.height,!0,e)}function De(){if(Sn.scrollH&&Sn.scrollV){var t=3e4,e=Bn.document.getPageCount();if(Sn.scrollH.pauseEventPropagation(),Sn.scrollV.pauseEventPropagation(),jn.direction===Ln.Vertical){Te(Sn.scrollH,"width");var o=Math.round(ne(e-1).height+$(e-1).height);Sn.scrollV.scrollSize(o-(Sn.scrollV.height()-Sn.scrollH.scrollbarHeight()-1)),o>t?(Sn.scrollV.ratio(o/(t-(Sn.scrollV.height()-Sn.scrollH.scrollbarHeight()-1))),Sn.scrollV._tray.height(t)):(Sn.scrollV._tray.height(o),Sn.scrollV.ratio(1)),Ae(Sn.scrollV)}else if(jn.direction===Ln.Horizontal){Te(Sn.scrollV,"height");var n=Math.round(ne(e-1).width+$(e-1).width);Sn.scrollH.scrollSize(n),n>t?(Sn.scrollH.ratio(n/(t-(Sn.scrollH.width()-Sn.scrollV.width()-1))),Sn.scrollH._tray.width(t)):(Sn.scrollH._tray.width(n),Sn.scrollH.ratio(1)),Ae(Sn.scrollH)}Sn.scrollV._max=Math.max(Sn.scrollV._tray.height()-Sn.scrollV.height(),0)+1,Sn.scrollH._max=Math.max(Sn.scrollH._tray.width()-Sn.scrollH.width(),0)+1,Sn.scrollH.resumeEventPropagation(),Sn.scrollV.resumeEventPropagation()}}function Pe(t,e){var o=3e4;if(jn.direction===Ln.Vertical){if(Sn.scrollV)if(Sn.scrollV.scrollSize(Math.max(Sn.scrollV._scrollSize+e,0)),1===Sn.scrollV._ratio&&Sn.scrollV._scrollSize+e<o)Sn.scrollV._tray.height(Sn.scrollV._tray.height()+e),Sn.scrollV._max=Math.max(Sn.scrollV._tray.height()-Sn.scrollV[0].clientHeight,0)+1;else{var n=Sn.scrollV.height()-Sn.scrollH.scrollbarHeight()-1,i=(o-n)*Sn.scrollV._ratio;i+e>o?Sn.scrollV.ratio((i+e)/(o-n)):De()}Ae(Sn.scrollV),Te(Sn.scrollH,"width")}else if(jn.direction===Ln.Horizontal){if(Sn.scrollH)if(Sn.scrollH.scrollSize(Math.max(Sn.scrollH._scrollSize+t,0)),1===Sn.scrollH._ratio&&Sn.scrollH._scrollSize+t<o)Sn.scrollH._tray.width(Sn.scrollH._tray.width()+t),Sn.scrollH._max=Math.max(Sn.scrollH._tray.width()-Sn.scrollH[0].clientWidth,0)+1,Sn.scrollH.ratio(Sn.scrollH._scrollSize/Sn.scrollH._max);else{var a=Sn.scrollH.width()-Sn.scrollV.width()-1,r=(o-a)*Sn.scrollH._ratio;r+t>o?Sn.scrollH.ratio((r+t)/(o-a)):De()}Ae(Sn.scrollH),Te(Sn.scrollV,"height")}if((0!==t||0!==e)&&0!==e){var l=Sn.scroller[0].scrollLeft,s=Sn.scroller[0].scrollTop;We(te(l,s)+1),yn({type:"scroll",x:l,y:s,dx:0,dy:0})}}function Te(t,e){if(t){var o=Math.round(Wn.size[e]*jn.zoom);if(jn.tabular)o=Sn.content[e]();else for(var n=0;n<Sn.pageDivs.length;n++)null!=Sn.pageDivs[n]._index&&(o=Math.max($(Sn.pageDivs[n]._index)[e],o));t._tray[e](o),t.scrollSize(o-t[e]()),Ae(t),t.ratio(1)}}function Ae(t){t&&(t._scrollSize<=0?t._tray.hide():t._tray.show())}function Ve(t){if(!Rn.zooming&&!Rn.scrollBuffer&&Sn.pageDivs.length){var e=(new Date).getTime(),o=Sn.scroller[0].scrollLeft,n=Sn.scroller[0].scrollTop,i=o+Sn.scroller[0].clientWidth,a=n+Sn.scroller[0].clientHeight,r=Y(o,n)+1,l=Math.abs(r-Wn.number)/le();if(!Rn.loading){var s=Bn.document.getPageCount(),c=Sn.pageDivs[0]._index,u=Sn.pageDivs[Sn.pageDivs.length-1]._index,d=0===l&&(Wn.number-1<c||Wn.number-1>u);l<Sn.pageDivs.length&&!d?fe(Sn.edges[1][0],Sn.scroller[0],o,n,i,a)&&s-1>u?Se(l):fe(Sn.edges[0][0],Sn.scroller[0],o,n,i,a)&&c>0?Ee(l):r!==Wn.number&&null===eo(r-1)&&Ue(r):Le(r,!1,null),bo()}if(We(te(o,n)+1),!Sn.scroller.propagationPaused()&&Sn.scrollH&&Sn.scrollV){var h=Math.round(o/Sn.scrollH._ratio),g=Math.round(n/Sn.scrollV._ratio);h!==Sn.scrollH.scrollLeft()&&(Sn.scrollH.pauseEventPropagation(!0),Sn.scrollH.scrollLeft(h)),g!==Sn.scrollV.scrollTop()&&(Sn.scrollV.pauseEventPropagation(!0),Sn.scrollV.scrollTop(g))}yn({type:"scroll",x:o,y:n,dx:o-Rn.scrollPos.x,dy:n-Rn.scrollPos.y}),t&&(Rn.scrollTimeout&&clearTimeout(Rn.scrollTimeout),Rn.scrollTimeout=setTimeout(function(){Ce(o,n)},500),Rn.scrollPos.x=Sn.scroller[0].scrollLeft,Rn.scrollPos.y=Sn.scroller[0].scrollTop,Rn.scrollPos.t=e),Rn.scrollBuffer=t?setTimeout(He,50):null}}function Ce(t,e){var o=Sn.scroller[0].scrollLeft,n=Sn.scroller[0].scrollTop,i=o===Rn.scrollPos.x&&n===Rn.scrollPos.y;t===Rn.scrollPos.x&&e===Rn.scrollPos.y&&i?(Xo(),Rn.scrollTimeout=null,Rn.loading||bo()):i||(Ve({}),Rn.scrollTimeout=null)}function He(){null!==Rn.scrollBuffer&&(clearTimeout(Rn.scrollBuffer),Rn.scrollBuffer=null)}function Me(){if(jn.direction===Ln.Vertical)Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8&&(Sn.edges[0].width(Sn.content.width()),Sn.edges[1].width(Sn.content.width()));else if(jn.direction===Ln.Horizontal){var t=Sn.pageDivs.length?(Tn?Math.max(Wn.size.height,Wn.size.width):Wn.size.height)*jn.zoom:0;jn.thumbpadding&&"number"==typeof jn.thumbpadding&&(t+=2*jn.thumbpadding),Sn.edges[0].height(t),Sn.edges[1].height(t)}}function Ie(t,e){e=e||0===e?e:t+Sn.pageDivs.length-1,e=Math.max(t,e);var o=jn.tabular?le():1,n=jn.tabular?(Math.floor(e/o)+1)*o-e:1,i=ne(t),a=Bn.document.getPageCount(),r=a>e?$(e):{width:0,height:0},l=a-o>e?$(a-1):{width:0,height:0},s=ie(t,e);s.width+=r.width,s.height+=r.height;var c=ie(e+1,a-1);if(c.width+=l.width,c.height+=l.height,jn.direction===Ln.Vertical)if(Sn.edges[0].height(i.height),e+n>=Bn.document.getPageCount()){var u=i.height+s.height+c.height;Sn.scrollH&&u>Sn.scroller[0].clientHeight&&Sn.content.width()<=Sn.scroller[0].clientWidth?Sn.edges[1].height(Sn.scrollH.scrollbarHeight()):Sn.edges[1].height(0)}else Sn.edges[1].height(c.height),Atalasoft.Utils.Browser.Chrome&&Sn.content.height("");else if(jn.direction===Ln.Horizontal)if(Sn.edges[0].width(i.width),e+n>=Bn.document.getPageCount()){var d=i.width+s.width+c.width;Sn.scrollV&&d>Sn.scroller[0].clientWidth&&Sn.content.height()<=Sn.scroller[0].clientHeight?Sn.scrollV._explicitSize?Sn.edges[1].width(Sn.scrollV.height()<Sn.scrollV._tray.height()?Sn.scrollV.width():0):Sn.edges[1].width(Sn.scrollV.width()):Sn.edges[1].width(0)}else Sn.edges[1].width(c.width),Sn.edges[1].height(1)}function ke(){return Rn.activepage}function Ee(t){if(t=t?t:1,0===Rn.prpr&&Sn.pageDivs.length>0){var e=le(jn.zoom);Ze();for(var o=t;o>0;o--){var n=Sn.pageDivs[0]._index-e;if(n>=0&&n<Bn.document.getPageCount()){for(var i=e-1;i>=0;i--){var a=Xe(-1);qe(a),Sn.content.prepend(a),je(a,Ye(n+i),n+i)}Ie(n,null),Me(),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<=8&&(Sn.content[0].className=Sn.content[0].className)}}setTimeout(Ge,10)}}function Se(t){t=t?t:1;var e=Sn.pageDivs[Sn.pageDivs.length-1]._index+1;if(0===Rn.prpr&&Sn.pageDivs.length>0&&e<Bn.document.getPageCount()){Ze();for(var o=le(jn.zoom),n=Bn.document.getPageCount(),i=t;i>0;i--){var a=Sn.pageDivs[Sn.pageDivs.length-1]._index+1;if(n>a){for(var r=a+o-1-Sn.pageDivs.length,l=0;o>l;l++){var s=Xe(1);qe(s),Sn.content.append(s),je(s,Ye(a+l),a+l)}Ie(r+1,a),Me()}}setTimeout(Ge,10)}}/**
-        * Scrolls the viewer to the given page index and executes the callback when finished.
-        * @param {number} index - Index of the page to show.
-        * @param {NotificationCallback} [callback] - Function to execute after this operation is done.
-        *  @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function showPage
-        */
-function Be(t,e){Ue(t+1,e)}/**
-        * Scrolls the viewer to the given page number and executes the callback when finished.
-        * @param {number} pageNumber - Number of the page to show. Note that page number is expected 1-based.
-        * @param {NotificationCallback} [callback]: function to execute after this operation is done
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function showPageNumber
-        * @deprecated Please use {@link Atalasoft.Controls.WebDocumentViewer#showPage|showPage} instead.
-        */
-function Ue(t,e){if(t=Math.max(1,t),t=Math.min(Bn.document.getPageCount(),t),Wn.number!==t){var o=t-Wn.number;Math.abs(o)<Sn.pageDivs.length?ze(o,e):Le(t,!0,e)}else"function"==typeof e&&e.call()}function Le(t,e,o){var n=Bn.document.getPageCount(),i=t-1;if(0===Rn.prpr&&n>0){var a=function(){Ge(!e),"function"==typeof o&&o.call()};Ze();var r=0,l=0,s=0>=i?0:i;if(s+Sn.pageDivs.length>=n){if(s=n-Sn.pageDivs.length,jn.tabular){var c=le();s=Math.ceil(s/c)*c}s=Math.max(s,0)}if(jn.direction===Ln.Vertical){r=ne(s).height,Sn.edges[0].height(r),Ie(s,null),Me(),Re();for(var u=0;u<Sn.pageDivs.length;u++)Sn.content.append(Sn.pageDivs[u]),je(Sn.pageDivs[u],null,s+u);var d=ne(Math.max(i,0)).height,h=Wn.number<t?-Wn.size.height:Wn.size.height;e&&d!==Rn.scrollPos.y?(be(null,d+h,!1),be(null,d,!0,a)):a.call()}else if(jn.direction===Ln.Horizontal){l=ne(s).width,Sn.edges[0].width(l),Ie(s,null),Me(),Re();for(var g=0;g<Sn.pageDivs.length;g++)Sn.content.append(Sn.pageDivs[g]),je(Sn.pageDivs[g],null,s+g);var f=ne(Math.max(i,0)).width,p=Wn.number<t?-Wn.size.width:Wn.size.width;e&&f!==Rn.scrollPos.x?(be(f+p,null,!1),be(f,null,!0,a)):a.call()}}else ge("paused",o)}function Fe(t){Rn.activepage=t}function We(t){var e=Bn.document.getPageCount();if(t>0&&e>=t){if(Wn.number!==t||Wn.numberoutof!==e){if(Sn.pageLabel.html(t+" / "+e),Wn.number!==t){Wn.number=t;for(var o=0;o<Sn.pageDivs.length;o++){var n=Sn.pageDivs[o];n._index===t-1?n.addClass(On.atala_active_page):n.removeClass(On.atala_active_page)}yn({type:"pagenumberchanged",number:Wn.number})}Wn.numberoutof!==e&&(Wn.numberoutof=e)}}else Sn.pageLabel.html(""),Sn.viewport.find("."+On.atala_active_page).removeClass(On.atala_active_page),Wn.numberoutof=0}function Re(){for(var t=Sn.pageDivs.length-1;t>=0;t--)qe(Sn.pageDivs[t])}function Oe(){for(var t=0;t<Sn.loadedImgs.length;t++)Sn.loadedImgs[t]&&(Sn.loadedImgs[t].dispose(),Sn.loadedImgs[t].remove());Sn.loadedImgs.length=0}function qe(t){Atalasoft.Utils.Browser.Explorer&&document.activeElement&&t.has(document.activeElement).length&&Sn.scroller.focus(),t.detach(),null!=t._img&&(t._img._page=null,t._img.getDomElement().detach(),t._img=null),yn({type:"pagerecycled",index:t._index,page:t}),t._index=-1,t.removeAttr(qn.atala_page_index)}function Ne(t){qe(t),t._index=-1,t.removeAttr(qn.atala_page_index),t._img=null,t.remove()}function je(t,e,o,n){if(t._index===o&&t._img===e&&!n)return!1;if(n&&!t.nullinserted&&0>o)return!1;if(t._index=o,t.attr(qn.atala_page_index,o),o>=Bn.document.getPageCount())return t.hide(),!1;t._img&&t._img!==e&&(t._img._page=null,t.has(t._img.getDomElement()).length>0&&t._img.getDomElement().detach(void 0,!0)),t._rubberband&&t._rubberband.reset(),t._img=e,t._img&&(t._img._page=t),t.css({display:jn.tabular||jn.direction===Ln.Horizontal?"inline-block":"block"}),jn.showpagenumber&&(t.css({position:"relative"}),t._num||(t._num=Dn('<div style="position:absolute; right:20px; bottom:16px;z-index:1"/>'),t._num.addClass(On.atala_page_number),t.append(t._num)),t._num.text(t._index+1));var i=Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<=8,a=i&&t._img&&!t._img._loaded;if(t._img&&t._img._binds&&(t._img._binds.pageresize||(t._img._binds.pageresize=function(t){yn({type:"pageresize",page:t.image._page,image:t.image,index:t.image._page?t.image._page._index:Bn.document.getPageIndexByImageIndex(t.image._index),width:t.width,height:t.height})},t._img.bind({pageresize:t._img._binds.pageresize})),t._img._binds.pagesizechanged||(t._img._binds.pagesizechanged=function(e){yn({type:"pagesizechanged",page:t,image:e.image,index:e.index,width:e.width,height:e.height,dx:e.dx,dy:e.dy})},t._img.bind({pagesizechanged:t._img._binds.pagesizechanged}))),t._img&&!a){var r=t._img.getDomElement();i&&0===r.find(t._img).length&&r.append(t._img),t.append(r),t._img.trigger({type:"inserted",page:t}),t._img._loaded||(t.nullinserted?t._img.css({width:t.width(),height:t.height()}):Qe(t._img,t._index)),Rn.newpagedivsize||t.css({width:"",height:""}),t.nullinserted=!1}else t.nullinserted=!0,Rn.newpagedivsize||Qe(t,t._index);return yn({type:"pageshown",page:t,index:t._index}),!0}function Qe(t,e){var o=$(e,null,!1);t.css({width:o.width,height:o.height})}function Ze(){Rn.prpr++}function Ge(t){0!==Rn.prpr&&(Rn.prpr--,0!==Rn.prpr||t||Ve())}function Xe(t){return t>0?(pe(Sn.pageDivs,0,Sn.pageDivs.length-1),Sn.pageDivs[Sn.pageDivs.length-1]):(pe(Sn.pageDivs,Sn.pageDivs.length-1,0),Sn.pageDivs[0])}/**
-         * Checks whether specified document page have been loaded. 
-         * @param {number} index - Page index.
-         * @returns {boolean} `true` if page have already been loaded; `false` otherwise.
-         * @instance
-         * @memberOf Atalasoft.Controls.WebDocumentViewer
-         * @function isPageLoaded
-         */
-function Ke(t){var e=Bn.document.getPageDefinition(t);return e.cacheIndex>=0&&Sn.loadedImgs[e.cacheIndex]&&Sn.loadedImgs[e.cacheIndex]._loaded}/**
-        * Reloads the specified page.
-        * @param {number} index - The index of the page to reload.
-        * @param {string|boolean} [annotations=false] - Url of the annotation xmp file or flag indicating whether to reload annotations of boolean flag indicating whether to load annotations data.
-        * @param {string|boolean} [forms] - Url of the form file or flag indicating whether to reload forms of boolean flag indicating whether to load forms data.
-        * @param {object} [params] - A plain object containing optional parameters that will be passed to server.
-        *
-        * Params could contain any application specific information that should be passed to server.
-        * For example, this could be the aggregated list of the parameters that was used in {@link Atalasoft.Controls.WebDocumentViewer#reloadPage|reloadPage} calls for different pages.
-        * @param {NotificationCallback} [callback] - function that is called when page have been loaded.
-        *
-        * This object will be available on the server side hander as an key-values collection. This allows to pass specific load options for individual pages.
-        * @function Atalasoft.Controls.WebDocumentViewer#reloadPage
-        */
-function $e(t,e,o,n,i){var a=Dn.Deferred(),r=Dn.Deferred(),l=Dn.Deferred(),s=Dn.Deferred();"function"==typeof n&&(i=n,n=void 0),"function"==typeof o&&(i=o,o=!1),"function"==typeof e&&(i=e,e=!1),"function"==typeof i&&a.done(i);var c=Bn.document.getPageDefinition(t);if(!c)return a.resolve(),a.promise();c.cacheIndex>=0&&Sn.loadedImgs[c.cacheIndex]?r=Je(c,n):Ye(t,n,function(){r.resolve()});var u="string"==typeof e?e:c.uri?null:jn.annotationsurl;jn.allowannotations&&e&&(u||c.uri)?Bn.annotations.loadAnnotationsUrl(jn.serverurl,u,c.uri,c.index,1,t,function(){l.resolve(!0)}):(e&&Bn.annotations.loadAnnotations({layers:[[]],offset:t}),l.resolve(!!e));var d="string"==typeof o?o:c.uri?null:jn.formsurl;return jn.allowforms&&o&&(jn.formsurl||d)?Bn.forms.loadFormUrl(jn.serverurl,d,c.uri,c.index,1,t,function(){s.resolve(!0)}):s.resolve(),Dn.when(r,l,s).done(function(e,o,n){(o||n)&&Ko(t,!0),a.resolve(t)}),a.promise()}/**
-        * Silently reloads the specified page if it has already been loaded before. Not creates new page.
-        * @private
-        * @return {object} page reload promise
-        */
-function Je(t,e){var o=Dn.Deferred();if(t.cacheIndex>=0&&Sn.loadedImgs[t.cacheIndex]){var n=Sn.loadedImgs[t.cacheIndex];n.invalidate(e,function(){o.resolve()})}else o.resolve();return o.promise()}function Ye(t,e,o){"function"==typeof e&&(o=e,e=void 0);var n=Bn.document.getPageDefinition(t);if(n){if(n.cacheIndex<0||!Sn.loadedImgs[n.cacheIndex]){var i=Rn.nextImageCacheIndex++;n.cacheIndex=i,Bn.document.setPageCacheIndex(t,i),Sn.loadedImgs[i]=R(n.index,n.ref,e,function(t){t&&(Sn.loadedImgs[i]=t,t._cacheIndex=i,Bn.memory.allocate(t)),"function"==typeof o&&o.call()}),jn.allowtext&&Bn.text&&!Tn&&Bn.text.ensurePageTextLoaded(t)}else"function"==typeof o&&o.call();return Sn.loadedImgs[n.cacheIndex]}}function to(t){var e=eo(t);if(e){var o=Sn.scroller[0].scrollLeft,n=Sn.scroller[0].scrollTop;return fe(e[0],Sn.scroller[0],o,n,o+Sn.scroller[0].clientWidth,n+Sn.scroller[0].clientHeight)}return!1}function eo(t){for(var e=null,o=0;o<Sn.pageDivs.length&&null===e;o++)Sn.pageDivs[o]._index===t&&(e=Sn.pageDivs[o]);return e}function oo(t,e,o,n,i){n&&"function"==typeof n&&(i=n,n=!1);var a,r=eo(t);if(r){var l=Sn.scroller[0].scrollLeft,s=Sn.scroller[0].scrollTop;if(a=ee(r[0],Sn.scroller[0]),a.left+=e.x,a.top+=e.y,!n&&a.left>=l&&a.left<=l+l+Sn.scroller[0].clientWidth&&a.top>=s&&a.top<=s+Sn.scroller[0].clientHeight)return i&&i(),void 0}else a=ne(t),a.left=a.width+e.x,a.top=a.height+e.y;var c={x:Sn.scroller[0].clientWidth/2,y:Sn.scroller[0].clientHeight/2};no(o,Atalasoft.Utils.PageSelection.BottomLeft)?(c.x=Sn.scroller[0].clientWidth,c.y=Sn.scroller[0].clientHeight):no(o,Atalasoft.Utils.PageSelection.TopLeft)&&(c.x=0,c.y=0),be(a.left-c.x,a.top-c.y,!0,i)}function no(t,e){return t&&e&&t.x===e.x&&t.y===e.y}function io(t,e){var o=eo(t);null!=o&&null!=o._num&&o._num.css({left:e-20,right:0})}function ao(){Gn&&clearTimeout(Gn),Gn=setTimeout(function(){yn("documentchanged")},200)}function ro(){0===Rn.prpr&&(Atalasoft.Utils.Browser.Safari||Atalasoft.Utils.Browser.Chrome?Sn.edges[1].hide().show():Sn.edges[1][0].className=Sn.edges[1][0].className)}function lo(){Sn.scroller.stop(),Sn.scroller.pauseEventPropagation(),Ze()}function so(){De(),Sn.pageDivs.length>0&&to(Bn.document.getPageCount()-1)&&Ie(Sn.pageDivs[0]._index),Me(),Sn.scroller.resumeEventPropagation(),Ge()}function co(){Rn.zooming=!0,lo(),yn("zoomstarted")}function uo(t){t=Math.min(t,K()),t=Math.max(t,X()),mo(t,!1),jn.zoom=t,bo(!1),vo(t,!1)}function ho(){Rn.zooming=!1,so(),yn({type:"zoomchanged",zoom:jn.zoom})}/**
-        * Asynchronously zooms the viewer to the given zoom over the default zoom duration
-        * @param {number} zoom - Desired zoom level to zoom to.
-        * @param {NotificationCallback} [callback] - function to execute after the zoom is finished animating.
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function zoom
-        */
-function go(t,e){Rn.zooming?ge("zooming",e):(Rn.zooming=!0,lo(),yn("zoomstarted"),e=null==e?fo:Atalasoft.Utils.__functionFromArray([fo,e]),t!==jn.zoom?(t=Math.min(t,K()),t=Math.max(t,X()),mo(t,!0),jn.zoom=t,bo(!0),vo(t,!0,e)):"function"==typeof e&&e.call())}function fo(){Rn.zooming=!1,so(),Ve(),yn({type:"zoomchanged",zoom:jn.zoom})}function po(t,e){var o=jn.zoom+(t?-1:1)*jn.zoom*.3;go(o,e)}function mo(t,e,o){var n=ne(Wn.number,null,null),i=ne(Wn.number,null,null,t),a=(Sn.scroller.scrollLeft()-n.width)/jn.zoom*t,r=(Sn.scroller.scrollTop()-n.height)/jn.zoom*t;be(i.width+a,i.height+r,e,Vn,o)}function _o(){Sn.edges[0]._z=jn.zoom}function vo(t,e,o){if(Sn.edges.length>0){o="function"==typeof o?Atalasoft.Utils.__functionFromArray([_o,o]):_o;var n=jn.direction===Ln.Vertical,i=Sn.pageDivs[0]&&Sn.pageDivs[0]._img?Sn.pageDivs[0]._index:0,a=ne(i,null,null,t),r=n?a.height:a.width;if(e&&!Rn.loading){var l=n?{height:r}:{width:r};Sn.edges[0].animate(l,{duration:Vn,easing:"easeOutQuad",complete:o,queue:!1})}else n?Sn.edges[0].height(r):Sn.edges[0].width(r),"function"==typeof o&&o.call();wo()}}function wo(t){setTimeout(function(){var e=Dn("<canvas/>"),o=Dn('<span style="position:absolute; visibility:hidden; left: -5000px;">{[|,0123456789Thqkbfjplyg</span>');Dn(document.body).append(o),t=t||jn.zoom;var n=jn.direction===Ln.Vertical,i=Rn.newpagedivsize?Rn.newpagedivsize:{width:Wn.size.width*t,height:Wn.size.height*t},a=Math.max(1,jn.pagespacing),r=le();e[0].width=(i.width+a)*(n?r:1),e[0].height=i.height*(n?1:r);var l=e[0].getContext("2d");l.lineWidth=jn.pageborderwidth,jn.backcolor&&(l.fillStyle=jn.backcolor);for(var s=1,c=0;r>c;++c){var u=n?s+c*i.width:s,d=n?s:s+c*i.height;l.strokeRect(u,d,i.width-2*s,i.height-2*s),jn.backcolor&&l.fillRect(u+l.lineWidth,d+l.lineWidth,i.width-2*(s+l.lineWidth),i.height-2*(s+l.lineWidth))}var h=e[0].toDataURL(),g={backgroundImage:"url("+h+")",backgroundSize:"auto auto",backgroundRepeat:n?"repeat-y":"repeat-x"};Sn.edges[0].css(g),Sn.edges[1].css(g),o.remove()},0)}function xo(){var t={backgroundImage:"",backgroundSize:"",backgroundRepeat:"",backgroundColor:""};Sn.edges[0].css(t),Sn.edges[1].css(t)}function bo(t,e){for(var o=0,n=!0,i=function(){if(o--,0>=o){if(jn.direction===Ln.Horizontal){var t=oe().width;Sn.spacer||(Sn.spacer=y(),Sn.spacer.css({position:"absolute",top:"-1px",height:"1px"}),Sn.viewport.append(Sn.spacer)),Sn.spacer.width(t)}"function"==typeof e&&e.call(),ro()}},a=0;a<Sn.pageDivs.length;a++)if(Sn.pageDivs[a]._img){var r=Sn.pageDivs[a]._img.needsZoom()||Sn.pageDivs[a]._img.needsRotate();r&&(n=!1,o++,Sn.pageDivs[a]._img.needsRotate()?Sn.pageDivs[a]._img.rotate(i):Sn.pageDivs[a]._img.needsZoom()&&Sn.pageDivs[a]._img.zoom(t,i))}n&&i.call()}/**
-        * Asynchronously zooms the viewer to fit to a page.
-        * @param {Atalasoft.Utils.Fitting} fit - Type of fitting to fit the page to.
-        * @param {number} pageNumber - Page number to fit to.  Note, that it's 1-based.
-        * @param {NotificationCallback} callback - Function to execute after the fit is done animating.
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function fit
-        */
-function yo(t,e,o){null!=e?"function"==typeof e&&(o=e,e=Wn.number):e=Wn.number;var n=zo(t,e-1),i=n.zoom,a=Un.Width===n.fit,r=Un.Height===n.height;a&&be(0,null,!1),r&&be(null,0,!1),go(i,o)}function zo(t,e){var o=he(),n=J(e,1,!1);(0===n.width||0===n.height)&&(t=null);var i=jn.zoom;switch(t){case Un.None:break;case Un.Best:n.width/o.width>n.height/o.height?(i=o.width/n.width,t=Un.Width):(i=o.height/n.height,t=Un.Height);break;case Un.Height:i=o.height/n.height;break;case Un.Width:i=o.width/n.width;break;default:i=1,t=Un.None}return{zoom:i,fit:t}}function Do(t){return Bn.document.getPageFitMultiplier(t)}function Po(t){return jn.zoom*Bn.document.getPageFitMultiplier(t)}function To(t){return Bn.document.getPageRotation(t)}function Ao(t,e){e=e||0;var o=To(t),n=Po(t),i=se(t,e),a=Raphael.matrix();a.scale(n,n,0,0),a.rotate(o+e,0,0);var r=Vo(a,{x:i.width,y:i.height}),l=Math.min(0,r.x),s=Math.min(0,r.y),c=a.invert(),u=c.x(-l,-s),d=c.y(-l,-s);return a.translate(u,d),a}function Vo(t,e){return{x:t.x(e.x,e.y),y:t.y(e.x,e.y)}}function Co(t){var e=Dn.data(t.currentTarget,"_config"),o=Dn.data(t.currentTarget,"_annoConfig");!o&&e&&(o={type:e.icon,rotatable:jn.showrotatetools}),o&&(Bn.mouseTool.setTool(Fn.None,Fn.None),Bn.annotations.drawAnnotation(o,!1,Mo,Ho))}function Ho(){Bn.mouseTool.setTool(Fn.Pan,Fn.None)}function Mo(){Bn.mouseTool.setTool(Fn.Pan,Fn.None)}/**
-        * Checks whether annotations support is enabled.
-        * @private
-        */
-function Io(){return jn.allowannotations===!1&&w("InitError",'The "allowannotations" property in the WebDocumentViewer config is set to false.'),jn.allowannotations}function ko(){for(var t=0;t<Sn.pageDivs.length;t++)Sn.pageDivs[t]._draw.toFront()}function Eo(){for(var t=0;t<Sn.pageDivs.length;t++)Sn.pageDivs[t]._draw.reset()}function So(t,e,o){if(t){if(Rn.loading=!0,Wn.size.width=t.pagewidth,Wn.size.height=t.pageheight,Wn.count=t.pagecount,Wn.buffer=jn.pagebuffersize,Wn.dpi=t.dpi,Wn.vector=t.vector===!0,jn.allowannotations=o.allowannotations,jn.allowforms=o.allowforms,jn.allowtext=o.allowtext,jn.documenturl=o.documenturl,jn.annotationsurl=o.annotationsurl,jn.formsurl=o.formsurl,Bn.document.__linkChanges(e),Bn.annotations&&(Bn.annotations.clear(),Bn.annotations.loadAnnotations(t)),Bn.forms&&(Bn.forms.clear(),t.forms&&Bn.forms.loadForms(t)),Bn.text&&Bn.text.search(""),Bn.mouseTool.setTool(jn.mousetool.type&&!Tn?jn.mousetool.type:Fn.Pan,Fn.None),Rn.zooming=!1,t.zoom)jn.zoom=t.zoom;else{var n=zo(jn.fitting,1);jn.zoom=n.zoom}Ro(t.pagenumber||0),wo(),Rn.loading=!1,bo(),L=e.__getSelectedPagesIndices,yn({type:"activedocumentchanged"})}}function Bo(t,e){e&&ln(!0);for(var o=0;o<t._controllers.document.getPageCount();++o){var n=t._controllers.document.getPageDefinition(o,An);n&&n.cacheIndex>=0&&Sn.loadedImgs[n.cacheIndex]&&(Bn.memory.deallocate(Sn.loadedImgs[n.cacheIndex]),Sn.loadedImgs[n.cacheIndex].dispose(),Sn.loadedImgs[n.cacheIndex].remove(),Sn.loadedImgs[n.cacheIndex]=void 0)}}function Uo(t,e){function o(t){Lo(t,e)}function n(t,o,n){Fo(t,o,n,e)}Rn.loading=!0;var i={atala_docurl:jn.documenturl,atala_pagebuffer:jn.pagebuffersize,atala_minwidth:jn.minwidth};Tn&&(i.atala_thumb=Tn,i.atala_capt_format=jn.thumbcaptionformat),null!=t&&("function"==typeof t&&(e=t,t=null),Dn.extend(i,t));var a={type:"docinfo",serverurl:jn.serverurl,query:"?ataladocinfo=",method:"GET",data:i,cancel:!1,info:{pagewidth:-1,pageheight:-1,pagecount:-1}};en(a,o,n)}function Lo(t,e){if(t&&t.licensed!==!1)Wn.size.width=t.pagewidth,Wn.size.height=t.pageheight,Wn.count=t.pagecount,Wn.buffer=jn.pagebuffersize,Wn.dpi=t.dpi,Wn.vector=t.vector===!0,Wn.caption=t.thumbcaptionformat||(jn.showthumbcaption?"{0}":""),Zn.zero(),Bn.memory.clearEntries(),Bn.memory.colorDepth=t.colordepth,Bn.memory.pageSize={width:t.pagewidth,height:t.pageheight},yn({type:"documentinfochanged",info:{count:Wn.count,dpi:Wn.dpi,size:{height:Wn.size.height,width:Wn.size.width},vector:Wn.vector}}),Bn.text&&(Bn.text.clear(),t.text&&Bn.text.loadText(t)),Rn.loading&&(jn.zoom=1,W(),be(0,0),Sn.scrollV&&Sn.scrollV.pageNum(1),We(1),yo(jn.fitting,1,function(){Me(),Ie(0,Sn.pageDivs.length-1);for(var o=0;o<Sn.pageDivs.length&&o<Wn.count;o++)Sn.content.append(Sn.pageDivs[o]),je(Sn.pageDivs[o],null,o);Sn.pageDivs.length>0&&Sn.pageDivs[0].addClass(On.atala_active_page),t.layers&&t.layers.length?Bn.annotations.loadAnnotations(t):jn.annotationsurl&&Bn.annotations&&Bn.annotations.clear(),Bn.forms&&(Bn.forms.clear(),t.forms&&Bn.forms.loadForms(t)),Bn.mouseTool.setTool(jn.mousetool.type&&!Tn?jn.mousetool.type:Fn.Pan,Fn.None),Rn.loading=!1,wo(),"function"==typeof e&&e(t.error),t.error&&setTimeout(function(){w("DocumentLoadError",t.error)},0)})),Rn.loading=!1;else{var o,n;t&&t.licensed===!1?(o="LicenseException",n=t.error?t.error:"LicenseException: Handler was unable to find a valid license."):(o="DocumentLoadError",n="HandlerException: Handler did not return any data."),Rn.loading=!1,"function"==typeof e&&e.call(void 0,n),o&&n&&w(o,n)}}function Fo(t,e,o,n){if(t.responseText){var i=t.responseText.substr(t.responseText.indexOf("</html>")+7);i.indexOf("<!--")>=0?(i=i.replace("<!--","").replace("-->",""),i.length>0&&(o="<pre>"+i+"</pre>")):t.responseText.indexOf("web.config")>0&&t.responseText.indexOf("customErrors")>0&&(o+=": web.config customErrors attribute has disabled remote error messages.")}w("DocumentLoadError",o),"function"==typeof n&&n.call(void 0,o)}function Wo(){Ro()}function Ro(t){if(W(),Sn.pageDivs.length>0){var e=Bn.document.getPageCount(),o="number"==typeof t?t:Sn.pageDivs[0]._index;o=o>=0?Math.min(o,e-Sn.pageDivs.length):0;for(var n=0;n<Sn.pageDivs.length&&e>n;n++){var i=o+n;qe(Sn.pageDivs[n]),Sn.content.append(Sn.pageDivs[n]),je(Sn.pageDivs[n],null,i)}}Ie(Sn.pageDivs.length>0?Sn.pageDivs[0]._index:0,null),Me(),Xo(),De();var a=Sn.scroller[0].scrollLeft,r=Sn.scroller[0].scrollTop,l=te(a,r);We(l+1),t>=0&&l!==t&&Be(t)}function Oo(t,e){function o(t){qo(t),"function"==typeof e&&e.call()}function n(t){var e=[];e.error=t.responseText,o(e)}var i={atala_docurl:jn.documenturl,atala_spath:jn.savepath};Dn.extend(i,t);var a={type:"docsave",serverurl:jn.serverurl,query:"?ataladocsave=",method:"POST",data:i,cancel:!1,info:{success:void 0,error:void 0}};en(a,o,n)}function qo(t){t.error?w("DocumentSaveError",t.error):me("DocumentSave: success="+t.success),yn({type:"documentsaved",success:t.success})}function No(t,e,o){var n=null;return"string"==typeof t?(n={},Rn.initialized&&o&&(t.length>0?n=o.createHandlerRequest(jn.serverurl,t,e):0===t.length&&o.clear()),n.url=t):"undefined"!=typeof t&&null!=t&&w("openUrlError","string input expected for url."),n}function jo(){xn({annotationsloaded:Jo})}function Qo(t,e){Bn.annotations&&(jo(),Bn.annotations.makeHandlerRequest(t,e))}function Zo(){xn({formsloaded:Yo})}function Go(t,e){Bn.forms&&(Zo(),Bn.forms.makeHandlerRequest(t,e))}function Xo(t){if(!(Sn.pageDivs.length>0&&"undefined"==typeof Sn.pageDivs[0]._index))for(var e=0;e<Sn.pageDivs.length;e++)$o(Sn.pageDivs[e],t)}function Ko(t,e){var o=eo(t);o&&$o(o,e)}function $o(t,e){(je(t,Ye(t._index),t._index)||e)&&(Bn.annotations&&Bn.annotations.showLayer(t._index,t),Bn.forms&&!Tn&&Bn.forms.showLayer(t._index,t),Bn.text&&!Tn&&jn.allowtext&&Bn.text.showLayer(t._index,t))}function Jo(t){t.error&&(w("AnnotationsLoadError",t.error),jn.annotationsurl=""),Bn.annotations&&bn({annotationsloaded:Jo})}function Yo(t){t.error&&(w("FormsLoadError",t.error),jn.formsurl=""),Bn.forms&&bn({formsloaded:Yo})}function tn(t){yn({type:"beforehandlerrequest",request:t})}function en(t,e,o){var n=on(t,function(t){e(t.request.info)});tn(t),t.cancel||(bn({handlerreturned:n}),t.serverurl&&!Dn.isEmptyObject(t.data)&&(t.info instanceof jQuery&&"docpage"===t.type?t.info.attr("src",t.serverurl+t.query+"&"+Dn.param(t.data)):Dn.ajax({type:t.method,url:t.serverurl+t.query+"?",dataType:"json",data:t.data,success:e,error:o,crossDomain:"string"==typeof t.method&&"post"===t.method.toLowerCase()?!1:void 0})))}function on(t,e){var o=function n(o){o.request===t&&(bn({handlerreturned:n}),"function"==typeof e&&e.call(this,o))};return xn({handlerreturned:o}),o}function nn(){var t={version:Atalasoft.Controls.Version.join(".")};return jn.debug&&Dn.extend(!0,t,{dom:Sn,controllers:Bn,page:Wn}),t}function an(t){function e(){this.typeOf="__LVlinker",this._id=An,this._config=jn,this._controllers=Bn,this._dom=Sn,this._page=Wn,this._state=Rn,this._annos=null,this._fields=null,this.stateManager=En,this.__createDialog=C,this.__createDiv=y,this.__createDOM=b,this.__createDropDownButton=H,this.__createDropDownMenu=M,this.__createMenu=V,this.__getPageSize=ce,this.__getTabularIndexOffset=le,this.__redrawVisiblePages=Xo,this.__adjustVisiblePages=bo,this.__onDocumentChanged=Wo,this.__startDomManipulation=lo,this.__endDomManipulation=so,this.__status=me,this.__updatePageSize=f,this.__silentReloadPage=Je,this.__isObjectInRect=fe,this.__getIndexFromPos=Y,this.__showNext=Se,this.__showPrevious=Ee,this.__showPageAsync=Le,this.__adjustEdgeHeights=Ie,this.__getSelectedPagesIndices=L}if(t&&"Atalasoft.Controls.WebDocumentThumbnailer"===t.typeOf){var o=new e;return Bn.document.__linkChanges(o),jn.allowannotations&&(t!==Pn&&jn.annotationsurl.length>0&&(jn.annotationsurl=""),Bn.annotations.__linkAnnotations(o)),jn.allowforms&&(t!==Pn&&jn.formurl.length>0&&(jn.formurl=""),Bn.forms.__linkForms(o)),jn.allowtext&&Bn.text&&Bn.text.__linkText(o),o}}/**
-         * Resets the viewer to its default state.
-         * @param {OpenUrlCallback} [callback]  - Function to execute when the empty process is finished
-         * @instance
-         * @memberOf Atalasoft.Controls.WebDocumentViewer
-         * @function empty
-        */
-function rn(t){Rn.loading=!0;var e=function(){De(),yn({type:"documentunloaded"}),"function"==typeof t&&t.call()};ln(),Lo({pagewidth:0,pageheight:0,pagecount:-1},e)}function ln(t){Rn.initialized&&(Re(),W(0),t||Oe(),Sn.edges[0].width(0).height(0),Sn.edges[1].width(0).height(0),Sn.scrollH&&(Sn.scrollH.scrollSize(0),Ae(Sn.scrollH)),Sn.scrollV&&(Sn.scrollV.scrollSize(0),Ae(Sn.scrollV)),xo())}/**
-        * Gets the current zoom level of the viewer.
-        * @returns {number}
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function getZoom
-        */
-function sn(){return jn.zoom}/**
-        * Indicates whether the viewer is ready to receive commands.
-         *
-         * If all dependent JavaScript libraries are included to the web page, control is initialized synchronously.
-         * Otherwise dependencies are asynchronously loaded automatically using {@link WebDocumentViewerConfig.scripturl|scripturl} parameter or from the same url where JQuery library is referenced.
-         * When all dependent JavaScript libraries are loaded, {@link Atalasoft.Controls.WebDocumentViewer#event:initialized|initialized} event is fired.
-         * @instance
-         * @memberOf Atalasoft.Controls.WebDocumentViewer
-         * @function isReady
-         * @returns {boolean}
-        */
-function cn(){return Rn.initialized}/**
-        * Scrolls to the given coordinates, does not account for zoom, i.e. `x` and `y` values are passed in window coordinate space.
-        * @param {number} x - Indicating the coordinate of the x axis.
-        * @param {number} y - Indicating the coordinate of the y axis.
-        * @param {boolean} [ani=false] - Indicating whether to animate this scroll.
-        * @param {NotificationCallback} [callback] - function to execute when the scroll operation is finished.
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function scrollTo
-         */
-function un(t,e,o,n){null==n&&"function"==typeof o&&(n=o,o=!1),be(t,e,o,null,n)}/**
-        * Scrolls by the given deltas, does not account for zoom, i.e. `dx` and `dy` values are passed in window coordinate space.
-        * @param {number} dx - Indicating delta of the x axis.
-        * @param {number} dy - Indicating delta of the y axis .
-        * @param {boolean} [ani=false] - Indicating whether to animate this scroll.
-        * @param {NotificationCallback} [callback] - Function to execute when the scroll operation is finished.
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function scrollBy
-        */
-function dn(t,e,o,n){null==n&&"function"==typeof o&&(n=o,o=!1),ye(t,e,o,null,n)}/**
-        * Scrolls to the next viewable page.
-        * @param {number} n - Number of pages to scroll forward.
-        * @param {NotificationCallback} [callback] - Function to execute when the scroll operation is finished.
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function next
-        */
-function hn(t,e){var o=jn.direction===Ln.Vertical?le():1;null==e&&"function"==typeof t&&(e=t,t=o),isFinite(t)||(t=o),ze(t,e)}/**
-        * Scrolls to the previous viewable page.
-        * @param {number} n - Number of pages to scroll backward.
-        * @param {NotificationCallback} [callback] - Function to execute when the scroll operation is finished.
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function previous
-        */
-function gn(t,e){var o=jn.direction===Ln.Vertical?le():1;null==e&&"function"==typeof t&&(e=t,t=o),isFinite(t)||(t=o),ze(-t,e)}/**
-         * Zooms in one level.
-         * @param {NotificationCallback} [callback] - Function to execute when the zoom operation is finished
-         * @instance
-         * @memberOf Atalasoft.Controls.WebDocumentViewer
-         * @function zoomIn
-         */
-function fn(t){po(!1,t)}/**
-        * Zooms out one level.
-        * @param  {NotificationCallback} [callback] - Function to execute when the zoom operation is finished.
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function zoomOut
-        */
-function pn(t){po(!0,t)}/**
-         * Callback signature for {@link Atalasoft.Controls.WebDocumentViewer#openUrl | openUrl} method.
-         * @callback OpenUrlCallback
-         * @param {string} error - If present, provides error description. If `undefined`, operation were successful.
+         * @typedef {Object} UploadFileInfo - The upload file information structure.
+         * @property {string} filename - Name of the file for upload.
+         * @property {number} size - Size of the file for upload in bytes.
+         * @property {boolean} cancel - Flag indicating whether or not upload should be canceled by the client.
          */
 /**
-        * Opens the document at the given urls.
-        * It's possible to call this method multiple times for the same document to load document and the forms or annotations data separately.
-        *
-        * @param {string} [documenturl] - url of the document file with respect to the {@link WebDocumentViewerConfig.serverurl | config.serverurl}.
-        *
-        * If set to empty string, call is equivalent to {@link Atalasoft.Controls.WebDocumentViewer#empty|empty}.
-        *
-        * @param {string} [annotationsurl] - url of the annotation xmp file with respect to the {@link WebDocumentViewerConfig.serverurl| config.serverurl}.
-        *
-        * *Note*, If empty string is passed, annotations from the previous document are cleared. if not passed or `undefined`, annotations from the previously opened document are preserved.
-        * @param {string} [formurl] - url of the form file with respect to the @link WebDocumentViewerConfig.serverurl| config.serverurl}.
-        * @param {OpenUrlCallback} [callback] - Function to execute when the open operation is finished.
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function openUrl
-        */
-function mn(t,e,o,n){null==n&&("function"==typeof e?(n=e,e=null):"function"==typeof o&&(n=o,o=null));var i=0,a=!1,r={},l=No(e,t,Bn.annotations),s=No(o||t,t,Bn.forms);jn.annotationsurl=l?l.url:jn.annotationsurl,jn.formsurl=s?s.url:jn.formsurl;var c=function(t){i--,0>=i&&(Xo(!0),yn({type:"documentloaded"}),"function"==typeof n&&n.call(void 0,t))};if("string"==typeof t)0===t.length?rn(c):(jn.documenturl=t,Rn.initialized&&(ln(),q(Sn.scrollH),q(Sn.scrollV),i++,0===t.length&&rn(c),jn.allowannotations&&l&&l.data&&(jo(),Dn.extend(r,l.data)),jn.allowforms&&s&&s.data&&(Zo(),Dn.extend(r,s.data)),a=!0,Uo(r,c)));else{var u=!(t||!(jn.documenturl.length>0)||!e&&""!==e&&!o&&""!==o);u||w("openUrlError","string input expected for document url.")}a||(l&&(i++,Qo(l,c)),s&&(i++,Go(s,c)))}/**
-        * Saves the client changes in this document to the pre defined save folder or to the given path.
-        * @param {string} [subpath] - Relative path to save to starting from {@link WebDocumentViewerConfig.savepath | savepath}. Must be writable.
-        * @param {string} [saveformat] - Save file format. If specified, the value overrides {@link WebDocumentViewerConfig.savefileformat | savefileformat} form config.
-        * @param {object} [params] - A plain object containing optional reload parameters that will be passed to server.
-        * @param {NotificationCallback} [callback]  to execute when the save has finished
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function save
-         *
-         * @example
-         * var _viewer = new Atalasoft.Controls.WebDocumentViewer({
-         * 		parent: $('#atala-document-container-left'),
-         * 		toolbarparent: $('#atala-document-toolbar-left'),
-         *		serverurl: 'WebDocumentHandler.ashx',
-         *		savepath: 'Save/',
-         *		savefileformat: 'pdf'
-         * });
-         *
-         * // document will be saved to the subpath subfolder. So if the savepath configuration
-         * // parameter was set to Save/ then the save path will be Save/subpath. The format to save the file to will
-         * // be taken from the configuration parameter savefileformat (in this example, 'pdf').
-         * // This means that the file in pdf format will be saved in Save/subpath folder.
-         *  _viewer.save(‘subpath’) // saves to ‘Save/subpath’ in ‘pdf’ format
-         *
-         * // document will be saved to ‘Save/’ foler in ‘tif’ format.
-         * _viewer.save(‘’, ‘tif’)
+         * @typedef {Object} UploadFileErrorInfo - The upload error information structure.
+         * @property {string} filename - Name of the file for upload.
+         * @property {string} error - Error message contains the cause why file upload has failed.
+         * @property {boolean} canceled - Flag indicating whether or not upload was canceled by the client or server.
+         * @property {Object} event.customData - The event customer data from server. This property is set in case when error has occurred on server or file was rejected on server-side.
          */
-function _n(t,e,o,n){"function"==typeof o&&(n=o,o={}),"function"==typeof e&&(n=e,e=jn.savefileformat),"function"==typeof t&&(n=t,t=null),void 0===e&&(e=jn.savefileformat);var i=Dn.extend(!0,o,{atala_subpath:t||"",atala_sformat:e});Bn.annotations&&Dn.extend(i,{atala_iuname:jn.annotations.saveusername,atala_annos:Bn.annotations.stringifyChanges()}),Bn.forms&&Dn.extend(i,{atala_forms:Bn.forms.stringifyChanges()}),Bn.document&&Dn.extend(i,{atala_document:Bn.document.stringifyChanges()}),Oo(i,n)}/**
-        * Gets the current page index
-        * @returns {number} Zero based index of the current page.
-        *
-        * Note, that current page index detection could be affected by {@link WebDocumentViewerConfig.pageselectlocation|pageselectlocation} configuration parameter.
-        *  @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function getCurrentPageIndex
-        */
-function vn(){return Wn.number-1}/**
-         * Sets the current mouse tool
-         * @param {Atalasoft.Utils.MouseToolType} tool - Type of the tool to set.
-         *
-         * Mouse tool configuration could be passed using {@link WebDocumentViewerConfig.mousetool| mousetool} configuration option.
-         * @instance
-         * @memberOf Atalasoft.Controls.WebDocumentViewer
-         * @function setMouseTool
-         */
-function wn(t){for(var e in Atalasoft.Utils.MouseToolType)if(Atalasoft.Utils.MouseToolType.hasOwnProperty(e)&&Atalasoft.Utils.MouseToolType[e]===t){Bn.mouseTool.setTool(t);break}}/**
-        *  Attaches a handler to an event.
-        * @param {string} event - the name of the event to bind to.
-        * @param {function} handler - event handler.
-        * @returns {Atalasoft.Controls.WebDocumentViewer} reference to `this`.
-        * @instance
-         * @memberOf Atalasoft.Controls.WebDocumentViewer
-         * @function bind
-         */
-function xn(){return _e(arguments,!0),In.bind.apply(In,arguments),Pn}/**
-        * Detaches the handler from the event.
-        * @param {string} event - the name of the event to unbind.
-        * @param {function} [handler] -  the event handler to unbind. If not specified, all handlers are unbound.
-        * @returns {Atalasoft.Controls.WebDocumentViewer} reference to `this`.
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function unbind
-        */
-function bn(){return _e(arguments,!1),In.unbind.apply(In,arguments),Pn}/**
-        * Triggers the event.
-        * @param {string} event - the name of the event to trigger.
-        * @param {Object} [parameters] - the event data.
-        * @returns {Atalasoft.Controls.WebDocumentViewer} reference to `this`.
-        * @instance
-        * @memberOf Atalasoft.Controls.WebDocumentViewer
-        * @function trigger
-        */
-function yn(){return In.trigger.apply(In,arguments),Pn}/**
-         * Gets the current document info
-         * @return {{count: *, dpi: number, size: {height: number, width: number}, vector: boolean}} object indicating document main page size, and number of pages
-         * @instance
-         * @memberOf Atalasoft.Controls.WebDocumentViewer
-         * @function getDocumentInfo
-         */
-function zn(){return{count:Bn.document.getPageCount(),dpi:Wn.dpi,size:{height:Wn.size.height,width:Wn.size.width},vector:Wn.vector}}var Dn=Atalasoft.$,Pn={typeOf:e.type||"Atalasoft.Controls.WebDocumentViewer"},Tn="Atalasoft.Controls.WebDocumentThumbnailer"===Pn.typeOf,An="",Vn=150,Cn=500,Hn="atala-ui-icon",Mn=document.createElement("div"),In=Dn({}),kn=Dn({}),En=new Atalasoft.Controls.DocumentStateManager(n()),Sn={/** Main outer object that holds the scrollbars */
-main:null,/** Toolbar wrapper object */
-toolbar:null,/** Inner object that controls scrolling */
-scroller:null,/** Inner object that defines the viewable area */
-viewport:null,/** Inner content container object */
-content:null,/** Inner horizontal scroll bar object */
-scrollH:null,/** Inner vertical scroll bar object */
-scrollV:null,/** Edge objects of viewable area */
-edges:[],/** Image objects already requested */
-loadedImgs:[],/** Page wrapper objects recycle pool */
-pageDivs:[],/** Span tag containing the page number */
-pageLabel:null,/** Status div */
-status:null},Bn={annotations:null,document:null,forms:null,mouseTool:null,memory:null,text:null},Un=Atalasoft.Utils.Fitting,Ln=Atalasoft.Utils.ScrollDirection,Fn=Atalasoft.Utils.MouseToolType,Wn=a(),Rn=r(),On=Atalasoft.Controls.WebDocumentViewer.domclasses,qn=Atalasoft.Controls.WebDocumentViewer.domattributes,Nn={/**
-             * @typedef {Object} Request
-             * @property {string} method - The request HTTP method.
-             * @property {Object} data - The request parameters that will be send to server.
-             * @property {string} type - The request type identifier.
-             * Supported request types are:
-             *
-             * |Identifier| Description|
-             * | ----- | ------- |
-             * |`docinfo` | Document info request. Maps to `DocumentInfoRequested` server event.|
-             * |`docpage` | Document page request. Could be issued multiple times - it's expected that page will be served from browser cache for the same query. Maps to `ImageRequested` server event.|
-             * |`docsave` | Document save request. Maps to `DocumentSave` server event.|
-             * |`annodata` | Annotation data request. Maps to `AnnotationDataRequested` server event.|
-             * |`formdata` | Forms data request. Maps to `PdfFormRequested` server event.|
-             * |`pagetextdata` | Maps to `PageTextRequested` server event.|
-             */
 /**
-             * Callback signature for
-             * @callback BeforeHandlerRequestCallback {@link Atalasoft.Controls.WebDocumentViewer#event:beforehandlerrequest} event.
-             * @param {Object} event - The event object.
-             * @param {Request} event.request - The request object.
-             */
+         * @typedef {Object} UploadingFileInfo - The uploading file information structure.
+         * @property {string} filename - Name of the file for upload.
+         * @property {number} uploadedbytes - Uploaded bytes count.
+         * @property {number} totalbytes - Total bytes count.
+         * @property {boolean} cancel - Flag indicating whether or not upload should be canceled by the client.
+         */
 /**
-             * Triggers before a request is sent to the server.
-             * @event Atalasoft.Controls.WebDocumentViewer#beforehandlerrequest
-             * @type {BeforeHandlerRequestCallback}
-             * @param {Object} event - The event object.
-             * @param {Request} event.request - The request object.
-             *
-             * This event could be used to override or extend request parameters which is exposed through `event.request.data`.
-             * Requests could be distinguished using `event.request.type` field. For supported request types see {@link Request} structure.
-             */
-beforehandlerrequest:null,/**
-             *  Triggers when the document info has changed, usually after a new document is opened.
-             *  @event Atalasoft.Controls.WebDocumentViewer#documentinfochanged
-             *  @type {NotificationCallback}
-             */
-documentinfochanged:null,/** Triggers when the document is done loading.
-             * @event Atalasoft.Controls.WebDocumentViewer#documentloaded
-             * @type {NotificationCallback}
-             */
-documentloaded:null,/**
-             * Triggers when viewer has been activated by another thumbnailer or reactivated by the same thumbnailer with changed document data.
-             */
-activedocumentchanged:null,/** Triggers after a response from the server while saving the document.
-             * @event Atalasoft.Controls.WebDocumentViewer#documentsaved
-             * @param {Object} event - The event object.
-             * @param {boolean} event.success - Flag indicating whether save were successful.
-             */
-documentsaved:null,/**
-             * Triggers when the document has been unloaded from the control.
-             * @event Atalasoft.Controls.WebDocumentViewer#documentunloaded
-             * @type {NotificationCallback}
-             */
-documentunloaded:null,/**
-             * Callback signature for {@link Atalasoft.Controls.WebDocumentViewer#event:error} event.
-             * @callback ErrorCallback
-             * @param {Object} event - The event object.
-             * @param {string} event.name - The error type identifier.
-             * @param {string} event.message - The error clarification message.
-             */
+         * @typedef {Object} UploadStartInfo - The upload start infromation structure.
+         * @property {boolean} cancel - Flag indicating whether or not upload should be canceled by the client.
+         */
+/**
+         * Callback signature for
+         * @callback BeforeHandlerRequestCallback {@link Atalasoft.Controls.WebDocumentViewer#event:beforehandlerrequest} event.
+         * @param {Object} event - The event object.
+         * @param {Request} event.request - The request object.
+         */
+/**
+         * Triggers before a request is sent to the server.
+         * @event Atalasoft.Controls.WebDocumentViewer#beforehandlerrequest
+         * @type {BeforeHandlerRequestCallback}
+         * @param {Object} event - The event object.
+         * @param {Request} event.request - The request object.
+         *
+         * This event could be used to override or extend request parameters which is exposed through `event.request.data`.
+         * Requests could be distinguished using `event.request.type` field. For supported request types see {@link Request} structure.
+         */
+beforehandlerrequest:null,
+/**
+         *  Triggers when the document info has changed, usually after a new document is opened.
+         *  @event Atalasoft.Controls.WebDocumentViewer#documentinfochanged
+         *  @param {Object} event - The event object.
+         *  @param {DocumentInfo} event.info - The event document info.
+         *  @param {Object} event.customData - The event customer data from server.
+         */
+documentinfochanged:null,
+/** Triggers when the document is done loading.
+         * @event Atalasoft.Controls.WebDocumentViewer#documentloaded
+         * @param {Object} event - The event object.
+         * @param {Object} event.customData - The event customer data from server.
+         */
+documentloaded:null,
+/**
+         * Triggers when viewer has been activated by another thumbnailer or reactivated by the same thumbnailer with changed document data.
+         */
+activedocumentchanged:null,
+/** Triggers after a response from the server while saving the document.
+         * @event Atalasoft.Controls.WebDocumentViewer#documentsaved
+         * @param {Object} event - The event object.
+         * @param {boolean} event.success - Flag indicating whether or not save were successful.
+         * @param {string} event.fileName - File path to the saved file. By default it represents a path to the file relative to application path. However, if 'DocumentStream' property  was initialized or 'PreventDefaultSaving' flag is used on server-side, then this property contains a value of 'DocumentStreamName' property.
+         * @param {Object} event.customData - The event customer data from server.
+         */
+documentsaved:null,
+/**
+         * Triggers when the document has been unloaded from the control.
+         * @event Atalasoft.Controls.WebDocumentViewer#documentunloaded
+         * @type {NotificationCallback}
+         */
+documentunloaded:null,
+/**
+         * Callback signature for {@link Atalasoft.Controls.WebDocumentViewer#event:error} event.
+         * @callback ErrorCallback
+         * @param {Object} event - The event object.
+         * @param {string} event.name - The error type identifier.
+         * @param {string} event.message - The error clarification message.
+         */
 /** Triggers when the control has encountered and error. Populated keys: e.name, e.message
-             * @event Atalasoft.Controls.WebDocumentViewer#error
-             * @param {Object} event - The event object.
-             * @param {string} event.name - The error type identifier.
-             * @param {string} event.message - The error clarification message.
-             * @type {ErrorCallback}
-             */
-error:null,/** Triggers when the control has completed asynchronous initialization.
-             *
-             * Asynchronous initialization happens when some dependent scripts are not included to web page and control trying to load them on background.
-             * In case of synchronous initialization, this event won't be fired. {@link Atalasoft.Controls.WebDocumentViewer#isReady| isReady} method could be used after construction to check whether control is initialized.
-             * @event Atalasoft.Controls.WebDocumentViewer#initialized
-             * @type {NotificationCallback}
-             */
-initialized:null,/**
-             * Triggers when the page number has changed. Populated keys: e.number
-             * @event Atalasoft.Controls.WebDocumentViewer#pagenumberchanged
-             * @param {Object} event - The event object.
-             */
-pagenumberchanged:null,/** Triggers when the control has recycled a pageDiv object.
-             * @event Atalasoft.Controls.WebDocumentViewer#pagerecycled
-             * @param {Object} event - The event object.
-             * @param {number} event.index - Index of the recycled page.
-             */
-pagerecycled:null,/**
-             * Triggers when the control has resized a pageDiv object.
-             * @event Atalasoft.Controls.WebDocumentViewer#pageresize
-             * @param {Object} event - The event object.
-             * @param {number} event.index - Index of the resized page.
-             * @param {number} event.width - Width of the page after resize.
-             * @param {number} event.height - Height of the recycled page.
-             */
-pageresize:null,/** Triggers when the control has shown a page in the viewable area.
-             * @event Atalasoft.Controls.WebDocumentViewer#pageshown
-             * @param {Object} event - The event object.
-             * @param {number} event.index - Index of the page.
-             */
-pageshown:null,/** Triggers when the page size returned from the server is different than expected. The expected page size is the size returned from server along with other document info.
-             * @event Atalasoft.Controls.WebDocumentViewer#pagesizechanged
-             * @param {Object} event - The event object.
-             * @param {number} event.index - Index of the resized page.
-             * @param {number} event.width - Width of the page after resize.
-             * @param {number} event.height - Height of the recycled page.
-             * @param {number} event.dx - Difference with the previous(expected) page width. Scaled images are compared.
-             * @param {number} event.dy - Difference with the previous(expected) page height. Scaled images are compared.
-             */
-pagesizechanged:null,/** Triggers for every pixel movement registered by the scrollable area.
-             * @event Atalasoft.Controls.WebDocumentViewer#scroll
-             * @param {Object} event - The event object.
-             * @param {number} event.x - Horizontal scroll position.
-             * @param {number} event.y - Vertical scroll position.
-             * @param {number} event.dx - Distance scrolled horizontally.
-             * @param {number} event.dy - Distance scrolled vertically.
-             */
-scroll:null,/**
-             *@private 
-             */
-scrollFinished:null,/** Triggers when dependencies have finished loading.
-             * @event Atalasoft.Controls.WebDocumentViewer#scriptsloaded
-             * @type {NotificationCallback}
-             */
-scriptsloaded:null,/** Triggers when the control has updated the status bar.
-             * @event Atalasoft.Controls.WebDocumentViewer#statusmessage
-             * @param {Object} event - The event object.
-             * @param {string} event.message - The status message.
-             */
-statusmessage:null,/** Triggers when a zoom operation has been started.
-             * @event Atalasoft.Controls.WebDocumentViewer#zoomstarted
-             * @type {NotificationCallback}
-             */
-zoomstarted:null,/** Triggers when the zoom level of the control has changed.
-             * @event Atalasoft.Controls.WebDocumentViewer#zoomchanged
-             * @param {Object} event - The event object.
-             * @param {number} zoom - Current document zoom value.
-             */
-zoomchanged:null},jn={/**
-             * @property {boolean} [allowannotations=false] - Turns annotation support on or off.
-             * This affects both UI annotations toolbar appearance and corresponding API methods behavior.
-             * If set to `false`, {@link Atalasoft.Controls.WebDocumentViewer#annotations|WebDocumentViewer.annotations} will be set to `null` and annotation-related methods of {@link Atalasoft.Controls.WebDocumentViewer |WebDocumentViewer} will throw errors.
-             */
-allowannotations:!1,/**
-             * @property {boolean} [allowflick=true] - Turns flick scrolling support on or off.
-             */
-allowflick:!0,/**
-             * @property {boolean} [allowforms=false] - Turns forms support on or off.
-             */
-allowforms:!1,/**
-             * @property {boolean} [allowtext=false] - Turns text selection support on or off.
-             */
-allowtext:!1,/**
-             * @property {AnnotationsConfig} [annotations] - Annotations specific config options, including predefined configurations for particular annotation types.
-             */
-annotations:{/**
-                 * Represents default configuration for various types of annotations.
-                 * @typedef {Object} AnnotationsConfig
-                 * @property {AnnotationData[]} [defaults] - Pre defined annotations to be drawn with the mouse.
-                 * @property {AnnotationData[]} [stamps] - Pre defined stamp annotations to be drawn with the mouse.
-                 * @property {AnnotationData[]} [images] - Pre defined image annotations to be drawn with the mouse.
-                 * @property {boolean} [saveusername] - Indicates whether the server handler will save the username property when saving all
-                 */
-/**
-                 * Predefined annotations to be drawn with the mouse.
-                 */
-defaults:null,/**
-                 * Predefined stamp annotations to be drawn with the mouse.
-                 */
-stamps:null,/**
-                 * Pre defined image annotations to be drawn with the mouse.
-                 */
-images:null,/**
-                 * Indicates whether the server handler will save the username property when saving all annotations.
-                 */
-saveusername:!1},/**
-             * @property {number} [columns] - Number of columns to show when displaying tabular pages, -1 is automatic. */
-columns:-1,/** @property {Atalasoft.Utils.ScrollDirection} [direction = Vertical] - Scroll direction of the viewer.
-             *
-             * i.e. controls whether document pages positioned in vertical or horizontal direction.
-             */
-direction:Ln.Vertical,/**
-             * @property {string} [documenturl] - Identifier of the document (that is on the server) to be displayed when the document is first opened.
-             *
-             * By default `documenturl` is treated as an url to the image file on server. Application could customize server behavior and in this case `documenturl` could contain arbitrary string.
-             * If this parameter is specified, document will be opened right after viewer initialization completes. Otherwise document should be opened using {@link Atalasoft.Controls.WebDocumentViewer.openUrl | openUrl} method.
-             *
-             * This property on the {@link Atalasoft.Controls.WebDocumentViewer#config|viewer.config} is updated internally each time new document is opened.
-             */
-documenturl:"",/**
-             *  @property {string} [annotationsurl] Identifier of the annotation data (an .xmp file on the server) that should be displayed along with the displayed document.
-             *
-             *  By default `annotationsurl` is treated as an url to the serialized annotations data file on server(usually .xmp). Application could customize server behavior and in this case `annotationsurl` could contain arbitrary string.
-             *
-             *  This property on the {@link Atalasoft.Controls.WebDocumentViewer#config|viewer.config} is updated internally each time new document is opened.
-             */
-annotationsurl:"",/**
-             * @property {string} [formurl] - Identifier of the annotation data PDF form data (.pdf file on the server) that should be displayed along with the displayed document.
-             *
-             * In most cases this option should be omitted, so forms will be loaded from the PDF document specified by {@link WebDocumentViewerConfig.documenturl | documenturl}
-             *
-             * This property on the {@link Atalasoft.Controls.WebDocumentViewer#config|viewer.config} is updated internally each time new document is opened.
-             */
-formurl:"",/**
-             * @property {Atalasoft.Utils.Fitting} [fitting = Width] - Specifies the initial page image fit when document is opened in the viewer.
-             *
-             * Usually it makes sense to set initial fit to viewer width for vertical scrolling {@link WebDocumentViewerConfig.direction|direction} and to height for horizontal.
-             */
-fitting:Un.Width,/**
-             * @property {boolean} [forcepagefit=false] - Specifies whether document pages should be unified basing on the expected document page size.
-             *
-             * Expected page size is sent by server when opening new document. By default it's the size of the first page in document, but any values could be provided when default behavior is overridden by application.
-             *
-             * It's recommended to set this option to `true` for most documents.
-             *
-             * Setting this property to true have following benefits:
-             * - Pages looks similar even for documents containing pages with having different sizes(or different DPI). Aspect ratio is preserved when calculating unification zoom ratio, so pages are not completely same. But in most cases they would have same width or height.
-             *
-             * - Pages are requested on demand, so size of each individual page is not known util it's loaded from server. Thus when pages having different sizes are inserted into DOM, their sizes are different from expected. This would cause resizing of the DOM elements and thus cause visual shifts of the images. Especially such effect could be noticeable on big images, when rendering and load time is bigger then usual.
-             *
-             * Setting this option to false is helpful when document having pages both "small" and "big" pages and those pages should be displayed as is, without additional zoom. For example, when driver license and scanned pages are displayed as a single document.
-             */
-forcepagefit:!1,/**
-             * @property [forcepagesize] - Allows a custom page size to be used for force fitting all pages to. Ignored if forcepagefit is false.
-             * @private
-             */
-forcepagesize:{height:-1,width:-1},/**
-             *  @property {boolean} [jpeg=false] - Allows page images to be returned as jpeg instead of png.
-             */
-jpeg:!1,/**
-             *  @property {number} [maxwidth=3000] - Specifies the maximum amount of pixel width allowed for zooming in.
-             *
-             *  This property is intended to limit size of the images data transferred over the wire on big zoom values.
-             */
-maxwidth:3e3,/**
-             *  @property {number} [memorythreshold=500000000] - Maximum number of bytes in memory before larger memory objects are recycled.
-             *
-             *  DOM image objects are cached internally. This option allows to control memory usage on the browser page. Note, that estimated image sizes are not exactly match actual values - estimation is based on the expected document images color format and size. So actual memory usage in browser process could differ from the configured value.
-             */
-memorythreshold:5e8,/**
-             *  @property {number} [minwidth=150] - Specifies the minimum amount of pixel width allowed for zooming out.
-             */
-minwidth:150,/**
-             *  @property {number} [pageborderwidth=1] - Specifies the pixel border width around each page in a document.
-             *  */
-pageborderwidth:1,/**
-             * @property {number} [pagebuffersize] - The number of pages to keep in memory while scrolling. Negative values will automatically calculate the optimal number based on available screen space. Values lower than can be displayed will be ignored, and higher values will cause a degradation in performance. */
-pagebuffersize:-1,/**
-             *  @property {number} [pagespacing=4] - Specifies the distance (in pixels) between pages displayed.
-             */
-pagespacing:4,/**
-             * @property {Atalasoft.Utils.PageSelection} [pageselectlocation] - Specifies the location to determine the current page number.
-             *
-             * Current page number is displayed on the document toolbar, and also current page is used in some operation in default UI, like page rotation is applied to the current page or in {@link Atalasoft.Controls.WebDocumentViewer.next | next}, {@link Atalasoft.Controls.WebDocumentViewer.previous | previous}, {@link Atalasoft.Controls.WebDocumentViewer.showPage | showPage} methods.
-             */
-pageselectlocation:Dn.extend({},Atalasoft.Utils.PageSelection.TopLeft),/**
-             * @property {Object} parent - jQuery object that the control will contain the control. */
-parent:null,/** @property {number} [rows] - Number of rows to show when displaying tabular pages, -1 is automatic.
-             * @deprecated tabular horizontal layout is not consistent with horizontal scrolling and will be removed. Use tabular layout with vertical scrolling and columns configuration. The value of this property will be ignored.
-             * @ignore
-             */
-rows:-1,/**
-             * @property {string} [savefileformat] - Specifies the default file format for the document that will be used when saving multipage document to the server.
-             *
-             * The following formats are supported: pdf, tiff (or tif), jpeg (or jpg), png, bmp, tga, pcx, psd, tla, wbmp, emf, wmf.
-             *
-             * If set, this value is used when document save is performed using default UI or when {@link Atalasoft.Controls.WebDocumentViewer.save | save} is called without save format parameter passed.
-             *
-             * If not specified, document is saved in it's own format. Note that it's not possible to save multipage documents(for example when document pages was added using JavaScript API) to the single page image format by default. Server behavior on save could be highly customized.
-             */
-savefileformat:"",/**
-             * @property {string} [savepath] - Specifies the path that the document, annotation data, and form data will be saved to on the server.
-             */
-savepath:"",/**
-             *  @property {string} [scripturl] - Url location to the server where all JavaScript files are put when not in the default location.
-             */
-scripturl:"",/**
-             *  @property {string} serverurl - Url location to the server handler.
-             */
-serverurl:"",/**
-             *  @property {boolean} [showbuttontext=true] - If the toolbar is displayed, this can be used to hide or show the button text for the toolbar items.
-             */
-showbuttontext:!0,/**
-             * @property {boolean} [showpageborder=true] - Specifies whether a black border will be added around each page in the displayed document. */
-showpageborder:!0,/**
-             * @property {boolean} [showpagenumber=true] - Specifies whether a page number will be added to the bottom left of each page. */
-showpagenumber:!0,/**
-             * @property {boolean} [showpagenumbertooltip=true] - Specifies whether a tooltip containing estimated current page number should be shown during fast scrolling. */
-showpagenumbertooltip:!0,/**
-             * @property {boolean} [showerrors=false] - Specifies whether error messages are allowed to show up in the console instead of being caught. */
-showerrors:!1,/**
-             * @property {boolean} [showstatus=false] - Specifies whether status messages will be output to an area in the toolbar. */
-showstatus:!1,/**
-             * @property {boolean} [showscrollbars=true] - Specifies whether scrollbars will be shown. */
-showscrollbars:!0,/**
-             * @property {boolean} [showselecttools=false] - Specifies whether rubberband selection tools are shown in the toolbar. */
-showselecttools:!1,/**
-             * @property {boolean} [tabular=false] - Specifies whether pages should be displayed in a tabular(grid) fashion, rather than one row or column. */
-tabular:!1,/**
-             * @property {Object} [toolbarparent] - Specifies the jQuery object where the toolbar will be created. */
-toolbarparent:null,/** @property {number} [zoom] - Sets the initial zoom level of the document. Ignored when fitting set to anything besides Fitting.None. */
-zoom:1,/**
-             * @ignore
-             */
-showthumbcaption:!1,/**
-             * @ignore
-             */
-thumbcaptionformat:"",/**
-             * @property {boolean} [persistrotation=true] - Specifies whether to persist page rotation on document save.
-             *
-             * I.e of set to `false`, rotation applied in 'view-only' mode and ignored when document is saved.
-             */
-persistrotation:!0,/**
-             * @property {boolean} [showrotatetools=true] - Specifies whether page and annotations rotation UI handles and buttons are shown.
-             *
-             * Annotation rotation could be explicitly enabled or disabled for individual types of annotations using {@link WebDocumentViewerConfig.annotations|annotations.defaults}. */
-showrotatetools:!0,/** @property {MouseToolConfig|Atalasoft.Utils.MouseToolType} [mousetool] - Specifies the mouse tools settings. Could be set to Atalasoft.Utils.MouseToolType if no advanced settings specified.
-             *
-             * Mouse tool identifies how user mouse or touch actions ar interpreted. For example, this could be Pan tool to scroll pages, Zoom-Area tool to select image region and zoom to it, Text tool to select and copy document text, etc.
-             *
-             * Active mouse tool could be changed using {@link Atalasoft.Controls.WebDocumentViewer.setMouseTool | setMouseTool} method.
-             */
-mousetool:{/**
-                 * @typedef {Object} MouseToolConfig
-                 *
-                 * @property {Atalasoft.Utils.MouseToolType} [type = Pan] - default mouse tool. This tool is enabled each time new document is loaded.
-                 * @property {TextMouseToolConfig} [text] - Text selection behavior configuration.
-                 */
-type:Fn.Pan,/** Specifies the default text selection settings*/
-text:{/**
-                     * @typedef {Object} TextMouseToolConfig
-                     *
-                     * @property [Atalasoft.Utils.ScrollArea] [scrolltriggerarea = Normal] - Specifies the percentage of type of scroll trigger area. When selecting text in that area around page bounds scrolling will be triggered for corresponding direction.
-                     *
-                     * @property {number} [throttlingtreshold=40] - Milliseconds throttling threshold for text selection UI operations. 0 performs selection without throttling barrier, most CPU intensive. I.e. setting this to 0 causes selection calculation on each corresponding browser mouse event.
-                     *
-                     * @property {Object} [selection] - Specifies the text selection highlight settings.
-                     * @property {string} [selection.color='blue'] - Specifies the fill color for selected text.
-                     * @property {number} [selection.alpha = 0.25] - Specifies the selected text highlighting transparency level.
-                     *
-                     * @property {Object} [highlight] - Specifies the search results highlight settings.
-                     * @property {string} [highlight.color='yellow'] - Specifies the fill color for search results highlight.
-                     * @property {number} [highlight.alpha = 0.7] - Specifies the transparency level for search results highlight.
-                     *
-                     * @property {boolean} [hookcopy=false] - Control subscribes to ctrl+c key combination. If so, selected text will be copied to clipboard when uses press ctrl+c.
-                     *
-                     * Alternatively application could apply it's own logic for ctrl+c - for example, grab selected text using {Atalasoft.Controls.WebDocumentViewer~TextController#getSelected| getSelected} method and let user to edit it before copying.
-                     *
-                     * @property {boolean} [allowsearch=true] - Specifies whether to show default search UI.
-                     *
-                     * @property {boolean} [wrapsearch=true] - Specifies whether default text search is wrapped.
-                     *
-                     * @property {number} [searchdelay=400] - Specifies the milliseconds timeout before triggering text search when text is modified in search textbox.
-                     *
-                     * This allows to delay potentially search operation start while user still types query text.
-                     */
-scrolltriggerarea:Atalasoft.Utils.ScrollArea.Normal,/**
-                     *  Specifies scroll delta in pixels that are applied when selecting text within viewport scroll trigger area
-                     *  @private
-                     */
-innerscrolldelta:10,/**
-                     * Specifies scroll delta in pixels that are applied when selecting text and mouse goes out of viewport.
-                     * @private
-                     */
-outerscrolldelta:20,/** Specifies  */
-throttlingtreshold:40,selection:{color:"blue",alpha:.25},highlight:{color:"yellow",alpha:.7},hookcopy:!1,allowsearch:!0,wrapsearch:!0,searchdelay:400}}};if(e){var Qn=e.mousetool;e.mousetool&&"object"!==_typeof(e.mousetool)&&(e.mousetool=Dn.extend({},jn.mousetool,{type:Qn})),!e.tabular||e.direction!==Atalasoft.Utils.ScrollDirection.Horizontal&&1!==e.columns||(e.tabular=!1),Dn.extend(!0,jn,e),e.mousetool=Qn}ve(),s(),/**
-         * @member {WebDocumentViewerConfig} config - Current control configuration.
-         * @memberOf Atalasoft.Controls.WebDocumentViewer
-         * @instance
-         * @alias config
+         * @event Atalasoft.Controls.WebDocumentViewer#error
+         * @param {Object} event - The event object.
+         * @param {string} event.name - The error type identifier.
+         * @param {string} event.message - The error clarification message.
+         * @type {ErrorCallback}
          */
-Pn.config=jn,/** WARNING: Changing values from these references can cause instability.*/
-Pn.events=Nn,/** WARNING: Changing values from these references can cause instability.*/
-Pn.domclasses=On,/** WARNING: Changing values from these references can cause instability.*/
-Pn.domattributes=qn;var Zn={height:0,isEmpty:function(){return 0===this.width&&0===this.height},width:0,zero:function(){this.width=0,this.height=0},zoom:1},Gn=null;/**
-        * [Internal] Gets debug info object
-        * @returns debug info object if available, otherwise null
-        */
-return Pn.__getDebugInfo=nn,/**
-        * [Internal] Gets the viewer linkage for controls that inherit this one
-        * @param viewer object of type WebDocumentViewer
-        * @param linker internal object of type __LVlinker
-        * @returns linker object if possible, otherwise undefined
-        */
-Pn.__getViewerLink=an,Pn.dispose=u,Pn.empty=rn,Pn.fit=yo,Pn.getZoom=sn,Pn.isReady=cn,Pn.scrollTo=un,Pn.scrollBy=dn,Pn.next=hn,Pn.previous=gn,Pn.zoom=go,Pn.zoomIn=fn,Pn.zoomOut=pn,Pn.openUrl=Pn.OpenUrl=mn,Pn.save=_n,Pn.getCurrentPageIndex=vn,Pn.bind=xn,Pn.unbind=bn,Pn.trigger=yn,Pn.getDocumentInfo=zn,Pn.setMouseTool=wn,Pn.isPageLoaded=Ke,Pn.reloadPage=$e,Pn.showPage=Be,Pn.showPageNumber=Ue,Atalasoft.Annotations.AnnotationController(),Atalasoft.Document.ManipulationController(),Atalasoft.Forms.FormController(),Atalasoft.Text.TextController(),Pn.annotations=Atalasoft.Annotations.AnnotationController.__exposedApi,Pn.document=Atalasoft.Document.ManipulationController.__exposedApi,Pn.forms=Atalasoft.Forms.FormController.__exposedApi,Pn.text=Atalasoft.Text.TextController.__exposedApi,i(),Pn}}();
-"use strict";var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};/**
- * WebDocuemntViewer Document operations API.
+error:null,
+/** Triggers when the control has completed asynchronous initialization.
+         *
+         * Asynchronous initialization happens when some dependent scripts are not included to web page and control trying to load them on background.
+         * In case of synchronous initialization, this event won't be fired. {@link Atalasoft.Controls.WebDocumentViewer#isReady| isReady} method could be used after construction to check whether control is initialized.
+         * @event Atalasoft.Controls.WebDocumentViewer#initialized
+         * @type {NotificationCallback}
+         */
+initialized:null,
+/**
+         * Triggers when the page number has changed. Populated keys: e.number
+         * @event Atalasoft.Controls.WebDocumentViewer#pagenumberchanged
+         * @param {Object} event - The event object.
+         */
+pagenumberchanged:null,
+/** Triggers when the control has recycled a pageDiv object.
+         * @event Atalasoft.Controls.WebDocumentViewer#pagerecycled
+         * @param {Object} event - The event object.
+         * @param {number} event.index - Index of the recycled page.
+         */
+pagerecycled:null,
+/**
+         * Triggers when the control has resized a pageDiv object.
+         * @event Atalasoft.Controls.WebDocumentViewer#pageresize
+         * @param {Object} event - The event object.
+         * @param {number} event.index - Index of the resized page.
+         * @param {number} event.width - Width of the page after resize.
+         * @param {number} event.height - Height of the recycled page.
+         */
+pageresize:null,
+/** Triggers when the control has shown a page in the viewable area.
+         * @event Atalasoft.Controls.WebDocumentViewer#pageshown
+         * @param {Object} event - The event object.
+         * @param {number} event.index - Index of the page.
+         */
+pageshown:null,
+/** Triggers when the page size returned from the server is different than expected. The expected page size is the size returned from server along with other document info.
+         * @event Atalasoft.Controls.WebDocumentViewer#pagesizechanged
+         * @param {Object} event - The event object.
+         * @param {number} event.index - Index of the resized page.
+         * @param {number} event.width - Width of the page after resize.
+         * @param {number} event.height - Height of the recycled page.
+         * @param {number} event.dx - Difference with the previous(expected) page width. Scaled images are compared.
+         * @param {number} event.dy - Difference with the previous(expected) page height. Scaled images are compared.
+         */
+pagesizechanged:null,
+/** Triggers for every pixel movement registered by the scrollable area.
+         * @event Atalasoft.Controls.WebDocumentViewer#scroll
+         * @param {Object} event - The event object.
+         * @param {number} event.x - Horizontal scroll position.
+         * @param {number} event.y - Vertical scroll position.
+         * @param {number} event.dx - Distance scrolled horizontally.
+         * @param {number} event.dy - Distance scrolled vertically.
+         */
+scroll:null,
+/** Triggers when dependencies have finished loading.
+         * @event Atalasoft.Controls.WebDocumentViewer#scriptsloaded
+         * @type {NotificationCallback}
+         */
+scriptsloaded:null,
+/** Triggers when the control has updated the status bar.
+         * @event Atalasoft.Controls.WebDocumentViewer#statusmessage
+         * @param {Object} event - The event object.
+         * @param {string} event.message - The status message.
+         */
+statusmessage:null,
+/** Triggers when a zoom operation has been started.
+         * @event Atalasoft.Controls.WebDocumentViewer#zoomstarted
+         * @type {NotificationCallback}
+         */
+zoomstarted:null,
+/** Triggers when the zoom level of the control has changed.
+         * @event Atalasoft.Controls.WebDocumentViewer#zoomchanged
+         * @param {Object} event - The event object.
+         * @param {number} zoom - Current document zoom value.
+         */
+zoomchanged:null,
+/**
+         * Triggers when file upload is started
+         * @event Atalasoft.Controls.WebDocumentViewer#fileuploadstarted
+         * @param {Object} event - The event object.
+         * @param {UploadFileInfo} event.fileinfo - The file information.
+         */
+fileuploadstarted:null,
+/**
+         * Triggers when file upload has failed or was canceled.
+         * @event Atalasoft.Controls.WebDocumentViewer#fileuploaderror
+         * @param {Object} event - The event object.
+         * @param {UploadFileErrorInfo} event.errorinfo - The error information.
+         */
+fileuploaderror:null,
+/**
+         * Triggers when file upload has finished successfully.
+         * @event Atalasoft.Controls.WebDocumentViewer#fileuploadfinished
+         * @param {Object} event - The event object.
+         * @param {string} event.filename - Name of the file for upload.
+         * @param {string} event.filepath - Relative path on server to the uploaded file.
+         * @param {Object} event.customData - The event customer data from server.
+         */
+fileuploadfinished:null,
+/**
+         * Triggers during file upload process. Can be used to track upload progress.
+         * @event Atalasoft.Controls.WebDocumentViewer#fileuploading
+         * @param {Object} event - The event object.
+         * @param {UploadingFileInfo} event.uploadinfo - The progress information.
+         */
+fileuploading:null,
+/**
+         * Triggers when the files upload is started.
+         * @event Atalasoft.Controls.WebDocumentViewer#uploadstarted
+         * @param {Object} event - The event object.
+         * @param {UploadStartInfo} event.info - The upload information.
+         */
+uploadstarted:null,
+/**
+         * Triggers when the files upload is finished
+         * @event Atalasoft.Controls.WebDocumentViewer#uploadfinished
+         * @param {Object} event - The event object.
+         * @param {boolean} event.success - Flag indicating whether or not upload was completed without errors.
+         * @param {boolean} event.canceled - Flag indicating whether or not upload was canceled.
+         */
+uploadfinished:null,
+/**
+         * Triggers when the file added to upload files through UI controls.
+         * @event Atalasoft.Controls.WebDocumentViewer#fileaddedtoupload
+         * @param {object} event - The event object.
+         * @param {string} event.filename - Name of the file for upload.
+         * @param {Atalasoft.Utils.FileUploadRejectReason} event.reason - The reason of why file was rejected from the adding to upload.
+         * @param {boolean} event.success - Flag indicating whether or not file has passed filtering.
+         */
+fileaddedtoupload:null},B={
+/**
+         * @property {boolean} [allowannotations=false] - Turns annotation support on or off.
+         * This affects both UI annotations toolbar appearance and corresponding API methods behavior.
+         * If set to `false`, {@link Atalasoft.Controls.WebDocumentViewer#annotations|WebDocumentViewer.annotations} will be set to `null` and annotation-related methods of {@link Atalasoft.Controls.WebDocumentViewer |WebDocumentViewer} will throw errors.
+         */
+allowannotations:!1,
+/**
+         * @property {boolean} [allowflick=true] - Turns flick scrolling support on or off.
+         */
+allowflick:!0,
+/**
+         * @property {boolean} [allowforms=false] - Turns forms support on or off.
+         */
+allowforms:!1,
+/**
+         * @property {boolean} [allowtext=false] - Turns text selection support on or off.
+         */
+allowtext:!1,
+/**
+         * @property {AnnotationsConfig} [annotations] - Annotations specific config options, including predefined configurations for particular annotation types.
+         */
+annotations:{
+/**
+             * Represents default configuration for various types of annotations.
+             * @typedef {Object} AnnotationsConfig
+             * @property {AnnotationData[]} [defaults] - Pre defined annotations to be drawn with the mouse.
+             * @property {AnnotationData[]} [stamps] - Pre defined stamp annotations to be drawn with the mouse.
+             * @property {AnnotationData[]} [images] - Pre defined image annotations to be drawn with the mouse.
+             * @property {boolean} [saveusername] - Indicates whether the server handler will save the username property when saving all
+             */
+/**
+             * Predefined annotations to be drawn with the mouse.
+             */
+defaults:null,
+/**
+             * Predefined stamp annotations to be drawn with the mouse.
+             */
+stamps:null,
+/**
+             * Pre defined image annotations to be drawn with the mouse.
+             */
+images:null,
+/**
+             * Indicates whether the server handler will save the username property when saving all annotations.
+             */
+saveusername:!1},
+/**
+         * @property {number} [columns] - Number of columns to show when displaying tabular pages, -1 is automatic. */
+columns:-1,
+/** @property {Atalasoft.Utils.ScrollDirection} [direction = Vertical] - Scroll direction of the viewer.
+         *
+         * i.e. controls whether document pages positioned in vertical or horizontal direction.
+         */
+direction:k.Vertical,
+/**
+         * @property {string} [documenturl] - Identifier of the document (that is on the server) to be displayed when the document is first opened.
+         *
+         * By default `documenturl` is treated as an url to the image file on server. Application could customize server behavior and in this case `documenturl` could contain arbitrary string.
+         * If this parameter is specified, document will be opened right after viewer initialization completes. Otherwise document should be opened using {@link Atalasoft.Controls.WebDocumentViewer.openUrl | openUrl} method.
+         *
+         * This property on the {@link Atalasoft.Controls.WebDocumentViewer#config|viewer.config} is updated internally each time new document is opened.
+         */
+documenturl:"",
+/**
+         *  @property {string} [annotationsurl] Identifier of the annotation data (an .xmp file on the server) that should be displayed along with the displayed document.
+         *
+         *  By default `annotationsurl` is treated as an url to the serialized annotations data file on server(usually .xmp). Application could customize server behavior and in this case `annotationsurl` could contain arbitrary string.
+         *
+         *  This property on the {@link Atalasoft.Controls.WebDocumentViewer#config|viewer.config} is updated internally each time new document is opened.
+         */
+annotationsurl:"",
+/**
+         * @property {string} [formurl] - Identifier of the annotation data PDF form data (.pdf file on the server) that should be displayed along with the displayed document.
+         *
+         * In most cases this option should be omitted, so forms will be loaded from the PDF document specified by {@link WebDocumentViewerConfig.documenturl | documenturl}
+         *
+         * This property on the {@link Atalasoft.Controls.WebDocumentViewer#config|viewer.config} is updated internally each time new document is opened.
+         */
+formurl:"",
+/**
+         * @property {Atalasoft.Utils.Fitting} [fitting = Width] - Specifies the initial page image fit when document is opened in the viewer.
+         *
+         * Usually it makes sense to set initial fit to viewer width for vertical scrolling {@link WebDocumentViewerConfig.direction|direction} and to height for horizontal.
+         */
+fitting:u.Width,
+/**
+         * @property {boolean} [forcepagefit=false] - Specifies whether document pages should be unified basing on the expected document page size.
+         *
+         * Expected page size is sent by server when opening new document. By default it's the size of the first page in document, but any values could be provided when default behavior is overridden by application.
+         *
+         * It's recommended to set this option to `true` for most documents.
+         *
+         * Setting this property to true have following benefits:
+         * - Pages looks similar even for documents containing pages with having different sizes(or different DPI). Aspect ratio is preserved when calculating unification zoom ratio, so pages are not completely same. But in most cases they would have same width or height.
+         *
+         * - Pages are requested on demand, so size of each individual page is not known util it's loaded from server. Thus when pages having different sizes are inserted into DOM, their sizes are different from expected. This would cause resizing of the DOM elements and thus cause visual shifts of the images. Especially such effect could be noticeable on big images, when rendering and load time is bigger then usual.
+         *
+         * Setting this option to false is helpful when document having pages both "small" and "big" pages and those pages should be displayed as is, without additional zoom. For example, when driver license and scanned pages are displayed as a single document.
+         */
+forcepagefit:!1,
+/**
+         * @property [forcepagesize] - Allows a custom page size to be used for force fitting all pages to. Ignored if forcepagefit is false.
+         * @private
+         */
+forcepagesize:{height:-1,width:-1},
+/**
+         *  @property {boolean} [jpeg=false] - Allows page images to be returned as jpeg instead of png.
+         */
+jpeg:!1,
+/**
+         *  @property {number} [maxwidth=3000] - Specifies the maximum amount of pixel width allowed for zooming in.
+         *
+         *  This property is intended to limit size of the images data transferred over the wire on big zoom values.
+         */
+maxwidth:3e3,
+/**
+         *  @property {number} [memorythreshold=500000000] - Maximum number of bytes in memory before larger memory objects are recycled.
+         *
+         *  DOM image objects are cached internally. This option allows to control memory usage on the browser page. Note, that estimated image sizes are not exactly match actual values - estimation is based on the expected document images color format and size. So actual memory usage in browser process could differ from the configured value.
+         */
+memorythreshold:5e8,
+/**
+         *  @property {number} [minwidth=150] - Specifies the minimum amount of pixel width allowed for zooming out.
+         */
+minwidth:150,
+/**
+         *  @property {number} [pageborderwidth=1] - Specifies the pixel border width around each page in a document.
+         *  */
+pageborderwidth:1,
+/**
+         * @property {number} [pagebuffersize] - The number of pages to keep in memory while scrolling. Negative values will automatically calculate the optimal number based on available screen space. Values lower than can be displayed will be ignored, and higher values will cause a degradation in performance. */
+pagebuffersize:-1,
+/**
+         *  @property {number} [pagespacing=4] - Specifies the distance (in pixels) between pages displayed.
+         */
+pagespacing:4,
+/**
+         * @property {Atalasoft.Utils.PageSelection} [pageselectlocation] - Specifies the location to determine the current page number.
+         *
+         * Current page number is displayed on the document toolbar, and also current page is used in some operation in default UI, like page rotation is applied to the current page or in {@link Atalasoft.Controls.WebDocumentViewer.next | next}, {@link Atalasoft.Controls.WebDocumentViewer.previous | previous}, {@link Atalasoft.Controls.WebDocumentViewer.showPage | showPage} methods.
+         */
+pageselectlocation:V.extend({},Atalasoft.Utils.PageSelection.TopLeft),
+/**
+         * @property {Object} parent - jQuery object that the control will contain the control. */
+parent:null,
+/** @property {number} [rows] - Number of rows to show when displaying tabular pages, -1 is automatic.
+         * @deprecated tabular horizontal layout is not consistent with horizontal scrolling and will be removed. Use tabular layout with vertical scrolling and columns configuration. The value of this property will be ignored.
+         * @ignore
+         */
+rows:-1,
+/**
+         * @property {string} [savefileformat] - Specifies the default file format for the document that will be used when saving multipage document to the server.
+         *
+         * The following formats are supported: pdf, tiff (or tif), jpeg (or jpg), png, bmp, tga, pcx, psd, tla, wbmp, emf, wmf.
+         *
+         * If set, this value is used when document save is performed using default UI or when {@link Atalasoft.Controls.WebDocumentViewer.save | save} is called without save format parameter passed.
+         *
+         * If not specified, document is saved in it's own format. Note that it's not possible to save multipage documents(for example when document pages was added using JavaScript API) to the single page image format by default. Server behavior on save could be highly customized.
+         */
+savefileformat:"",
+/**
+         * @property {string} [savepath] - Specifies the path that the document, annotation data, and form data will be saved to on the server.
+         */
+savepath:"",
+/**
+         *  @property {string} [scripturl] - Url location to the server where all JavaScript files are put when not in the default location.
+         */
+scripturl:"",
+/**
+         *  @property {string} serverurl - Url location to the server handler.
+         */
+serverurl:"",
+/**
+         *  @property {boolean} [showbuttontext=true] - If the toolbar is displayed, this can be used to hide or show the button text for the toolbar items.
+         */
+showbuttontext:!0,
+/**
+         * @property {boolean} [showpageborder=true] - Specifies whether a black border will be added around each page in the displayed document. */
+showpageborder:!0,
+/**
+         * @property {boolean} [showpagenumber=true] - Specifies whether a page number will be added to the bottom left of each page. */
+showpagenumber:!0,
+/**
+         * @property {boolean} [showpagenumbertooltip=true] - Specifies whether a tooltip containing estimated current page number should be shown during fast scrolling. */
+showpagenumbertooltip:!0,
+/**
+         * @property {boolean} [showerrors=false] - Specifies whether error messages are allowed to show up in the console instead of being caught. */
+showerrors:!1,
+/**
+         * @property {boolean} [showstatus=false] - Specifies whether status messages will be output to an area in the toolbar. */
+showstatus:!1,
+/**
+         * @property {boolean} [showscrollbars=true] - Specifies whether scrollbars will be shown. */
+showscrollbars:!0,
+/**
+         * @property {boolean} [showselecttools=false] - Specifies whether rubberband selection tools are shown in the toolbar. */
+showselecttools:!1,
+/**
+         * @property {boolean} [tabular=false] - Specifies whether pages should be displayed in a tabular(grid) fashion, rather than one row or column. */
+tabular:!1,
+/**
+         * @property {Object} [toolbarparent] - Specifies the jQuery object where the toolbar will be created. */
+toolbarparent:null,
+/** @property {number} [zoom] - Sets the initial zoom level of the document. Ignored when fitting set to anything besides Fitting.None. */
+zoom:1,
+/**
+         * @ignore
+         */
+showthumbcaption:!1,
+/**
+         * @ignore
+         */
+thumbcaptionformat:"",
+/**
+         * @property {boolean} [persistrotation=true] - Specifies whether to persist page rotation on document save.
+         *
+         * I.e of set to `false`, rotation applied in 'view-only' mode and ignored when document is saved.
+         */
+persistrotation:!0,
+/**
+         * @property {boolean} [showrotatetools=true] - Specifies whether page and annotations rotation UI handles and buttons are shown.
+         *
+         * Annotation rotation could be explicitly enabled or disabled for individual types of annotations using {@link WebDocumentViewerConfig.annotations|annotations.defaults}. */
+showrotatetools:!0,
+/** @property {MouseToolConfig|Atalasoft.Utils.MouseToolType} [mousetool] - Specifies the mouse tools settings. Could be set to Atalasoft.Utils.MouseToolType if no advanced settings specified.
+         *
+         * Mouse tool identifies how user mouse or touch actions ar interpreted. For example, this could be Pan tool to scroll pages, Zoom-Area tool to select image region and zoom to it, Text tool to select and copy document text, etc.
+         *
+         * Active mouse tool could be changed using {@link Atalasoft.Controls.WebDocumentViewer.setMouseTool | setMouseTool} method.
+         */
+mousetool:{
+/**
+             * @typedef {Object} MouseToolConfig
+             *
+             * @property {Atalasoft.Utils.MouseToolType} [type = Pan] - default mouse tool. This tool is enabled each time new document is loaded.
+             * @property {TextMouseToolConfig} [text] - Text selection behavior configuration.
+             */
+type:r.Pan,
+/** Specifies the default text selection settings*/
+text:{
+/**
+                 * @typedef {Object} TextMouseToolConfig
+                 *
+                 * @property {Atalasoft.Utils.ScrollArea} [scrolltriggerarea = Normal] - Specifies the percentage of type of scroll trigger area. When selecting text in that area around page bounds scrolling will be triggered for corresponding direction.
+                 *
+                 * @property {number} [throttlingtreshold=40] - Milliseconds throttling threshold for text selection UI operations. 0 performs selection without throttling barrier, most CPU intensive. I.e. setting this to 0 causes selection calculation on each corresponding browser mouse event.
+                 *
+                 * @property {Object} [selection] - Specifies the text selection highlight settings.
+                 * @property {string} [selection.color='blue'] - Specifies the fill color for selected text.
+                 * @property {number} [selection.alpha = 0.25] - Specifies the selected text highlighting transparency level.
+                 *
+                 * @property {Object} [highlight] - Specifies the search results highlight settings.
+                 * @property {string} [highlight.color='yellow'] - Specifies the fill color for search results highlight.
+                 * @property {number} [highlight.alpha = 0.7] - Specifies the transparency level for search results highlight.
+                 *
+                 * @property {boolean} [hookcopy=false] - Control subscribes to ctrl+c key combination. If so, selected text will be copied to clipboard when uses press ctrl+c.
+                 *
+                 * Alternatively application could apply it's own logic for ctrl+c - for example, grab selected text using {Atalasoft.Controls.WebDocumentViewer~TextController#getSelected| getSelected} method and let user to edit it before copying.
+                 *
+                 * @property {boolean} [allowsearch=true] - Specifies whether to show default search UI.
+                 *
+                 * @property {boolean} [wrapsearch=true] - Specifies whether default text search is wrapped.
+                 *
+                 * @property {number} [searchdelay=400] - Specifies the milliseconds timeout before triggering text search when text is modified in search textbox.
+                 *
+                 * This allows to delay potentially search operation start while user still types query text.
+                 */
+scrolltriggerarea:Atalasoft.Utils.ScrollArea.Normal,
+/**
+                 *  Specifies scroll delta in pixels that are applied when selecting text within viewport scroll trigger area
+                 *  @private
+                 */
+innerscrolldelta:10,
+/**
+                 * Specifies scroll delta in pixels that are applied when selecting text and mouse goes out of viewport.
+                 * @private
+                 */
+outerscrolldelta:20,
+/** Specifies  */
+throttlingtreshold:40,selection:{color:"blue",alpha:.25},highlight:{color:"yellow",alpha:.7},hookcopy:!1,allowsearch:!0,wrapsearch:!0,searchdelay:400}},
+/**
+         * @typedef {Object} FileUploadConfig
+         *
+         * @property {boolean} [enabled] - a flag indicating whether or not upload functionality should be enabled. Provides a possibility to explicitly disable upload functionality even if upload section is presented.
+         * @property {string} uploadpath - represents a relative path where an uploaded file should be saved. This path must be a path to an application subfolder, otherwise upload operation will not work correctly and exception about incorrect path will be returned to the client.
+         * @property {string} allowedfiletypes - represents a comma-separated list of file types and MIME-types that are allowed to be selected and uploaded.
+         * @property {number} allowedmaxfilesize - represents a file size in bytes.
+         * @property {boolean} allowmultiplefiles - a flag inidicating whether or not it is allowed to perform multiple files upload.
+         * @property {boolean} allowdragdrop - a flag indicating whether or not it is allowed to upload files using drag-and-drop.
+         * @property {number} filesuploadconcurrency - represents a number of concurrent uploading files, by default all files loads sequentially.
+         * Note, this property doesn't affect on maximum allowed connections per host, that defined by each browser internally. If this value is
+         * bigger than number of default persistent connections per server/proxy, than WDV puts the request in queue and fires event {@link Atalasoft.Controls.WebDocumentViewer#event:fileuploadstarted|fileuploadstarted},
+         * but the real file upload stats only when browser allow this request to be sent.
+         * @property {boolean} closeuiafterupload - a flag indicating whether or not UI will be closed automatically right after upload finished. By default this flag set to `true` value.
+         * @example <caption>Upload section of Web Document Viewer config</caption>
+         * upload: {
+         *   uploadpath: 'Upload/Viewer',
+         *   allowedfiletypes: '.jpg,.raw,image/tiff', // Allowed JPG, RAW and TIFF files.
+         *   allowedmaxfilesize: 10 * 1024 * 1024, // 10MB
+         *   allowmultiplefiles: true,
+         *   allowdragdrop: true
+         * }
+         */
+/**
+         * @property {FileUploadConfig} [upload] - Specifies the file upload settings. If this section is not specified, the upload functionality is disabled.
+         */
+upload:null};if(t){var p=t.mousetool;t.mousetool&&"object"!==_typeof(t.mousetool)&&(t.mousetool=V.extend({},B.mousetool,{type:p})),!t.tabular||t.direction!==Atalasoft.Utils.ScrollDirection.Horizontal&&1!==t.columns||(t.tabular=!1),V.extend(!0,B,t),t.mousetool=p}if(B.direction=B.direction===k.Vertical||B.direction===k.Horizontal?B.direction:k.Vertical,B.fitting=B.fitting===u.None||B.fitting===u.Best||B.fitting===u.Width||B.fitting===u.Height?B.fitting:u.Width,B.pageborderwidth=Tt(B.pageborderwidth)?parseInt(B.pageborderwidth,10):1,B.pagespacing=Tt(B.pagespacing)?parseInt(B.pagespacing,10):4,B.showpageborder=!!B.showpageborder,B.showpagenumber=!!B.showpagenumber,B.showstatus=!!B.showstatus,B.zoom=Tt(B.zoom,!0)?parseFloat(B.zoom):1,B.scripturl=0<(e=B.scripturl).length&&-1===e.indexOf("/",e.length-1)&&-1===e.indexOf("\\",e.length-1)?B.scripturl+"/":B.scripturl,function(){if((B.mousetool.type===r.ZoomArea||B.mousetool.type===r.Selection||B.mousetool.type===r.Text)&&!B.showselecttools){if(null!==t.showselecttols&&void 0!==t.showselecttools)throw"The mouse tool type is incompatible with 'showselecttools' flag value. Please change the tool type or enable selection tools.";B.showselecttools=!0}}(),function(){B.upload||(B.upload={enabled:!1});var t=B.upload;!1!==t.enabled&&(t.allowedmaxfilesize=Atalasoft.Utils.IsInteger(t.allowedmaxfilesize)?t.allowedmaxfilesize:Number.MAX_VALUE,t.allowdragdrop=!!t.allowdragdrop,t.allowmultiplefiles=!!t.allowmultiplefiles,t.allowedfiletypes="string"==typeof t.allowedfiletypes?t.allowedfiletypes:"",t.uploadpath="string"==typeof t.uploadpath?t.uploadpath:".",t.filesuploadconcurrency=Atalasoft.Utils.IsInteger(t.filesuploadconcurrency)?t.filesuploadconcurrency:1,t.closeuiafterupload=!1!==t.closeuiafterupload)}(),!Atalasoft.Utils.checkViewerDependencies(B.allowannotations,B.allowtext))return null;function f(t){var e=I.memory.deallocateOldestEntry();!function(t){try{t.parentNode&&t.parentNode.removeChild(t),o.appendChild(t),o.innerHTML=""}catch(t){}}(e[0]),0<=e._cacheIndex&&(b.loadedImgs[e._cacheIndex]=null,e._cacheIndex=-1),e.remove(),e.length=0,e=null}function m(t){S.newpagedivsize={height:t.height,width:t.width},S.newpagedivfullzoom=t.fullzoom,B.minwidth=t.minwidth,B.zoom=t.fullzoom,Me()}function _(t){var e=!1;(E.smallest.width<=0||t.width<E.smallest.width)&&(E.smallest.width=t.width,e=!0),(E.smallest.height<=0||t.height<E.smallest.height)&&(E.smallest.height=t.height,e=!0),H||(!function(t,e){var o=3e4;if(B.direction===k.Vertical){if(b.scrollV)if(b.scrollV.scrollSize(Math.max(b.scrollV._scrollSize+e,0)),1===b.scrollV._ratio&&b.scrollV._scrollSize+e<o)b.scrollV._tray.height(b.scrollV._tray.height()+e),b.scrollV._max=Math.max(b.scrollV._tray.height()-b.scrollV[0].clientHeight,0)+1;else{var i=b.scrollV.height()-b.scrollH.scrollbarHeight()-1,n=(o-i)*b.scrollV._ratio;o<n+e?b.scrollV.ratio((n+e)/(o-i)):Ct()}Ht(b.scrollV),Vt(b.scrollH,"width")}else if(B.direction===k.Horizontal){if(b.scrollH)if(b.scrollH.scrollSize(Math.max(b.scrollH._scrollSize+t,0)),1===b.scrollH._ratio&&b.scrollH._scrollSize+t<o)b.scrollH._tray.width(b.scrollH._tray.width()+t),b.scrollH._max=Math.max(b.scrollH._tray.width()-b.scrollH[0].clientWidth,0)+1,b.scrollH.ratio(b.scrollH._scrollSize/b.scrollH._max);else{var a=b.scrollH.width()-b.scrollV.width()-1,l=(o-a)*b.scrollH._ratio;o<l+t?b.scrollH.ratio((l+t)/(o-a)):Ct()}Ht(b.scrollH),Vt(b.scrollV,"height")}if((0!==t||0!==e)&&0!==e){var r=b.scroller[0].scrollLeft,s=b.scroller[0].scrollTop;Rt(ct(r,s)+1),eo({type:"scroll",x:r,y:s,dx:0,dy:0})}}(t.dx,t.dy),e&&ot(nt())>b.pageDivs.length&&Me(t))}function v(t,e,o,i){var n=e.getPageSize(t.index,s);if(!n){var a=e.getPageFitMultiplier(t.index,s),l=a,r={width:t.width,height:t.height};1===l&&B.forcepagefit&&(r.width!==o.width||r.height!==o.height)&&0<r.width&&0<r.height&&(l=r.width/o.width>r.height/o.height?o.width/r.width:o.height/r.height,e.setPageFitMultiplier(t.index,l,s)),e.setPageSize(t.index,V.extend({},r),s),i&&(r.width*=B.zoom*l,r.height*=B.zoom*l,(n=V.extend({},E.size)).width*=B.zoom*a,n.height*=B.zoom*a,t.dx=r.width-n.width,t.dy=r.height-n.height,_(t))}}function x(){Atalasoft.Utils.Browser.Mobile.Any()?V(window).on({orientationchange:ie}):V(window).on({resize:ie}),b.scroller.scroll(Mt),G(E.buffer)}function y(t){var e=t.target||t.srcElement;return Atalasoft.Utils.Browser.Explorer8?Atalasoft.Utils.__rf():"TEXTAREA"!==e.nodeName&&"INPUT"!==e.nodeName&&"text"!==e.type?Atalasoft.Utils.__rf():e.attributes.selectable&&"false"===e.attributes.selectable.value?Atalasoft.Utils.__rf():void 0}function z(e,o){return function(t){try{t.currentTarget=o&&0<o.length?o[0]:t.currentTarget,e&&e(t)}catch(t){zt(t.message)}}}function L(t,e){if(B.showerrors)throw void 0===e?t:t+": "+e;zt(t+": "+e),eo({type:"error",name:t,message:e})}function D(t){L(t.name,t.msg)}function T(t,e,o,i){var n=V("<"+t+"></"+t+">");return e&&e.append&&n.appendTo(e),o&&n.attr("id",o),i&&n.html(i),n}function F(t,e,o){return T("div",t,e,o)}function P(t){var e=V('<div style="width:100%; height:100%; position:absolute; left: 0px; top: 0px; background: #F00; opacity:0.0;"></div>');if(Atalasoft.Utils.Browser.Explorer)if(parseInt(Atalasoft.Utils.Browser.Version,10)<=8)e.css({filter:"alpha(opacity=0)"});else if(10===parseInt(Atalasoft.Utils.Browser.Version,10)){var o=!1;e.reflow=function(){if(o)e.empty();else{var t=V("<hr/>");e.append(t)}o=!o}}return e.toFront=function(){e.css({"z-index":"10"}),e.reflow&&e.reflow()},e.reset=function(){e.css({"z-index":""}),e.reflow&&e.reflow()},t&&t.prepend(e),e}function A(t){var e=F(t.parent),o=s+"_toolbar";e.buttons=[];for(var i=0;t.children&&i<t.children.length;i++){var n=null;switch(t.children[i].type){case"button":if(!Atalasoft.Utils.Browser.Features.Touch||"lines"!==t.children[i].icon){t.children[i].id=o+"_"+t.children[i].id;var a=j(t.children[i],e);a.addClass(U.atala_toolbar_button),n=a,e.buttons.push(a)}break;case"pagelabel":b.pageLabel=T("span",e,o+"_"+t.children[i].id),(n=b.pageLabel).addClass("ui-controlgroup-item")}n&&t.children[i].cls&&n.addClass(t.children[i].cls)}return e}function C(t){var e=V("<ul/>");for(var o in e.css({fontSize:"medium"}),e.addClass(U.atala_context_menu),t)if(t.hasOwnProperty(o)){var i=Atalasoft.Utils.flattenVersionSting(V.ui.version)>=Atalasoft.Utils.flattenVersionSting("1.12")?"div":"a",n=V("<li><"+i+' href="#"> '+o+" </"+i+"></li>");Atalasoft.Utils.Browser.Features.Touch&&!Atalasoft.Utils.Browser.Mobile.iOS&&n.bind({touchend:t[o]}),n.click(t[o]),n.appendTo(e)}return e.menu(),e}function W(t,e,o){var i=V('<div title="'+e+'" />');return o&&i.append(o),i.dialog(),i}function R(t){var e=T("span",b.toolbar.annoToolbar).addClass("ui-controlgroup-item");return j(t,e),q(e,t.id+"_Drop","ui-icon-triangle-1-s","Click To Choose",null,function(){var t=V(this).next();if(t.is(":visible"))return t.hide(),!1;var e=t.prev().prev().parent();return t.menu().show().css({position:"absolute",top:0,left:0,"min-width":e.width()+"px","z-index":11}).position({my:"left top",at:"left bottom",of:e}),!1}),e.controlgroup(),b.toolbar.annoToolbar.controlgroup("refresh"),e}function N(t,e,o){for(var i=V(t.children().first()),n={},a=0;a<o.length;a++)n[o[a].name]=O(i,e,o[a]);i.menu=C(n),t.append(i.menu),i.menu.hide()}function O(t,e,o){var i=function(){return t.button("option","label","Draw "+o.name),t.data("_annoConfig",o),t.click(e.onclick),t.menu.hide(),t.trigger("click"),!1};return Ye("menuselect"+e.icon+o.name,z(i,t)),i}function q(t,e,o,i,n,a){var l=V('<button id="'+e+'" title="'+i+'">'+(n||i)+"</button>");return a&&l.click(a),l.button({icon:o,showLabel:null!=n&&B.showbuttontext}),l.addClass("atala-ui-button"),t&&l.appendTo(t),l}function j(t,e){var o,i="menuclick"+t.icon,n=q(e,t.id,w+" "+w+"-"+t.icon,t.tooltip,t.text,(o=i,function(t){t.preventDefault(),eo(o,arguments)}));return n.data("_config",t),Ye(i,z(t.onclick,n)),n}function Z(t){var e={clearable:"atala_search_input_clearable",onclear:"atala_search_input_clear_hover",inputEmpty:"atala_search_input_empty",loading:"atala_search_input_loading"},o=t.parent||b.toolbar,i=null,n=null,a=void 0,l=void 0;function r(){var t=l.val();return t?l.addClass(e.clearable):l.removeClass(e.clearable),!!(t&&i&&i.isValid()&&t===i.getQuery())||(clearTimeout(n),i=null,t&&3<=t.length?(p(!0),n=setTimeout(function(){i=I.text.search(t,Ke(),h),g(!0)},B.mousetool.text.searchdelay),!1):void u())}function s(t){var e=l.val();return 13===t.keyCode&&i&&e&&i.isValid()&&i.getQuery()===e?(t.shiftKey?d():c(),!1):13!==t.keyCode||i&&i.isValid()?27===t.keyCode?(u(),v(),!1):void(Atalasoft.Utils.Browser.Explorer&&Atalasoft.Utils.Browser.Version<=9&&(8===t.keyCode||46===t.keyCode)&&(clearTimeout(n),n=setTimeout(function(){r()},B.mousetool.text.searchdelay))):(r(),!1)}function c(){i&&(g(!0),i.next(h))}function d(){i&&(g(!0),i.prev(h))}function u(){i=null,I.text.search(""),I.text.clearSelection(),g(!1),p(!0)}function h(t,e){t.isValid()&&(g(!1),t.wrap=B.mousetool.text.wrapsearch,e||p(e))}function g(t){m(e.loading,t)}function p(t){m(e.inputEmpty,!t)}function f(e){return function(t){t.preventDefault(),e&&e()}}function m(t,e){e?l.addClass(t):l.removeClass(t)}function _(t){m(e.onclear,this.offsetWidth-18<t.clientX-this.getBoundingClientRect().left)}function v(t){t&&t.preventDefault(),l.removeClass(e.clearable).removeClass(e.onclear).val("").change(),r()}!function(){a=F().addClass(U.atala_search_container).addClass("ui-controlgroup-item"),(l=V('<input type="text" placeholder="Search..." />').addClass(U.atala_search_input).addClass("ui-widget")).bind({keydown:s,"input propertychange":r}),T("span",a).css({width:"100%"}).append(l);var t=T("span",a);q(t,null,w+" "+w+"-search-next","Next",null,f(c)).addClass(U.atala_search_next).addClass(U.atala_toolbar_button),q(t,null,w+" "+w+"-search-prev","Previous",null,f(d)).addClass(U.atala_search_prev).addClass(U.atala_toolbar_button),a.on("mousemove","."+e.clearable,_).on("touchstart click","."+e.onclear,v),o.append(a),o.append(V('<div style="clear:both;"></div>'))}(),this.dispose=function(){l.unbind({keypress:s,"input propertychange":r}),a.off("mousemove","."+e.clearable,_).off("touchstart click","."+e.onclear,v),i&&i.dispose();a.remove()}}function Q(){B.allowannotations&&c.annotations.cancelDraw(),I.mouseTool.setTool(r.ZoomArea)}function X(o){return function(){var t=J(E),n=t[0],e=[];t.forEach(function(t){return e.push(I.document.getPageRotation(t)+o)}),I.document.rotatePages(t,e,function(){var t=ve(n),e=vt(n),o=B.direction===k.Vertical?e.height*t:0;ee(B.pageselectlocation,Atalasoft.Utils.PageSelection.Center)||ee(B.pageselectlocation,Atalasoft.Utils.PageSelection.MiddleLeft)?o/=2:ee(B.pageselectlocation,Atalasoft.Utils.PageSelection.TopLeft)&&(o=0);var i={x:B.direction===k.Vertical?0:o,y:B.direction===k.Vertical?o:0};te(n,i,B.pageselectlocation,!0)})}}function J(t){return[t.number-1]}function $(t,e){var o=Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8,i=F(t,e);return B.direction===k.Vertical?(i.height(1),i.css({display:"block"})):B.direction===k.Horizontal&&(i.width(1),i.css({display:"inline-block",overflow:"hidden"})),i._zoom=1,B.backcolor&&i.css({backgroundColor:B.backcolor}),o&&i.html("&nbsp;"),i}function G(t){if(void 0===t){var e=ot(H&&S.newpagedivsize&&0<B.zoom&&isFinite(B.zoom)?B.zoom:nt());E.buffer<e&&(E.buffer=e),E.buffer=Math.min(E.buffer,I.document.getPageCount()),t=E.buffer}function o(e){return function(){var t;t=e,S.activepage=t}}if(b.pageDivs.length<t)for(var i=b.pageDivs.length;i<t;i++)b.pageDivs[i]=F(),b.pageDivs[i].addClass(U.atala_page_div),B.showselecttools&&(b.pageDivs[i]._rubberband=new Atalasoft.Controls.RubberBandTool(c,{},b.pageDivs[i],{getViewportSize:wt,getMaxZoom:at,getPageOffsets:gt,raiseDrawLayer:Te,resetDrawLayer:Pe})),b.pageDivs[i].bind({touchstart:o(b.pageDivs[i]),mousedown:o(b.pageDivs[i])}),I.annotations&&I.annotations.addDrawingSurface(b.pageDivs[i]),(B.showselecttools||B.allowannotations||B.allowforms||B.allowtext)&&(b.pageDivs[i]._draw=P(b.pageDivs[i])),I.forms&&!H&&I.forms.addFormLayer(b.pageDivs[i]),I.text&&!H&&I.text.addTextLayer(b.pageDivs[i]);else if(b.pageDivs.length>t)for(;b.pageDivs.length>t&&0!==b.pageDivs.length;){var n=b.pageDivs.pop();n._rubberband&&n._rubberband.dispose(),I.annotations&&I.annotations.removeDrawingSurface(n),I.forms&&!H&&I.forms.removeFormLayer(n),I.text&&!H&&I.text.removeTextLayer(n),n&&qt(n),n=null}}function K(t,l,e,o){"function"==typeof e&&(o=e,e=void 0);var i="function"==typeof o?[o]:[],h=V(new Image),g=Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<=8,n=.9,r=V.extend(!0,{atala_cb:void 0},e||{});h._domEl=F(),h._domEl.addClass(U.atala_page_image_anchor),h.addClass(U.atala_page_image),g||h._domEl.append(h);var a={load:d,error:function(){T(),L("ImageError","Image at frameIndex "+p()+" failed to load.")},inserted:function(t){h._loaded&&u()}};function p(){return h._page?h._page._index:I.document.getPageIndexByImageIndex(h._index)}function f(){return h._domEl}function s(t){return I.document.getPageFitMultiplier(void 0!==t?t:p())}function m(t,e){return(t=void 0===t?B.zoom:t)*s(e)}function _(){var t=vt(p())||E.size;return{height:t.height,width:t.width}}
+/**
+        * Returns physical size of the image without client transformations applied(like view rotation)
+        */function v(){var t=_();return 90===h._viewrotation||270===h._viewrotation?C(t):t}function w(t,e){return e=e||_(),{height:Math.round(e.height*m(t)),width:Math.round(e.width*m(t))}}function c(t){var e=p(),o=E.vector&&(!l||!l.uri)?m():Math.min(m(),1),i=I.document.getPageRotation(e);if(t||o!==h._zoom||h._rotation!==i){var n=V.extend({atala_docurl:l?l.uri:h.documenturl,atala_doczoom:o,atala_thumbpadding:!1},r);i&&(n.atala_angle=i),B.jpeg&&(n.atala_jpeg=!0);var a={type:"docpage",serverurl:B.serverurl,query:"?ataladocpage="+(null===l?h._index:void 0!==l.index?l.index:l),method:"GET",data:n,cancel:!1,info:h};h._reqzoom=o,h._reqangle=i,Ne(a,d,d)}}function d(){h._loaded||h._domEl.removeClass(U.atala_page_loading),h._loaded=!0,h._zoom=h._reqzoom,h._rotation=h._reqangle;var t=p();if(0<=t){if(h._rotation!==I.document.getPageRotation(t))return void c();(h._viewrotation=0)<h.parent().length?u():g&&h._page&&h._page.nullinserted&&(jt(h._page,h,t,!0),u()),A(h._viewrotation);var e=E.vector?m():Math.min(m(),1);x()&&h._zoom<e*n&&!it(h._zoom,e)&&b(!1)}T()}function u(){var t;(t=h)&&(t.removeAttr("width height"),t.css({width:"auto",height:"auto"}));var e=h.prop("naturalWidth")||0,o=h.prop("naturalHeight")||0,i=e||h.width(),n=o||h.height(),a=_(),l=m(),r=!1;if(0!==i&&0!==n){var s;h._size.width=Math.round(i/h._zoom),h._size.height=Math.round(n/h._zoom),90!==h._viewrotation&&270!==h._viewrotation||(h._size=C(h._size)),h._size.width===E.size.width&&h._size.height===E.size.height||it(h._size.width,a.width)&&it(h._size.height,a.height)||(r=!0,I.document.setPageSize(p(),h._size)),null===I.document.getPageSize(p())&&(r=!0,I.document.setPageSize(vt,h._size)),B.forcepagefit?(s=D()/B.zoom,I.document.setPageFitMultiplier(p(),s),z()):(h._zoom!==B.zoom||r||0!==h._viewrotation)&&z();var c=w();r&&h.trigger({type:"pagesizechanged",image:h,index:p(),width:h._size.width,height:h._size.height,dx:Math.round(c.width-a.width*l),dy:Math.round(c.height-a.height*l)}),h.trigger({type:"pageresize",image:h,index:p(),width:c.width,height:c.height})}else if(g){var d=v(),u=D(d);return d.width*=u,d.height*=u,f().css(d),void h.trigger({type:"pageresize",image:h,index:p(),width:d.width,height:d.height})}}function b(t,e){x()&&!h._size.isEmpty()?("function"==typeof e&&i.push(e),h._prevzoom=h._reqzoom,t&&!S.loading?h.animate({height:Math.round(h._size.height*m()),width:Math.round(h._size.width*m())},{duration:M,easing:"easeOutQuad",complete:y,queue:!1}):(z(),y())):"function"==typeof e&&e.call(this,h)}function x(){if(!h._loaded)return!1;var t=!E.vector&&1===h._reqzoom&&1===h._prevzoom&&1<m(),e=it(h._reqzoom,m())||t;if(!e){var o=Math.abs(h._reqzoom*h._size.width-m()*h._size.width),i=Math.abs(h._reqzoom*h._size.height-m()*h._size.height);o<1&&i<1&&(e=!0)}return!e||!it(h._scaledzoom,m())}function y(){h.trigger({type:"pagezoom",index:p(),height:Math.round(h._size.height*m()),width:Math.round(h._size.width*m()),prevzoom:h._prevzoom,zoom:m()}),0===S.prpr?c():T()}function z(){var t,e,o,i=w(void 0,v()),n=w(),a=h.prop("naturalWidth")||0,l=h.prop("naturalHeight")||0,r=a&&Math.abs(a-i.width)/i.width<.01,s=l&&Math.abs(l-i.height)/i.height<.01;r&&s||(h.height(i.height),h.width(i.width)),h._domEl.width(n.width),h._domEl.height(n.height),h._scaledzoom=m(),A(h._viewrotation),t=p(),e=n.width,n.height,null!=(o=Yt(t))&&null!=o._num&&o._num.css({left:e-20,right:0})}function D(t){t=t||h._size;var e={width:B.forcepagesize.width*(H?1:B.zoom),height:B.forcepagesize.height*(H?1:B.zoom)};return(e.width<1||e.height<1)&&(e.width=E.size.width*B.zoom,e.height=E.size.height*B.zoom),t.width/e.width>t.height/e.height?e.width/t.width:e.height/t.height}function T(){0<i.length&&function(t){var e=Array.prototype.slice.call(arguments,1);for(;t.length;)t.shift().apply(this,e)}(i,h)}function P(){var t=I.document.getPageRotation(p());return 0===h._viewrotation&&t!==h._rotation||0!==h._viewrotation}function A(t){g&&0!==t&&(h.remove(void 0,!0),h._page.nullinserted=!0);var e=v(),o=w(void 0,e),i=0,n=0,a="";90!==t&&270!==t||(i=(o.height-o.width)/2,H&&e.width<e.height&&(i=0),n=(o.width-o.height)/2,o=C(o)),0!==t?(a+=" translate("+i+"px,"+n+"px)",a+="rotate("+t+"deg)",h.css(Atalasoft.Utils.__htmlTransformStyle(a))):h.css(Atalasoft.Utils.__htmlTransformStyle("")),f().css({width:o.width,height:o.height}),h._viewrotation=t}function C(t){var e=t.width;return t.width=t.height,t.height=e,t}return h._binds=a,h.documenturl=B.documenturl,h._index=l?l.mapsto:t,h._loaded=!1,h._size={width:0,height:0,isEmpty:function(){return 0===this.width&&0===this.height}},h._zoom=-1,h._prevzoom=h._zoom,h._scaledzoom=-1,h._rotation=0,h._viewrotation=0,h.dispose=function(){h.unbind(a),h._page=null,h=null},h.zoom=b,h.needsZoom=x,h.getSize=_,h.getScaledSize=w,h.getFitZoom=m,h.getFitMultiplier=s,h.needsRotate=P,h.rotate=function(t){"function"==typeof t&&i.push(t);if(P()){var e=I.document.getPageRotation(p());if(o=I.document.getPageRotation(p()),(0===h._viewrotation&&o!==h._rotation||0!==h._viewrotation&&(h._viewrotation+h._rotation)%360!==o)&&h&&h._loaded&&h._page&&(A(e=(360+e-h._rotation)%360),u()),0===S.prpr&&h._loaded)return void c()}var o;T()},h.getDomElement=f,h.invalidate=function(t,e){"function"==typeof t&&(e=t,t={});(r=V.extend(!0,{},t)).atala_cb=Math.floor(1e9*Math.random()),"function"==typeof e&&i.push(e);c(!0)},function(){h.bind(a);var t=B.pageborderwidth,e={bottom:0,top:0,right:0,left:0};h._loaded=!1,h._reqzoom=-1,(B.direction===k.Vertical||B.tabular)&&(e.bottom=B.pagespacing);(B.direction===k.Horizontal||B.tabular)&&(e.right=B.pagespacing);var o=f();B.showpageborder&&o.css({"border-bottom":t+"px solid black","border-right":t+"px solid black","border-top":t+"px solid silver","border-left":t+"px solid silver","margin-bottom":e.bottom+"px","margin-right":e.right+"px"});o.css({display:"inline-block"}),o.addClass(U.atala_page_loading),c()}(),h}function Y(t,e){var o=Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8,i="overflow:scroll; position:absolute; background-color:Transparent;",n=F(t);n.css({position:"absolute",display:"none","background-color":"white"});var a=null,l=!1;function r(){a._tooltip.hide(),E.number===a._pagenum||Kt(a._pagenum)||Ft(a._pagenum),Be()}function s(t,e){if(B.forcepagefit){e*=t._ratio;var o=t._direction===k.Vertical?{x:0,y:e}:{x:e,y:0};return ct(o.x,o.y)+1}return Math.floor(e/(t._max/I.document.getPageCount()))+1}return e===k.Horizontal?((o||Atalasoft.Utils.Browser.Firefox)&&(i=i.replace("overflow","overflow-x")),(a=V('<div style="'+i+'bottom:0px; left:0px; width:100%;z-index:10"></div>').appendTo(t))._tray=V('<div style="height:1px;"></div>').appendTo(a)):((o||Atalasoft.Utils.Browser.Firefox)&&(i=i.replace("overflow","overflow-y"),i+="width:"+(function(){var t=F(V("body")),e=F(t);t.css({width:"50px",height:"50px",overflow:"hidden",position:"absolute",visibility:"hidden"}),e.css({width:"100px",height:"100px"});var o=t.width();t.css({"overflow-y":"scroll"});var i=o-t[0].clientWidth;return V(t).remove(),i}()+1)+"px;",l=!0),(a=V('<div style="'+i+'top:0px; right:0px; height:100%;z-index:10"></div>').appendTo(t))._explicitSize=l,a._tray=V('<div style="width:1px;"></div>').appendTo(a)),et(a),a._ratio=1,a._direction=e,a._tooltip=n,a._pagenum=-1,a._scrollSize=0,a.pageNum=function(t){a._pagenum=t},a.scrollbarHeight=function(){return a.height()-a[0].clientHeight},a.scrollSize=function(t){a._scrollSize=t},a.ratio=function(t){a._ratio=t},a.bind({scroll:function(t){if(!a.propagationPaused()){clearTimeout(a._tooltip._timeout),b.scroller.stop(),b.scroller.pauseEventPropagation(!0);var e={};a._direction===k.Vertical?(b.scroller.scrollTop(a[0].scrollTop*a._ratio),a._pagenum=s(a,a[0].scrollTop),e.right=a.width()+10+"px",e.top=16+Math.round((a[0].offsetHeight-48)/a[0].scrollHeight*a[0].scrollTop)+"px"):a._direction===k.Horizontal&&(b.scroller.scrollLeft(a[0].scrollLeft*a._ratio),a._pagenum=s(a,a[0].scrollLeft),e.bottom=a.height()+10+"px",e.left=16+Math.round((a[0].offsetWidth-48)/a[0].scrollWidth*a[0].scrollLeft)+"px"),a._direction===B.direction&&B.showpagenumbertooltip&&("none"===a._tooltip.css("display")&&(a._tooltip.css(e),a._tooltip.show()),B.showpagenumbertooltip&&a._tooltip.html("Page "+a._pagenum),a._tooltip._timeout=setTimeout(r,1e3))}}}),a}function tt(t){t&&t._tooltip&&(clearTimeout(t._tooltip._timeout),t._tooltip.hide())}function et(e){var o={scroll:function(){e.unbind(o),e.resumeEventPropagation()}};e._pauseEP=0,e.propagationPaused=function(){return 0<e._pauseEP},e.pauseEventPropagation=function(t){e._pauseEP++,t&&e.bind(o)},e.resumeEventPropagation=function(){0<e._pauseEP&&e._pauseEP--}}function ot(t){var e=wt(),o=lt(0,t);o.width=0<E.smallest.width&&E.smallest.width<o.width&&!H?E.smallest.width:o.width,o.height=0<E.smallest.height&&E.smallest.height<o.height&&!H?E.smallest.height:o.height;var i=Math.ceil(e.width/o.width)+2,n=Math.ceil(e.height/o.height)+2,a=void 0;return B.tabular?(B.direction===k.Vertical&&0<B.columns?i=B.columns:B.direction===k.Horizontal&&0<B.rows&&(n=B.rows),a=i*n):B.direction===k.Vertical?a=n:B.direction===k.Horizontal&&(a=i),a}function it(t,e){return e<t+.001&&t-.001<e}function nt(){return 0!==E.size.width?B.minwidth/E.size.width:1}function at(){return 0!==E.size.width?B.maxwidth/E.size.width:1}function lt(t,e,o){if(I.document.getPageCount()<=0)return{width:0,height:0};if(o=void 0===o||o,S.newpagedivsize){var i={width:S.newpagedivsize.width,height:S.newpagedivsize.height},n=B.showpageborder&&o?2*B.pageborderwidth:0,a=(e||B.zoom)/S.newpagedivfullzoom;return i.height=Math.round(i.height*a)+n,i.width=Math.round(i.width*a)+n,i}return rt(t,e||B.zoom,B.showpageborder&&o)}function rt(t,e,o){var i,n=V.extend({},vt(t)),a=o?2*B.pageborderwidth:0;return e*=(i=t,I.document.getPageFitMultiplier(i)),n.height=Math.round(n.height*e)+a,n.width=Math.round(n.width*e)+a,n}function st(t,e){return gt(null,t,e).index}function ct(t,e){var o=wt(),i={x:t+B.pageselectlocation.x*o.width,y:e+B.pageselectlocation.y*o.height};return st(i.x,i.y)}function dt(t,e){for(var o={left:0,top:0},i=t;null!=i&&i!==e;i=i.offsetParent)o.left+=i.offsetLeft,o.top+=i.offsetTop;return o}!function(){var t=B.parent.attr("id")+"_wdv";++_Statics.instanceCounter;for(;document.getElementById(t+_Statics.instanceCounter);)++_Statics.instanceCounter;s=t+_Statics.instanceCounter}(),
+/**
+     * @member {WebDocumentViewerConfig} config - Current control configuration.
+     * @memberOf Atalasoft.Controls.WebDocumentViewer
+     * @instance
+     * @alias config
+     */
+c.config=B,
+/** WARNING: Changing values from these references can cause instability.*/
+c.events=g,
+/** WARNING: Changing values from these references can cause instability.*/
+c.domclasses=U,
+/** WARNING: Changing values from these references can cause instability.*/
+c.domattributes=h;var ut={height:0,isEmpty:function(){return 0===this.width&&0===this.height},width:0,zero:function(){this.width=0,this.height=0},zoom:1};function ht(){if(ut.isEmpty()||ut.zoom!==B.zoom){var t=gt(null,null,null,B.zoom);ut.height=t.height,ut.width=t.width,ut.zoom=B.zoom}return ut}function gt(t,e,o,i){return pt(0,t,e,o,i)}function pt(t,e,o,i,n){if(B.tabular)return function(t,e,o,i,n){if(e<t)return{width:0,height:0,index:e};var a=ft(t,o,i,n),l=ft(e,o,i,n);return l.height=B.direction===k.Vertical?l.height-a.height:l.height,l.width=B.direction===k.Horizontal?l.width-a.width:l.width,l}(t,e,o,i,n);var a=I.document.getPageCount();e=e||0===e?e:a;var l={height:0,width:0,index:t=t||0};if(B.direction===k.Vertical)for(var r=null,s=t;s<a&&s<e&&(l.height+(r=lt(s,n).height)<=i||null==i);s++)l.height+=r+B.pagespacing,l.index++;else if(B.direction===k.Horizontal)for(var c=null,d=t;d<a&&d<e&&(l.width+(c=lt(d,n).width)<=o||null==o);d++)l.width+=c+B.pagespacing,l.index++;return l.index>=a&&0<a&&(l.index=a-1),l}function ft(t,e,o,i){var n=I.document.getPageCount(),a={height:0,width:0,index:0},l=mt(i);t=null==t?t=n:t;var r=void 0,s=void 0;B.direction===k.Vertical?(r=l||1,s=Math.ceil(n/r)):B.direction===k.Horizontal&&(s=l||1,r=Math.ceil(n/s));var c=lt(0,i);c.width+=B.pagespacing,c.height+=B.pagespacing;var d=null==o?Math.floor(t/r):Math.floor(o/c.height),u=null==e?t%r:Math.ceil(e/c.width);return a.height=d*c.height,a.width=u*c.width,a.index=d*r+u,a.index>=n&&0<n&&(a.index=n-1),a}function mt(t){var e=1;if(B.tabular){var o=B.pagespacing||0,i=lt(0,t);B.direction===k.Vertical?(e=Math.floor(b.content.width()/i.width),e=Math.min(e,Math.floor((b.content.width()-e*o)/i.width))):B.direction===k.Horizontal&&(e=Math.floor(b.content.height()/i.height),e=Math.min(e,Math.floor((b.content.height()-e*o)/i.height)))}return e||1}function _t(t,e){var o=vt(t);return(we(t)+(e||0))%180==0?o:{width:o.height,height:o.width}}function vt(t){var e=I.document.getPageSize(t);return e||E.size}function wt(){return{width:b.scrollV?b.main.width()-b.scrollV.width():b.main.width(),height:b.scrollH?b.main.height()-b.scrollH.scrollbarHeight():b.main.height()}}function bt(t,e){var o={status:"fail",started:!1,reason:t};return"function"==typeof e&&e.call(),o}function xt(t,e,o,i,n,a){var l=dt(t,e);return l.left<=n&&l.left+t.clientWidth>=o&&l.top<=a&&l.top+t.clientHeight>=i}function yt(t,e,o){return e<t.length&&(t.splice(o,0,t.splice(e,1)[0]),!0)}function zt(t){B.showstatus&&b.status&&b.status.html(t),eo({type:"statusmessage",message:t})}function Dt(t,e){var o=void 0;if(1===t.length&&"object"===_typeof(t[0]))o=t[0];else if("string"==typeof t[0]){o={};var i=null;3===t.length?i=t[2]:2===t.length&&(i=t[1]);for(var n=-1<t[0].indexOf(" ")?t[0].split(" "):[t[0]],a=0;a<n.length;a++)o[n[a]]=i}for(var l in o)if(o.hasOwnProperty(l)){var r=null;if(l in g?r=g:c&&l in c.annotations.events?r=c.annotations.events:c&&l in c.forms.events?r=c.forms.events:c&&l in c.document.events&&(r=c.document.events),null==r&&(r=g),null==r[l])e&&(r[l]=[o[l]]);else if(e)r[l].push(o[l]);else if(o[l])for(var s=0;s<r[l].length;s++)r[l][s]===o[l]&&r[l].splice(s,1);else r[l].length=0}}function Tt(t,e){return e?isFinite(parseFloat(t)):isFinite(parseInt(t,10))}function Pt(t,e,o,i,n){if(null==n&&"function"==typeof i&&(n=i,i=null),t=null==t?b.scroller.scrollLeft():t,e=null==e?b.scroller.scrollTop():e,B.direction===k.Horizontal){if(t>b.viewport.width()){var a=ht();if(t<a.width&&0<b.content.width()){var l=a.width-(b.edges[0].width()+b.content.width());b.edges[1].width(l)}}}else if(B.direction===k.Vertical&&e>b.viewport.height()){var r=ht();if(e<r.height&&0<b.content.height()){var s=r.height-(b.edges[0].height()+b.content.height());b.edges[1].height(s)}}b.scroller.stop(),!o||S.loading||S.scrollPos.x===t&&S.scrollPos.y===e?(b.scroller.scrollLeft(t),b.scroller.scrollTop(e),"function"==typeof n&&n.call()):V.when(b.scroller.animate({scrollLeft:t,scrollTop:e},{duration:i||d,easing:"easeOutQuad",queue:!1})).done(n)}function At(t,e){if(b.scroller.is(":animated"))return bt("scrolling",e);var o=gt(E.number+t-1);Pt(o.width,o.height,!0,e)}function Ct(){if(b.scrollH&&b.scrollV){var t=I.document.getPageCount();if(b.scrollH.pauseEventPropagation(),b.scrollV.pauseEventPropagation(),B.direction===k.Vertical){Vt(b.scrollH,"width");var e=Math.round(gt(t-1).height+lt(t-1).height);Atalasoft.Utils.Browser.Firefox&&(e+=Math.round(b.scrollH.scrollbarHeight())),b.scrollV.scrollSize(e-(b.scrollV.height()-b.scrollH.scrollbarHeight()-1)),3e4<e?(b.scrollV.ratio(e/(3e4-(b.scrollV.height()-b.scrollH.scrollbarHeight()-1))),b.scrollV._tray.height(3e4)):(b.scrollV._tray.height(e),b.scrollV.ratio(1)),Ht(b.scrollV)}else if(B.direction===k.Horizontal){Vt(b.scrollV,"height");var o=Math.round(gt(t-1).width+lt(t-1).width);b.scrollH.scrollSize(o),3e4<o?(b.scrollH.ratio(o/(3e4-(b.scrollH.width()-b.scrollV.width()-1))),b.scrollH._tray.width(3e4)):(b.scrollH._tray.width(o),b.scrollH.ratio(1)),Ht(b.scrollH)}b.scrollV._max=Math.max(b.scrollV._tray.height()-b.scrollV.height(),0)+1,b.scrollH._max=Math.max(b.scrollH._tray.width()-b.scrollH.width(),0)+1,b.scrollH.resumeEventPropagation(),b.scrollV.resumeEventPropagation()}}function Vt(t,e){if(t){var o=Math.round(E.size[e]*B.zoom);if(B.tabular)o=b.content[e]();else for(var i=0;i<b.pageDivs.length;i++)null!=b.pageDivs[i]._index&&(o=Math.max(lt(b.pageDivs[i]._index)[e],o));t._tray[e](o),t.scrollSize(o-t[e]()),Ht(t),t.ratio(1)}}function Ht(t){t&&(t._scrollSize<=0?t._tray.hide():t._tray.show())}function Mt(t){if(!S.zooming&&!S.scrollBuffer&&b.pageDivs.length){var e=(new Date).getTime(),a=b.scroller[0].scrollLeft,l=b.scroller[0].scrollTop,o=a+b.scroller[0].clientWidth,i=l+b.scroller[0].clientHeight,n=st(a,l)+1,r=Math.abs(n-E.number)/mt();if(!S.loading){var s=I.document.getPageCount(),c=b.pageDivs[0]._index,d=b.pageDivs[b.pageDivs.length-1]._index,u=0===r&&(E.number-1<c||E.number-1>d);r<b.pageDivs.length&&!u?xt(b.edges[1][0],b.scroller[0],a,l,o,i)&&d<s-1?Bt(r):xt(b.edges[0][0],b.scroller[0],a,l,o,i)&&0<c?Ut(r):n!==E.number&&null===Yt(n-1)&&Ft(n):Wt(n,!1,null),fe()}if(Rt(ct(a,l)+1),!b.scroller.propagationPaused()&&b.scrollH&&b.scrollV){var h=Math.round(a/b.scrollH._ratio),g=Math.round(l/b.scrollV._ratio);h!==b.scrollH.scrollLeft()&&(b.scrollH.pauseEventPropagation(!0),b.scrollH.scrollLeft(h)),g!==b.scrollV.scrollTop()&&(b.scrollV.pauseEventPropagation(!0),b.scrollV.scrollTop(g))}eo({type:"scroll",x:a,y:l,dx:a-S.scrollPos.x,dy:l-S.scrollPos.y}),t&&(S.scrollTimeout&&clearTimeout(S.scrollTimeout),S.scrollTimeout=setTimeout(function(){var t,e,o,i,n;t=a,e=l,o=b.scroller[0].scrollLeft,i=b.scroller[0].scrollTop,n=o===S.scrollPos.x&&i===S.scrollPos.y,t===S.scrollPos.x&&e===S.scrollPos.y&&n?(Be(),S.scrollTimeout=null,S.loading||fe()):n||(Mt({}),S.scrollTimeout=null)},500),S.scrollPos.x=b.scroller[0].scrollLeft,S.scrollPos.y=b.scroller[0].scrollTop,S.scrollPos.t=e),S.scrollBuffer=t?setTimeout(It,50):null}}function It(){null!==S.scrollBuffer&&(clearTimeout(S.scrollBuffer),S.scrollBuffer=null)}function kt(){if(B.direction===k.Vertical)Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8&&(b.edges[0].width(b.content.width()),b.edges[1].width(b.content.width()));else if(B.direction===k.Horizontal){var t=b.pageDivs.length?(H?Math.max(E.size.height,E.size.width):E.size.height)*B.zoom:0;B.thumbpadding&&"number"==typeof B.thumbpadding&&(t+=2*B.thumbpadding),b.edges[0].height(t),b.edges[1].height(t)}}function Et(t,e){e=e||0===e?e:t+b.pageDivs.length-1,e=Math.max(t,e);var o=B.tabular?mt():1,i=B.tabular?(Math.floor(e/o)+1)*o-e:1,n=gt(t),a=I.document.getPageCount(),l=e<a?lt(e):{width:0,height:0},r=e<a-o?lt(a-1):{width:0,height:0},s=pt(t,e);s.width+=l.width,s.height+=l.height;var c=pt(e+1,a-1);if(c.width+=r.width,c.height+=r.height,B.direction===k.Vertical)if(b.edges[0].height(n.height),e+i>=I.document.getPageCount()){var d=n.height+s.height+c.height;b.scrollH&&d>b.scroller[0].clientHeight&&b.content.width()<=b.scroller[0].clientWidth?b.edges[1].height(b.scrollH.scrollbarHeight()):b.edges[1].height(0)}else b.edges[1].height(c.height),Atalasoft.Utils.Browser.Chrome&&b.content.height("");else if(B.direction===k.Horizontal)if(b.edges[0].width(n.width),e+i>=I.document.getPageCount()){var u=n.width+s.width+c.width;b.scrollV&&u>b.scroller[0].clientWidth&&b.content.height()<=b.scroller[0].clientHeight?b.scrollV._explicitSize?b.edges[1].width(b.scrollV.height()<b.scrollV._tray.height()?b.scrollV.width():0):b.edges[1].width(b.scrollV.width()):b.edges[1].width(0)}else b.edges[1].width(c.width),b.edges[1].height(1)}function St(){return S.activepage}function Ut(t){if(t=t||1,0===S.prpr&&0<b.pageDivs.length){var e=mt(B.zoom);Qt();for(var o=t;0<o;o--){var i=b.pageDivs[0]._index-e;if(0<=i&&i<I.document.getPageCount()){for(var n=e-1;0<=n;n--){var a=Jt(-1);Ot(a),b.content.prepend(a),jt(a,Gt(i+n),i+n)}Et(i,null),kt(),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<=8&&(b.content[0].className=b.content[0].className)}}setTimeout(Xt,10)}}function Bt(t){t=t||1;var e=b.pageDivs[b.pageDivs.length-1]._index+1;if(0===S.prpr&&0<b.pageDivs.length&&e<I.document.getPageCount()){Qt();for(var o=mt(B.zoom),i=I.document.getPageCount(),n=t;0<n;n--){var a=b.pageDivs[b.pageDivs.length-1]._index+1;if(a<i){for(var l=a+o-1-b.pageDivs.length,r=0;r<o;r++){var s=Jt(1);Ot(s),b.content.append(s),jt(s,Gt(a+r),a+r)}Et(l+1,a),kt()}}setTimeout(Xt,10)}}
+/**
+    * Scrolls the viewer to the given page index and executes the callback when finished.
+    * @param {number} index - Index of the page to show.
+    * @param {NotificationCallback} [callback] - Function to execute after this operation is done.
+    *  @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function showPage
+    */function Lt(t,e){Ft(t+1,e)}
+/**
+    * Scrolls the viewer to the given page number and executes the callback when finished.
+    * @param {number} pageNumber - Number of the page to show. Note that page number is expected 1-based.
+    * @param {NotificationCallback} [callback]: function to execute after this operation is done
+    * @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function showPageNumber
+    * @deprecated Please use {@link Atalasoft.Controls.WebDocumentViewer#showPage|showPage} instead.
+    */function Ft(t,e){if(t=Math.max(1,t),t=Math.min(I.document.getPageCount(),t),E.number!==t){var o=t-E.number;Math.abs(o)<b.pageDivs.length?At(o,e):Wt(t,!0,e)}else"function"==typeof e&&e.call()}function Wt(t,e,o){var i=I.document.getPageCount(),n=t-1;if(0===S.prpr&&0<i){var a=function(){Xt(!e),"function"==typeof o&&o.call()};Qt();var l=0,r=0,s=n<=0?0:n;if(s+b.pageDivs.length>=i){if(s=i-b.pageDivs.length,B.tabular){var c=mt();s=Math.ceil(s/c)*c}s=Math.max(s,0)}if(B.direction===k.Vertical){l=gt(s).height,b.edges[0].height(l),Et(s,null),kt(),Nt();for(var d=0;d<b.pageDivs.length;d++)b.content.append(b.pageDivs[d]),jt(b.pageDivs[d],null,s+d);var u=gt(Math.max(n,0)).height,h=E.number<t?-E.size.height:E.size.height;e&&u!==S.scrollPos.y?(Pt(null,u+h,!1),Pt(null,u,!0,a)):a.call()}else if(B.direction===k.Horizontal){r=gt(s).width,b.edges[0].width(r),Et(s,null),kt(),Nt();for(var g=0;g<b.pageDivs.length;g++)b.content.append(b.pageDivs[g]),jt(b.pageDivs[g],null,s+g);var p=gt(Math.max(n,0)).width,f=E.number<t?-E.size.width:E.size.width;e&&p!==S.scrollPos.x?(Pt(p+f,null,!1),Pt(p,null,!0,a)):a.call()}}else bt("paused",o)}function Rt(t){var e=I.document.getPageCount();if(0<t&&t<=e){if(E.number!==t||E.numberoutof!==e){if(b.pageLabel.html(t+" / "+e),E.number!==t){E.number=t;for(var o=0;o<b.pageDivs.length;o++){var i=b.pageDivs[o];i._index===t-1?i.addClass(U.atala_active_page):i.removeClass(U.atala_active_page)}eo({type:"pagenumberchanged",number:E.number})}E.numberoutof!==e&&(E.numberoutof=e)}}else b.pageLabel.html(""),b.viewport.find("."+U.atala_active_page).removeClass(U.atala_active_page),E.numberoutof=0}function Nt(){for(var t=b.pageDivs.length-1;0<=t;t--)Ot(b.pageDivs[t])}function Ot(t){Atalasoft.Utils.Browser.Explorer&&document.activeElement&&t.has(document.activeElement).length&&b.scroller.focus(),B.allowannotations&&(Atalasoft.Utils.Browser.Firefox||Atalasoft.Utils.Browser.Edge)&&I.annotations.__clearAllSelection(t),t.detach(),null!=t._img&&(t._img._page=null,t._img.getDomElement().detach(),t._img=null),eo({type:"pagerecycled",index:t._index,page:t}),t._index=-1,t.removeAttr(h.atala_page_index)}function qt(t){Ot(t),t._index=-1,t.removeAttr(h.atala_page_index),t._img=null,t.remove()}function jt(e,t,o,i){if(e._index===o&&e._img===t&&!i)return!1;if(i&&!e.nullinserted&&o<0)return!1;if(e._index=o,e.attr(h.atala_page_index,o),o>=I.document.getPageCount())return e.hide(),!1;e._img&&e._img!==t&&(e._img._page=null,0<e.has(e._img.getDomElement()).length&&e._img.getDomElement().detach(void 0,!0)),e._rubberband&&e._rubberband.reset(),e._img=t,e._img&&(e._img._page=e),e.css({display:B.tabular||B.direction===k.Horizontal?"inline-block":"block"}),B.showpagenumber&&(e.css({position:"relative"}),e._num||(e._num=V('<div style="position:absolute; right:20px; bottom:16px;z-index:1"/>'),e._num.addClass(U.atala_page_number),e.append(e._num)),e._num.text(e._index+1));var n=Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<=8,a=n&&e._img&&!e._img._loaded;if(e._img&&e._img._binds&&(e._img._binds.pageresize||(e._img._binds.pageresize=function(t){eo({type:"pageresize",page:t.image._page,image:t.image,index:t.image._page?t.image._page._index:I.document.getPageIndexByImageIndex(t.image._index),width:t.width,height:t.height})},e._img.bind({pageresize:e._img._binds.pageresize})),e._img._binds.pagesizechanged||(e._img._binds.pagesizechanged=function(t){eo({type:"pagesizechanged",page:e,image:t.image,index:t.index,width:t.width,height:t.height,dx:t.dx,dy:t.dy})},e._img.bind({pagesizechanged:e._img._binds.pagesizechanged}))),e._img&&!a){var l=e._img.getDomElement();n&&0===l.find(e._img).length&&l.append(e._img),e.append(l),e._img.trigger({type:"inserted",page:e}),e._img._loaded||(e.nullinserted?e._img.css({width:e.width(),height:e.height()}):Zt(e._img,e._index)),S.newpagedivsize||e.css({width:"",height:""}),e.nullinserted=!1}else e.nullinserted=!0,S.newpagedivsize||Zt(e,e._index);return eo({type:"pageshown",page:e,index:e._index}),!0}function Zt(t,e){var o=lt(e,null,!1);t.css({width:o.width,height:o.height})}function Qt(){S.prpr++}function Xt(t){0!==S.prpr&&(S.prpr--,0!==S.prpr||t||Mt())}function Jt(t){return 0<t?(yt(b.pageDivs,0,b.pageDivs.length-1),b.pageDivs[b.pageDivs.length-1]):(yt(b.pageDivs,b.pageDivs.length-1,0),b.pageDivs[0])}
+/**
+     * Checks whether specified document page have been loaded.
+     * @param {number} index - Page index.
+     * @returns {boolean} `true` if page have already been loaded; `false` otherwise.
+     * @instance
+     * @memberOf Atalasoft.Controls.WebDocumentViewer
+     * @function isPageLoaded
+     */
+/**
+    * Silently reloads the specified page if it has already been loaded before. Not creates new page.
+    * @private
+    * @return {object} page reload promise
+    */
+function $t(t,e){var o=V.Deferred();0<=t.cacheIndex&&b.loadedImgs[t.cacheIndex]?b.loadedImgs[t.cacheIndex].invalidate(e,function(){o.resolve()}):o.resolve();return o.promise()}function Gt(t,e,o){"function"==typeof e&&(o=e,e=void 0);var i=I.document.getPageDefinition(t);if(i){if(i.cacheIndex<0||!b.loadedImgs[i.cacheIndex]){var n=S.nextImageCacheIndex++;i.cacheIndex=n,I.document.setPageCacheIndex(t,n),b.loadedImgs[n]=K(i.index,i.ref,e,function(t){t&&((b.loadedImgs[n]=t)._cacheIndex=n,I.memory.allocate(t)),"function"==typeof o&&o.call()}),B.allowtext&&I.text&&!H&&I.text.ensurePageTextLoaded(t)}else"function"==typeof o&&o.call();return b.loadedImgs[i.cacheIndex]}}function Kt(t){var e=Yt(t);if(e){var o=b.scroller[0].scrollLeft,i=b.scroller[0].scrollTop;return xt(e[0],b.scroller[0],o,i,o+b.scroller[0].clientWidth,i+b.scroller[0].clientHeight)}return!1}function Yt(t){for(var e=null,o=0;o<b.pageDivs.length&&null===e;o++)b.pageDivs[o]._index===t&&(e=b.pageDivs[o]);return e}function te(t,e,o,i,n){i&&"function"==typeof i&&(n=i,i=!1);var a=Yt(t),l=void 0;if(a){var r=b.scroller[0].scrollLeft,s=b.scroller[0].scrollTop;if((l=dt(a[0],b.scroller[0])).left+=e.x,l.top+=e.y,!i&&l.left>=r&&l.left<=r+r+b.scroller[0].clientWidth&&l.top>=s&&l.top<=s+b.scroller[0].clientHeight)return void(n&&n())}else(l=gt(t)).left=l.width+e.x,l.top=l.height+e.y;var c={x:b.scroller[0].clientWidth/2,y:b.scroller[0].clientHeight/2};ee(o,Atalasoft.Utils.PageSelection.BottomLeft)?(c.x=b.scroller[0].clientWidth,c.y=b.scroller[0].clientHeight):ee(o,Atalasoft.Utils.PageSelection.TopLeft)&&(c.x=0,c.y=0),Pt(l.left-c.x,l.top-c.y,!0,n)}function ee(t,e){return t&&e&&t.x===e.x&&t.y===e.y}var oe=null;function ie(t){oe&&clearTimeout(oe),oe=setTimeout(function(){eo("documentchanged")},200)}function ne(){b.scroller.stop(),b.scroller.pauseEventPropagation(),Qt()}function ae(){Ct(),0<b.pageDivs.length&&Kt(I.document.getPageCount()-1)&&Et(b.pageDivs[0]._index),kt(),b.scroller.resumeEventPropagation(),Xt()}function le(){S.zooming=!0,ne(),eo("zoomstarted")}function re(t){var e,o,i,n,a,l,r;t=Math.min(t,at()),t=Math.max(t,nt()),e=t,o=!1,n=gt(E.number,null,null),a=gt(E.number,null,null,e),l=(b.scroller.scrollLeft()-n.width)/B.zoom*e,r=(b.scroller.scrollTop()-n.height)/B.zoom*e,Pt(a.width+l,a.height+r,o,M,i),B.zoom=t,fe(!1),ge(t,!1)}function se(){S.zooming=!1,ae(),eo({type:"zoomchanged",zoom:B.zoom})}
+/**
+    * Asynchronously zooms the viewer to the given zoom over the default zoom duration
+    * @param {number} zoom - Desired zoom level to zoom to.
+    * @param {NotificationCallback} [callback] - function to execute after the zoom is finished animating.
+    * @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function zoom
+    */function ce(t,e){if(S.zooming)bt("zooming",e);else if(S.zooming=!0,ne(),eo("zoomstarted"),e=null==e?de:Atalasoft.Utils.__functionFromArray([de,e]),t!==B.zoom){t=Math.min(t,at()),t=Math.max(t,nt());var o=gt(E.number,null,null),i=gt(E.number,null,null,t),n=(b.scroller.scrollLeft()-o.width)/B.zoom*t,a=(b.scroller.scrollTop()-o.height)/B.zoom*t;Atalasoft.Utils.Browser.Explorer?(B.zoom=t,fe(!0),ge(t,!0,e),Pt(i.width+n,i.height+a,!1,M)):(Pt(i.width+n,i.height+a,!0,M),B.zoom=t,fe(!0),ge(t,!0,e))}else"function"==typeof e&&e.call()}function de(){S.zooming=!1,ae(),Mt(),eo({type:"zoomchanged",zoom:B.zoom})}function ue(t,e){ce(B.zoom+(t?-1:1)*B.zoom*.3,e)}function he(){b.edges[0]._z=B.zoom}function ge(t,e,o){if(0<b.edges.length){o="function"==typeof o?Atalasoft.Utils.__functionFromArray([he,o]):he;var i=B.direction===k.Vertical,n=gt(b.pageDivs[0]&&b.pageDivs[0]._img?b.pageDivs[0]._index:0,null,null,t),a=i?n.height:n.width;if(e&&!S.loading){var l=i?{height:a}:{width:a};b.edges[0].animate(l,{duration:M,easing:"easeOutQuad",complete:o,queue:!1})}else i?b.edges[0].height(a):b.edges[0].width(a),"function"==typeof o&&o.call();pe()}}function pe(u){setTimeout(function(){var t=V("<canvas/>"),e=V('<span style="position:absolute; visibility:hidden; left: -5000px;">{[|,0123456789Thqkbfjplyg</span>');V(document.body).append(e),u=u||B.zoom;var o=B.direction===k.Vertical,i=S.newpagedivsize?S.newpagedivsize:{width:E.size.width*u,height:E.size.height*u},n=Math.max(1,B.pagespacing),a=mt();t[0].width=(i.width+n)*(o?a:1),t[0].height=i.height*(o?1:a);var l=t[0].getContext("2d");l.lineWidth=B.pageborderwidth,B.backcolor&&(l.fillStyle=B.backcolor);for(var r=0;r<a;++r){var s=o?1+r*i.width:1,c=o?1:1+r*i.height;l.strokeRect(s,c,i.width-2,i.height-2),B.backcolor&&l.fillRect(s+l.lineWidth,c+l.lineWidth,i.width-2*(1+l.lineWidth),i.height-2*(1+l.lineWidth))}var d={backgroundImage:"url("+t[0].toDataURL()+")",backgroundSize:"auto auto",backgroundRepeat:o?"repeat-y":"repeat-x"};b.edges[0].css(d),b.edges[1].css(d),e.remove()},0)}function fe(t,e){for(var o=0,i=!0,n=function(){if(--o<=0){if(B.direction===k.Horizontal){var t=ht().width;b.spacer||(b.spacer=F(),b.spacer.css({position:"absolute",top:"-1px",height:"1px"}),b.viewport.append(b.spacer)),b.spacer.width(t)}"function"==typeof e&&e.call(),0===S.prpr&&(Atalasoft.Utils.Browser.Safari||Atalasoft.Utils.Browser.Chrome?b.edges[1].hide().show():b.edges[1][0].className=b.edges[1][0].className)}},a=0;a<b.pageDivs.length;a++){if(b.pageDivs[a]._img)(b.pageDivs[a]._img.needsZoom()||b.pageDivs[a]._img.needsRotate())&&(i=!1,o++,b.pageDivs[a]._img.needsRotate()?b.pageDivs[a]._img.rotate(n):b.pageDivs[a]._img.needsZoom()&&b.pageDivs[a]._img.zoom(t,n))}i&&n.call()}
+/**
+    * Asynchronously zooms the viewer to fit to a page.
+    * @param {Atalasoft.Utils.Fitting} fit - Type of fitting to fit the page to.
+    * @param {number} pageNumber - Page number to fit to.  Note, that it's 1-based.
+    * @param {NotificationCallback} callback - Function to execute after the fit is done animating.
+    * @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function fit
+    */function me(t,e,o){null!=e?"function"==typeof e&&(o=e,e=E.number):e=E.number;var i=_e(t,e-1),n=i.zoom,a=u.Width===i.fit,l=u.Height===i.height;a&&Pt(0,null,!1),l&&Pt(null,0,!1),ce(n,o)}function _e(t,e){var o,i,n,a=(o=wt(),i=B.showpageborder?2*B.pageborderwidth:0,n={width:o.width-i,height:o.height-i},B.tabular&&(1<B.columns&&(n.width=Math.floor((o.width-(B.pagespacing+i)*B.columns)/B.columns)),1<B.rows&&(n.height=Math.floor((o.height-(B.pagespacing+i)*B.rows)/B.rows))),n),l=rt(e,1,!1);0!==l.width&&0!==l.height||(t=null);var r=B.zoom;switch(t){case u.None:break;case u.Best:t=l.width/a.width>l.height/a.height?(r=a.width/l.width,u.Width):(r=a.height/l.height,u.Height);break;case u.Height:r=a.height/l.height;break;case u.Width:r=a.width/l.width;break;default:r=1,t=u.None}return{zoom:r,fit:t}}function ve(t){return B.zoom*I.document.getPageFitMultiplier(t)}function we(t){return I.document.getPageRotation(t)}function be(t,e){e=e||0;var o=we(t),i=ve(t),n=_t(t,e),a=Raphael.matrix();a.scale(i,i,0,0),a.rotate(o+e,0,0);var l,r,s=(l=a,r={x:n.width,y:n.height},{x:l.x(r.x,r.y),y:l.y(r.x,r.y)}),c=Math.min(0,s.x),d=Math.min(0,s.y),u=a.invert(),h=u.x(-c,-d),g=u.y(-c,-d);return a.translate(h,g),a}function xe(t){var e=V.data(t.currentTarget,"_config"),o=V.data(t.currentTarget,"_annoConfig");!o&&e&&(o={type:e.icon,rotatable:B.showrotatetools}),o&&(I.mouseTool.setTool(r.None,r.None),I.annotations.drawAnnotation(o,!1,ze,ye))}function ye(t){I.mouseTool.setTool(r.Pan,r.None)}function ze(t){I.mouseTool.setTool(r.Pan,r.None)}
+/**
+    * Checks whether annotations support is enabled.
+    * @private
+    */function De(){return!1===B.allowannotations&&L("InitError",'The "allowannotations" property in the WebDocumentViewer config is set to false.'),B.allowannotations}function Te(){for(var t=0;t<b.pageDivs.length;t++)b.pageDivs[t]._draw.toFront()}function Pe(){for(var t=0;t<b.pageDivs.length;t++)b.pageDivs[t]._draw.reset()}function Ae(t,e,o){if(t){if(S.loading=!0,Nt(),E.size.width=t.pagewidth,E.size.height=t.pageheight,E.count=t.pagecount,E.buffer=B.pagebuffersize,E.dpi=t.dpi,E.vector=!0===t.vector,B.allowannotations=o.allowannotations,B.allowforms=o.allowforms,B.allowtext=o.allowtext,B.documenturl=o.documenturl,B.annotationsurl=o.annotationsurl,B.formsurl=o.formsurl,I.document.__linkChanges(e),I.annotations&&(I.annotations.clear(),I.annotations.loadAnnotations(t)),I.forms&&(I.forms.clear(),t.forms&&I.forms.loadForms(t)),I.text&&I.text.search(""),I.mouseTool.setTool(B.mousetool.type&&!H?B.mousetool.type:r.Pan,r.None),S.zooming=!1,t.zoom)B.zoom=t.zoom;else{var i=_e(B.fitting,1);B.zoom=i.zoom}Ie(t.pagenumber||0),pe(),S.loading=!1,fe(),J=e.__getSelectedPagesIndices,eo({type:"activedocumentchanged"})}}function Ce(t,e){e&&qe(!0);for(var o=0;o<t._controllers.document.getPageCount();++o){var i=t._controllers.document.getPageDefinition(o,s);i&&0<=i.cacheIndex&&b.loadedImgs[i.cacheIndex]&&(I.memory.deallocate(b.loadedImgs[i.cacheIndex]),b.loadedImgs[i.cacheIndex].dispose(),b.loadedImgs[i.cacheIndex].remove(),b.loadedImgs[i.cacheIndex]=void 0)}}function Ve(t,i){S.loading=!0;var e={atala_docurl:B.documenturl,atala_pagebuffer:B.pagebuffersize,atala_minwidth:B.minwidth};H&&(e.atala_thumb=H,e.atala_capt_format=B.thumbcaptionformat),null!=t&&("function"==typeof t&&(i=t,t=null),V.extend(e,t)),Ne({type:"docinfo",serverurl:B.serverurl,query:"?ataladocinfo=",method:"GET",data:e,cancel:!1,info:{pagewidth:-1,pageheight:-1,pagecount:-1}},function(t){He(t,i)},function(t,e,o){!function(t,e,o,i){if(t.responseText){var n=t.responseText.substr(t.responseText.indexOf("</html>")+7);0<=n.indexOf("\x3c!--")?0<(n=n.replace("\x3c!--","").replace("--\x3e","")).length&&(o="<pre>"+n+"</pre>"):0<t.responseText.indexOf("web.config")&&0<t.responseText.indexOf("customErrors")&&(o+=": web.config customErrors attribute has disabled remote error messages.")}L("DocumentLoadError",o),"function"==typeof i&&i.call(void 0,o)}(t,0,o,i)})}function He(e,o){if(e&&!1!==e.licensed)E.size.width=e.pagewidth,E.size.height=e.pageheight,E.count=e.pagecount,E.buffer=B.pagebuffersize,E.dpi=e.dpi,E.vector=!0===e.vector,E.caption=e.thumbcaptionformat||(B.showthumbcaption?"{0}":""),ut.zero(),I.memory.clearEntries(),I.memory.colorDepth=e.colordepth,I.memory.pageSize={width:e.pagewidth,height:e.pageheight},eo({type:"documentinfochanged",info:{count:E.count,dpi:E.dpi,size:{height:E.size.height,width:E.size.width},vector:E.vector},customData:e.customData}),I.text&&(I.text.clear(),e.text&&I.text.loadText(e)),S.loading&&(B.zoom=1,G(),Pt(0,0),b.scrollV&&b.scrollV.pageNum(1),Rt(1),me(B.fitting,1,function(){kt(),Et(0,b.pageDivs.length-1);for(var t=0;t<b.pageDivs.length&&t<E.count;t++)b.content.append(b.pageDivs[t]),jt(b.pageDivs[t],null,t);0<b.pageDivs.length&&b.pageDivs[0].addClass(U.atala_active_page),e.layers&&e.layers.length?I.annotations.loadAnnotations(e):B.annotationsurl&&I.annotations&&I.annotations.clear(),I.forms&&(I.forms.clear(),e.forms&&I.forms.loadForms(e)),I.mouseTool.setTool(B.mousetool.type&&!H?B.mousetool.type:r.Pan,r.None),S.loading=!1,pe(),"function"==typeof o&&o(e.error,e),e.error&&setTimeout(function(){L("DocumentLoadError",e.error)},0)})),S.loading=!1;else{var t=void 0,i=void 0;i=e&&!1===e.licensed?(t="LicenseException",e.error?e.error:"LicenseException: Handler was unable to find a valid license."):(t="DocumentLoadError","HandlerException: Handler did not return any data."),S.loading=!1,"function"==typeof o&&o.call(void 0,i),t&&i&&L(t,i)}}function Me(t){Ie()}function Ie(t){if(G(),0<b.pageDivs.length){var e=I.document.getPageCount(),o="number"==typeof t?t:b.pageDivs[0]._index;o=0<=o?Math.min(o,e-b.pageDivs.length):0;for(var i=0;i<b.pageDivs.length&&i<e;i++){var n=o+i;Ot(b.pageDivs[i]),b.content.append(b.pageDivs[i]),jt(b.pageDivs[i],null,n)}}Et(0<b.pageDivs.length?b.pageDivs[0]._index:0,null),kt(),Be(),Ct();var a=ct(b.scroller[0].scrollLeft,b.scroller[0].scrollTop);Rt(a+1),0<=t&&a!==t&&Lt(t)}function ke(t,e){var o={atala_docurl:B.documenturl,atala_spath:B.savepath};function i(t){!function(t){t.error?L("DocumentSaveError",t.error):zt("DocumentSave: success="+t.success);eo({type:"documentsaved",success:t.success,customData:t.customData,fileName:t.fileName})}(t),"function"==typeof e&&e.call()}V.extend(o,t),Ne({type:"docsave",serverurl:B.serverurl,query:"?ataladocsave=",method:"POST",data:o,cancel:!1,info:{success:void 0,error:void 0}},i,function(t){var e=[];e.error=t.responseText,i(e)})}function Ee(t,e,o){var i=null;return"string"==typeof t?(i={},S.initialized&&o&&(0<t.length?i=o.createHandlerRequest(B.serverurl,t,e):0===t.length&&o.clear()),i.url=t):void 0!==t&&null!=t&&L("openUrlError","string input expected for url."),i}function Se(){Ye({annotationsloaded:We})}function Ue(){Ye({formsloaded:Re})}function Be(t){if(!(0<b.pageDivs.length&&void 0===b.pageDivs[0]._index))for(var e=0;e<b.pageDivs.length;e++)Fe(b.pageDivs[e],t)}function Le(t,e){var o=Yt(t);o&&Fe(o,e)}function Fe(t,e){(jt(t,Gt(t._index),t._index)||e)&&(I.annotations&&I.annotations.showLayer(t._index,t),I.forms&&!H&&I.forms.showLayer(t._index,t),I.text&&!H&&B.allowtext&&I.text.showLayer(t._index,t))}function We(t){t.error&&(L("AnnotationsLoadError",t.error),B.annotationsurl=""),I.annotations&&to({annotationsloaded:We})}function Re(t){t.error&&(L("FormsLoadError",t.error),B.formsurl=""),I.forms&&to({formsloaded:Re})}function Ne(i,e,n,o){var a,l,t,r=(a=i,l=function(t){e(t.request.info)},Ye({handlerreturned:t=function t(e){e.request===a&&(to({handlerreturned:t}),"function"==typeof l&&l.call(this,e))}}),t);if(eo({type:"beforehandlerrequest",request:i}),!i.cancel&&(to({handlerreturned:r}),i.serverurl&&!V.isEmptyObject(i.data))){if(!(i.info instanceof jQuery&&"docpage"===i.type)){if("fileupload"!==i.type)return V.ajax({type:i.method,url:i.serverurl+i.query+"?",dataType:"json",data:i.data,success:e,error:n,crossDomain:("string"!=typeof i.method||"post"!==i.method.toLowerCase())&&void 0});var s="&"+V.param(i.data),c=new FormData;c.append("file",i.file,i.file.name);var d=V.ajax({type:i.method,url:i.serverurl+i.query+"??"+s,dataType:"json",data:c,contentType:!1,processData:!1,success:function(t){t.success&&(t.success=JSON.parse(t.success)),t.canceled&&(t.canceled=JSON.parse(t.canceled)),e(t,i.file.name)},error:function(t,e,o){n(e,o,i.file.name)},crossDomain:("string"!=typeof i.method||"post"!==i.method.toLowerCase())&&void 0,xhr:function(){var t=new XMLHttpRequest;return t.upload.addEventListener("progress",function(t){t.lengthComputable&&(o(i.file.name,t.loaded,t.total)||d.abort())},!1),t}});return d}i.info.attr("src",i.serverurl+i.query+"&"+V.param(i.data))}}
+/**
+     * Resets the viewer to its default state.
+     * @param {OpenUrlCallback} [callback]  - Function to execute when the empty process is finished
+     * @instance
+     * @memberOf Atalasoft.Controls.WebDocumentViewer
+     * @function empty
+    */
+function Oe(t){S.loading=!0;qe(),He({pagewidth:0,pageheight:0,pagecount:-1},function(){Ct(),eo({type:"documentunloaded"}),"function"==typeof t&&t.call()})}function qe(t){var e;S.initialized&&(Nt(),G(0),t||function(){for(var t=0;t<b.loadedImgs.length;t++)b.loadedImgs[t]&&(b.loadedImgs[t].dispose(),b.loadedImgs[t].remove());b.loadedImgs.length=0}(),b.edges[0].width(0).height(0),b.edges[1].width(0).height(0),b.scrollH&&(b.scrollH.scrollSize(0),Ht(b.scrollH)),b.scrollV&&(b.scrollV.scrollSize(0),Ht(b.scrollV)),e={backgroundImage:"",backgroundSize:"",backgroundRepeat:"",backgroundColor:""},b.edges[0].css(e),b.edges[1].css(e))}
+/**
+    * Gets the current zoom level of the viewer.
+    * @returns {number}
+    * @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function getZoom
+    */
+/**
+    * Indicates whether the viewer is ready to receive commands.
+     *
+     * If all dependent JavaScript libraries are included to the web page, control is initialized synchronously.
+     * Otherwise dependencies are asynchronously loaded automatically using {@link WebDocumentViewerConfig.scripturl|scripturl} parameter or from the same url where JQuery library is referenced.
+     * When all dependent JavaScript libraries are loaded, {@link Atalasoft.Controls.WebDocumentViewer#event:initialized|initialized} event is fired.
+     * @instance
+     * @memberOf Atalasoft.Controls.WebDocumentViewer
+     * @function isReady
+     * @returns {boolean}
+    */
+function je(){return S.initialized}
+/**
+    * Scrolls to the given coordinates, does not account for zoom, i.e. `x` and `y` values are passed in window coordinate space.
+    * @param {number} x - Indicating the coordinate of the x axis.
+    * @param {number} y - Indicating the coordinate of the y axis.
+    * @param {boolean} [ani=false] - Indicating whether to animate this scroll.
+    * @param {NotificationCallback} [callback] - function to execute when the scroll operation is finished.
+    * @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function scrollTo
+     */
+/**
+    * Scrolls to the next viewable page.
+    * @param {number} n - Number of pages to scroll forward.
+    * @param {NotificationCallback} [callback] - Function to execute when the scroll operation is finished.
+    * @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function next
+    */
+function Ze(t,e){var o=B.direction===k.Vertical?mt():1;null==e&&"function"==typeof t&&(e=t,t=o),isFinite(t)||(t=o),At(t,e)}
+/**
+    * Scrolls to the previous viewable page.
+    * @param {number} n - Number of pages to scroll backward.
+    * @param {NotificationCallback} [callback] - Function to execute when the scroll operation is finished.
+    * @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function previous
+    */function Qe(t,e){var o=B.direction===k.Vertical?mt():1;null==e&&"function"==typeof t&&(e=t,t=o),isFinite(t)||(t=o),At(-t,e)}
+/**
+     * Zooms in one level.
+     * @param {NotificationCallback} [callback] - Function to execute when the zoom operation is finished
+     * @instance
+     * @memberOf Atalasoft.Controls.WebDocumentViewer
+     * @function zoomIn
+     */function Xe(t){ue(!1,t)}
+/**
+    * Zooms out one level.
+    * @param  {NotificationCallback} [callback] - Function to execute when the zoom operation is finished.
+    * @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function zoomOut
+    */function Je(t){ue(!0,t)}
+/**
+     * Callback signature for {@link Atalasoft.Controls.WebDocumentViewer#openUrl | openUrl} method.
+     * @callback OpenUrlCallback
+     * @param {string} error - If present, provides error description. If `undefined`, operation were successful.
+     */
+/**
+    * Opens the document at the given urls.
+    * It's possible to call this method multiple times for the same document to load document and the forms or annotations data separately.
+    *
+    * @param {string} [documenturl] - url of the document file with respect to the {@link WebDocumentViewerConfig.serverurl | config.serverurl}.
+    *
+    * If set to empty string, call is equivalent to {@link Atalasoft.Controls.WebDocumentViewer#empty|empty}.
+    *
+    * @param {string} [annotationsurl] - url of the annotation xmp file with respect to the {@link WebDocumentViewerConfig.serverurl| config.serverurl}.
+    *
+    * *Note*, If empty string is passed, annotations from the previous document are cleared. if not passed or `undefined`, annotations from the previously opened document are preserved.
+    * @param {string} [formurl] - url of the form file with respect to the {@link WebDocumentViewerConfig.serverurl| config.serverurl}.
+    * @param {OpenUrlCallback} [callback] - Function to execute when the open operation is finished.
+    * @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function openUrl
+    */function $e(t,e,o,i){null==i&&("function"==typeof e?(i=e,e=null):"function"==typeof o&&(i=o,o=null));var n=0,a=!1,l=Ee(e,t,I.annotations),r=Ee(o||t,t,I.forms);B.annotationsurl=l?l.url:B.annotationsurl,B.formsurl=r?r.url:B.formsurl;var s,c,d,u,h=function(t,e){--n<=0&&(Be(!0),eo({type:"documentloaded",customData:null==e?void 0:e.customData}),"function"==typeof i&&i.call(void 0,t,e))};if("string"==typeof t){if(0===t.length)Oe(h);else if(B.documenturl=t,S.initialized){qe(),tt(b.scrollH),tt(b.scrollV),n++,0===t.length&&Oe(h);var g={};B.allowannotations&&l&&l.data&&(Se(),V.extend(g,l.data)),B.allowforms&&r&&r.data&&(Ue(),V.extend(g,r.data)),a=!0,Ve(g,h)}}else!(t||!(0<B.documenturl.length)||!e&&""!==e&&!o&&""!==o)||L("openUrlError","string input expected for document url.");a||(l&&(n++,d=l,u=h,I.annotations&&(Se(),I.annotations.makeHandlerRequest(d,u))),r&&(n++,s=r,c=h,I.forms&&(Ue(),I.forms.makeHandlerRequest(s,c))))}
+/**
+    * Saves the client changes in this document to the predefined save folder or to the given path.
+    * @param {string} [subpath] - Relative path to save to starting from {@link WebDocumentViewerConfig.savepath | savepath}. Must be writable.
+    * @param {string} [saveformat] - Save file format. If specified, the value overrides {@link WebDocumentViewerConfig.savefileformat | savefileformat} form config.
+    * @param {object} [params] - A plain object containing optional reload parameters that will be passed to server.
+    * @param {NotificationCallback} [callback]  to execute when the save has finished
+    * @instance
+    * @memberof Atalasoft.Controls.WebDocumentViewer
+    * @function save
+     *
+     * @example
+     * const _viewer = new Atalasoft.Controls.WebDocumentViewer({
+     * 		parent: $('#atala-document-container-left'),
+     * 		toolbarparent: $('#atala-document-toolbar-left'),
+     *		serverurl: 'WebDocumentHandler.ashx',
+     *		savepath: 'Save/',
+     *		savefileformat: 'pdf'
+     * });
+     *
+     * // document will be saved to the subpath subfolder. So if the savepath configuration
+     * // parameter was set to Save/ then the save path will be Save/subpath. The format to save the file to will
+     * // be taken from the configuration parameter savefileformat (in this example, 'pdf').
+     * // This means that the file in pdf format will be saved in Save/subpath folder.
+     *  _viewer.save(‘subpath’) // saves to ‘Save/subpath’ in ‘pdf’ format
+     *
+     * // document will be saved to ‘Save/’ foler in ‘tif’ format.
+     * _viewer.save(‘’, ‘tif’)
+     */function Ge(t,e,o,i){"function"==typeof o&&(i=o,o={}),"function"==typeof e&&(i=e,e=B.savefileformat),"function"==typeof t&&(i=t,t=null),void 0===e&&(e=B.savefileformat);var n=V.extend(!0,o,{atala_subpath:t||"",atala_sformat:e});I.annotations&&V.extend(n,{atala_iuname:B.annotations.saveusername,atala_annos:I.annotations.stringifyChanges()}),I.forms&&V.extend(n,{atala_forms:I.forms.stringifyChanges()}),I.document&&V.extend(n,{atala_document:I.document.stringifyChanges()}),ke(n,i)}
+/**
+    * Gets the current page index
+    * @returns {number} Zero based index of the current page.
+    *
+    * Note, that current page index detection could be affected by {@link WebDocumentViewerConfig.pageselectlocation|pageselectlocation} configuration parameter.
+    * @instance
+    * @memberof Atalasoft.Controls.WebDocumentViewer
+    * @function getCurrentPageIndex
+    */
+function Ke(){return E.number-1}
+/**
+     * Sets the current mouse tool
+     * @param {Atalasoft.Utils.MouseToolType} tool - Type of the tool to set.
+     *
+     * Mouse tool configuration could be passed using {@link WebDocumentViewerConfig.mousetool| mousetool} configuration option.
+     * @instance
+     * @memberOf Atalasoft.Controls.WebDocumentViewer
+     * @function setMouseTool
+     */
+/**
+    *  Attaches a handler to an event.
+    * @param {string} event - the name of the event to bind to.
+    * @param {function} handler - event handler.
+    * @returns {Atalasoft.Controls.WebDocumentViewer} reference to `this`.
+    * @instance
+     * @memberOf Atalasoft.Controls.WebDocumentViewer
+     * @function bind
+     */
+function Ye(t,e){return Dt(arguments,!0),i.bind.apply(i,arguments),c}
+/**
+    * Detaches the handler from the event.
+    * @param {string} event - the name of the event to unbind.
+    * @param {function} [handler] -  the event handler to unbind. If not specified, all handlers are unbound.
+    * @returns {Atalasoft.Controls.WebDocumentViewer} reference to `this`.
+    * @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function unbind
+    */function to(t,e){return Dt(arguments,!1),i.unbind.apply(i,arguments),c}
+/**
+    * Triggers the event.
+    * @param {string} event - the name of the event to trigger.
+    * @param {Object} [parameters] - the event data.
+    * @returns {Atalasoft.Controls.WebDocumentViewer} reference to `this`.
+    * @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function trigger
+    */function eo(t,e){return i.trigger.apply(i,arguments),c}
+/**
+     * Gets the current document info
+     * @return {{count: *, dpi: number, size: {height: number, width: number}, vector: boolean}} object indicating document main page size, and number of pages
+     * @instance
+     * @memberOf Atalasoft.Controls.WebDocumentViewer
+     * @function getDocumentInfo
+     */
+/**
+    * [Internal] Gets debug info object
+    * @returns debug info object if available, otherwise null
+    */
+return c.__getDebugInfo=function(){var t={version:Atalasoft.Controls.Version.join(".")};B.debug&&V.extend(!0,t,{dom:b,controllers:I,page:E});return t}
+/**
+    * [Internal] Gets the viewer linkage for controls that inherit this one
+    * @param viewer object of type WebDocumentViewer
+    * @param linker internal object of type __LVlinker
+    * @returns linker object if possible, otherwise undefined
+    */,c.__getViewerLink=function(t,e){if(t&&"Atalasoft.Controls.WebDocumentThumbnailer"===t.typeOf){var o=new function(){this.typeOf="__LVlinker",this._id=s,this._config=B,this._controllers=I,this._dom=b,this._page=E,this._state=S,this._annos=null,this._fields=null,this.stateManager=l,this.__createDialog=W,this.__createDiv=F,this.__createDOM=T,this.__createDropDownButton=R,this.__createDropDownMenu=N,this.__createMenu=C,this.__getPageSize=vt,this.__getTabularIndexOffset=mt,this.__redrawVisiblePages=Be,this.__adjustVisiblePages=fe,this.__onDocumentChanged=Me,this.__startDomManipulation=ne,this.__endDomManipulation=ae,this.__status=zt,this.__updatePageSize=v,this.__silentReloadPage=$t,this.__isObjectInRect=xt,this.__getIndexFromPos=st,this.__showNext=Bt,this.__showPrevious=Ut,this.__showPageAsync=Wt,this.__adjustEdgeHeights=Et,this.__getSelectedPagesIndices=J};return I.document.__linkChanges(o),B.allowannotations&&(t!==c&&0<B.annotationsurl.length&&(B.annotationsurl=""),I.annotations.__linkAnnotations(o)),B.allowforms&&(t!==c&&0<B.formurl.length&&(B.formurl=""),I.forms.__linkForms(o)),B.allowtext&&I.text&&I.text.__linkText(o),o}},c.dispose=
+/**
+     * Removes all DOM elements, internal references, and empties memory intensive objects.
+     * The WebDocumentViewer will no longer function after a call to this method.
+     * @instance
+     * @memberOf Atalasoft.Controls.WebDocumentViewer
+     * @function dispose
+     */
+function(){if(!H&&l&&l.closeDocument(),qe(),b.main&&b.main.remove(),b.toolbar&&(b.toolbar.controlgroup("destroy"),b.toolbar.remove(),b.toolbar.annoToolbar&&(b.toolbar.annoToolbar.controlgroup("destroy"),b.toolbar.annoToolbar.remove())),b.search&&b.search.dispose(),b.uploadCtrl&&b.uploadCtrl.remove(),b.main=null,b.toolbar=null,b.scroller=null,b.viewport=null,b.content=null,b.scrollH=null,b.scrollV=null,b.loadedImgs.length=0,b.pageDivs.length=0,b.pageLabel=null,b.status=null,b.search=null,b.uploadCtrl=null,b.edges){for(var t=0;t<b.edges.length;t++)b.edges[t]=null;b.edges=[]}for(var e in I)I.hasOwnProperty(e)&&null!==I[e]&&(I[e].dispose(),I[e]=null);S={prpr:0,batchoperation:0,loading:(E={size:{width:0,height:0},sizes:[{width:0,height:0}],smallest:{width:0,height:0},count:0,number:-1,numberoutof:-1,buffer:3,dpi:96,vector:!1,caption:"",customData:null},!1),zooming:!1,initialized:!1,newpagedivsize:null,newpagedivfullzoom:1,scrollPos:{x:0,y:0,t:0},scrollBuffer:null,scrollTimeout:null,activepage:null,nextImageCacheIndex:0}},c.empty=Oe,c.fit=me,c.getZoom=function(){return B.zoom},c.isReady=je,c.scrollTo=function(t,e,o,i){null==i&&"function"==typeof o&&(i=o,o=!1);Pt(t,e,o,null,i)}
+/**
+    * Scrolls by the given deltas, does not account for zoom, i.e. `dx` and `dy` values are passed in window coordinate space.
+    * @param {number} dx - Indicating delta of the x axis.
+    * @param {number} dy - Indicating delta of the y axis .
+    * @param {boolean} [ani=false] - Indicating whether to animate this scroll.
+    * @param {NotificationCallback} [callback] - Function to execute when the scroll operation is finished.
+    * @instance
+    * @memberOf Atalasoft.Controls.WebDocumentViewer
+    * @function scrollBy
+    */,c.scrollBy=function(t,e,o,i){null==i&&"function"==typeof o&&(i=o,o=!1);n=t,a=e,l=o,r=null,s=i,Pt(b.scroller.scrollLeft()+n,b.scroller.scrollTop()+a,l,r,s);var n,a,l,r,s},c.next=Ze,c.previous=Qe,c.zoom=ce,c.zoomIn=Xe,c.zoomOut=Je,c.openUrl=c.OpenUrl=$e,c.save=Ge,c.uploadFiles=
+/**
+     * Uploads several files on server to the predefined upload folder or to the given path.
+     * @param {Array<File>} files - Array of file objects that should be uploaded.
+     * @param {string} [uploadpath] - Relative path to upload to starting from {@link WebDocumentViewerConfig.upload.uploadpath | uploadpath}. Must be writable.
+     * @param {NotificationCallback} [callback] - Function to execute when the upload has requested.
+     * @instance
+     * @memberof Atalasoft.Controls.WebDocumentViewer
+     * @function uploadFiles
+     *
+     */
+function(t,e,o){if(H)return;I.upload.uploadFiles(t,e,o)}
+/**
+     * Uploads one file on server to the predefined upload folder or to the given path.
+     * @param {File} file - File object that should be uploaded.
+     * @param {string} [uploadpath] - Relative path to upload to starting from {@link WebDocumentViewerConfig.upload.uploadpath | uploadpath}. Must be writable.
+     * @param {NotificationCallback} [callback]  - Function to execute when the upload has requested.
+     * @instance
+     * @memberof Atalasoft.Controls.WebDocumentViewer
+     * @function uploadFile
+     *
+     * @example
+     * <caption>Assuming you have a {@link https://developer.mozilla.org/en-US/docs/Web/API/File | File } object in your script. It can be
+     * retrieved from a {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file | input} control or from server or any other way.</caption>
+     *
+     * let viewer = new Atalasoft.Controls.WebDocumentViewer({
+     *          ...
+     *          upload:{} //enable upload support with default parameters. Where uploadpath is the web-project root folder.
+     *          });
+     * let file = document.getElementById('fileInput'); //Retrieve File object
+     *
+     * viewer.uploadFile(file, 'uploadDirectory'); //Upload the file to the 'uploadDirectory' web-project root sub folder.
+     */,c.uploadFile=function(t,e,o){if(H)return;I.upload.uploadFile(t,e,o)}
+/**
+     * Filters files that should be uploaded using the settings from config {@link WebDocumentViewerConfig.upload | upload} section.
+     * This includes filtering by size, by type and even by name in order to find out files for upload that have same names. It can be
+     * useful, because all events in WDV related to upload use filename as a key, thus you can find duplicates and upload
+     * such files in separate {@link Atalasoft.Controls.WebDocumentViewer#uploadFiles | uploadFiles} method calls.
+     *
+     * This method is fully optional and even if some files failed to pass this filtering, they still can be uploaded to server,
+     * @summary Filters files for upload using the settings from config {@link WebDocumentViewerConfig.upload | upload} section.
+     * @param {File[]} files - An array of file objects that can be used for upload.
+     * @param {string[]} [filteredFiles] - An array of filenames that previously were filtered. It's used for find duplicates in a new bunch of files.
+     * @param {NotificationCallback} [callback] - Function to execute when the filtering has finished.
+     * @returns {File[]} An array files that have passed the filtering.
+     * @instance
+     * @memberof Atalasoft.Controls.WebDocumentViewer
+     * @function filterFilesForUpload
+     */,c.filterFilesForUpload=function(t,e,o){if(H)return;return I.upload.filterFilesPublic(t,e,o)},c.getCurrentPageIndex=Ke,c.bind=Ye,c.unbind=to,c.trigger=eo,c.getDocumentInfo=function(){return{count:I.document.getPageCount(),dpi:E.dpi,size:{height:E.size.height,width:E.size.width},vector:E.vector}},c.setMouseTool=function(t){for(var e in Atalasoft.Utils.MouseToolType)if(Atalasoft.Utils.MouseToolType.hasOwnProperty(e)&&Atalasoft.Utils.MouseToolType[e]===t){I.mouseTool.setTool(t);break}},c.isPageLoaded=function(t){var e=I.document.getPageDefinition(t);return 0<=e.cacheIndex&&b.loadedImgs[e.cacheIndex]&&b.loadedImgs[e.cacheIndex]._loaded}
+/**
+    * Reloads the specified page.
+    * @param {number} index - The index of the page to reload.
+    * @param {string|boolean} [annotations=false] - Url of the annotation xmp file or flag indicating whether to reload annotations of boolean flag indicating whether to load annotations data.
+    * @param {string|boolean} [forms] - Url of the form file or flag indicating whether to reload forms of boolean flag indicating whether to load forms data.
+    * @param {object} [params] - A plain object containing optional parameters that will be passed to server.
+    *
+    * Params could contain any application specific information that should be passed to server.
+    * For example, this could be the aggregated list of the parameters that was used in {@link Atalasoft.Controls.WebDocumentViewer#reloadPage|reloadPage} calls for different pages.
+    * @param {NotificationCallback} [callback] - function that is called when page have been loaded.
+    *
+    * This object will be available on the server side hander as an key-values collection. This allows to pass specific load options for individual pages.
+    * @function Atalasoft.Controls.WebDocumentViewer#reloadPage
+    */,c.reloadPage=function(i,t,e,o,n){var a=V.Deferred(),l=V.Deferred(),r=V.Deferred(),s=V.Deferred();"function"==typeof o&&(n=o,o=void 0),"function"==typeof e&&(n=e,e=!1),"function"==typeof t&&(n=t,t=!1),"function"==typeof n&&a.done(n);var c=I.document.getPageDefinition(i);if(!c)return a.resolve(),a.promise();0<=c.cacheIndex&&b.loadedImgs[c.cacheIndex]?s=$t(c,o):Gt(i,o,function(){s.resolve()});var d="string"==typeof t?t:c.uri?null:B.annotationsurl;B.allowannotations&&t&&(d||c.uri)?I.annotations.loadAnnotationsUrl(B.serverurl,d,c.uri,c.index,1,i,function(){l.resolve(!0)}):(t&&I.annotations.loadAnnotations({layers:[[]],offset:i}),l.resolve(!!t));var u="string"==typeof e?e:c.uri?null:B.formsurl;return B.allowforms&&e&&(B.formsurl||u)?I.forms.loadFormUrl(B.serverurl,u,c.uri,c.index,1,i,function(){r.resolve(!0)}):r.resolve(),V.when(s,l,r).done(function(t,e,o){(e||o)&&Le(i,!0),a.resolve(i)}),a.promise()},c.showPage=Lt,c.showPageNumber=Ft,Atalasoft.Annotations.AnnotationController(),Atalasoft.Document.ManipulationController(),Atalasoft.Forms.FormController(),Atalasoft.Text.TextController(),c.annotations=Atalasoft.Annotations.AnnotationController.__exposedApi,c.document=Atalasoft.Document.ManipulationController.__exposedApi,c.forms=Atalasoft.Forms.FormController.__exposedApi,c.text=Atalasoft.Text.TextController.__exposedApi,function(){je()||(S={prpr:0,batchoperation:0,loading:(E={size:{width:0,height:0},sizes:[{width:0,height:0}],smallest:{width:0,height:0},count:0,number:-1,numberoutof:-1,buffer:3,dpi:96,vector:!1,caption:"",customData:null},!1),zooming:!1,initialized:!1,newpagedivsize:null,newpagedivfullzoom:1,scrollPos:{x:0,y:0,t:0},scrollBuffer:null,scrollTimeout:null,activepage:null,nextImageCacheIndex:0});var t={_config:B,_id:s,_dom:b,_document:b.loadedImgs,_pages:b.pageDivs,_state:S,_internalEvents:a,_controllers:I,createDOM:T,createDiv:F,createDialog:W,createDropDownButton:R,createDropDownMenu:N,createMenu:C,drawAnnotation:xe,redrawVisiblePages:Be,adjustVisiblePages:fe,startDomManipulation:ne,endDomManipulation:ae,redrawPageFromIndex:Le,makeHandlerRequest:Ne,getPageScale:ve,getPageSize:vt,getSourcePageSize:_t,getPageRotation:we,getViewerTransform:be,isPageInView:Kt,findPageFromIndex:Yt,showPagePoint:te};I.document=new Atalasoft.Document.ManipulationController(c,t,s),c.document=I.document.__exposedApi,B.allowannotations?(I.annotations=new Atalasoft.Annotations.AnnotationController(c,t,H),c.annotations=I.annotations.__exposedApi):(c.deselectAll=De,c.createAnnotationOnPage=De,c.getAnnotationsFromPage=De,c.deleteAnnotationOnPageAtIndex=De,c.setAnnotationDefaults=De,c.setImages=De,c.setStamps=De),B.allowforms&&!I.forms&&(I.forms=new Atalasoft.Forms.FormController(c,t),c.forms=I.forms.__exposedApi),B.allowtext&&!Atalasoft.Utils.Browser.Explorer8&&(I.text=new Atalasoft.Text.TextController(c,t,B.mousetool?B.mousetool.text:{}),c.text=I.text.__exposedApi),H||(I.upload=new Atalasoft.Upload.UploadController(c,t)),!1===S.initialized&&(S.initialized=!0,Ye({throwerror:D,pagedivsresized:m,documentchanged:Me,pagesizechanged:_}),B.parent?(B.parent instanceof jQuery||(B.parent=V(B.parent)),B.parent.length||L("InitError","Parent element not found.")):L("InitError","No parent element given."),b.toolbar=(e=B.toolbarparent||B.parent,o={id:s+"_toolbar",parent:e,children:[{type:"button",id:"Button_PagePrev",cls:U.atala_tool_button_page_prev,icon:"page-prev",tooltip:"Previous Page",text:null,onclick:function(){Qe()}},{type:"pagelabel",id:"Label_PageNumber",cls:U.atala_page_label},{type:"button",id:"Button_PageNext",cls:U.atala_tool_button_page_next,icon:"page-next",tooltip:"Next Page",text:null,onclick:function(){Ze()}},{type:"button",id:"Button_ZoomOut",cls:U.atala_tool_button_zoom_out,icon:"zoom-out",tooltip:"Zoom Out",text:"",onclick:function(){Je()}},{type:"button",id:"Button_ZoomIn",cls:U.atala_tool_button_zoom_in,icon:"zoom-in",tooltip:"Zoom In",text:"",onclick:function(){Xe()}},{type:"button",id:"Button_FitNone",cls:U.atala_tool_button_fit_none,icon:"zoom-full",tooltip:"Full Size",text:"",onclick:function(){ce(1)}},{type:"button",id:"Button_FitBest",cls:U.atala_tool_button_fit_best,icon:"fit-best",tooltip:"Best Fit",text:"",onclick:function(){me(u.Best)}},{type:"button",id:"Button_FitWidth",cls:U.atala_tool_button_fit_width,icon:"fit-width",tooltip:"Fit To Width",text:"",onclick:function(){me(u.Width)}}]},B.showselecttools&&o.children.splice(5,0,{type:"button",id:"Button_ZoomArea",cls:U.atala_tool_button_zoom_area,icon:"zoom-area",tooltip:"Zoom Area",text:"",onclick:Q}),B.allowtext&&(o.children.splice(3,0,{type:"button",id:"Button_Text",cls:U.atala_tool_button_text_tool,icon:"text-tool",tooltip:"Text Selection",text:"",onclick:function(){I.mouseTool.setTool(r.Text)}}),o.children.splice(3,0,{type:"button",id:"Button_Text",cls:U.atala_tool_button_pan_tool,icon:"pan-tool",tooltip:"Pan",text:"",onclick:function(){I.mouseTool.setTool(r.Pan)}})),B.showrotatetools&&(o.children.push({type:"button",id:"Button_RotateLeft",cls:U.atala_tool_button_rotate_left,icon:"rotate-left",tooltip:"Rotate Left",text:"",onclick:X(270)}),o.children.push({type:"button",id:"Button_RotateRight",cls:U.atala_tool_button_rotate_right,icon:"rotate-right",tooltip:"Rotate Right",text:"",onclick:X(90)})),0<B.savepath.length&&o.children.unshift({type:"button",id:"Button_Save",cls:U.atala_tool_button_save,icon:"save",tooltip:"Save Changes",text:null,onclick:function(){Ge()}}),!1!==B.upload.enabled&&o.children.unshift({type:"button",id:"Button_Upload",cls:U.atala_tool_button_upload,icon:"upload",tooltip:"Upload document",text:null,onclick:function(){H||I.upload.uploadWithUi(function(t){t?(b.toolbar.controlgroup("enable"),B.allowannotations&&b.toolbar.annoToolbar.controlgroup("enable"),b.toolbar.find(".atala_page_label, .atala_search_container").removeClass("ui-state-disabled")):(b.toolbar.controlgroup("disable"),b.toolbar.annoToolbar&&b.toolbar.annoToolbar.controlgroup("disable"),b.toolbar.find(".atala_page_label, .atala_search_container").addClass("ui-state-disabled"))})}}),(i=A(o)).controlgroup(),B.allowannotations&&(i.annoToolbar=A({id:s+"_toolbar",parent:e,children:[{type:"button",id:"Button_Ellipse",cls:U.atala_tool_button_ellipse_anno,icon:"ellipse",tooltip:"Draw Ellipse",text:"",onclick:xe},{type:"button",id:"Button_Highlight",cls:U.atala_tool_button_highlight_anno,icon:"highlight",tooltip:"Draw Highlight",text:"",onclick:xe},{type:"button",id:"Button_Line",cls:U.atala_tool_button_line_anno,icon:"line",tooltip:"Draw Line",text:"",onclick:xe},{type:"button",id:"Button_Lines",cls:U.atala_tool_button_lines_anno,icon:"lines",tooltip:"Draw Poly Lines",text:"",onclick:xe},{type:"button",id:"Button_Freehand",cls:U.atala_tool_button_freehand_anno,icon:"freehand",tooltip:"Draw Freehand",text:"",onclick:xe},{type:"button",id:"Button_Rectangle",cls:U.atala_tool_button_rect_anno,icon:"rectangle",tooltip:"Draw Rectangle",text:"",onclick:xe},{type:"button",id:"Button_Text",cls:U.atala_tool_button_text_anno,icon:"text",tooltip:"Draw Text",text:"",onclick:xe}]}),i.annoToolbar.addClass(U.atala_annotation_toolbar),i.annoToolbar.controlgroup()),B.showstatus&&(b.status=V('<div id="'+s+'_status" style="display:inline"></div>'),b.status.addClass(U.atala_statusbar),i.append("Status:"),i.append(b.status)),B.allowtext&&B.mousetool.text.allowsearch&&(b.search=new Z({parent:i})),i),b.toolbar.addClass(U.atala_toolbar),b.main=F(B.parent),b.main.addClass(U.atala_main_container),b.scroller=F(b.main),b.scroller.addClass(U.atala_scroller),b.main.bind({selectstart:y}),b.toolbar.attr("id",s+"_toolbar"),b.main.attr("id",s+"_main"),b.scroller.attr("id",s+"_scroller"),b.main.css({height:"100%",width:"100%",position:"relative"}),b.scroller.css({height:"100%",width:"100%",position:"relative"}),b.viewport=F(b.scroller,s+"_vp"),b.viewport.css({overflow:"hidden",fontSize:0,"touch-action":"none"}),b.viewport.addClass(U.atala_viewport),b.viewport.attr("tabindex",-1),b.edges[0]=$(b.viewport,s+"_e0"),b.edges[0].addClass(U.atala_dom_edge_first),b.content=F(b.viewport,s+"_ct"),b.content.addClass(U.atala_content),b.content.css({"-ms-touch-action":"none",fontSize:0,overflow:"hidden"}),B.direction===k.Horizontal&&b.content.css({display:"inline-block"}),b.edges[1]=$(b.viewport,s+"_e1"),b.edges[1].addClass(U.atala_dom_edge_last),Atalasoft.Utils.Browser.Features.Compatibility&&L("InitError","Compatibility Mode is not supported."),!1===B.upload.enabled||H||(b.uploadCtrl=I.upload.getUploadControl()),Atalasoft.Utils.Browser.Mobile.Any()?b.scroller.css({overflow:"hidden"}):B.showscrollbars?(b.scroller.css({overflow:"auto"}),b.scrollH=Y(b.main,k.Horizontal),b.scrollH.attr("id",s+"_sH"),b.scrollH.addClass(U.atala_scroll_horizontal),b.scrollV=Y(b.main,k.Vertical),b.scrollV.attr("id",s+"_sV"),b.scrollV.addClass(U.atala_scroll_vertical)):b.scroller.css({overflow:"hidden"}),I.mouseTool=new Atalasoft.Controls.ToolController(c,{_internalEvents:a,_controllers:I,zoomStart:le,zoom:re,zoomEnd:se,getActivePage:St,raiseDrawLayer:Te,resetDrawLayer:Pe,getViewerTransform:be},b.viewport,b.scroller,V.extend({allowflick:B.allowflick},B.mousetool)),I.memory=new Atalasoft.Document.MemoryTracker({highWaterMark:B.memorythreshold}),I.memory.bind({exceededhighwatermark:f}),I.annotations&&I.annotations.setViewPort(b.viewport),eo("initialized"),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8?b.viewport.css({float:"left"}):(B.direction===k.Horizontal&&b.viewport.css({"white-space":"nowrap"}),b.viewport.css({display:"table-cell"})),et(b.scroller),b.scrollH&&b.edges[1].height(b.scrollH.scrollbarHeight()),I.mouseTool.setTool(r.Pan,r.None),(B.documenturl||B.annotationsurl||B.formurl)&&$e(B.documenturl,B.annotationsurl,B.formurl,n),V(document).ready(x));var e,o,i}(),c};
+"use strict";var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};
+/**
+ * WebDocumentViewer Document operations API.
  * @class
  * @name DocumentController
  * @inner
  * @memberOf Atalasoft.Controls.WebDocumentViewer
- */
-Atalasoft.Document.ManipulationController=function(e,n,t){function r(){Q.bind({pagerecycled:A,pageshown:_,documentinfochanged:a}),Y._state.initialized?i():Q.bind({initialized:i})}function i(){nn=!0}function a(e){tn.info=e.info,tn.mapping=null,tn.changes.length=0,tn.count=0,tn.inserted=0,tn.length=0}function o(){K=null,Q=null,Y=null}function u(){"Atalasoft.Controls.WebDocumentViewer"===Q.typeOf&&H.extend(Q,en)}function g(e,n){Q.trigger({type:"throwerror",name:e,msg:n})}function l(){null==tn.mapping&&p()}function c(e,n){l(),tn.mapping[e]&&(tn.mapping[e].viewestate[n]||(tn.mapping[e].viewestate[n]={size:null,fitmultiplier:null}))}function s(e){if(e<tn.info.count){for(var n=0;n<tn.mapping.length;n++)if(tn.mapping[n].index===e)return n}else for(var t=0;t<tn.mapping.length;t++)if(tn.mapping[t].pageref&&tn.mapping[t].pageref.mapsto===e)return t;return-1}function p(){var e=Math.max(tn.info.count,0);tn.mapping=new Array(e);for(var n=0;e>n;++n)tn.mapping[n]=f(n)}function f(e){return{index:e,viewestate:{},pageref:null,angle:0,text:null}}function d(e,n){c(e,Z),tn.mapping[e]&&tn.mapping[e].viewestate&&(tn.mapping[e].viewestate[Z].cacheIndex=n)}function m(e,n){if(n=n||Z,l(),e>=0&&e<tn.mapping.length&&tn.mapping[e]){var t=tn.mapping[e],r=null,i=null;if(-1===t)return null;null!=t.pageref?(r=t.pageref,e=r.index,i=r.uri):e=t.index;var a=t.viewestate[n]&&t.viewestate[n].cacheIndex>=0?t.viewestate[n].cacheIndex:-1;return{index:e,ref:r,cacheIndex:a,uri:i}}return null}function h(e){return l(),e>=0&&e<tn.mapping.length?null!==tn.mapping[e].pageref?tn.mapping[e].pageref:tn.mapping[e].index:null}function v(e,n){return n=n||Z,l(),c(e,n),e>=0&&e<tn.mapping.length&&tn.mapping[e].viewestate[n].fitmultiplier?tn.mapping[e].viewestate[n].fitmultiplier:1}function y(e,n,t){t=t||Z,l(),c(e,t),e>=0&&e<tn.mapping.length&&(tn.mapping[e].viewestate[t].fitmultiplier=n)}function x(e){return l(),e>=0&&e<tn.mapping.length?tn.mapping[e].angle:0}function P(n,t,r){var i=t;n&&n!==e.config.documenturl&&(i.pageref={uri:n,index:t.index,mapsto:tn.info.count+tn.inserted}),tn.count++,tn.inserted++,tn.mapping.splice(r,0,i)}function b(e){return tn.count--,tn.mapping.splice(e,1)[0]}function _(){}function A(){}function I(n){var t=h(n);if(null!==t){if("object"===("undefined"==typeof t?"undefined":_typeof(t)))return{uri:t.uri,index:t.index};if(H.isNumeric(t))return{uri:e.config.documenturl,index:t}}return t}function w(e,n,t,r){return Array.isArray(n)?(g("IncorrectIndex","Source index can not be an array."),void 0):(j(e,[n],t,r),void 0)}function j(e,n,t,r){var i=void 0,a=void 0;if("string"==typeof e&&e.trim().length>0)i=W(n,Number.MAX_VALUE),a=!0;else{if(null!==e&&"undefined"!=typeof e)return g("IncorrectUri",'Uri has invalid value "'+e+'". It must be an uri to the source document or not set.'),void 0;var o=function(e){var n=[],t=null,r=null;if(!Array.isArray(e))return g("IncorrectPageReferences","Objects "+e+" are not an array."),t;if(q(e)){r=new Array(e.length);for(var i=0;i<e.length;i++)r[i]=I(e[i])}for(var a=0;a<e.length;a++){var o=null!==r?r[a]:e[a];if("object"===("undefined"==typeof o?"undefined":_typeof(o))&&null!==o&&"string"==typeof o.uri&&0!==o.uri.trim().length){var u=W([o.index],Number.MAX_VALUE);null!==u?o.index=u[0]:n.push(o)}else n.push(o)}return n.length>1?g("IncorrectPageReferences",'Objects "'+n.join('", "')+'" are not correct page references.'):n.length>0?g("IncorrectPageReferences",'Object "'+n[0]+'" is not a correct page reference.'):t=null!==r?r:e,t};a=!1,i=o(n)}var u=B(t,!1);if(null!==i&&null!==u){Y._state.batchoperation++;for(var l=0;l<i.length;l++){var c=a?e:i[l].uri,s=a?i[l]:i[l].index;l===i.length-1&&Y._state.batchoperation--;var p=f(s);P(c,p,u),Y._controllers.annotations&&Y._controllers.annotations.insertLayer(null,null,u),Y._controllers.forms&&Y._controllers.forms.insertForm(null,null,u),tn.changes.push({type:"insertpage",uri:c,src:p.index,dest:u}),Q.trigger({type:rn.inserted,srcuri:c,srcindex:s,destindex:u}),u++}"function"==typeof r&&r(),Q.trigger(rn.changed)}}function O(e,n){z([e],n)}function z(e,n){l();var t=J(e,!0);null!==t&&(Y._state.batchoperation++,t.sort(function(e,n){return n-e}).forEach(function(e,n){n===t.length-1&&Y._state.batchoperation--,b(e),Y._controllers.annotations&&Y._controllers.annotations.removeLayer(e),Y._controllers.forms&&Y._controllers.forms.removeForm(e),tn.changes.push({type:"removepage",index:e}),Q.trigger({type:rn.removed,index:e})}),"function"==typeof n&&n(),Q.trigger(rn.changed))}function M(e,n,t){S([e],n,t)}function S(e,n,t){l();var r=J(e,!0),i=B(n,!0);if(null!==r&&null!==i){var a=i,o=r[0]>i?1:-1;Y._state.batchoperation++;for(var u=function(e){var n=e,t=r[n],u=0,g=0;u=i>t?-r.filter(function(e,r){return n>r&&t>e&&i>e}).length:t>i?r.filter(function(e,r){return n>r&&e>t}).length:0>o?-r.filter(function(e,r){return n>r&&t>e&&i>e}).length:r.filter(function(e,r){return n>r&&e>t}).length,e>0&&(0>u||i>t)&&(g=-1),a+=g,e===r.length-1&&Y._state.batchoperation--,P(null,b(t+u),a),Y._controllers.annotations&&Y._controllers.annotations.moveLayer(t+u,a),Y._controllers.forms&&Y._controllers.forms.moveForm(t+u,a),tn.changes.push({type:"movepage",src:t+u,dest:a}),Q.trigger({type:rn.moved,shiftedsrcindex:t+u,srcindex:t,destindex:a}),a++},g=0;g<r.length;g++)u(g);"function"==typeof t&&t(),Q.trigger(rn.changed)}}function D(e,n,t){return Array.isArray(n)?(g("rotatePage","angle "+n+" is array."),void 0):(C([e],n,t),void 0)}function C(e,n,t){l();var r=function(e,n){var t=n?$([e]):$(e);if(t)for(var r=0;r<t.length;r++){if(t[r]%90)return g("rotatePages","Angle must be a multiple of 90 degrees."),null;t[r]=t[r]%360}return t},i=J(e),a="number"==typeof n||"string"==typeof n,o=r(n,a);if(null!==i&&null!==o){if(!a&&i.length!==o.length)return g("rotatePages","Indices array and angles array have different lengths."),void 0;Y._state.batchoperation++,i.forEach(function(e,n){var t=o.length>1?o[n]:o[0];n===i.length-1&&Y._state.batchoperation--;var r=E(e,t);tn.changes.push({type:"rotatepage",index:e,angle:t}),Q.trigger({type:rn.rotated,index:e,page:r,angle:t})}),"function"==typeof t&&t()}}function E(e,n){tn.mapping[e].angle=n;for(var t=null,r=0;r<Y._pages.length;++r){var i=Y._pages[r];if(i._index===e){t=i;break}}var a=!!t&&!!t._img;return a&&(Y.startDomManipulation(),Y.adjustVisiblePages(!0,Y.endDomManipulation)),t}function N(e,n){l(),e>=0&&e<tn.mapping.length&&(tn.mapping[e].text=n)}function R(e){return e>=0&&e<tn.mapping.length?tn.mapping[e].text:null}function U(e){if(e&&e.pages){l();for(var n=0;n<tn.mapping.length;++n)if(n<e.pages.length)if(tn.mapping[n].index===n)tn.mapping[n].text=e.pages[n];else for(var t=0;t<tn.mapping.length;++t)tn.mapping[t].index===n&&(tn.mapping[t].text=e.pages[n]);else tn.mapping[n].text=null}}function F(){var e={};return H.extend(!0,e,{data:tn,changes:tn.changes}),e}function L(e){e&&(e._changes?tn=e._changes:e._changes=tn)}function V(e){tn.clear(),"function"==typeof e&&e(),Q.trigger(rn.changed)}function T(){return tn.info.count+tn.count}function k(e,n){if(n=n||Z,l(),c(e,n),e>=0&&e<tn.mapping.length){var t=tn.mapping[e].viewestate[n].size;if(!t){var r=tn.info;if(r.pagesizes&&r.pagesizes[e])return r.pagesizes[e]}return t}}function X(e,n,t){t=t||Z,l(),c(e,t),e>=0&&e<tn.mapping.length&&(tn.mapping[e].viewestate[t].size=n)}function B(e,n){var t=W([e],tn.mapping.length+(n?0:1));return t?t[0]:t}function J(e,n){return W(e,tn.mapping.length,n)}function W(e,n,t){var r=[],i=[],a=null,o="IncorrectIndices";return Array.isArray(e)?(e=$(e),e&&e.forEach(function(e,a,o){(0>e||e>=n)&&r.push(e),t&&o.filter(function(n){return n===e}).length>1&&-1===i.indexOf(e)&&i.push(e)}),r.length>1?g(o,"Page indices "+r.join(", ")+" are outside of the document."):r.length>0?g(o,"Page index "+r[0]+" is outside of the document."):i.length>1?g(o,"Page indices "+i.join(", ")+" are included more than once."):i.length>0?g(o,"Page index "+i[0]+" is included more than once."):a=e,a):(g(o,"Object "+e+" is not an array."),a)}function $(e){var n=[],t=[];return Array.isArray(e)?(e.forEach(function(e){var r=Atalasoft.Utils.ParseInt(e);null===r?n.push(e):t.push(r)}),n.length>1?(g("IncorrectNumbers",'Objects "'+n.join('", "')+'" are not numbers.'),t=null):n.length>0&&(g("IncorrectNumbers",'Object "'+n[0]+'" is not a number.'),t=null),t):(g("IncorrectNumbers","Object "+e+" is not an array."),t)}function q(e){var n=[];return Array.isArray(e)?(e.forEach(function(e){var t=Atalasoft.Utils.ParseInt(e);null===t&&n.push(e)}),0===n.length):!1}function G(){var e=[],n={type:"docinfo",pagescount:tn.info.count};e.push(n);for(var t in tn.changes)if(tn.changes.hasOwnProperty(t)&&(Q.config.persistrotation||"rotatepage"!==tn.changes[t].type)){var r={};for(var i in tn.changes[t])tn.changes[t].hasOwnProperty(i)&&(r[i]=tn.changes[t][i]);e.push(r)}return JSON.stringify({changes:e})}var H=Atalasoft.$,K=this,Q=e,Y=n,Z=t,en={document:{events:{/**
+ */Atalasoft.Document.ManipulationController=function(a,e,n){var r=Atalasoft.$,t=this,c=a,p=e,o=n,i={document:{events:{
+/**
                  * Triggers when a page is added to the document.
                  * @event Atalasoft.Controls.WebDocumentViewer~DocumentController#pageinserted
                  * @param {Object} e - Event arguments.
@@ -789,12 +1080,14 @@ Atalasoft.Document.ManipulationController=function(e,n,t){function r(){Q.bind({p
                  * @param {number} e.srcindex - Index of the inserted page in the source document.
                  * @param {number} e.index - Page insert index.
                  */
-pageinserted:null,/** Triggers when a page is removed from the document.
+pageinserted:null,
+/** Triggers when a page is removed from the document.
                  * @event Atalasoft.Controls.WebDocumentViewer~DocumentController#pageremoved
                  * @param {Object} e - Event arguments.
                  * @param {number} e.index - Index of the removed page.
                  */
-pageremoved:null,/**
+pageremoved:null,
+/**
                  * Triggers when a page is moved within the same document.
                  * @event Atalasoft.Controls.WebDocumentViewer~DocumentController#pagemoved
                  * @param {Object} e - Event arguments.
@@ -802,19 +1095,22 @@ pageremoved:null,/**
                  * @param {number} e.srcindex - Initial page index.
                  * @param {number} e.destindex - Destination page index.
                  */
-pagemoved:null,/**
+pagemoved:null,
+/**
                  * Triggers when the document is changed.
                  * This event indicates document structure or internal state changes and causes visible pages repaint.
                  * @event Atalasoft.Controls.WebDocumentViewer~DocumentController#documentchanged
                  */
-documentchanged:null,/**
+documentchanged:null,
+/**
                  * Fired when document page has been rotated.
                  * @event Atalasoft.Controls.WebDocumentViewer~DocumentController#pagerotated
                  * @param {Object} e - Event arguments
                  * @param {number} e.index - Index of the rotated page.
                  * @param {number} e.angle - Clockwise page rotation angle.
                  */
-pagerotated:null},/**
+pagerotated:null},
+/**
              * Inserts a page at the destination index from the given source uri and index.
              * @param {string} [documenturl] - The identifier of the document which contains the page. If empty, `src` numeric value is considered as referencing currently opened document.
              * @param {number|string|DocumentPageReference} src - zero based index of the page in the source document. Can be passed as string representation of a number. Or page descriptor returned by the {@link Atalasoft.Controls.WebDocumentViewer~DocumentController#getPageReference|getPageReference}.
@@ -828,7 +1124,7 @@ pagerotated:null},/**
              *
              * @example
              * <caption>Assuming we have two instances of the {@link Atalasoft.Controls.WebDocumentThumbnailer| WebDocumentThumbnailer} control
-             * both having document opened. To copy firs page of one control into first position of another
+             * both having document opened. To copy first page of one control into first position of another
              * following code could be used. </caption>
              *
              * _thumb1.document.insertPage(null, _thumb2.document.getPageReference(0), 0);
@@ -836,12 +1132,13 @@ pagerotated:null},/**
              * // this call will insert new page and correctly handle annotations and forms data, so new empty layers will be created.
              * // If annotations should be also coped from the source document, it could be done explicitly using following code
              *
-             * const annotations = _thumb1.annotations.getFromPage(0);
-             * for (const i = 0; i < annotations.length; i++) {
+             * var annotations = _thumb1.annotations.getFromPage(0);
+             * for (var i = 0; i < annotations.length; i++) {
              * 	_thumb2.annotations.createOnPage(annotations[i], 0);
              * }
              */
-insertPage:w,/**
+insertPage:A,
+/**
              * Inserts a page at the destination index from the given source uri and index.
              * @param {string} [documenturl] - The identifier of the document which contains the page. If empty, `src` numeric value is considered as referencing currently opened document.
              * @param {number[]|string[]|DocumentPageReference[]} src - zero based indices of the pages in the source document. Can be passed as string representation of numbers. Or page descriptors returned by the {@link Atalasoft.Controls.WebDocumentViewer~DocumentController#getPageReference|getPageReference}.
@@ -853,7 +1150,8 @@ insertPage:w,/**
              * @function
              *
              */
-insertPages:j,/**
+insertPages:w,
+/**
              * Removes the page at the given index.
              * @param {number|string} index - Index of the page to remove. Can be passed as string representation of a number
              * @param {NotificationCallback} [callback] - Function to execute when the operation has completed.
@@ -861,7 +1159,8 @@ insertPages:j,/**
              * @memberOf Atalasoft.Controls.WebDocumentViewer~DocumentController
              * @function
              */
-removePage:O,/**
+removePage:j,
+/**
              * Removes pages at given indices.
              * @param {number[]|string[]} indices - Indices of pages to remove. Can be passed as string representation of numbers
              * @param {NotificationCallback} [callback] - Function to execute when the operation has completed.
@@ -869,7 +1168,8 @@ removePage:O,/**
              * @memberOf Atalasoft.Controls.WebDocumentViewer~DocumentController
              * @function
              */
-removePages:z,/**
+removePages:O,
+/**
              * Moves a page from the source index to the destination index within single document.
              * @param {number|string} sourceIndex - Source index to get the page from. Can be passed as string representation of a number
              * @param {number|string} destinationIndex - Destination index to insert the page. Can be passed as string representation of a number
@@ -879,7 +1179,8 @@ removePages:z,/**
              * @memberOf Atalasoft.Controls.WebDocumentViewer~DocumentController
              * @function
              */
-movePage:M,/**
+movePage:z,
+/**
              * Moves pages from the source indices to the destination index within single document.
              * @param {number[]|string[]} sourceIndices - Source indices to get pages from. Can be passed as string representation of numbers
              * @param {number|string} destinationIndex - Destination index to insert pages. Can be passed as string representation of a number
@@ -889,7 +1190,8 @@ movePage:M,/**
              * @memberOf Atalasoft.Controls.WebDocumentViewer~DocumentController
              * @function
              */
-movePages:S,/**
+movePages:M,
+/**
              * Rotates the specified angle page to the specified angle.
              *
              * Note, that `angle` represents final rotation value that will be applied to the original page.			 *
@@ -905,7 +1207,8 @@ movePages:S,/**
              * <caption>If rotation should be applied to already rotated page, use {@link Atalasoft.Controls.WebDocumentViewer~DocumentController#getPageRotation| getPageRotation} to get current page rotation.</caption>
              * viewer.document.rotatePage(0, viewer.document.getPageRotation(0) + 90);
              */
-rotatePage:D,/**
+rotatePage:S,
+/**
              * Rotates specified angle pages to specified angles.
              *
              * Note, that `angles` represents final rotation values that will be applied to original pages.
@@ -926,7 +1229,8 @@ rotatePage:D,/**
              * <caption>Rotate page with index 0 on 180 degrees and page with index 3 on 90 degrees</caption>
              * viewer.document.rotatePages([0, 3], [180, 90])
              */
-rotatePages:C,/**
+rotatePages:D,
+/**
              * Gets the rotation angle of the specified page.
              * @param {number} index - Index of the page to retrieve rotation angle.
              * @returns {number} Clockwise rotation angle of the specified page.
@@ -935,7 +1239,8 @@ rotatePages:C,/**
              * @memberOf Atalasoft.Controls.WebDocumentViewer~DocumentController
              * @function
              */
-getPageRotation:x,/**
+getPageRotation:s,
+/**
              * Document page descriptor.
              * @typedef {Object} DocumentPageReference
              * @property {string} uri - Identifier of the document containing the page.
@@ -949,17 +1254,22 @@ getPageRotation:x,/**
              * @memberOf Atalasoft.Controls.WebDocumentViewer~DocumentController
              * @function
              */
-getPageReference:I}};if(Atalasoft.Document.ManipulationController.__exposedApi=en.document,!e)return null;var nn=!1,tn={changes:[],mapping:null,count:0,inserted:0,info:{count:0,dpi:96,size:{width:0,height:0},vector:!1}},rn={inserted:"pageinserted",removed:"pageremoved",moved:"pagemoved",changed:"documentchanged",rotated:"pagerotated"};K.dispose=o,K.__exposedApi=en.document,K.getPageDefinition=m,K.setPageCacheIndex=d,K.insertPage=w,K.removePage=O,K.movePage=M,K.rotatePage=D,K.insertPages=j,K.removePages=z,K.movePages=S,K.rotatePages=C,K.getPageFitMultiplier=v,K.setPageFitMultiplier=y,K.getPageRotation=x,K.getPageSize=k,K.setPageSize=X,K.updatePageText=N,K.getPageText=R,K.initDocumentText=U,K.getPageIndexByImageIndex=s,K.__getDebugInfo=F,K.__linkChanges=L,K.clear=V,K.getPageCount=T,K.stringifyChanges=G,u(),r()};
-"use strict";Atalasoft.Controls.ToolController=function(t,e,o,n,l){function r(){R=new Atalasoft.Controls.PointerTool,Q.bind(R.events.viewport),R.events.wdv&&V.bind(R.events.wdv),R.bind({clickzoom:h,fit:m,panstart:y,panmove:T,panend:E,zoomstart:D,zoommove:_,zoomend:z,selectstart:b,selectmove:w,selectend:A,zoomareastart:b,zoomareamove:w,zoomareaend:A,textselectstart:k,textselectmove:C,textselectend:L,textselectscroll:M,textselectcopy:S})}function a(){R&&R.events&&(R.events.wdv&&V&&V.unbind&&V.unbind(R.events.wdv),R.events.viewport&&Q&&Q.unbind&&Q.unbind(R.events.viewport)),le&&le.length>0&&(le.length=0),R&&R.dispose&&R.dispose(),J=null,G=null,$=null,Q=null,V=null,F=null}function s(){return q.bind.apply(q,arguments),F}function i(){return q.unbind.apply(q,arguments),F}function c(){return q.trigger.apply(q,arguments),F}function u(t,e){switch(Atalasoft.Utils.Browser.Explorer8&&(t=t!==Atalasoft.Utils.MouseToolType.Text?t:Atalasoft.Utils.MouseToolType.Arrow,e=e!==Atalasoft.Utils.MouseToolType.Text?e:Atalasoft.Utils.MouseToolType.Arrow),R.setTool(t,e),N(t,e),t){case G.None:p(J.Arrow);break;case G.Pan:p(J.Move);break;case G.ZoomIn:p(J.ZoomIn);break;case G.ZoomOut:p(J.ZoomOut);break;case G.Selection:j.raiseDrawLayer(),se=1,p(J.Crosshair);break;case G.ZoomArea:j.raiseDrawLayer(),se=1,p(J.Crosshair);break;case G.Text:j.raiseDrawLayer(),p(J.Text);break;default:p(J.Arrow)}}function v(){var t={};return Y.extend(!0,t,{cursor:oe,custom:ne,flick:le,resourcepath:ee,flickdelay:re,scroller:$,tool:R,toolcusors:J,tooltypes:G,viewport:Q,zoom:te}),t}function f(){return R.getTool()}function d(){return R.pauseTool()}function g(){return R.resumeTool()}function p(t){var e=""===ee?"?atalacsr=":ee;oe="%2"===t?oe=ne:t.replace("%1",e),Q.css({cursor:oe})}function x(t){ne=t}function m(t){V.fit(t.fit)}function h(t){t.zoomout?V.zoomOut():V.zoomIn()}function y(t){$.data("ox",$.scrollLeft()+t.x).data("oy",$.scrollTop()+t.y),$.stop()}function T(t){$.scrollLeft($.data("ox")-t.x),$.scrollTop($.data("oy")-t.y),ce.allowflick&&(le.push({x:t.x,y:t.y,time:(new Date).getTime()}),le.length>10&&le.shift())}function E(){if(ce.allowflick){if(le.length>1){var t=(new Date).getTime(),e=le.pop();if(t-e.time<100){var o=le.shift(),n=-o.time+e.time;$.animate({scrollLeft:$.scrollLeft()+Math.round((o.x-e.x)/n*250),scrollTop:$.scrollTop()+Math.round((o.y-e.y)/n*250)},re,"easeOutQuad")}}le.length=0}}function b(t){ae=j.getActivePage(),ae&&ae._rubberband.startSelect(t)}function w(t){ae=j.getActivePage(),ae&&ae._rubberband.moveSelect(t)}function A(t){ae=j.getActivePage(),ae&&(ae._rubberband.endSelect(t),"zoomareaend"===t.type&&(ae._rubberband.hide(),ae._rubberband.zoomToSelection())),se--,0===se&&(se=-1,j.resetDrawLayer(),u(W,H))}function D(){j.zoomStart(),te=V.getZoom()}function _(t){var e=te*t.scale;j.zoom(e)}function z(){j.zoomEnd()}function k(t){var e=X(t);if(e){if(e.cursor=oe,e.complete=!1,e.rectangular=t.toolEvent?t.toolEvent.altKey:!1,e.interval=t.toolEvent?t.toolEvent.shiftKey:!1,!e.rectangular&&!e.interval){var o=t.toolEvent&&t.toolEvent.originalEvent&&t.toolEvent.originalEvent.detail?t.toolEvent.originalEvent.detail%3:1;1!==o&&(e.word=2===o,e.line=0===o)}c({type:ue.textselectstart,eventData:e}),t.eventData.handled=e.handled,e.complete&&e.handled&&(L(t),t.eventData.complete=!0)}}function C(t){U();var e=X(t);if(e){e.cursor=oe,e.selecting=t.eventData.selecting,c({type:ue.textselectmove,eventData:e}),t.eventData.handled=e.handled;var o=e.handled&&e.cursor?e.cursor:J.Arrow;o!==oe&&p(o),t.eventData.handled&&t.eventData.selecting&&t.toolEvent&&t.toolEvent.target&&P(t)}}function L(t){U();var e=X(t);e&&(c({type:ue.textselectend,eventData:e}),t.eventData.handled=e.handled)}function M(t){U(),P(t)}function S(){ce.text.hookcopy&&c({type:ue.textselectcopy})}function U(){ie&&(clearTimeout(ie),ie=null)}function P(t){if(U(),t&&t.toolEvent){var e=B.offset(),o=null;if(void 0!==t.toolEvent.pageX&&void 0!==t.toolEvent.pageY?o=t.toolEvent:t.toolEvent.originalEvent&&t.toolEvent.originalEvent.touches&&1===t.toolEvent.originalEvent.touches.length&&void 0!==t.toolEvent.originalEvent.touches[0].pageX&&void 0!==t.toolEvent.originalEvent.touches[0].pageY&&(o=t.toolEvent.originalEvent.touches[0]),o){var n={x:o.pageX-e.left,y:o.pageY-e.top},l=B.width(),r=B.height(),a=0,s=0;n.y<r*ce.text.scrolltriggerarea&&$.scrollTop()>0?a=n.y>0?-ce.text.innerscrolldelta:-ce.text.outerscrolldelta:n.y>r*(1-ce.text.scrolltriggerarea)?a=n.y<r?ce.text.innerscrolldelta:ce.text.outerscrolldelta:n.x<l*ce.text.scrolltriggerarea&&$.scrollLeft()>0?s=n.x>0?-ce.text.innerscrolldelta:-ce.text.outerscrolldelta:n.x>l*(1-ce.text.scrolltriggerarea)&&(s=n.x<l?ce.text.innerscrolldelta:ce.text.outerscrolldelta),(a||s)&&ce.text.scrolltriggerarea!==Atalasoft.Utils.ScrollArea.None&&($.scrollTop($.scrollTop()+a),$.scrollLeft($.scrollLeft()+s),ie=setTimeout(P,K,t))}}}function Z(t){var e=Y(t).parents("."+V.domclasses.atala_page_div).first();if(e){var o=e.attr(V.domattributes.atala_page_index);return parseInt(o,10)}return null}function I(t,e){var o=Atalasoft.Utils.getMousePositionJquery(t.toolEvent?t.toolEvent:t);if(e&&e._paper){var n=Atalasoft.Utils.getSVGOffset(e._paper.canvas,e);o.x-=n.left,o.y-=n.top}return o}function O(t,e){var o=0;if(j._controllers.text){var n=j._controllers.document.getPageText(e);n&&isFinite(n.rotation)&&(o=n.rotation)}var l=j.getViewerTransform(e,o).invert();return{x:l.x(t.x,t.y),y:l.y(t.x,t.y)}}function N(t,e){var o=(W===G.Text||H===G.Text)&&t!==G.Text&&e!==G.Text;o&&j.resetDrawLayer(),t!==G.Selection&&t!==G.ZoomArea&&(W=t),e!==G.Selection&&e!==G.ZoomArea&&(H=e)}function X(t){var e={cursor:null,handled:!1};if(t&&t.toolEvent){var o=t.toolEvent.originalEvent.touches&&1===t.toolEvent.originalEvent.touches.length,n=o?document.elementFromPoint(t.toolEvent.originalEvent.touches[0].clientX,t.toolEvent.originalEvent.touches[0].clientY):t.toolEvent.target,l=Z(n);if(isFinite(l)&&l>=0){var r=I(t),a=O(r,l);Atalasoft.$.extend(e,{page:l,point:a,viewerPoint:r})}}return e}if(!o||!n)return Atalasoft.Event.Throw("Atalasoft.Controls.ToolController",0,null,"ToolController requires a WDV and two jQuery objects passed in as input, one for mouse events, the other for scrolling."),!1;var Y=Atalasoft.$,F=this,V=t,j=e,q=(e?e._internalEvents:null)||Y({}),K=50,Q=o,$=n,B=Q.parents("."+V.domclasses.atala_main_container).first(),G=Atalasoft.Utils.MouseToolType,J=Atalasoft.Utils.MouseToolCursor,W=G.Pan,H=G.None,R=null,te=1,ee="",oe=null,ne="",le=[],re=1e3,ae=null,se=-1,ie=null,ce={allowflick:!0,text:{scrolltriggerarea:Atalasoft.Utils.ScrollArea.Normal,innerscrolldelta:10,outerscrolldelta:20}};/**
+getPageReference:I}};if(Atalasoft.Document.ManipulationController.__exposedApi=i.document,!a)return null;var f={changes:[],mapping:null,count:0,inserted:0,info:{count:0,dpi:96,size:{width:0,height:0},vector:!1}},m={inserted:"pageinserted",removed:"pageremoved",moved:"pagemoved",changed:"documentchanged",rotated:"pagerotated"};function g(){!0}function u(e){f.info=e.info,f.mapping=null,f.changes.length=0,f.count=0,f.inserted=0,f.length=0}t.dispose=function(){p=c=t=null};var h=null;function d(e,n,t){t?null===h?h={name:e,message:n}:h.message+="\r\n"+n:c.trigger({type:"throwerror",name:e,msg:n})}function v(){null==f.mapping&&function(){var e=Math.max(f.info.count,0);f.mapping=new Array(e);for(var n=0;n<e;++n)f.mapping[n]=y(n)}()}function l(e,n){v(),f.mapping[e]&&(f.mapping[e].viewestate[n]||(f.mapping[e].viewestate[n]={size:null,fitmultiplier:null}))}function y(e){return{index:e,viewestate:{},pageref:null,angle:0,text:null}}function s(e){return v(),0<=e&&e<f.mapping.length?f.mapping[e].angle:0}function x(e,n,t){var r=n;e&&e!==a.config.documenturl&&(r.pageref={uri:e,index:n.index,mapsto:f.info.count+f.inserted}),f.count++,f.inserted++,f.mapping.splice(t,0,r)}function P(e){return f.count--,f.mapping.splice(e,1)[0]}function b(e){}function _(e){}function I(e){var n,t=(n=e,v(),0<=n&&n<f.mapping.length?null!==f.mapping[n].pageref?f.mapping[n].pageref:f.mapping[n].index:null);if(null!==t){if("object"===(void 0===t?"undefined":_typeof(t)))return{uri:t.uri,index:t.index};if(r.isNumeric(t))return{uri:a.config.documenturl,index:t}}return t}function A(e,n,t,r){Array.isArray(n)?d("IncorrectIndex","Source index can not be an array."):w(e,[n],t,r)}function w(e,n,t,r){v();var a=void 0,i=void 0;if("string"==typeof e&&0<e.trim().length)h=null,a=E(n,Number.MAX_VALUE,!1,!0),i=!0,null!==h&&("IncorrectNumbers"===h.name?d("IncorrectIndices","When this methods has set srcUri, then srcIndices should be an array of numbers representing page indices from an external document. Please check your input parameters and try again.\r\n\tInner error: "+h.message):d(h.name,h.message));else{if(null!=e)return void d("IncorrectUri",'Uri has invalid value "'+e+'". It must be an uri to the source document or not set.');i=!1,a=function(e){var n,t,r=[],a=null,i=null;if(!Array.isArray(e))return d("IncorrectPageReferences","Objects "+e+" are not an array."),a;if(n=e,t=[],Array.isArray(n)&&(n.forEach(function(e){null===Atalasoft.Utils.ParseInt(e)&&t.push(e)}),0===t.length)){i=new Array(e.length);for(var o=0;o<e.length;o++)i[o]=I(e[o])}for(var g=0;g<e.length;g++){var u=null!==i?i[g]:e[g];if("object"===(void 0===u?"undefined":_typeof(u))&&null!==u&&"string"==typeof u.uri&&0!==u.uri.trim().length){var l=E([u.index],Number.MAX_VALUE);null!==l?u.index=l[0]:r.push(u)}else r.push(u)}return 1<r.length?d("IncorrectPageReferences",'Objects "'+r.join('", "')+'" are not correct page references.'):0<r.length?d("IncorrectPageReferences",'Object "'+r[0]+'" is not a correct page reference.'):a=null!==i?i:e,a}(n)}var o=N(t,!1);if(null!==a&&null!==o){p._state.batchoperation++;for(var g=0;g<a.length;g++){var u=i?e:a[g].uri,l=i?a[g]:a[g].index;g===a.length-1&&p._state.batchoperation--;var s=y(l);x(u,s,o),p._controllers.annotations&&p._controllers.annotations.insertLayer(null,null,o),p._controllers.forms&&p._controllers.forms.insertForm(null,null,o),f.changes.push({type:"insertpage",uri:u,src:s.index,dest:o}),c.trigger({type:m.inserted,srcuri:u,srcindex:l,destindex:o}),o++}"function"==typeof r&&r(),c.trigger(m.changed)}}function j(e,n){O([e],n)}function O(e,n){v();var t=C(e,!0);null!==t&&(p._state.batchoperation++,t.sort(function(e,n){return n-e}).forEach(function(e,n){n===t.length-1&&p._state.batchoperation--,P(e),p._controllers.annotations&&p._controllers.annotations.removeLayer(e),p._controllers.forms&&p._controllers.forms.removeForm(e),f.changes.push({type:"removepage",index:e}),c.trigger({type:m.removed,index:e})}),"function"==typeof n&&n(),c.trigger(m.changed))}function z(e,n,t){M([e],n,t)}function M(e,n,t){v();var i=C(e,!0),o=N(n,!0);if(null!==i&&null!==o){var g=o,u=i[0]>o?1:-1;p._state.batchoperation++;for(var r=function(e){var t=e,r=i[t],n=0,a=0;n=r<o?-i.filter(function(e,n){return n<t&&e<r&&e<o}).length:o<r?i.filter(function(e,n){return n<t&&r<e}).length:u<0?-i.filter(function(e,n){return n<t&&e<r&&e<o}).length:i.filter(function(e,n){return n<t&&r<e}).length,0<e&&(n<0||r<o)&&(a=-1),g+=a,e===i.length-1&&p._state.batchoperation--,x(null,P(r+n),g),p._controllers.annotations&&p._controllers.annotations.moveLayer(r+n,g),p._controllers.forms&&p._controllers.forms.moveForm(r+n,g),f.changes.push({type:"movepage",src:r+n,dest:g}),c.trigger({type:m.moved,shiftedsrcindex:r+n,srcindex:r,destindex:g}),g++},a=0;a<i.length;a++)r(a);"function"==typeof t&&t(),c.trigger(m.changed)}}function S(e,n,t){Array.isArray(n)?d("rotatePage","angle "+n+" is array."):D([e],n,t)}function D(e,n,t){v();var a=C(e),r="number"==typeof n||"string"==typeof n,i=function(e,n){var t=U(n?[e]:e);if(t)for(var r=0;r<t.length;r++){if(t[r]%90)return d("rotatePages","Angle must be a multiple of 90 degrees."),null;t[r]=t[r]%360}return t}(n,r);null!==a&&null!==i&&(r||a.length===i.length?(p._state.batchoperation++,a.forEach(function(e,n){var t=1<i.length?i[n]:i[0];n===a.length-1&&p._state.batchoperation--;var r=function(e,n){f.mapping[e].angle=n;for(var t=null,r=0;r<p._pages.length;++r){var a=p._pages[r];if(a._index===e){t=a;break}}t&&t._img&&(p.startDomManipulation(),p.adjustVisiblePages(!0,p.endDomManipulation));return t}(e,t);f.changes.push({type:"rotatepage",index:e,angle:t}),c.trigger({type:m.rotated,index:e,page:r,angle:t})}),"function"==typeof t&&t()):d("rotatePages","Indices array and angles array have different lengths."))}function N(e,n){var t=E([e],f.mapping.length+(n?0:1));return t?t[0]:t}function C(e,n){return E(e,f.mapping.length,n)}function E(e,r,a,n){var i=[],o=[],t=null,g="IncorrectIndices";return Array.isArray(e)?((e=U(e,n))&&e.forEach(function(n,e,t){(n<0||r<=n)&&i.push(n),a&&1<t.filter(function(e){return e===n}).length&&-1===o.indexOf(n)&&o.push(n)}),1<i.length?d(g,"Page indices "+i.join(", ")+" are outside of the document.",n):0<i.length?d(g,"Page index "+i[0]+" is outside of the document.",n):1<o.length?d(g,"Page indices "+o.join(", ")+" are included more than once.",n):0<o.length?d(g,"Page index "+o[0]+" is included more than once.",n):t=e):d(g,"Object "+e+" is not an array.",n),t}function U(e,n){var t=[],r=[];return Array.isArray(e)?(e.forEach(function(e){var n=Atalasoft.Utils.ParseInt(e);null===n?t.push(e):r.push(n)}),1<t.length?(d("IncorrectNumbers",'Objects "'+t.join('", "')+'" are not numbers.',n),r=null):0<t.length&&(d("IncorrectNumbers",'Object "'+t[0]+'" is not a number.',n),r=null)):d("IncorrectNumbers","Object "+e+" is not an array.",n),r}t.__exposedApi=i.document,t.getPageDefinition=function(e,n){if(n=n||o,v(),0<=e&&e<f.mapping.length&&f.mapping[e]){var t=f.mapping[e],r=null,a=null;if(-1===t)return null;null!=t.pageref?(r=t.pageref,e=r.index,a=r.uri):e=t.index;var i=t.viewestate[n]&&0<=t.viewestate[n].cacheIndex?t.viewestate[n].cacheIndex:-1;return{index:e,ref:r,cacheIndex:i,uri:a}}return null},t.setPageCacheIndex=function(e,n){l(e,o),f.mapping[e]&&f.mapping[e].viewestate&&(f.mapping[e].viewestate[o].cacheIndex=n)},t.insertPage=A,t.removePage=j,t.movePage=z,t.rotatePage=S,t.insertPages=w,t.removePages=O,t.movePages=M,t.rotatePages=D,t.getPageFitMultiplier=function(e,n){return n=n||o,v(),l(e,n),0<=e&&e<f.mapping.length&&f.mapping[e].viewestate[n].fitmultiplier?f.mapping[e].viewestate[n].fitmultiplier:1},t.setPageFitMultiplier=function(e,n,t){t=t||o,v(),l(e,t),0<=e&&e<f.mapping.length&&(f.mapping[e].viewestate[t].fitmultiplier=n)},t.getPageRotation=s,t.getPageSize=function(e,n){if(n=n||o,v(),l(e,n),0<=e&&e<f.mapping.length){var t=f.mapping[e].viewestate[n].size;if(!t){var r=f.info;if(r.pagesizes&&r.pagesizes[e])return r.pagesizes[e]}return t}},t.setPageSize=function(e,n,t){t=t||o,v(),l(e,t),0<=e&&e<f.mapping.length&&(f.mapping[e].viewestate[t].size=n)},t.updatePageText=function(e,n){v(),0<=e&&e<f.mapping.length&&(f.mapping[e].text=n)},t.getPageText=function(e){if(0<=e&&e<f.mapping.length)return f.mapping[e].text;return null},t.initDocumentText=function(e){if(e&&e.pages){v();for(var n=0;n<f.mapping.length;++n)if(n<e.pages.length)if(f.mapping[n].index===n)f.mapping[n].text=e.pages[n];else for(var t=0;t<f.mapping.length;++t)f.mapping[t].index===n&&(f.mapping[t].text=e.pages[n]);else f.mapping[n].text=null}},t.getPageIndexByImageIndex=function(e){if(e<f.info.count){for(var n=0;n<f.mapping.length;n++)if(f.mapping[n].index===e)return n}else for(var t=0;t<f.mapping.length;t++)if(f.mapping[t].pageref&&f.mapping[t].pageref.mapsto===e)return t;return-1},t.__getDebugInfo=function(){var e={};return r.extend(!0,e,{data:f,changes:f.changes}),e},t.__linkChanges=function(e){e&&(e._changes?f=e._changes:e._changes=f)},t.clear=function(e){f.clear(),"function"==typeof e&&e();c.trigger(m.changed)},t.getPageCount=function(){return f.info.count+f.count},t.stringifyChanges=function(e){var n=[],t={type:"docinfo",pagescount:f.info.count};for(var r in n.push(t),f.changes)if(f.changes.hasOwnProperty(r)&&(c.config.persistrotation||"rotatepage"!==f.changes[r].type)){var a={};for(var i in f.changes[r])f.changes[r].hasOwnProperty(i)&&(a[i]=f.changes[r][i]);n.push(a)}return JSON.stringify({changes:n})},"Atalasoft.Controls.WebDocumentViewer"===c.typeOf&&r.extend(c,i),c.bind({pagerecycled:_,pageshown:b,documentinfochanged:u}),p._state.initialized?g():c.bind({initialized:g})};
+"use strict";Atalasoft.Controls.ToolController=function(t,e,o,l,n){if(!o||!l)return Atalasoft.Event.Throw("Atalasoft.Controls.ToolController",0,null,"ToolController requires a WDV and two jQuery objects passed in as input, one for mouse events, the other for scrolling."),!1;var r=Atalasoft.$,a=this,s=t,i=e,c=(e?e._internalEvents:null)||r({}),u=50,v=o,f=l,d=v.parents("."+s.domclasses.atala_main_container).first(),g=Atalasoft.Utils.MouseToolType,p=Atalasoft.Utils.MouseToolCursor,m=g.Pan,x=g.None,h=null,T=1,y="",E=null,b="",w=[],A=1e3,D=null,_=-1,z=null,k={allowflick:!0,text:{scrolltriggerarea:Atalasoft.Utils.ScrollArea.Normal,innerscrolldelta:10,outerscrolldelta:20}};
+/**
      * Internal events for conditional input handling.
      */
-F.events=ue;var ue={textselectstart:"textselectstart",textselectmove:"textselectmove",textselectend:"textselectend",textselectcopy:"textselectcopy"};l&&(Y.extend(ce,l),ce.text.scrolltriggerarea=Math.max(0,Math.min(ce.text.scrolltriggerarea,.3))),r(),F.dispose=a,F.bind=s,F.unbind=i,F.trigger=c,F.setTool=u,F.__getDebugInfo=v,F.getTool=f,F.pauseTool=d,F.resumeTool=g,F.setCursor=p,F.setCustomCursor=x};
-"use strict";Atalasoft.Controls.PointerTool=function(){function t(){N(),ln.events={viewport:{click:Y,dblclick:D,mousedown:S,mousemove:C,mouseout:I,mouseover:O,mouseup:q,contextmenu:Z,mousewheel:B,keydown:M}},Atalasoft.Utils.Browser.Features.Touch&&un.extend(!0,ln.events,{viewport:{touchstart:V,touchmove:W,touchend:tn},wdv:{annotationdrawstart:c,annotationdrawend:s,annotationdragstart:c,annotationdragend:s}})}function n(){sn&&(sn=null),pn&&(pn=null),ln=null}function e(){return cn.bind.apply(cn,arguments),ln}function o(){return cn.unbind.apply(cn,arguments),ln}function i(){return cn.trigger.apply(cn,arguments),ln}function a(t,n){switch(vn=t,gn=n,N(),vn){case fn.None:J=Atalasoft.Utils.__rf;break;case fn.Pan:j=m;break;case fn.ZoomIn:J=L;break;case fn.ZoomOut:J=Q;break;case fn.Selection:j=A;break;case fn.ZoomArea:j=A;break;case fn.PassThrough:break;case fn.Text:j=y,F=x,H=E}switch(gn){case fn.None:break;case fn.Pan:G=m;break;case fn.ZoomIn:K=L;break;case fn.ZoomOut:K=Q;break;case fn.Selection:G=A;break;case fn.ZoomArea:G=A;break;case fn.PassThrough:}}function r(){return{primary:vn,secondary:gn}}function u(){sn.prpt++}function l(){sn.prpt>0&&sn.prpt--}function c(){sn&&(sn.drawing=!0)}function s(){sn&&(sn.drawing=!1)}function p(t){if(!sn.prpt){t.stopPropagation(),sn.pinching=!0;var n=t.originalEvent.touches[0],e=t.originalEvent.touches[1];pn={start:Atalasoft.Utils.CalcDistance(n.clientX,n.clientY,e.clientX,e.clientY)},i({type:"zoomstart",touches:t.originalEvent.touches})}}function f(t){if(!sn.prpt&&(t.stopPropagation(),!sn.zooming)){sn.zooming=!0;var n=t.originalEvent.touches[0],e=t.originalEvent.touches[1],o=Atalasoft.Utils.CalcDistance(n.clientX,n.clientY,e.clientX,e.clientY,pn.start),a=o.x/pn.start.x,r=o.y/pn.start.y;setTimeout(v,40),i({type:"zoommove",touches:t.originalEvent.touches,scale:a,scalex:a,scaley:r,dx:o.dx,dy:o.dy})}}function v(){sn.zooming=!1}function g(t){sn.prpt||(t.stopPropagation(),sn.pinching=!1,i({type:"zoomend",touches:t.originalEvent.touches}),1===t.originalEvent.touches.length&&V(t))}function m(t){return sn.prmt?void 0:(i({type:"panstart",x:t.clientX,y:t.clientY}),un(document).bind({mousemove:d,mouseup:h,ondrag:Atalasoft.Utils.__rf}),!1)}function d(t){return t=null==t?event:t,sn.prpt?void 0:0===t.which?(h(),void 0):(i({type:"panmove",x:t.clientX,y:t.clientY}),!1)}function h(){return sn.prpt?void 0:(un(document).unbind({mousemove:d,mouseup:h,ondrag:Atalasoft.Utils.__rf}),i({type:"panend"}),!1)}function y(t){if(sn.prmt)return!1;t.stopPropagation();var n={handled:!1,complete:!1};return i({type:"textselectstart",toolEvent:t,eventData:n}),n.complete||(sn.textselection=!0,un(document).bind({mouseup:_,mousemove:b,ondrag:Atalasoft.Utils.__rf})),!1}function x(t){if(sn.prmt)return!0;if(!(0!==t.which||t.originalEvent.touches&&t.originalEvent.touches.length))return _(),!0;var n={handled:!1,selecting:sn.textselection};return i({type:"textselectmove",toolEvent:t,eventData:n}),!1}function _(t){if(sn.prmt||!sn.textselection)return!1;sn.textselection=!1,un(document).unbind({mouseup:_,mousemove:b,ondrag:Atalasoft.Utils.__rf});var n={handled:!1};return i({type:"textselectend",toolEvent:t,eventData:n}),!1}function b(t){return sn.textselection?sn.prmt?!0:0!==t.which||t.originalEvent.touches&&t.originalEvent.touches.length?(i({type:"textselectscroll",toolEvent:t}),!1):(_(),!0):void 0}function E(t){67===t.keyCode&&t.ctrlKey&&i({type:"textselectcopy",toolEvent:t})}function A(t){return sn.prmt?!0:(i({type:vn===fn.Selection?"selectstart":"zoomareastart",x:t.clientX,y:t.clientY,toolEvent:t}),mn=un(t.target),mn._binds={mousemove:w,mouseup:U,ondrag:Atalasoft.Utils.__rf},mn.bind(mn._binds),!1)}function w(t){return t=null==t?event:t,sn.prpt?!0:0===t.which?(U(),void 0):(i({type:vn===fn.Selection?"selectmove":"zoomareamove",x:t.clientX,y:t.clientY,toolEvent:t}),!1)}function U(t){return sn.prpt?void 0:(mn.unbind(mn._binds),mn=null,i({type:vn===fn.Selection?"selectend":"zoomareaend",toolEvent:t}),!1)}function k(t){vn===fn.Pan&&(t.type="panstart",i(t))}function T(t){vn===fn.Pan&&(t.type="panmove",i(t))}function P(t){vn===fn.Pan&&(t.type="panend",i(t))}function z(t){t.type="contextmenu",i(t)}function X(t){t.type="fit",i(t)}function Y(t){return t=null==t?event:t,J(t)}function D(t){t=null==t?event:t}function Z(t){return t=null==t?event:t,K(t)}function S(t){return t=null==t?event:t,2===t.button?G(t):j(t),$(t)}function C(t){return t=null==t?event:t,F(t)}function M(t){return t=null==t?event:t,H(t)}function N(){J=vn===fn.PassThrough?Atalasoft.Utils.__ef:Atalasoft.Utils.__rf,K=gn===fn.PassThrough?Atalasoft.Utils.__ef:Atalasoft.Utils.__rf,$=Atalasoft.Utils.__ef,j=Atalasoft.Utils.__ef,G=Atalasoft.Utils.__ef,F=Atalasoft.Utils.__ef,H=Atalasoft.Utils.__ef}function I(){}function O(){}function q(){}function B(){}function F(){}function J(){}function K(){}function $(){}function j(){}function G(){}function H(){}function L(t){return sn.prpt?void 0:(R(t,!1),!1)}function Q(t){return sn.prpt?void 0:(R(t,!0),!1)}function R(t,n){return sn.prpt?void 0:(i({type:"clickzoom",x:t.clientX,y:t.clientY,zoomout:n}),!1)}function V(t){sn.prpt||sn.drawing||sn.pinching||un(t.target).is(".ui-menu,.ui-menu-item,.ui-corner-all")||(t.preventDefault(),sn.e=t,2===t.originalEvent.touches.length&&rn(t.originalEvent.touches)?(an(),sn.touching=!1,p(t)):vn===fn.Text?y(t):1===t.originalEvent.touches.length&&(sn.touching=!0,sn.point.x=t.originalEvent.touches[0].pageX,sn.point.y=t.originalEvent.touches[0].pageY,sn.hold=setTimeout(on,1500),k({x:sn.point.x,y:sn.point.y})))}function W(t){if(!sn.prpt&&!sn.drawing)if(t.preventDefault(),sn.e=t,sn.pinching)f(t);else if(sn.touching){var n=t.originalEvent.touches[0];sn.moves++,sn.touching=!0,T({x:n.pageX,y:n.pageY})}else sn.textselection&&x(t)}function tn(t){sn.prpt||sn.drawing||(t.preventDefault(),sn.pinching?g(t):sn.textselection?_(t):(sn.touching=!1,an(),sn.moves>0?(sn.moves=0,P({})):sn.tapped?en(t):(sn.tapped=!0,setTimeout(nn,300))))}function nn(){sn.tapped=!1}function en(t){X(t)}function on(){if(sn.moves>0&&null!=sn.e){var t=Atalasoft.Utils.getMousePositionJquery(sn.e);Math.abs(sn.point.x-t.x)<5&&Math.abs(sn.point.y-t.y)<5&&(sn.moves=0)}0===sn.moves&&sn.touching&&z({x:sn.point.x,y:sn.point.y})}function an(){null!=sn.hold&&(clearTimeout(sn.hold),sn.hold=null)}function rn(t){for(var n=null,e=0;e<t.length;e++){var o=t[e].target;if(o)if(null==n)n=o;else if(n!==o)return!1}return!0}var un=Atalasoft.$,ln=this,cn=un({}),sn={tapped:!1,touching:!1,pinching:!1,zooming:!1,textselection:!1,origin:{x:0,y:0},point:{x:0,y:0},delta:{x:0,y:0},drawing:!1,moves:0,prpt:0},pn=null,fn=Atalasoft.Utils.MouseToolType,vn=fn.None,gn=fn.None,mn=null;return t(),ln.dispose=n,ln.bind=e,ln.unbind=o,ln.trigger=i,ln.setTool=a,ln.getTool=r,ln.pauseTool=u,ln.resumeTool=l,ln};
-"use strict";Atalasoft.Controls.RubberBandTool=function(t,e,o,i){function n(){e&&ne.extend(!0,ue,e),le.rect=l(),le.rectback=l(),le.mask.top=d(),le.mask.bottom=d(),le.mask.left=d(),le.mask.right=d(),ie=u("div"),ie.addClass(he.domclasses.atala_tool_selection_tooltip),ie.hide(),ie.css({fontFamily:"Arial, helvetica, san-serif",fontSize:"8pt",padding:"1px",backgroundColor:"#FFFFE1",border:"1px solid #000000",position:"absolute",zIndex:999}),ge.append(le.rectback),ge.append(le.rect),ge.append(ie),ge.append(le.mask.top),ge.append(le.mask.bottom),ge.append(le.mask.left),ge.append(le.mask.right),oe=new h,I(),ue.visible?E():D(),ge.bind({pageresize:r,pagezoom:a})}function s(){null!=oe&&(oe.dispose(),oe=null),re=null,le.rect=null,le.rectback=null,ie=null,le.mask.top=null,le.mask.bottom=null,le.mask.left=null,le.mask.right=null}function r(){te(),V()}function a(){te(),V()}function h(){function t(){for(var t=0;9>t;t++)l[t].dispose(),l[t]=null;u=null,l=null,d=null,c=null}function e(t,e,o,i){g=o,m=i,l[0].setPos(t,e),l[1].setPos(t-4,e-4),l[3].setPos(t+o-4,e-4),l[6].setPos(t-4,e+i-4),l[8].setPos(t+o-4,e+i-4),l[0].setSize(o,i),ue.showgrips?(l[2].setPos(t+Math.round(o/2)-4,e-4),l[4].setPos(t-4,e+Math.round(i/2)-4),l[5].setPos(t+o-4,e+Math.round(i/2)-4),l[7].setPos(t+Math.round(o/2)-4,e+i-4)):(l[2].setPos(t+4,e-4),l[4].setPos(t-4,e+4),l[5].setPos(t+o-4,e+4),l[7].setPos(t+4,e+i-4),l[2].setSize(o-8,8),l[4].setSize(8,i-8),l[5].setSize(8,i-8),l[7].setSize(o-8,8)),r()}function o(){for(var t=0;9>t;t++)l[t].resetColors()}function i(){for(var t=0;9>t;t++)l[t].resetGripSize(),l[t].resetColors()}function n(){for(var t=0;9>t;t++)l[t].hide()}function s(){for(var t=0;9>t;t++)c[t]===!0?l[t].show():l[t].hide()}function r(){for(var t=0;9>t;t++)c[t]=!0;c[0]=!0,8>g&&8>m&&(c[1]=!1),(12>g||12>m)&&(c[3]=!1,c[6]=!1),(16>g||8>m)&&(c[2]=!1,c[7]=!1),(16>m||8>g)&&(c[4]=!1,c[5]=!1),s()}function a(){x()===!0?(l[0].grip.onmousedown=W,l[0].grip.style.cursor="move"):(l[0].grip.onmousedown=Atalasoft.Utils.__rf,l[0].grip.style.cursor="default");for(var t=1;9>t;t++)v()===!0?(l[t].bind({mousedown:l[t].onResize}),l[t].grip.style.cursor=u[t]+"-resize"):(l[t].unbind({mousedown:l[t].onResize}),l[t].grip.style.cursor="default")}function h(t){function e(){x=null,c=null,g=null,w=null}function o(){return m.bind.apply(m,arguments),m}function i(){return m.unbind.apply(m,arguments),m}function n(t,e){g.left=t+"px",g.top=e+"px"}function s(t,e){z()===!0&&"move"!==w&&(t-=2,e-=2),0>=t&&(t=1),0>=e&&(e=1),g.width=t+"px",g.height=e+"px"}function r(){y&&(g.visibility="hidden",y=!1)}function a(){y||(g.visibility="visible",y=!0)}function h(){"move"!==w&&(ue.showgrips===!0?b()===!0?(g.backgroundColor="#"+p(),g.border="1px solid #"+f()):(g.backgroundColor="#"+f(),g.border="1px solid #"+f()):(g.backgroundColor="",g.border=""))}function l(){ue.showgrips===!0?(g.width="6px",g.height="6px"):(g.width="8px",g.height="8px")}function d(t){return H(t,w)}var c,g,m,x=this,w=u[t],y=!1;c=document.createElement("div"),g=c.style,m=ne(c),m.addClass(he.domclasses.atala_tool_selection_grip),h(),l(),x.grip=c,x.dispose=e,x.setPos=n,x.setSize=s,x.hide=r,x.show=a,x.resetColors=h,x.resetGripSize=l,x.onResize=d,x.bind=o,x.unbind=i,g.display="block",g.position="absolute",g.visibility="hidden",g.zIndex=se,c.onclick=Atalasoft.Utils.__rf,c.onselectstart=Atalasoft.Utils.__rf,c.onselect=Atalasoft.Utils.__rf,c.oncontextmenu=Atalasoft.Utils.__rf}for(var u=new Array("move","nw","n","ne","w","e","sw","s","se"),l=[],d=!1,c=[],g=0,m=0,w=0;9>w;w++)l[w]=new h(w),ge.append(l[w].grip);this.dispose=t,this.setRectangle=e,this.resetColors=o,this.resetGrips=i,this.hide=n,this.show=s,this.showGrips=r,this.resetEvents=a,a()}function u(t,e,o,i){var n=ne("<"+t+"></"+t+">");return e&&e.append&&n.appendTo(e),o&&n.attr("id",o),i&&n.html(i),n}function l(){var t=u("div");return t.addClass(he.domclasses.atala_tool_selection_band),t.css({position:"absolute",zIndex:se}),t}function d(){var t=u("div");return t.addClass(he.domclasses.atala_tool_selection_mask),t.hide(),t.css({left:"0px",top:"0px",width:"1px",height:"1px",position:"absolute",background:"#000",opacity:"0.6",zIndex:"0"}),t}function c(){return ue.animated}function g(){return ue.aspectratio}function p(){return ue.backcolor}function f(){return ue.forecolor}function m(){return ue.height}function x(){return ue.movable}function b(){return ue.multicolor}function w(){return{x:ue.x,y:ue.y}}function y(){return{x:ue.x,y:ue.y,width:ue.width,height:ue.height}}function v(){return ue.resizable}function z(){return ue.showgrips}function k(){return ue.showmask}function M(){return ue.showtooltip}function _(){return{width:ue.width,height:ue.height}}function P(){return ue.visible}function S(){return ue.width}function A(){return ae.bind.apply(ae,arguments),re}function C(){return ae.unbind.apply(ae,arguments),re}function U(){return ae.trigger.apply(ae,arguments),re}function R(){D(),ue.x=0,ue.y=0,ue.width=0,ue.height=0}function F(){le.mask.left.hide(),le.mask.right.hide(),le.mask.top.hide(),le.mask.bottom.hide()}function G(t,e,o,i){return ue.showmask?(e>0?(le.mask.top.css({left:de.pageoffset.x,top:de.pageoffset.y,width:X(),height:e}),le.mask.top.show()):le.mask.top.hide(),e+i<Q()?(le.mask.bottom.css({left:de.pageoffset.x,top:de.pageoffset.y+e+i,width:X(),height:Q()-(e+i)}),le.mask.bottom.show()):le.mask.bottom.hide(),t>0?(le.mask.left.css({left:de.pageoffset.x,top:de.pageoffset.y+e,width:t,height:i}),le.mask.left.show()):le.mask.left.hide(),t+o<X()?(le.mask.right.css({left:de.pageoffset.x+t+o,top:de.pageoffset.y+e,width:X()-(t+o),height:i}),le.mask.right.show()):le.mask.right.hide(),void 0):(F(),void 0)}function T(){ie.css({left:(ue.x+ue.width)*de.zoom+8+"px",top:(ue.y+ue.height)*de.zoom+4+"px"}),ie.text(Math.round(ue.width/de.zoom)+"x"+Math.round(ue.height/de.zoom)),ie.is(":hidden")&&ie.show()}function E(){ue.visible=!0,le.rectback.show(),le.rect.show(),c()===!0&&b()===!0&&K()}function D(){ue.visible=!1,F(),oe.hide(),le.rectback.hide(),le.rect.hide()}function I(){var t=ue.multicolor?"dashed":"solid",e="1px solid #"+ue.backcolor,o="1px "+t+" #"+ue.forecolor;le.rectback.css("border",e),le.rect.css("border",o),oe.resetColors()}function B(){V()}function V(){var t=ue.x,e=ue.y,o=de.pagesize.width,i=de.pagesize.height;(t>=o||t+ue.width>o)&&(t=o-ue.width,0>t&&(t=0)),(e>=i||e+ue.height>i)&&(e=i-ue.height,0>e&&(e=0)),t!==ue.x&&(ue.x=t),e!==ue.y&&(ue.y=e);var n=Math.round(ue.x*de.zoom),s=Math.round(ue.y*de.zoom),r=Math.round(ue.width*de.zoom),a=Math.round(ue.height*de.zoom);Z(n,s),q(r,a),oe.setRectangle(n,s,r,a),ue.visible?(E(),G(n,s,r,a)):D()}function Z(t,e){le.rectback.css({left:t+"px",top:e+"px"}),le.rect.css({left:t+"px",top:e+"px"})}function q(t,e){0===t&&(t=1),le.rectback.css({width:t+"px",height:e+"px"}),le.rect.css({width:t+"px",height:e+"px"})}function J(t){t.stopPropagation(),t.preventDefault(),te();var e=N(t);return E(),de.origin.x=e.x,de.origin.y=e.y,ue.x=Math.round(e.x/de.zoom),ue.y=Math.round(e.y/de.zoom),ue.width=1,ue.height=1,de.changing=!0,de.vert=0,de.horiz=0,V(),ue.showtooltip===!0&&T(),!1}function L(t,e){t.stopPropagation(),t.preventDefault();var o=e?e:N(t),i=Math.round(de.origin.x/de.zoom),n=Math.round(de.origin.y/de.zoom),s=Math.abs((o.x-de.origin.x)/de.zoom),r=Math.abs((o.y-de.origin.y)/de.zoom);if(ue.aspectratio>0){var a=Math.abs((o.y-de.origin.y)/(o.x-de.origin.x));a>1/ue.aspectratio&&0===de.horiz||1===de.vert?s=Math.round(r*ue.aspectratio):r=Math.round(s/ue.aspectratio)}return o.x<de.origin.x?(i-=s,i-de.pageoffset.x<0&&(s=de.origin.x-de.pageoffset.x,ue.aspectratio>0&&(r=Math.round(s/ue.aspectratio)),i=de.origin.x-s)):i+s>de.pagesize.width+de.pageoffset.x&&(s=de.pagesize.width-i+de.pageoffset.x,ue.aspectratio>0&&(r=Math.round(s/ue.aspectratio))),o.y<de.origin.y?(n-=r,n-de.pageoffset.y<0&&(r=de.origin.y-de.pageoffset.y,ue.aspectratio>0&&(s=Math.round(r*ue.aspectratio)),n=de.origin.y-r,o.x<de.origin.x&&(i=de.origin.x-s))):n+r>de.pagesize.height+de.pageoffset.y&&(r=de.pagesize.height-n+de.pageoffset.y,ue.aspectratio>0&&(s=Math.round(r*ue.aspectratio)),o.x<de.origin.x&&(i=de.origin.x-s)),(0===de.vert||ue.aspectratio>0)&&(ue.x=i-de.pageoffset.x,ue.width=s),(0===de.horiz||ue.aspectratio>0)&&(ue.y=n-de.pageoffset.y,ue.height=r),V(),ue.showtooltip===!0&&T(),!1}function O(t){return L(t,Atalasoft.Utils.getMousePositionJquery(t,null,!0))}function H(t,e){t=t||event,Y(t),de.vert=0,de.horiz=0,de.changing=!0;var o={x:0,y:0};switch(e){case"nw":o.x=ue.x+ue.width,o.y=ue.y+ue.height;break;case"n":o.x=ue.x,o.y=ue.y+ue.height,de.vert=1;break;case"ne":o.x=ue.x,o.y=ue.y+ue.height;break;case"w":o.x=ue.x+ue.width,o.y=ue.y+ue.height,de.horiz=1;break;case"e":o.x=ue.x,o.y=ue.y+ue.height,de.horiz=1;break;case"sw":o.x=ue.x+ue.width,o.y=ue.y;break;case"s":o.x=ue.x,o.y=ue.y,de.vert=1;break;case"se":o.x=ue.x,o.y=ue.y}de.origin.x=Math.round(o.x*de.zoom)+de.pageoffset.x,de.origin.y=Math.round(o.y*de.zoom)+de.pageoffset.y,ce.raiseDrawLayer();var i={mousemove:O,mouseup:j};return null!==de.boundevents?ne.extend(de.boundevents,i):de.boundevents=i,ge.bind(i),!1}function W(t){t=t||event,Y(t);var e=Atalasoft.Utils.getMousePosition(t,null,ge[0]);de.origin.x=e.x-Math.round(ue.x*de.zoom),de.origin.y=e.y-Math.round(ue.y*de.zoom),de.changing=!0;var o={mousemove:$,mouseup:j,ondrag:Atalasoft.Utils.__rf};return null!==de.boundevents?ne.extend(de.boundevents,o):de.boundevents=o,ge.bind(o),!1}function $(t){t=t||event,Y(t);var e=Atalasoft.Utils.getMousePosition(t,null,ge[0]),o={x:0,y:0};return o.x=Math.round((e.x-de.origin.x)/de.zoom),o.y=Math.round((e.y-de.origin.y)/de.zoom),o.x>de.pagesize.width-ue.width&&(o.x=de.pagesize.width-ue.width),o.x<0&&(o.x=0),o.y>de.pagesize.height-ue.height&&(o.y=de.pagesize.height-ue.height),o.y<0&&(o.y=0),ue.x=o.x,ue.y=o.y,V(),!1}function j(t){return t=t||event,Y(t),de.changing=!1,ue.showtooltip===!0&&ie.hide(),de.changing&&(de.changing=!1,U("changed")),null!==de.boundevents&&(ge.unbind(de.boundevents),de.boundevents=null,ce.resetDrawLayer()),!1}function K(){ue.animated===!0&&0===de.colorswap?(le.rect.css("border","1px dashed #"+p()),le.rectback.css("border","1px solid #"+f()),de.colorswap=1):(le.rect.css("border","1px dashed #"+f()),le.rectback.css("border","1px solid #"+p()),de.colorswap=0),ue.animated!==!0||le.rect.is(":hidden")||de.animating||(de.animating=setTimeout(function(){de.animating=!1,K()},250))}function N(t){var e=Atalasoft.Utils.getMousePositionJquery(t.toolEvent?t.toolEvent:t);if(ge._paper){var o=Atalasoft.Utils.getSVGOffset(ge._paper.canvas,ge);e.x-=o.left,e.y-=o.top}return e}function Q(){return Math.round(de.pagesize.height*de.zoom)}function X(){return Math.round(de.pagesize.width*de.zoom)}function Y(t){"undefined"!=typeof t.stopPropagation?t.stopPropagation():t.cancelBubble=!0}function te(){var t=ge._img.getSize();de.zoom=ge._img.getFitZoom(),de.pagesize.width=t.width,de.pagesize.height=t.height}function ee(){var t=ce.getMaxZoom();if(he.getZoom()<t){var e,o=ce.getViewportSize(),i=ge._img.getFitMultiplier(),n=1,s=0,r=0;e=o.width/ue.width===o.height/ue.height?Math.min(o.width/(ue.width*i),o.height/(ue.height*i),t):o.width/ue.width<o.height/ue.height?Math.min(o.width/(ue.width*i),t):Math.min(o.height/(ue.height*i),t),n=i*e,s=Math.round(ue.x*n),r=Math.round(ue.y*n),r-=Math.max(0,Math.round((o.height-ue.height*n)/2)),s-=Math.max(0,Math.round((o.width-ue.width*n)/2));var a=ce.getPageOffsets(ge._index,null,null,e);he.zoom(e,function(){he.scrollTo(a.width+s,a.height+r)})}}var oe,ie,ne=Atalasoft.$,se=3,re=this,ae=ne({}),he=t,ue={animated:!1,aspectratio:0,backcolor:"fff",forecolor:"000",movable:!0,multicolor:!0,resizable:!0,showgrips:!1,showmask:!1,showtooltip:!1,visible:!1,x:0,y:0,width:0,height:0},le={/** Main RubberBand dom object */
-rect:null,/** Dom object underneath Main RubberBand */
-rectback:null,/** Mask objects */
-mask:{top:null,bottom:null,left:null,right:null}},de={animating:!1,boundevents:null,changing:!1,colorswap:0,origin:{x:0,y:0},pagesize:{width:0,height:0},pageoffset:{x:0,y:0},vert:!1,horiz:!1,zoom:1},ce=i,ge=o;return re.dispose=s,re.getAnimated=c,re.getAspectRatio=g,re.getBackColor=p,re.getForeColor=f,re.getHeight=m,re.getMovable=x,re.getMultiColor=b,re.getPosition=w,re.getRectangle=y,re.getResizable=v,re.getShowGrips=z,re.getShowMask=k,re.getShowTooltip=M,re.getSize=_,re.getVisible=P,re.getWidth=S,re.bind=A,re.hide=D,re.reset=R,re.show=E,re.synchronize=B,re.trigger=U,re.unbind=C,re.zoomToSelection=ee,re.startSelect=J,re.moveSelect=L,re.endSelect=j,n(),re};
-"use strict";/**
+a.events=M;var M={textselectstart:"textselectstart",textselectmove:"textselectmove",textselectend:"textselectend",textselectcopy:"textselectcopy"};function P(){return c.trigger.apply(c,arguments),a}function C(t,e){switch(Atalasoft.Utils.Browser.Explorer8&&(t=t!==Atalasoft.Utils.MouseToolType.Text?t:Atalasoft.Utils.MouseToolType.Arrow,e=e!==Atalasoft.Utils.MouseToolType.Text?e:Atalasoft.Utils.MouseToolType.Arrow),h.setTool(t,e),function(t,e){m!==g.Text&&x!==g.Text||t===g.Text||e===g.Text||i.resetDrawLayer();t!==g.Selection&&t!==g.ZoomArea&&(m=t);e!==g.Selection&&e!==g.ZoomArea&&(x=e)}(t,e),t){case g.None:L(p.Arrow);break;case g.Pan:L(p.Move);break;case g.ZoomIn:L(p.ZoomIn);break;case g.ZoomOut:L(p.ZoomOut);break;case g.Selection:case g.ZoomArea:if(!s.config.showselecttools)throw"The mouse tool type is incompatible with 'showselecttools' flag value. Please change the tool type or enable selection tools.";i.raiseDrawLayer(),_=1,L(p.Crosshair);break;case g.Text:if(!s.config.showselecttools)throw"The mouse tool type is incompatible with 'showselecttools' flag value. Please change the tool type or enable selection tools.";i.raiseDrawLayer(),L(p.Text);break;default:L(p.Arrow)}}function L(t){var e=""===y?"?atalacsr=":y;E="%2"===t?E=b:t.replace("%1",e),v.css({cursor:E})}function S(t){s.fit(t.fit)}function U(t){t.zoomout?s.zoomOut():s.zoomIn()}function Z(t){f.data("ox",f.scrollLeft()+t.x).data("oy",f.scrollTop()+t.y),f.stop()}function I(t){f.scrollLeft(f.data("ox")-t.x),f.scrollTop(f.data("oy")-t.y),k.allowflick&&(w.push({x:t.x,y:t.y,time:(new Date).getTime()}),10<w.length&&w.shift())}function O(t){if(k.allowflick){if(1<w.length){var e=(new Date).getTime(),o=w.pop();if(e-o.time<100){var l=w.shift(),n=-l.time+o.time;f.animate({scrollLeft:f.scrollLeft()+Math.round((l.x-o.x)/n*250),scrollTop:f.scrollTop()+Math.round((l.y-o.y)/n*250)},A,"easeOutQuad")}}w.length=0}}function N(t){(D=i.getActivePage())&&D._rubberband.startSelect(t)}function X(t){(D=i.getActivePage())&&D._rubberband.moveSelect(t)}function Y(t){(D=i.getActivePage())&&(D._rubberband.endSelect(t),"zoomareaend"===t.type&&(D._rubberband.hide(),D._rubberband.zoomToSelection())),0===--_&&(_=-1,i.resetDrawLayer(),C(m,x))}function F(t){i.zoomStart(),T=s.getZoom()}function V(t){var e=T*t.scale;i.zoom(e)}function j(t){i.zoomEnd()}function q(t){var e=W(t);if(e){if(e.cursor=E,e.complete=!1,e.rectangular=!!t.toolEvent&&t.toolEvent.altKey,e.interval=!!t.toolEvent&&t.toolEvent.shiftKey,!e.rectangular&&!e.interval){var o=t.toolEvent&&t.toolEvent.originalEvent&&t.toolEvent.originalEvent.detail?t.toolEvent.originalEvent.detail%3:1;1!==o&&(e.word=2===o,e.line=0===o)}P({type:M.textselectstart,eventData:e}),t.eventData.handled=e.handled,e.complete&&e.handled&&(Q(t),t.eventData.complete=!0)}}function K(t){G();var e=W(t);if(e){e.cursor=E,e.selecting=t.eventData.selecting,P({type:M.textselectmove,eventData:e}),t.eventData.handled=e.handled;var o=e.handled&&e.cursor?e.cursor:p.Arrow;o!==E&&L(o),t.eventData.handled&&t.eventData.selecting&&t.toolEvent&&t.toolEvent.target&&J(t)}}function Q(t){G();var e=W(t);e&&(P({type:M.textselectend,eventData:e}),t.eventData.handled=e.handled)}function $(t){G(),J(t)}function B(t){k.text.hookcopy&&P({type:M.textselectcopy})}function G(){z&&(clearTimeout(z),z=null)}function J(t){if(G(),t&&t.toolEvent){var e=d.offset(),o=null;if(void 0!==t.toolEvent.pageX&&void 0!==t.toolEvent.pageY?o=t.toolEvent:t.toolEvent.originalEvent&&t.toolEvent.originalEvent.touches&&1===t.toolEvent.originalEvent.touches.length&&void 0!==t.toolEvent.originalEvent.touches[0].pageX&&void 0!==t.toolEvent.originalEvent.touches[0].pageY&&(o=t.toolEvent.originalEvent.touches[0]),o){var l=o.pageX-e.left,n=o.pageY-e.top,r=d.width(),a=d.height(),s=0,i=0;n<a*k.text.scrolltriggerarea&&0<f.scrollTop()?s=0<n?-k.text.innerscrolldelta:-k.text.outerscrolldelta:n>a*(1-k.text.scrolltriggerarea)?s=n<a?k.text.innerscrolldelta:k.text.outerscrolldelta:l<r*k.text.scrolltriggerarea&&0<f.scrollLeft()?i=0<l?-k.text.innerscrolldelta:-k.text.outerscrolldelta:l>r*(1-k.text.scrolltriggerarea)&&(i=l<r?k.text.innerscrolldelta:k.text.outerscrolldelta),(s||i)&&k.text.scrolltriggerarea!==Atalasoft.Utils.ScrollArea.None&&(f.scrollTop(f.scrollTop()+s),f.scrollLeft(f.scrollLeft()+i),z=setTimeout(J,u,t))}}}function W(t){var e={cursor:null,handled:!1};if(t&&t.toolEvent){var o=function(t){var e=r(t).parents("."+s.domclasses.atala_page_div).first();if(e){var o=e.attr(s.domattributes.atala_page_index);return parseInt(o,10)}return null}(t.toolEvent.originalEvent.touches&&1===t.toolEvent.originalEvent.touches.length?document.elementFromPoint(t.toolEvent.originalEvent.touches[0].clientX,t.toolEvent.originalEvent.touches[0].clientY):t.toolEvent.target);if(isFinite(o)&&0<=o){var l=function(t,e){var o=Atalasoft.Utils.getMousePositionJquery(t.toolEvent?t.toolEvent:t);if(e&&e._paper){var l=Atalasoft.Utils.getSVGOffset(e._paper.canvas,e);o.x-=l.left,o.y-=l.top}return o}(t),n=function(t,e){var o=0;if(i._controllers.text){var l=i._controllers.document.getPageText(e);l&&isFinite(l.rotation)&&(o=l.rotation)}var n=i.getViewerTransform(e,o).invert();return{x:n.x(t.x,t.y),y:n.y(t.x,t.y)}}(l,o);Atalasoft.$.extend(e,{page:o,point:n,viewerPoint:l})}}return e}n&&(r.extend(k,n),k.text.scrolltriggerarea=Math.max(0,Math.min(k.text.scrolltriggerarea,.3))),function(){h=new Atalasoft.Controls.PointerTool,v.bind(h.events.viewport),h.events.wdv&&s.bind(h.events.wdv);h.bind({clickzoom:U,fit:S,panstart:Z,panmove:I,panend:O,zoomstart:F,zoommove:V,zoomend:j,selectstart:N,selectmove:X,selectend:Y,zoomareastart:N,zoomareamove:X,zoomareaend:Y,textselectstart:q,textselectmove:K,textselectend:Q,textselectscroll:$,textselectcopy:B})}(),a.dispose=function(){h&&h.events&&(h.events.wdv&&s&&s.unbind&&s.unbind(h.events.wdv),h.events.viewport&&v&&v.unbind&&v.unbind(h.events.viewport));w&&0<w.length&&(w.length=0);h&&h.dispose&&h.dispose();a=s=v=f=g=p=null},a.bind=function(){return c.bind.apply(c,arguments),a},a.unbind=function(){return c.unbind.apply(c,arguments),a},a.trigger=P,a.setTool=C,a.__getDebugInfo=function(){var t={};return r.extend(!0,t,{cursor:E,custom:b,flick:w,resourcepath:y,flickdelay:A,scroller:f,tool:h,toolcusors:p,tooltypes:g,viewport:v,zoom:T}),t},a.getTool=function(){return h.getTool()},a.pauseTool=function(){return h.pauseTool()},a.resumeTool=function(){return h.resumeTool()},a.setCursor=L,a.setCustomCursor=function(t){b=t}};
+"use strict";Atalasoft.Controls.PointerTool=function(){var n=Atalasoft.$,t=this,e=n({}),r={tapped:!1,touching:!1,pinching:!1,zooming:!1,textselection:!1,origin:{x:0,y:0},point:{x:0,y:0},delta:{x:0,y:0},drawing:!1,moves:0,prpt:0},l=null,i=Atalasoft.Utils.MouseToolType,a=i.None,o=i.None,u=null;function c(){return e.trigger.apply(e,arguments),t}function s(t){r&&(r.drawing=!0)}function p(t){r&&(r.drawing=!1)}function f(){r.zooming=!1}function v(t){if(!r.prmt)return c({type:"panstart",x:t.clientX,y:t.clientY}),n(document).bind({mousemove:g,mouseup:m,ondrag:Atalasoft.Utils.__rf}),!1}function g(t){if(t=null==t?event:t,!r.prpt){if(0!==t.which)return c({type:"panmove",x:t.clientX,y:t.clientY}),!1;m()}}function m(){if(!r.prpt)return n(document).unbind({mousemove:g,mouseup:m,ondrag:Atalasoft.Utils.__rf}),c({type:"panend"}),!1}function h(t){if(r.prmt)return!1;t.stopPropagation();var e={handled:!1,complete:!1};return c({type:"textselectstart",toolEvent:t,eventData:e}),e.complete||(r.textselection=!0,n(document).bind({mouseup:y,mousemove:x,ondrag:Atalasoft.Utils.__rf})),!1}function d(t){return!!r.prmt||(0!==t.which||t.originalEvent.touches&&t.originalEvent.touches.length?(c({type:"textselectmove",toolEvent:t,eventData:{handled:!1,selecting:r.textselection}}),!1):(y(),!0))}function y(t){if(r.prmt||!r.textselection)return!1;r.textselection=!1,n(document).unbind({mouseup:y,mousemove:x,ondrag:Atalasoft.Utils.__rf});return c({type:"textselectend",toolEvent:t,eventData:{handled:!1}}),!1}function x(t){if(r.textselection)return!!r.prmt||(0!==t.which||t.originalEvent.touches&&t.originalEvent.touches.length?(c({type:"textselectscroll",toolEvent:t}),!1):(y(),!0))}function _(t){67===t.keyCode&&t.ctrlKey&&c({type:"textselectcopy",toolEvent:t})}function b(t){return!!r.prmt||(c({type:a===i.Selection?"selectstart":"zoomareastart",x:t.clientX,y:t.clientY,toolEvent:t}),(u=n(t.target))._binds={mousemove:E,mouseup:A,ondrag:Atalasoft.Utils.__rf},u.bind(u._binds),!1)}function E(t){return t=null==t?event:t,!!r.prpt||(0!==t.which?(c({type:a===i.Selection?"selectmove":"zoomareamove",x:t.clientX,y:t.clientY,toolEvent:t}),!1):void A())}function A(t){if(!r.prpt)return u.unbind(u._binds),u=null,c({type:a===i.Selection?"selectend":"zoomareaend",toolEvent:t}),!1}function w(t){return M(t=null==t?event:t)}function U(t){t=null==t?event:t}function T(t){return N(t=null==t?event:t)}function k(t){return 2===(t=null==t?event:t).button?q(t):O(t),I(t)}function P(t){return C(t=null==t?event:t)}function z(t){return B(t=null==t?event:t)}function X(){M=a===i.PassThrough?Atalasoft.Utils.__ef:Atalasoft.Utils.__rf,N=o===i.PassThrough?Atalasoft.Utils.__ef:Atalasoft.Utils.__rf,I=Atalasoft.Utils.__ef,O=Atalasoft.Utils.__ef,q=Atalasoft.Utils.__ef,C=Atalasoft.Utils.__ef,B=Atalasoft.Utils.__ef}function Y(){}function D(){}function Z(){}function S(){}function C(){}function M(){}function N(){}function I(){}function O(){}function q(){}function B(){}function F(t){if(!r.prpt)return K(t,!1),!1}function J(t){if(!r.prpt)return K(t,!0),!1}function K(t,e){if(!r.prpt)return c({type:"clickzoom",x:t.clientX,y:t.clientY,zoomout:e}),!1}function $(t){var e;r.prpt||r.drawing||r.pinching||n(t.target).is(".ui-menu,.ui-menu-item,.ui-corner-all")||(t.preventDefault(),2===(r.e=t).originalEvent.touches.length&&function(t){for(var e=null,n=0;n<t.length;n++){var o=t[n].target;if(o)if(null==e)e=o;else if(e!==o)return!1}return!0}(t.originalEvent.touches)?(Q(),r.touching=!1,function(t){if(!r.prpt){t.stopPropagation(),r.pinching=!0;var e=t.originalEvent.touches[0],n=t.originalEvent.touches[1];l={start:Atalasoft.Utils.CalcDistance(e.clientX,e.clientY,n.clientX,n.clientY)},c({type:"zoomstart",touches:t.originalEvent.touches})}}(t)):a===i.Text?h(t):1===t.originalEvent.touches.length&&(r.touching=!0,r.point.x=t.originalEvent.touches[0].pageX,r.point.y=t.originalEvent.touches[0].pageY,r.hold=setTimeout(L,1500),e={x:r.point.x,y:r.point.y},a===i.Pan&&(e.type="panstart",c(e))))}function j(t){var e;if(!r.prpt&&!r.drawing)if(t.preventDefault(),r.e=t,r.pinching)!function(t){if(!r.prpt&&(t.stopPropagation(),!r.zooming)){r.zooming=!0;var e=t.originalEvent.touches[0],n=t.originalEvent.touches[1],o=Atalasoft.Utils.CalcDistance(e.clientX,e.clientY,n.clientX,n.clientY,l.start),i=o.x/l.start.x,a=o.y/l.start.y;setTimeout(f,40),c({type:"zoommove",touches:t.originalEvent.touches,scale:i,scalex:i,scaley:a,dx:o.dx,dy:o.dy})}}(t);else if(r.touching){var n=t.originalEvent.touches[0];r.moves++,r.touching=!0,e={x:n.pageX,y:n.pageY},a===i.Pan&&(e.type="panmove",c(e))}else r.textselection&&d(t)}function G(t){var e,n,o;r.prpt||r.drawing||(t.preventDefault(),r.pinching?(o=t,r.prpt||(o.stopPropagation(),r.pinching=!1,c({type:"zoomend",touches:o.originalEvent.touches}),1===o.originalEvent.touches.length&&$(o))):r.textselection?y(t):(r.touching=!1,Q(),0<r.moves?(r.moves=0,n={},a===i.Pan&&(n.type="panend",c(n))):r.tapped?((e=t).type="fit",c(e)):(r.tapped=!0,setTimeout(H,300))))}function H(){r.tapped=!1}function L(){if(0<r.moves&&null!=r.e){var t=Atalasoft.Utils.getMousePositionJquery(r.e);Math.abs(r.point.x-t.x)<5&&Math.abs(r.point.y-t.y)<5&&(r.moves=0)}0===r.moves&&r.touching&&c({x:r.point.x,y:r.point.y,type:"contextmenu"})}function Q(){null!=r.hold&&(clearTimeout(r.hold),r.hold=null)}return X(),t.events={viewport:{click:w,dblclick:U,mousedown:k,mousemove:P,mouseout:Y,mouseover:D,mouseup:Z,contextmenu:T,mousewheel:S,keydown:z}},Atalasoft.Utils.Browser.Features.Touch&&n.extend(!0,t.events,{viewport:{touchstart:$,touchmove:j,touchend:G},wdv:{annotationdrawstart:s,annotationdrawend:p,annotationdragstart:s,annotationdragend:p}}),t.dispose=function(){r&&(r=null);l&&(l=null);t=null},t.bind=function(){return e.bind.apply(e,arguments),t},t.unbind=function(){return e.unbind.apply(e,arguments),t},t.trigger=c,t.setTool=function(t,e){switch(a=t,o=e,X(),a){case i.None:M=Atalasoft.Utils.__rf;break;case i.Pan:O=v;break;case i.ZoomIn:M=F;break;case i.ZoomOut:M=J;break;case i.Selection:case i.ZoomArea:O=b;break;case i.PassThrough:break;case i.Text:O=h,C=d,B=_}switch(o){case i.None:break;case i.Pan:q=v;break;case i.ZoomIn:N=F;break;case i.ZoomOut:N=J;break;case i.Selection:case i.ZoomArea:q=b;break;case i.PassThrough:}},t.getTool=function(){return{primary:a,secondary:o}},t.pauseTool=function(){r.prpt++},t.resumeTool=function(){0<r.prpt&&r.prpt--},t};
+"use strict";Atalasoft.Controls.RubberBandTool=function(t,e,o,i){var p,n,s,r,a,l=Atalasoft.$,d=3,h=this,u=l({}),c=t,f={animated:!1,aspectratio:0,backcolor:"fff",forecolor:"000",movable:!0,multicolor:!0,resizable:!0,showgrips:!1,showmask:!1,showtooltip:!1,visible:!1,x:0,y:0,width:0,height:0},x={
+/** Main RubberBand dom object */
+rect:null,
+/** Dom object underneath Main RubberBand */
+rectback:null,
+/** Mask objects */
+mask:{top:null,bottom:null,left:null,right:null}},m={animating:!1,boundevents:null,changing:!1,colorswap:0,origin:{x:0,y:0},pagesize:{width:0,height:0},pageoffset:{x:0,y:0},vert:!1,horiz:!1,zoom:1},g=i,w=o;function b(t){$(),I()}function y(t){$(),I()}function v(){for(var u=new Array("move","nw","n","ne","w","e","sw","s","se"),n=[],e=[],s=0,r=0,t=0;t<9;t++)n[t]=new h(t),w.append(n[t].grip);function o(){for(var t=0;t<9;t++)!0===e[t]?n[t].show():n[t].hide()}function a(){for(var t=0;t<9;t++)e[t]=!0;e[0]=!0,s<8&&r<8&&(e[1]=!1),(s<12||r<12)&&(e[3]=!1,e[6]=!1),(s<16||r<8)&&(e[2]=!1,e[7]=!1),(r<16||s<8)&&(e[4]=!1,e[5]=!1),o()}function i(){!0===A()?(n[0].grip.onmousedown=Z,n[0].grip.style.cursor="move"):(n[0].grip.onmousedown=Atalasoft.Utils.__rf,n[0].grip.style.cursor="default");for(var t=1;t<9;t++)!0===U()?(n[t].bind({mousedown:n[t].onResize}),n[t].grip.style.cursor=u[t]+"-resize"):(n[t].unbind({mousedown:n[t].onResize}),n[t].grip.style.cursor="default")}function h(t){var e,o,i,n=this,s=u[t],r=!1;function a(){"move"!==s&&(!0===f.showgrips?(!0===C()?o.backgroundColor="#"+P():o.backgroundColor="#"+S(),o.border="1px solid #"+S()):(o.backgroundColor="",o.border=""))}function h(){!0===f.showgrips?(o.width="6px",o.height="6px"):(o.width="8px",o.height="8px")}e=document.createElement("div"),o=e.style,(i=l(e)).addClass(c.domclasses.atala_tool_selection_grip),a(),h(),n.grip=e,n.dispose=function(){s=o=e=n=null},n.setPos=function(t,e){o.left=t+"px",o.top=e+"px"},n.setSize=function(t,e){!0===R()&&"move"!==s&&(t-=2,e-=2);t<=0&&(t=1);e<=0&&(e=1);o.width=t+"px",o.height=e+"px"},n.hide=function(){r&&(o.visibility="hidden",r=!1)},n.show=function(){r||(o.visibility="visible",r=!0)},n.resetColors=a,n.resetGripSize=h,n.onResize=function(t){return function(t,e){W(t=t||event),m.vert=0,m.horiz=0,m.changing=!0;var o={x:0,y:0};switch(e){case"nw":o.x=f.x+f.width,o.y=f.y+f.height;break;case"n":o.x=f.x,o.y=f.y+f.height,m.vert=1;break;case"ne":o.x=f.x,o.y=f.y+f.height;break;case"w":o.x=f.x+f.width,o.y=f.y+f.height,m.horiz=1;break;case"e":o.x=f.x,o.y=f.y+f.height,m.horiz=1;break;case"sw":o.x=f.x+f.width,o.y=f.y;break;case"s":o.x=f.x,o.y=f.y,m.vert=1;break;case"se":o.x=f.x,o.y=f.y}m.origin.x=Math.round(o.x*m.zoom)+m.pageoffset.x,m.origin.y=Math.round(o.y*m.zoom)+m.pageoffset.y,g.raiseDrawLayer();var i={mousemove:V,mouseup:J};null!==m.boundevents?l.extend(m.boundevents,i):m.boundevents=i;return w.bind(i),!1}(t,s)},n.bind=function(){return i.bind.apply(i,arguments),i},n.unbind=function(){return i.unbind.apply(i,arguments),i},o.display="block",o.position="absolute",o.visibility="hidden",o.zIndex=d,e.onclick=Atalasoft.Utils.__rf,e.onselectstart=Atalasoft.Utils.__rf,e.onselect=Atalasoft.Utils.__rf,e.oncontextmenu=Atalasoft.Utils.__rf}this.dispose=function(){for(var t=0;t<9;t++)n[t].dispose(),n[t]=null;e=n=u=null},this.setRectangle=function(t,e,o,i){s=o,r=i,n[0].setPos(t,e),n[1].setPos(t-4,e-4),n[3].setPos(t+o-4,e-4),n[6].setPos(t-4,e+i-4),n[8].setPos(t+o-4,e+i-4),n[0].setSize(o,i),f.showgrips?(n[2].setPos(t+Math.round(o/2)-4,e-4),n[4].setPos(t-4,e+Math.round(i/2)-4),n[5].setPos(t+o-4,e+Math.round(i/2)-4),n[7].setPos(t+Math.round(o/2)-4,e+i-4)):(n[2].setPos(t+4,e-4),n[4].setPos(t-4,e+4),n[5].setPos(t+o-4,e+4),n[7].setPos(t+4,e+i-4),n[2].setSize(o-8,8),n[4].setSize(8,i-8),n[5].setSize(8,i-8),n[7].setSize(o-8,8));a()},this.resetColors=function(){for(var t=0;t<9;t++)n[t].resetColors()},this.resetGrips=function(){for(var t=0;t<9;t++)n[t].resetGripSize(),n[t].resetColors()},this.hide=function(){for(var t=0;t<9;t++)n[t].hide()},this.show=o,this.showGrips=a,(this.resetEvents=i)()}function z(t,e,o,i){var n=l("<"+t+"></"+t+">");return e&&e.append&&n.appendTo(e),o&&n.attr("id",o),i&&n.html(i),n}function k(){var t=z("div");return t.addClass(c.domclasses.atala_tool_selection_band),t.css({position:"absolute",zIndex:d}),t}function M(){var t=z("div");return t.addClass(c.domclasses.atala_tool_selection_mask),t.hide(),t.css({left:"0px",top:"0px",width:"1px",height:"1px",position:"absolute",background:"#000",opacity:"0.6",zIndex:"0"}),t}function _(){return f.animated}function P(){return f.backcolor}function S(){return f.forecolor}function A(){return f.movable}function C(){return f.multicolor}function U(){return f.resizable}function R(){return f.showgrips}function F(){return u.trigger.apply(u,arguments),h}function G(){x.mask.left.hide(),x.mask.right.hide(),x.mask.top.hide(),x.mask.bottom.hide()}function T(){n.css({left:(f.x+f.width)*m.zoom+8+"px",top:(f.y+f.height)*m.zoom+4+"px"}),n.text(Math.round(f.width/m.zoom)+"x"+Math.round(f.height/m.zoom)),n.is(":hidden")&&n.show()}function E(){f.visible=!0,x.rectback.show(),x.rect.show(),!0===_()&&!0===C()&&function t(){!0===f.animated&&0===m.colorswap?(x.rect.css("border","1px dashed #"+P()),x.rectback.css("border","1px solid #"+S()),m.colorswap=1):(x.rect.css("border","1px dashed #"+S()),x.rectback.css("border","1px solid #"+P()),m.colorswap=0);!0!==f.animated||x.rect.is(":hidden")||m.animating||(m.animating=setTimeout(function(){m.animating=!1,t()},250))}()}function D(){f.visible=!1,G(),p.hide(),x.rectback.hide(),x.rect.hide()}function I(){var t=f.x,e=f.y,o=m.pagesize.width,i=m.pagesize.height;(o<=t||t+f.width>o)&&(t=o-f.width)<0&&(t=0),(i<=e||e+f.height>i)&&(e=i-f.height)<0&&(e=0),t!==f.x&&(f.x=t),e!==f.y&&(f.y=e);var n,s,r,a,h,u,l=Math.round(f.x*m.zoom),d=Math.round(f.y*m.zoom),c=Math.round(f.width*m.zoom),g=Math.round(f.height*m.zoom);n=l,s=d,x.rectback.css({left:n+"px",top:s+"px"}),x.rect.css({left:n+"px",top:s+"px"}),function(t,e){0===t&&(t=1);x.rectback.css({width:t+"px",height:e+"px"}),x.rect.css({width:t+"px",height:e+"px"})}(c,g),p.setRectangle(l,d,c,g),f.visible?(E(),r=l,a=d,h=c,u=g,f.showmask?(0<a?(x.mask.top.css({left:m.pageoffset.x,top:m.pageoffset.y,width:H(),height:a}),x.mask.top.show()):x.mask.top.hide(),a+u<O()?(x.mask.bottom.css({left:m.pageoffset.x,top:m.pageoffset.y+a+u,width:H(),height:O()-(a+u)}),x.mask.bottom.show()):x.mask.bottom.hide(),0<r?(x.mask.left.css({left:m.pageoffset.x,top:m.pageoffset.y+a,width:r,height:u}),x.mask.left.show()):x.mask.left.hide(),r+h<H()?(x.mask.right.css({left:m.pageoffset.x+r+h,top:m.pageoffset.y+a,width:H()-(r+h),height:u}),x.mask.right.show()):x.mask.right.hide()):G()):D()}function B(t,e){t.stopPropagation(),t.preventDefault();var o=e||L(t),i=Math.round(m.origin.x/m.zoom),n=Math.round(m.origin.y/m.zoom),s=Math.abs((o.x-m.origin.x)/m.zoom),r=Math.abs((o.y-m.origin.y)/m.zoom);0<f.aspectratio&&(Math.abs((o.y-m.origin.y)/(o.x-m.origin.x))>1/f.aspectratio&&0===m.horiz||1===m.vert?s=Math.round(r*f.aspectratio):r=Math.round(s/f.aspectratio));return o.x<m.origin.x?(i-=s)-m.pageoffset.x<0&&(s=m.origin.x-m.pageoffset.x,0<f.aspectratio&&(r=Math.round(s/f.aspectratio)),i=m.origin.x-s):i+s>m.pagesize.width+m.pageoffset.x&&(s=m.pagesize.width-i+m.pageoffset.x,0<f.aspectratio&&(r=Math.round(s/f.aspectratio))),o.y<m.origin.y?(n-=r)-m.pageoffset.y<0&&(r=m.origin.y-m.pageoffset.y,0<f.aspectratio&&(s=Math.round(r*f.aspectratio)),n=m.origin.y-r,o.x<m.origin.x&&(i=m.origin.x-s)):n+r>m.pagesize.height+m.pageoffset.y&&(r=m.pagesize.height-n+m.pageoffset.y,0<f.aspectratio&&(s=Math.round(r*f.aspectratio)),o.x<m.origin.x&&(i=m.origin.x-s)),(0===m.vert||0<f.aspectratio)&&(f.x=i-m.pageoffset.x,f.width=s),(0===m.horiz||0<f.aspectratio)&&(f.y=n-m.pageoffset.y,f.height=r),I(),!0===f.showtooltip&&T(),!1}function V(t){return B(t,Atalasoft.Utils.getMousePositionJquery(t,null,!0))}function Z(t){W(t=t||event);var e=Atalasoft.Utils.getMousePosition(t,null,w[0]);m.origin.x=e.x-Math.round(f.x*m.zoom),m.origin.y=e.y-Math.round(f.y*m.zoom),m.changing=!0;var o={mousemove:q,mouseup:J,ondrag:Atalasoft.Utils.__rf};return null!==m.boundevents?l.extend(m.boundevents,o):m.boundevents=o,w.bind(o),!1}function q(t){W(t=t||event);var e=Atalasoft.Utils.getMousePosition(t,null,w[0]),o={x:0,y:0};return o.x=Math.round((e.x-m.origin.x)/m.zoom),o.y=Math.round((e.y-m.origin.y)/m.zoom),o.x>m.pagesize.width-f.width&&(o.x=m.pagesize.width-f.width),o.x<0&&(o.x=0),o.y>m.pagesize.height-f.height&&(o.y=m.pagesize.height-f.height),o.y<0&&(o.y=0),f.x=o.x,f.y=o.y,I(),!1}function J(t){return W(t=t||event),!(m.changing=!1)===f.showtooltip&&n.hide(),m.changing&&(m.changing=!1,F("changed")),null!==m.boundevents&&(w.unbind(m.boundevents),m.boundevents=null,g.resetDrawLayer()),!1}function L(t){var e=Atalasoft.Utils.getMousePositionJquery(t.toolEvent?t.toolEvent:t);if(w._paper){var o=Atalasoft.Utils.getSVGOffset(w._paper.canvas,w);e.x-=o.left,e.y-=o.top}return e}function O(){return Math.round(m.pagesize.height*m.zoom)}function H(){return Math.round(m.pagesize.width*m.zoom)}function W(t){void 0!==t.stopPropagation?t.stopPropagation():t.cancelBubble=!0}function $(){var t=w._img.getSize();m.zoom=w._img.getFitZoom(),m.pagesize.width=t.width,m.pagesize.height=t.height}return h.dispose=function(){null!=p&&(p.dispose(),p=null);h=null,x.rect=null,x.rectback=null,n=null,x.mask.top=null,x.mask.bottom=null,x.mask.left=null,x.mask.right=null},h.getAnimated=_,h.getAspectRatio=function(){return f.aspectratio},h.getBackColor=P,h.getForeColor=S,h.getHeight=function(){return f.height},h.getMovable=A,h.getMultiColor=C,h.getPosition=function(){return{x:f.x,y:f.y}},h.getRectangle=function(){return{x:f.x,y:f.y,width:f.width,height:f.height}},h.getResizable=U,h.getShowGrips=R,h.getShowMask=function(){return f.showmask},h.getShowTooltip=function(){return f.showtooltip},h.getSize=function(){return{width:f.width,height:f.height}},h.getVisible=function(){return f.visible},h.getWidth=function(){return f.width},h.bind=function(){return u.bind.apply(u,arguments),h},h.hide=D,h.reset=function(){D(),f.x=0,f.y=0,f.width=0,f.height=0},h.show=E,h.synchronize=function(){I()},h.trigger=F,h.unbind=function(){return u.unbind.apply(u,arguments),h},h.zoomToSelection=function(){var t=g.getMaxZoom();if(c.getZoom()<t){var e,o=g.getViewportSize(),i=w._img.getFitMultiplier(),n=1,s=0,r=0;e=o.width/f.width==o.height/f.height?Math.min(o.width/(f.width*i),o.height/(f.height*i),t):o.width/f.width<o.height/f.height?Math.min(o.width/(f.width*i),t):Math.min(o.height/(f.height*i),t),n=i*e,s=Math.round(f.x*n),r=Math.round(f.y*n),r-=Math.max(0,Math.round((o.height-f.height*n)/2)),s-=Math.max(0,Math.round((o.width-f.width*n)/2));var a=g.getPageOffsets(w._index,null,null,e);c.zoom(e,function(){c.scrollTo(a.width+s,a.height+r)})}},h.startSelect=function(t){t.stopPropagation(),t.preventDefault(),$();var e=L(t);E(),m.origin.x=e.x,m.origin.y=e.y,f.x=Math.round(e.x/m.zoom),f.y=Math.round(e.y/m.zoom),f.width=1,f.height=1,m.changing=!0,m.vert=0,m.horiz=0,I(),!0===f.showtooltip&&T();return!1},h.moveSelect=B,h.endSelect=J,e&&l.extend(!0,f,e),x.rect=k(),x.rectback=k(),x.mask.top=M(),x.mask.bottom=M(),x.mask.left=M(),x.mask.right=M(),(n=z("div")).addClass(c.domclasses.atala_tool_selection_tooltip),n.hide(),n.css({fontFamily:"Arial, helvetica, san-serif",fontSize:"8pt",padding:"1px",backgroundColor:"#FFFFE1",border:"1px solid #000000",position:"absolute",zIndex:999}),w.append(x.rectback),w.append(x.rect),w.append(n),w.append(x.mask.top),w.append(x.mask.bottom),w.append(x.mask.left),w.append(x.mask.right),p=new v,s=f.multicolor?"dashed":"solid",r="1px solid #"+f.backcolor,a="1px "+s+" #"+f.forecolor,x.rectback.css("border",r),x.rect.css("border",a),p.resetColors(),f.visible?E():D(),w.bind({pageresize:b,pagezoom:y}),h};
+"use strict";
+/**
  * Notification callback signature. The callback function that is called without parameters.
  * @callback NotificationCallback
  */
@@ -973,225 +1283,387 @@ mask:{top:null,bottom:null,left:null,right:null}},de={animating:!1,boundevents:n
  * Represents supported annotation types.
  * @enum {string} AnnotationTypes
  * @memberOf Atalasoft.Annotations
- */
-Atalasoft.Annotations.AnnotationTypes={/**
+ */Atalasoft.Annotations.AnnotationTypes={
+/**
      * Image annotation.
      */
-image:"image",/**
+image:"image",
+/**
      * Highlight annotation.
      */
-highlight:"highlight",/**
+highlight:"highlight",
+/**
      * Rectangle annotation.
      */
-rectangle:"rectangle",/**
+rectangle:"rectangle",
+/**
      * Filled rectangle annotation.
      */
-fillrect:"fillrect",/**
+fillrect:"fillrect",
+/**
      * Text annotation.
      */
-text:"text",/**
+text:"text",
+/**
      * Stamp annotation.
      */
-stamp:"stamp",/**
+stamp:"stamp",
+/**
      * Ellipse annotation.
      */
-ellipse:"ellipse",/**
+ellipse:"ellipse",
+/**
      * Single line annotation.
      */
-line:"line",/**
+line:"line",
+/**
      * Multiline annotation. Similar to `polygon` but represents not enclosed shape, first and last points are not joined.
      */
-lines:"lines",/**
+lines:"lines",
+/**
      * Freehand annotation.
      */
-freehand:"freehand",/**
+freehand:"freehand",
+/**
      * Polygon annotation. Similar to `lines` but represents enclosed shape.
      */
-polygon:"polygon"},/**
+polygon:"polygon"},
+/**
  * The current browser metadata.
  * @type {Atalasoft.Utils.BrowserMetadata}
  */
-Atalasoft.Utils.Browser={Explorer:navigator.userAgent.indexOf("MSIE")>=0||navigator.userAgent.indexOf("Trident")>=0,Firefox:navigator.userAgent.indexOf("Firefox")>=0||navigator.userAgent.indexOf("Minefield")>=0,Safari:navigator.userAgent.indexOf("Safari")>=0&&navigator.userAgent.indexOf("Chrome")<0,Opera:navigator.userAgent.indexOf("Opera")>=0,Chrome:navigator.userAgent.indexOf("Safari")>=0&&navigator.userAgent.indexOf("Chrome")>=0,/**
-     * @private
-     */
-Features:{SVG:!(!window.SVGAngle&&!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure","1.1")),Touch:!!("ontouchstart"in window),VML:Atalasoft.Utils.__supportsVML(),foreignObject:document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Extensibility","1.1"),Compatibility:"undefined"!=typeof document.documentMode&&7===document.documentMode,FlexBox:"flex"in document.documentElement.style||"WebkitFlex"in document.documentElement.style||"msFlex"in document.documentElement.style},/**
-     * @private
-     */
-Layout:{Gecko:!!navigator.userAgent.match(/(Gecko)/i),Presto:!!navigator.userAgent.match(/(Presto)/i),Trident:!!navigator.userAgent.match(/(Trident)/i),Webkit:!!navigator.userAgent.match(/(WebKit)/i),Version:(Atalasoft.Utils.__blv=navigator.userAgent.match(/(?:Gecko|Presto|Trident|WebKit).[\d\.]*/))?Atalasoft.Utils.__blv[0].replace(/\D*/,""):null},Mobile:{iOS:!!navigator.userAgent.match(/(iPad|iPhone|iPod)/i),Android:!!navigator.userAgent.match(/(Android)/i),IEMobile:!!navigator.userAgent.match(/(IEMobile)/i),Any:function(){return this.iOS||this.Android||this.IEMobile}},Version:(Atalasoft.Utils.__bv=navigator.userAgent.match(/(?:MSIE|Firefox|Chrome|Safari|Opera| rv).[\d\.]*/))?Atalasoft.Utils.__bv[0].replace(/\D*/,""):null},Atalasoft.Utils.Browser.Explorer8=Atalasoft.Utils.Browser.Explorer&&8===parseInt(Atalasoft.Utils.Browser.Version,10),/**
+Atalasoft.Utils.Browser=new Atalasoft.Utils.BrowserImpl,
+/**
  *  Specifies the behavior of the mouse from within the WebDocumentViewer.
  *  @enum {number}
  */
-Atalasoft.Utils.MouseToolType={/** Specify no mouse behavior at all. */
-None:0,/** Clicking and dragging the mouse will scroll the image. */
-Pan:1,/** Clicking will zoom in. */
-ZoomIn:2,/** Clicking will zoom out. */
-ZoomOut:3,/** Shows a context menu for the clicked object (where applicable). */
-ContextMenu:4,/** Allows mouse events to pass through the DOM without any handling. */
-PassThrough:5,/** Mouse will be set to crosshairs and can be used to drag and modify a selection rectangle on the image. */
-Selection:6,/** Zoom in on a specified area defined by dragging a rectangle onto the image. */
-ZoomArea:7,/** Input actions are interpreted as text selection */
-Text:8},/** Specifies the cursor used with the mouse tool.
+Atalasoft.Utils.MouseToolType={
+/** Specify no mouse behavior at all. */
+None:0,
+/** Clicking and dragging the mouse will scroll the image. */
+Pan:1,
+/** Clicking will zoom in. */
+ZoomIn:2,
+/** Clicking will zoom out. */
+ZoomOut:3,
+/** Shows a context menu for the clicked object (where applicable). */
+ContextMenu:4,
+/** Allows mouse events to pass through the DOM without any handling. */
+PassThrough:5,
+/** Mouse will be set to crosshairs and can be used to drag and modify a selection rectangle on the image.
+     * This tool requires that the {@link WebDocumentViewerConfig.showselecttools} flag was set.
+     */
+Selection:6,
+/** Zoom in on a specified area defined by dragging a rectangle onto the image.
+     * This tool requires that the {@link WebDocumentViewerConfig.showselecttools} flag was set.
+     */
+ZoomArea:7,
+/** Input actions are interpreted as text selection
+     * This tool requires that the {@link WebDocumentViewerConfig.showselecttools} flag was set.
+     */
+Text:8},
+/** Specifies the cursor used with the mouse tool.
  * @enum {number}
  */
-Atalasoft.Utils.MouseToolCursor={/** Automatically determined by the browser. */
-Auto:"",/** An arrow pointer. */
-Arrow:"default",/** A crosshair usually used in drawing a box. */
-Crosshair:"crosshair",/** A grabbing cursor. Usually changes to gabbed while the mouse button is down. */
-Grab:Atalasoft.Utils.Browser.Firefox?"-moz-grab":"hand",/** A hand with a finger pointing. Usually what the browser uses for clicking hyperlinks. */
-Hand:"pointer",/** A crosshair pointer with arrowheads on the ends indicating movement. */
-Move:"move",/** A magnifying glass with a plus sign in it. */
-ZoomIn:Atalasoft.Utils.Browser.Firefox?"-moz-zoom-in":'url("%1ZoomIn.cur"pointer), pointer',/** A magnifying glass with a minus sign in it. */
-ZoomOut:Atalasoft.Utils.Browser.Firefox?"-moz-zoom-out":'url("%1ZoomOut.cur"), pointer',/** A selection editing cursor. */
-Text:"text",/** A vertical text editing cursor. */
-VerticalText:"vertical-text",/** A wait cursor. */
-Wait:"wait",/** A custom CSS cursor string provided by the user. */
-Custom:"%2"},/** Specifies the direction of the scrolling.
+Atalasoft.Utils.MouseToolCursor={
+/** Automatically determined by the browser. */
+Auto:"",
+/** An arrow pointer. */
+Arrow:"default",
+/** A crosshair usually used in drawing a box. */
+Crosshair:"crosshair",
+/** A grabbing cursor. Usually changes to gabbed while the mouse button is down. */
+Grab:Atalasoft.Utils.Browser.Firefox?"-moz-grab":"hand",
+/** A hand with a finger pointing. Usually what the browser uses for clicking hyperlinks. */
+Hand:"pointer",
+/** A crosshair pointer with arrowheads on the ends indicating movement. */
+Move:"move",
+/** A magnifying glass with a plus sign in it. */
+ZoomIn:Atalasoft.Utils.Browser.Firefox?"-moz-zoom-in":'url("%1ZoomIn.cur"pointer), pointer',
+/** A magnifying glass with a minus sign in it. */
+ZoomOut:Atalasoft.Utils.Browser.Firefox?"-moz-zoom-out":'url("%1ZoomOut.cur"), pointer',
+/** A selection editing cursor. */
+Text:"text",
+/** A vertical text editing cursor. */
+VerticalText:"vertical-text",
+/** A wait cursor. */
+Wait:"wait",
+/** A custom CSS cursor string provided by the user. */
+Custom:"%2"},
+/** Specifies the direction of the scrolling.
  * @enum {number}
  */
-Atalasoft.Utils.ScrollDirection={/** Scrolls horizontally. */
-Horizontal:"horizontal",/** Scrolls vertically. */
-Vertical:"vertical"},/** Specifies the fitting options.
+Atalasoft.Utils.ScrollDirection={
+/** Scrolls horizontally. */
+Horizontal:"horizontal",
+/** Scrolls vertically. */
+Vertical:"vertical"},
+/** Specifies the fitting options.
  * @enum {number}
  */
-Atalasoft.Utils.Fitting={/** No fitting will be applied to the image */
-None:0,/** Finds the best option between width or height based fitting. */
-Best:1,/** Fits the image to the available width. */
-Width:2,/** Fits the image to the available height. */
-Height:3},/** Specifies the page selection method.
+Atalasoft.Utils.Fitting={
+/** No fitting will be applied to the image */
+None:0,
+/** Finds the best option between width or height based fitting. */
+Best:1,
+/** Fits the image to the available width. */
+Width:2,
+/** Fits the image to the available height. */
+Height:3},
+/** Specifies the page selection method.
  *  @enum {number}
  */
-Atalasoft.Utils.PageSelection={/** Selects the page under the top left corner of the viewer  */
-TopLeft:{x:0,y:0},/** Selects the page under the middle left of the viewer  */
-MiddleLeft:{x:0,y:.5},/** Selects the page under the bottom left corner of the viewer  */
-BottomLeft:{x:0,y:1},/** Selects the page under the center location of viewer  */
-Center:{x:.5,y:.5}},/** Specifies the size of the viewport area that triggers document scroll when text selection enters it.
+Atalasoft.Utils.PageSelection={
+/** Selects the page under the top left corner of the viewer  */
+TopLeft:{x:0,y:0},
+/** Selects the page under the middle left of the viewer  */
+MiddleLeft:{x:0,y:.5},
+/** Selects the page under the bottom left corner of the viewer  */
+BottomLeft:{x:0,y:1},
+/** Selects the page under the center location of viewer  */
+Center:{x:.5,y:.5}},
+/** Specifies the size of the viewport area that triggers document scroll when text selection enters it.
  * @enum {number}
  */
-Atalasoft.Utils.ScrollArea={/** Text selection scrolling is disabled */
-None:0,/** Normal scroll area. Around 10% of the corresponding viewport dimension */
-Normal:.1,/** Normal scroll area. Around 20% of the corresponding viewport dimension */
-Large:.2},/**
+Atalasoft.Utils.ScrollArea={
+/** Text selection scrolling is disabled */
+None:0,
+/** Normal scroll area. Around 10% of the corresponding viewport dimension */
+Normal:.1,
+/** Normal scroll area. Around 20% of the corresponding viewport dimension */
+Large:.2},
+/**
  * Exposes the list of internal DOM elements classes that could be used to query and customize UI behavior.
  * @enum {string}
  * @readonly
  */
-Atalasoft.Controls.WebDocumentViewer.domclasses={/** Page element class. Container for all page elements - image, annotations, forms, text, etc layers. */
-atala_page_div:"atala_page_div",/** Page image container that is in initial image load state */
-atala_page_loading:"atala_page_loading",/** Page image anchor container element class*/
-atala_page_image_anchor:"atala_page_image_anchor",/** Page image element class*/
-atala_page_image:"atala_page_image",/** Page index element class. see {@link WebDocumentViewerConfig.showpagenumber | showpagenumber} config option */
-atala_page_number:"atala_page_number",/** Active page class */
-atala_active_page:"atala_active_page",/** Active thumbnail class */
-atala_active_thumb:"atala_active_thumb",/** Thumbnail caption class */
-atala_thumb_caption:"atala_thumb_caption",/** Document toolbar element class */
-atala_toolbar:"atala_toolbar",/** Annotations toolbar element class */
-atala_annotation_toolbar:"atala_annotation_toolbar",/** Toolbar button element class */
-atala_toolbar_button:"atala_toolbar_button",/** Class of the main outer object that holds the scrollbars */
-atala_main_container:"atala_main_container",/** Class of the inner object that controls scrolling */
-atala_scroller:"atala_scroller",/** Class of the inner object that defines the viewable area */
-atala_viewport:"atala_viewport",/** Inner content container object class */
-atala_content:"atala_content",/** Thumbnailer draggable area */
-atala_thumb_draggable:"atala_thumb_draggable",/** Placeholder element that is inserted into Thumbnailer to highlight drop location */
-atala_drag_placeholder:"atala_drag_placeholder",/** Placeholder inserted before page dom object that is used in virtual scrolling */
-atala_dom_edge_first:"atala_dom_edge_first",/** Placeholder inserted after page dom object that is used in virtual scrolling */
-atala_dom_edge_last:"atala_dom_edge_last",/** Inner horizontal scroll bar object class */
-atala_scroll_horizontal:"atala_scroll_horizontal",/** Inner vertical scroll bar object */
-atala_scroll_vertical:"atala_scroll_vertical",/** Toolbar span element containing the page number */
-atala_page_label:"atala_page_label",/** Context or dropdown menu element. Could be multiple instances within same viewer DOM sub tree */
-atala_context_menu:"atala_context_menu",/** Status div */
-atala_statusbar:"atala_statusbar",/** "Save Changes" toolbar button */
-atala_tool_button_save:"atala_tool_button_save",/** "Previous Page" toolbar button */
-atala_tool_button_page_prev:"atala_tool_button_page_prev",/** "Next Page" toolbar button */
-atala_tool_button_page_next:"atala_tool_button_page_next",/** "Zoom Out" toolbar button */
-atala_tool_button_zoom_out:"atala_tool_button_zoom_out",/** "Zoom In" toolbar button */
-atala_tool_button_zoom_in:"atala_tool_button_zoom_in",/** "Full Size" toolbar button */
-atala_tool_button_fit_none:"atala_tool_button_fit_none",/** "Best Fit" toolbar button */
-atala_tool_button_fit_best:"atala_tool_button_fit_best",/** "Fit To Width" toolbar button */
-atala_tool_button_fit_width:"atala_tool_button_fit_width",/** "Zoom Area" toolbar button */
-atala_tool_button_zoom_area:"atala_tool_button_zoom_area",/** "Rotate Left" tooltip button */
-atala_tool_button_rotate_left:"atala_tool_button_rotate_left",/** "Rotate Right" tooltip button */
-atala_tool_button_rotate_right:"atala_tool_button_rotate_right",/** "Text selection" toolbar button */
-atala_tool_button_text_tool:"atala_tool_button_text_tool",/** "Pan" toolbar button */
-atala_tool_button_pan_tool:"atala_tool_button_pan_tool",/** "Draw Ellipse" annotation toolbar button */
-atala_tool_button_ellipse_anno:"atala_tool_button_ellipse_anno",/** "Draw Highlight" annotation toolbar button */
-atala_tool_button_highlight_anno:"atala_tool_button_highlight_anno",/** "Draw Line" annotation toolbar button */
-atala_tool_button_line_anno:"atala_tool_button_line_anno",/** "Draw Poly Lines" annotation toolbar button */
-atala_tool_button_lines_anno:"atala_tool_button_lines_anno",/** "Draw Freehand" annotation toolbar button */
-atala_tool_button_freehand_anno:"atala_tool_button_freehand_anno",/** "Draw Polygon" annotation toolbar button */
-atala_tool_button_polygon_anno:"atala_tool_button_polygon_anno",/** "Draw Rectangle" annotation toolbar button */
-atala_tool_button_rect_anno:"atala_tool_button_rect_anno",/** "Filled Rectangle" annotation toolbar button */
-atala_tool_button_fillrect_anno:"atala_tool_button_fillrect_anno",/** "Draw Text" annotation toolbar button */
-atala_tool_button_text_anno:"atala_tool_button_text_anno",/** "Add a Stamp" annotation toolbar button */
-atala_tool_button_stamp_anno:"atala_tool_button_stamp_anno",/** "Add a Sticky Note" annotation toolbar button */
-atala_tool_button_note_anno:"atala_tool_button_note_anno",/** "Add a Comment" annotation toolbar button */
-atala_tool_button_commment_anno:"atala_tool_button_commment_anno",/** Selection Rubberband div object */
-atala_tool_selection_band:"atala_tool_selection_band",/** Selection Rubberband grip div object */
-atala_tool_selection_grip:"atala_tool_selection_grip",/** Selection Rubberband mask div object */
-atala_tool_selection_mask:"atala_tool_selection_mask",/** Selection Rubberband tooltip div object */
-atala_tool_selection_tooltip:"atala_tool_selection_tooltip",/** Text search containing div object */
-atala_search_container:"atala_search_container",/** Text search input box */
-atala_search_input:"atala_search_input",/** Text search next match button */
-atala_search_next:"atala_search_next",/** Text search previous match button */
-atala_search_prev:"atala_search_prev"},/**
+Atalasoft.Controls.WebDocumentViewer.domclasses={
+/** Page element class. Container for all page elements - image, annotations, forms, text, etc layers. */
+atala_page_div:"atala_page_div",
+/** Page image container that is in initial image load state */
+atala_page_loading:"atala_page_loading",
+/** Page image anchor container element class*/
+atala_page_image_anchor:"atala_page_image_anchor",
+/** Page image element class*/
+atala_page_image:"atala_page_image",
+/** Page index element class. see {@link WebDocumentViewerConfig.showpagenumber | showpagenumber} config option */
+atala_page_number:"atala_page_number",
+/** Active page class */
+atala_active_page:"atala_active_page",
+/** Active thumbnail class */
+atala_active_thumb:"atala_active_thumb",
+/** Thumbnail caption class */
+atala_thumb_caption:"atala_thumb_caption",
+/** Document toolbar element class */
+atala_toolbar:"atala_toolbar",
+/** Annotations toolbar element class */
+atala_annotation_toolbar:"atala_annotation_toolbar",
+/** Toolbar button element class */
+atala_toolbar_button:"atala_toolbar_button",
+/** Class of the main outer object that holds the scrollbars */
+atala_main_container:"atala_main_container",
+/** Class of the inner object that controls scrolling */
+atala_scroller:"atala_scroller",
+/** Class of the inner object that defines the viewable area */
+atala_viewport:"atala_viewport",
+/** Inner content container object class */
+atala_content:"atala_content",
+/** Thumbnailer draggable area */
+atala_thumb_draggable:"atala_thumb_draggable",
+/** Placeholder element that is inserted into Thumbnailer to highlight drop location */
+atala_drag_placeholder:"atala_drag_placeholder",
+/** Placeholder inserted before page dom object that is used in virtual scrolling */
+atala_dom_edge_first:"atala_dom_edge_first",
+/** Placeholder inserted after page dom object that is used in virtual scrolling */
+atala_dom_edge_last:"atala_dom_edge_last",
+/** Inner horizontal scroll bar object class */
+atala_scroll_horizontal:"atala_scroll_horizontal",
+/** Inner vertical scroll bar object */
+atala_scroll_vertical:"atala_scroll_vertical",
+/** Toolbar span element containing the page number */
+atala_page_label:"atala_page_label",
+/** Context or dropdown menu element. Could be multiple instances within same viewer DOM sub tree */
+atala_context_menu:"atala_context_menu",
+/** Status div */
+atala_statusbar:"atala_statusbar",
+/** "Save Changes" toolbar button */
+atala_tool_button_save:"atala_tool_button_save",
+/** "Previous Page" toolbar button */
+atala_tool_button_page_prev:"atala_tool_button_page_prev",
+/** "Next Page" toolbar button */
+atala_tool_button_page_next:"atala_tool_button_page_next",
+/** "Zoom Out" toolbar button */
+atala_tool_button_zoom_out:"atala_tool_button_zoom_out",
+/** "Zoom In" toolbar button */
+atala_tool_button_zoom_in:"atala_tool_button_zoom_in",
+/** "Full Size" toolbar button */
+atala_tool_button_fit_none:"atala_tool_button_fit_none",
+/** "Best Fit" toolbar button */
+atala_tool_button_fit_best:"atala_tool_button_fit_best",
+/** "Fit To Width" toolbar button */
+atala_tool_button_fit_width:"atala_tool_button_fit_width",
+/** "Zoom Area" toolbar button */
+atala_tool_button_zoom_area:"atala_tool_button_zoom_area",
+/** "Rotate Left" tooltip button */
+atala_tool_button_rotate_left:"atala_tool_button_rotate_left",
+/** "Rotate Right" tooltip button */
+atala_tool_button_rotate_right:"atala_tool_button_rotate_right",
+/** "Text selection" toolbar button */
+atala_tool_button_text_tool:"atala_tool_button_text_tool",
+/** "Pan" toolbar button */
+atala_tool_button_pan_tool:"atala_tool_button_pan_tool",
+/** "Draw Ellipse" annotation toolbar button */
+atala_tool_button_ellipse_anno:"atala_tool_button_ellipse_anno",
+/** "Draw Highlight" annotation toolbar button */
+atala_tool_button_highlight_anno:"atala_tool_button_highlight_anno",
+/** "Draw Line" annotation toolbar button */
+atala_tool_button_line_anno:"atala_tool_button_line_anno",
+/** "Draw Poly Lines" annotation toolbar button */
+atala_tool_button_lines_anno:"atala_tool_button_lines_anno",
+/** "Draw Freehand" annotation toolbar button */
+atala_tool_button_freehand_anno:"atala_tool_button_freehand_anno",
+/** "Draw Polygon" annotation toolbar button */
+atala_tool_button_polygon_anno:"atala_tool_button_polygon_anno",
+/** "Draw Rectangle" annotation toolbar button */
+atala_tool_button_rect_anno:"atala_tool_button_rect_anno",
+/** "Filled Rectangle" annotation toolbar button */
+atala_tool_button_fillrect_anno:"atala_tool_button_fillrect_anno",
+/** "Draw Text" annotation toolbar button */
+atala_tool_button_text_anno:"atala_tool_button_text_anno",
+/** "Add a Stamp" annotation toolbar button */
+atala_tool_button_stamp_anno:"atala_tool_button_stamp_anno",
+/** "Add a Sticky Note" annotation toolbar button */
+atala_tool_button_note_anno:"atala_tool_button_note_anno",
+/** "Add a Comment" annotation toolbar button */
+atala_tool_button_commment_anno:"atala_tool_button_commment_anno",
+/** Selection Rubberband div object */
+atala_tool_selection_band:"atala_tool_selection_band",
+/** Selection Rubberband grip div object */
+atala_tool_selection_grip:"atala_tool_selection_grip",
+/** Selection Rubberband mask div object */
+atala_tool_selection_mask:"atala_tool_selection_mask",
+/** Selection Rubberband tooltip div object */
+atala_tool_selection_tooltip:"atala_tool_selection_tooltip",
+/** Text search containing div object */
+atala_search_container:"atala_search_container",
+/** Text search input box */
+atala_search_input:"atala_search_input",
+/** Text search next match button */
+atala_search_next:"atala_search_next",
+/** Text search previous match button */
+atala_search_prev:"atala_search_prev",
+/** "Upload document" toolbar button */
+atala_tool_button_upload:"atala_tool_button_upload",
+/** Upload control root container */
+atala_upload_control:"atala-upload-control",
+/** Upload input control */
+atala_upload_file:"atala-upload-file",
+/** Upload control working area container */
+atala_upload_flex_area:"atala-upload-flex-area",
+/** Upload control single file status control */
+atala_upload_single_file:"atala-upload-single-file",
+/** Upload control multiple files status control */
+atala_upload_multiple_files:"atala-upload-multiple-files",
+/** Upload control buttons area container */
+atala_upload_flex_buttons:"atala-upload-flex-buttons",
+/** Upload control buttons conatiner */
+atala_upload_buttons:"atala-upload-buttons",
+/** Upload control Cancel button */
+atala_upload_cancel_button:"atala-upload-cancel-button",
+/** Upload control Ok button */
+atala_upload_ok_button:"atala-upload-ok-button",
+/** Upload control Add button */
+atala_upload_add_button:"atala-upload-add-button",
+/** Upload control multiple files Name column header */
+atala_upload_files_header_name:"atala-upload-files-header-name",
+/** Upload control multiple files Size column header */
+atala_upload_files_header_size:"atala-upload-files-header-size",
+/** Upload control multiple files Status column header */
+atala_upload_files_header_status:"atala-upload-files-header-status"},
+/**
  * Exposes list of well-known attributes that are used to provide additional information for DOM elements
  * @enum {string}
  */
-Atalasoft.Controls.WebDocumentViewer.domattributes={/** Index of the page currently displayed within the element. applies to elements having `.atala_page_div` class */
-atala_page_index:"atala_page_index"},/**
+Atalasoft.Controls.WebDocumentViewer.domattributes={
+/** Index of the page currently displayed within the element. applies to elements having `.atala_page_div` class */
+atala_page_index:"atala_page_index"},
+/**
  * Defines Web Document Thumbnailer selection mode.
  * @enum {number}
  * @readonly 
  */
-Atalasoft.Utils.SelectionMode={/**
+Atalasoft.Utils.SelectionMode={
+/**
      * Only one thumbnail can be selected 
      */
-SingleSelect:0,/**
+SingleSelect:0,
+/**
      * Multiple thumbnails can be selected
      */
-MultiSelect:1},/**
+MultiSelect:1},
+/**
  * Defines the order in which selected thumbnails are ordered
  * @enum {number}
  * @readonly 
  */
-Atalasoft.Utils.SelectedItemsOrder={/**
+Atalasoft.Utils.SelectedItemsOrder={
+/**
      * Items are sorted in their index order.
      */
-ItemIndexOrder:0,/**
+ItemIndexOrder:0,
+/**
      * Items are sorted in the order they were selected.
      */
-SelectedOrder:1};
-"use strict";var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};/**
- * WebDocuemntViewer Annotations API.
+SelectedOrder:1},
+/**
+ * Represents a reason why a file has been rejected by WDV from upload.
+ * @enum {number}
+ * @readonly 
+ */
+Atalasoft.Utils.FileUploadRejectReason={
+/**
+     * File is not rejected from upload
+     */
+None:0,
+/**
+     * File is bigger than allowed by {@link WebDocumentViewerConfig.upload.allowedmaxfilesize | allowedmaxfilesize} property.
+     */
+Size:1,
+/**
+     * File type or extensions is not allowed by {@link WebDocumentViewerConfig.upload.allowedfiletypes | allowedfiletypes} property.
+     */
+Type:2,
+/**
+     * File with the same name has already added to the upload queue.
+     */
+Name:3};
+/**
+ * Represents the current browser metadata.
+ * @typedef {Object} BrowserMetadata
+ * @memberOf Atalasoft.Utils
+ * @property {boolean} Explorer - Indicates whether current browser is Internet Explorer.
+ * @property {boolean} Firefox - Indicates whether current browser is Firefox.
+ * @property {boolean} Safari -  Indicates whether current browser is Safari.
+ * @property {boolean} Opera -  Indicates whether current browser is Opera.
+ * @property {boolean} Chrome -  Indicates whether current browser is Google Chrome.
+ * @property {Object} Mobile - Represents mobile browser indicators.
+ * @property {boolean} Mobile.iOS - Indicates that current device runs on iOS device.
+ * @property {boolean} Mobile.Android - Indicates that current device runs on Android device.
+ * @property {boolean} Mobile.IEMobile - Indicates that current device runs on mobile internet explorer.
+ * @property {function} Mobile.Any - Checks whether current platform is mobile device.
+ * @returns {boolean}
+ */
+"use strict";var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t};function _toConsumableArray(t){if(Array.isArray(t)){for(var e=0,n=Array(t.length);e<t.length;e++)n[e]=t[e];return n}return Array.from(t)}
+/**
+ * WebDocumentViewer Annotations API.
  * @class
  * @inner
  * @name AnnotationController
  * @memberOf Atalasoft.Controls.WebDocumentViewer
- */
-Atalasoft.Annotations.AnnotationController=function(e,t,n){function a(e){Ht.push(e)}function o(){Ut.setAnnos(Gt.annos),Ut.setPages(Bt)}function r(){if(o(),"undefined"==typeof Raphael)return d("DependencyError","Raphael did not load properly."),void 0;for(parseFloat(Raphael.version)<Ct&&d("DependencyError","Raphael versions 2.1 and higher are supported, other versions may cause instability."),Atalasoft.Utils._raphaelLoader&&Atalasoft.Utils._raphaelLoader===Ot&&delete Atalasoft.Utils._raphaelLoader,Ot.trigger("raphaelloaded"),l(),Ot.trigger("raphaelextended");Ht.length;)Ht.shift().call();qt=Raphael.matrix(1,0,0,1,0,0),Ot.bind({scroll:c,pagerecycled:D,pageshown:_,zoomchanged:u,pagerotated:P}),Nt={Delete:U,Properties:W},zt._state.initialized?i():Ot.bind({initialized:i})}function i(){It=!0,Gt.readonly||(Lt=O(Nt),jt=new V,null!=Mt.annotations.defaults&&G(Mt.annotations.defaults),null!=Mt.annotations.stamps&&Q(Mt.annotations.stamps),null!=Mt.annotations.images&&J(Mt.annotations.images),null!=Mt.annotations.custom&&X(Mt.annotations.custom))}/**
-    * [Internal] Disposes memory intensive objects
-    * @returns undefined
-    */
-function s(){St=null,Ot=null,zt=null,Mt=null,Bt=null,Et=null,Lt=null,Nt=null,jt=null,Ht.length=0,Gt.annos.length=0,Gt.activepage=null,Gt.activeanno=null,Gt.zoom=null,Ut.dispose(),Ut=null}function l(){function e(e,t,n,a,r){function i(e){var t=s.matrix.split();if(e.hasOwnProperty("x")&&"undefined"!=typeof e.x&&e.hasOwnProperty("y")&&"undefined"!=typeof e.y){var n={x:e.x*t.scalex,y:e.y*t.scaley};if(0!==t.rotate){var a=Atalasoft.Utils.__calcPathBounds([{x:e.x,y:e.y},{x:e.x+e.width,y:e.y},{x:e.x+e.width,y:e.y+e.height},{x:e.x,y:e.y+e.height}],s.matrix);n=a}l.style.left=Math.round(n.x)+"px",l.style.top=Math.round(n.y)+"px"}}var s=o(this,this,null,"div",t,n,a,r),l=s.node;return l.innerHTML=e?e:"",s.innerDom=l,l.style.position="absolute",s.__tsfm=s.transform,s.transform=function(){this.__tsfm.apply(this,arguments),this.repaint(),i(this.attrs)},s.backgroundColor=function(e){l.style.backgroundColor=e,this.repaint()},s.repaint=function(){l.style.filter='progid:DXImageTransform.Microsoft.Chroma(color="'+l.style.backgroundColor+'"); '+this.matrix.toFilter()},s.__attr=s.attr,s.attr=function(e){this.__attr.apply(this,arguments),e&&(i(e),e.hasOwnProperty("width")&&(l.style.width=e.width+"px"),e.hasOwnProperty("height")&&(l.style.height=e.height+"px"))},s.isHtml=!0,s}function t(e,t,n,o,r){return a.call(this,e,t,n,o,r,!0)}function n(e,t,n,o,r){return a.call(this,e,t,n,o,r)}function a(e,t,n,a,r,s){var l="http://www.w3.org/1999/xhtml",p="http://www.w3.org/2000/xmlns/",c="http://www.w3.org/2000/svg",d=i||s?"image":"foreignObject",u=o(this,this,c,d,t,n,a,r),f=null;return i||(f=document.createElementNS(l,"div"),f.setAttributeNS(p,"xmlns",p),f.innerHTML=e?e:"",u.node.appendChild(f),u.isHtml=!0),u.innerDom=f,u}function o(e,t,n,a,o,r,i,s,l){var p=null===n?document.createElement(a):document.createElementNS(n,a);t.canvas&&t.canvas.appendChild&&t.canvas.appendChild(p);var c=new e.constructor.el.constructor(p,e);c.attrs={x:o,y:r,width:i,height:s,r:l||0,rx:l||0,ry:l||0,fill:"none",stroke:"#000"},c.skew={},c.type=a,"g"===a&&(c.canvas=c.node);for(var d in c.attrs)c.attrs.hasOwnProperty(d)&&void 0!==c.attrs[d]&&p.setAttribute(d,c.attrs[d]+"");return c}function r(){var e={block:"M5,0 0,2.5 5,5z",classic:"M5,0 0,2.5 5,5 3.5,3 3.5,2z",diamond:"M2.5,0 5,2.5 2.5,5 0,2.5z",open:"M6,1 1,3.5 6,6",oval:"M2.5,0A2.5,2.5,0,0,1,2.5,5 2.5,2.5,0,0,1,2.5,0z"},t={},n=function a(e,t){if(t){"string"==typeof e&&(e=a(e));for(var n in t)t.hasOwnProperty(n)&&("xlink:"===n.substring(0,6)?e.setAttributeNS("http://www.w3.org/1999/xlink",n.substring(6),String(t[n])):e.setAttribute(n,String(t[n])))}else e=Raphael._g.doc.createElementNS("http://www.w3.org/2000/svg",e),e.style&&(e.style.webkitTapHighlightColor="rgba(0,0,0,0)");return e};Raphael.fn.addArrow=function(a,o,r){if("path"===a.type){for(var i,s,l,p,c,d=String(o).toLowerCase().split("-"),u=a.paper,f=r?"end":"start",g=a.node,h=a.attrs,v=h["stroke-width"],y=d.length,m="classic",w=3,_=3,x=5;y--;)switch(d[y]){case"block":case"classic":case"oval":case"diamond":case"open":case"none":m=d[y];break;case"wide":_=5;break;case"narrow":_=2;break;case"long":w=5;break;case"short":w=2}if("open"===m?(w+=2,_+=2,x+=2,l=1,p=r?4:1,c={fill:"none",stroke:h.stroke}):(p=l=w/2,c={fill:h.stroke,stroke:"none"}),a._.WDVarrows?r?(a._.WDVarrows.endPath&&t[a._.WDVarrows.endPath]--,a._.WDVarrows.endMarker&&t[a._.WDVarrows.endMarker]--):(a._.WDVarrows.startPath&&t[a._.WDVarrows.startPath]--,a._.WDVarrows.startMarker&&t[a._.WDVarrows.startMarker]--):a._.WDVarrows={},"none"!==m){var b=Math.random().toString(36).substring(7),A="dave-marker-"+m,D="dave-marker-"+f+m+w+_+b;Raphael._g.doc.getElementById(A)?t[A]++:(u.defs.appendChild(n(n("path"),{"stroke-linecap":"round",d:e[m],id:A})),t[A]=1);var k,P=Raphael._g.doc.getElementById(D);P?(t[D]++,k=P.getElementsByTagName("use")[0]):(P=n(n("marker"),{id:D,markerHeight:_,markerWidth:w,orient:"auto",refX:p,refY:_/2}),k=n(n("use"),{"xlink:href":"#"+A,transform:(r?"rotate(180 "+w/2+" "+_/2+") ":"")+"scale("+w/x+","+_/x+")","stroke-width":(1/((w/x+_/x)/2)).toFixed(4)}),P.appendChild(k),u.defs.appendChild(P),t[D]=1),n(k,c);var T=l*("diamond"!==m&&"oval"!==m);r?(i=a._.WDVarrows.startdx*v||0,s=Raphael.getTotalLength(h.path)-T*v):(i=T*v,s=Raphael.getTotalLength(h.path)-(a._.WDVarrows.enddx*v||0)),s=0>s?0:s,c={},c["marker-"+f]="url(#"+D+")",(s||i)&&(c.d=Raphael.getSubpath(h.path,i,s)),n(g,c),a._.WDVarrows[f+"Path"]=A,a._.WDVarrows[f+"Marker"]=D,a._.WDVarrows[f+"dx"]=T,a._.WDVarrows[f+"Type"]=m,a._.WDVarrows[f+"String"]=o}else r?(i=a._.WDVarrows.startdx*v||0,s=Raphael.getTotalLength(h.path)-i):(i=0,s=Raphael.getTotalLength(h.path)-(a._.WDVarrows.enddx*v||0)),a._.WDVarrows[f+"Path"]&&n(g,{d:Raphael.getSubpath(h.path,i,s)}),delete a._.WDVarrows[f+"Path"],delete a._.WDVarrows[f+"Marker"],delete a._.WDVarrows[f+"dx"],delete a._.WDVarrows[f+"Type"],delete a._.WDVarrows[f+"String"];for(c in t)if(t.hasOwnProperty(c)&&!t[c]){var V=Raphael._g.doc.getElementById(c);V&&V.parentNode.removeChild(V)}}}}var i=Raphael.svg&&!Atalasoft.Utils.Browser.Features.foreignObject;Raphael.vml?Raphael.fn.html=e:(Raphael.fn.html=n,r()),Raphael.fn.atalaImage=t}function p(){"Atalasoft.Controls.WebDocumentViewer"===Ot.typeOf&&Rt.extend(Ot,Ft)}function c(e){qt.translate(e.dx,e.dy)}function d(e,t){Ot.trigger({type:"throwerror",name:e,msg:t})}function u(e){Gt.zoom=e.zoom}function f(e){if(e instanceof jQuery){if("undefined"!=typeof Raphael){e._paper=Raphael(e[0]),e._paper.canvas.style.position="absolute",e._paper.canvas.style.zIndex="2",Mt.pageborderwidth>0&&(e._paper.canvas.style.left=Mt.pageborderwidth+"px",e._paper.canvas.style.top=Mt.pageborderwidth+"px"),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<=10&&(e._paper.canvas.style.backgroundColor="rgba(255,255,255,0.01)"),e._paper._annos=e._paper.set(),e._paper._trash=e._paper.set(),e._paper._page=e,e._matrix=Raphael.matrix(1,0,0,1,0,0),e._matrix.translate(-e.offset().left,-e.offset().top),e._grips=new Atalasoft.Annotations.Grips(e,Gt);var t=function(){A(e),Ut.deselectPage(e),S()};e.bind("mousedown",t),Atalasoft.Utils.Browser.Features.Touch&&e.bind("touchstart",t),e.bind({pageresize:function(t){t.page=e,w(t)},pagezoom:function(t){t.page=e,k(t)}})}else a(function(){f(e)});return!0}return!1}function g(e){return e instanceof jQuery?("undefined"!=typeof Raphael&&(e._paper&&(e._paper._annos=null,e._paper._page=null,e._paper=null),e._matrix=null,e._grips=null),!0):!1}function h(e,t,n){if(e||"number"!=typeof t||(t=v(t)),t=t||[],null==n?n=Gt.annos.length:0>n&&(n=0),n>Gt.annos.length){var a=Gt.annos.length;Gt.annos[n]=t;for(var o=a;o<Gt.annos.length;++o)Gt.annos[o]||(Gt.annos[o]=[])}else Gt.annos.splice(n,0,t);return n}function v(e){return e<Gt.annos.length?Gt.annos.splice(e,1)[0]:null}function y(e,t){return h(null,v(e),t)}function m(e){e&&e.remove&&!e.grip&&e.paper&&e.paper._trash&&e.paper._trash.push(e)}function w(e){e.page._paper.setSize(e.width,e.height),e.page._paper.canvas.style.width=e.width,e.page._paper.canvas.style.height=e.height,T(e.page)}function _(e){x(e.index,e.page)}function x(e,t){if("undefined"!=typeof Raphael){if(e<Gt.annos.length&&(b(t),Gt.annos[e]&&Gt.annos[e].length))for(var n,o=0;o<Gt.annos[e].length;o++)n=Gt.annos[e][o],n._pageindex=e,n.repaint(t._paper),n.get("selected")&&Ut.select(n,e,!0)}else a(function(){x(e,t)})}function b(e){e._grips.clear(),e._paper._annos.remove(),e._paper._annos.clear(),e._paper.forEach(function(e){e&&e.remove&&!e.grip&&e.paper&&e.paper._trash&&e.paper._trash.push(e)}),e._paper._trash.remove(),e._paper._trash.clear(),ut()}function A(e){Gt.activepage=e}function D(e){e.page._paper&&(b(e.page),e.page.append(e.page._paper.canvas))}function k(e){isFinite(e.width)&&isFinite(e.height)&&e.width&&e.height&&(Gt.zoom=e.zoom,e.page._paper.setSize(e.width,e.height),e.page._paper.canvas.style.width=e.width,e.page._paper.canvas.style.height=e.height,e.page._paper.forEach(function(t){if(t&&t.transform&&!t.grip){"undefined"!=typeof t._linewidth&&t.attr("stroke-width",t._linewidth*Gt.zoom);var n=t.attr("clip-rect");if("object"===("undefined"==typeof n?"undefined":_typeof(n))&&"number"==typeof n.length){if(Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<9)for(var a=0;a<n.length;a++)n[a]=n[a]/e.prevzoom*e.zoom;t.attr("clip-rect",n)}}}),T(e.page))}function P(e){T(e.page)}function T(e){if(e&&e._index>=0&&Gt.annos[e._index]){for(var t=0;t<Gt.annos[e._index].length;t++)Gt.annos[e._index][t].repaint();e&&e._grips.repaint()}}function V(){function e(){g.appendTo(f),f.dialog({minWidth:320,dialogClass:"atala-ui",resizable:!1,autoOpen:!1,buttons:{Ok:n,Reset:r,Cancel:o}})}function t(e){h=e,g.empty(),v={};for(var t in y)if(y.hasOwnProperty(t)){var n={};n[t]=h.get(t),Rt.extend(!0,v,n)}i(h.get(),"",y),f.dialog("open")}function n(){f.dialog("close")}function a(){return f.dialog("isOpen")}function o(){r(),n()}function r(){h.set(v,!0),h.updateView(),h.repaint(),g.empty(),i(h.get(),"",y),d()}function i(e,t,n){function a(t){if(this.value&&"boolean"!=typeof this.value)if("number"==typeof e[this.title]){var n=parseFloat(this.value);isNaN(n)||"rotation"!==this.title||n===e[this.title]?"opacity"===this.title&&n>=0&&1>=n||"opacity"!==this.title&&this.value>=0?e[this.title]=n:this.value=e[this.title]:(h.set({rotation:n}),h.repaint())}else e[this.title]=this.value;else t&&"boolean"==typeof this.value?e[this.title]=t.target.id.indexOf("true")>=0:this.value=e[this.title];h.updateView(),h.repaint(),d()}for(var o in e)if(e.hasOwnProperty(o))if("object"===_typeof(e[o])){var r="text"!==o?c(o):"";n[o]&&("text"!==o||"text"===o&&"text"===h.get("type"))&&i(e[o],(t?t+" ":t)+r,n[o])}else if("type"===o)f.dialog("option","title",c(e[o].replace("fillrect","rectangle"))+" Annotation Properties");else if(n[o]){var l=Rt("<div/>"),u=s(o,e[o],a,n[o]);l.addClass("ui-helper-clearfix atala-ui-dialog-clearfix"),l.css({overflow:"hidden"}),u.appendTo(l),p(l,(t?t+" ":t)+c(o)+":"),l.appendTo(g)}}function s(e,t,n,a){var o="undefined"==typeof t?"undefined":_typeof(t),r=null;if(Rt.isArray(a))r=Rt("<select/>").attr({title:e}),Rt.each(a,function(e,t){var n=t,a=t,o=t.split(":");o.length>1&&(a=o[0],n=o[1]),r.append(Rt("<option/>",{value:n,text:a}))}),r.change(n),r.val(t);else if("string"===o||"number"===o)r=Rt("<input/>").attr({type:"text",title:e}),r.val(t),r.change(n),r.focus(function(){this.select(),this._focused=!0}),r.mouseup(function(e){this._focused&&(e.preventDefault(),this._focused=!1)});else if("boolean"===o){var i="bool"+e;r=Rt("<div/>").attr({title:e}),l(r,i+!0,i,"True",t),l(r,i+!1,i,"False",!t),r.buttonset(),r.change(n),r[0].value=t}else r=Rt("<div>"+t+"</div>");return r.css({"float":"right"}),r}function l(e,t,n,a,o){e.append(Rt("<input/>").attr({type:"radio",id:t,name:n,checked:o})),e.append(Rt("<label/>").attr({"for":t}).text(a))}function p(e,t){e.append(Rt("<span/>").text(t))}function c(e){return e.charAt(0).toUpperCase()+e.slice(1)}function d(){var e=h.getObject();e&&e.paper&&e.paper._page&&e.paper._page._grips.repaint()}var u=this,f=Rt("<div />"),g=Rt("<div />"),h=null,v=null,y={fill:{color:!0,opacity:!0},rotation:!0,outline:{color:!0,opacity:!0,width:!0,startcap:{style:["None:none","Arrow:open","Filled Arrow:block","Filled Ellipse:oval","Filled Diamond:diamond"],width:["medium","long","short"],height:["medium","wide","narrow"]},endcap:{style:["None:none","Arrow:open","Filled Arrow:block","Filled Ellipse:oval","Filled Diamond:diamond"],width:["medium","long","short"],height:["medium","wide","narrow"]}},text:{font:{bold:!0,italic:!0,color:!0,family:!0,size:!0}}};return u.show=t,u.hide=n,u.isVisible=a,u.cancel=o,u.reset=r,e(),u}function R(e){if(Lt){if(Gt.activeanno.get("readonly"))Lt.children(":contains(Properties)").unbind("click").children("a, div").css("color","#cdc9c9");else{var t=Lt.children(":contains(Properties)");void 0!==t.data("events")&&"click"in t.data("events")||t.bind("click",W),t.children("a").css("color","#000000")}0===Lt.closest().length&&Et.prepend(Lt);var n={x:e.x-6,y:e.y-6};Lt.css({left:n.x,top:n.y}),Lt.show(),Lt.visible=!0}}function C(e){Lt&&(Lt.visible&&S(),Lt.remove());var t=Rt.extend(!0,{},Nt);if(Ot.trigger("contextmenu",[Gt.activeanno.getClonedData(),t]),Rt.isEmptyObject(t))Lt=null;else{for(var n in t)t.hasOwnProperty(n)&&(t[n]=z(t[n]));Lt=O(t)}R(e)}function S(){Lt&&(Lt.hide(),Lt.visible=!1)}function O(e){var t=zt.createMenu(e);return t.css({position:"fixed","z-index":99999}),t.mouseleave(S),t.visible=!1,t}function z(e){return function(){return S(),e.call(this,Gt.activeanno.getClonedData())}}function U(){var e=Gt.activepage?Gt.activepage._index:0;if(Gt.annos[e]){var t=Rt.inArray(Gt.activeanno,Gt.annos[e]);-1!==t&&(Gt.activeanno=null,E(t,e))}S()}function W(){S(),jt.show(Gt.activeanno)}/**
-    * Clears the annotations and related data from all pages
-    */
-function F(){if(Gt.annos.length>0){if(Gt.annos.length=0,Bt)for(var e=0;e<Bt.length;e++)Bt[e]._grips.clear(),Bt[e]._paper.forEach(m),Bt[e]._paper._trash.remove(),Bt[e]._paper._trash.clear(),Bt[e]._paper._annos.remove(),Bt[e]._paper._annos.clear();Ot.trigger({type:"annotationscleared"})}}/**
-    * Creates an annotation on the desired page with the given annotation data.
-    * @param aConfig: object, Key value pairs representing annotation data.
-    * @param pgNum: number, The zero based index of the page the annotation should be created on.
-    * @param callback: function, Function to be called when the operation has completed.
-    * @returns object: Atalasoft.Annotations.Annotation.
-    */
-function M(e,t,n){var a={};e.multiview?a=e:(e&&e.type&&Qt[e.type]&&Rt.extend(!0,a,Qt[e.type]),Rt.extend(!0,a,e));var o=new Atalasoft.Annotations.Annotation(a,Gt);return o._pageindex=t,"undefined"==typeof Gt.annos[t]&&(Gt.annos[t]=[]),Gt.annos[t].push(o),zt.redrawPageFromIndex(t,!0),"function"==typeof n&&n(o),ht(o),o}function B(e,t,n){var a=M(e,t,n).getClonedData();return Ot.trigger({type:Zt.annocreate,anno:a,annotation:a,page:t}),a}function I(e,t){E(t,e)}/**
-    * Deletes an annotation on the given z-index and zero based page index.
-    * @param annIndex: number, Zero based z-index of the annotation.
-    * @param pgNum: number, Zero based page index the annotation is located on.
-    */
-function E(e,t){var n=Gt.annos[t].splice(e,1)[0];Gt.activepage&&Gt.activepage._paper&&Gt.activepage._paper._annos.exclude(n.getObject()),Gt.activeanno===n&&(Gt.activeanno=null),n.dispose(),Gt.activepage&&Gt.activepage._grips&&Gt.activepage._grips.repaint(),Ot.trigger({type:"annotationdeleted",page:t,index:e})}function L(e){var t=[];if(0===Gt.annos.length||"undefined"==typeof Gt.annos[e])return t;for(var n=0;n<Gt.annos[e].length;n++)t[n]=Gt.annos[e][n].getClonedData();return t}function N(e,t){var n;if(isFinite(t)){if(t<Gt.annos.length)for(n=0;n<Gt.annos[t].length;++n)if(Gt.annos[t][n].isCloneSource(e))return Gt.annos[t][n]}else for(n=0;n<Gt.annos.length;++n){var a=N(e,n);if(a)return a}return null}function j(e,t,n,a){n=h(e,t,n),"function"==typeof a&&a(),Ot.trigger({type:Zt.layerinserted,srcurl:e,srcindex:t,index:n}),Ot.trigger(Zt.layerschanged)}function H(e,t){var n=v(e);"function"==typeof t&&t(),Ot.trigger({type:Zt.layerremoved,layer:n,index:e}),Ot.trigger(Zt.layerschanged)}function q(e,t,n){t=y(e,t),"function"==typeof n&&n(),Ot.trigger({type:Zt.layermoved,srcindex:e,destindex:t}),Ot.trigger(Zt.layerschanged)}function G(e){Mt.annotations.defaults=e;for(var t=0;t<e.length;t++)"string"==typeof e[t].type&&(Qt[e[t].type]=e[t]);return Ot}function Q(e){Mt.annotations.stamps=e;for(var t=0;t<e.length;t++)kt(e[t]);if(It){var n={type:"button",id:zt._id+"_toolbar_Button_Stamp",icon:"stamp",tooltip:"Draw Stamp",text:""},a=zt.createDropDownButton(n);n.onclick=zt.drawAnnotation,zt.createDropDownMenu(a,n,e)}return Ot}function J(e){Mt.annotations.images=e;for(var t=0;t<e.length;t++)Tt(e[t]);if(It){var n={type:"button",id:zt._id+"_toolbar_Button_Image",icon:"image",tooltip:"Draw Image",text:""},a=zt.createDropDownButton(n);n.onclick=zt.drawAnnotation,zt.createDropDownMenu(a,n,e)}return Ot}/**
-    * Sets the default annotation properties for initially created custom annotations.  This accepts the same input as the main config.
-    * @param cConfig: array, An array of JSON objects representing custom annotation types.
-    * @returns object: Atalasoft.Controls.WebDocumentViewer
-    */
-function X(e){Mt.annotations.custom=e;for(var t=0;t<e.length;t++)Vt(e[t]);if(It){var n={type:"button",id:zt._id+"_toolbar_Button_Custom",icon:"image",tooltip:"Draw Custom",text:""},a=zt.createDropDownButton(n);n.onclick=zt.drawAnnotation,zt.createDropDownMenu(a,n,e)}return Ot}function Z(e){return $(e,!0)}function Y(e){return $(e,!1)}function $(e,t){if("text"===e.type&&e){var n=e.getPageIndex(),a=N(e,n);if(t){var o=e.visible;o&&(zt.isPageInView(n)?K(a,n):Ot.showPage(e.getPageIndex(),function(){K(a,n)}))}else a.trigger("hideeditor")}}function K(e,t){e&&(e.get("selectable")!==!1&&Ut.select(e,t,!1),e.trigger("showeditor"))}function et(){var e={};return Rt.extend(!0,e,{data:Gt,defaults:Qt,drawing:Jt,drawready:Xt,matrix:qt,menu:Lt,menuconfig:Nt,pages:Bt,props:jt,viewport:Et}),e}function tt(e){e&&(e._annos?Rt.isArray(e._annos)&&(Gt.annos=e._annos):e._annos=Gt.annos)}function nt(e){e&&(e instanceof jQuery||(e=Rt(e)),Et=e)}function at(e,t,n,a){if(Jt)return null;var o=Rt.extend(!0,{},e);return e&&e.type&&Qt[e.type]&&(o=Rt.extend(!0,o,Qt[e.type]),t&&(o=Rt.extend(!0,o,e))),o.rotation=0,Gt.activeanno&&null===Gt.activeanno.getObject()&&dt(),st(),Gt.activeanno=new Atalasoft.Annotations.Annotation(o,Gt),Gt.activeanno.bind({drawn:ct,cancelled:dt}),"function"==typeof n&&(rt=n),"function"==typeof a&&(it=a),Gt.activeanno}function ot(e,t,n){zt._controllers.mouseTool.setTool(Atalasoft.Utils.MouseToolType.None,Atalasoft.Utils.MouseToolType.None);var a=function(){zt._controllers.mouseTool.setTool(Atalasoft.Utils.MouseToolType.Pan,Atalasoft.Utils.MouseToolType.None),"function"==typeof t&&t()},o=function(){zt._controllers.mouseTool.setTool(Atalasoft.Utils.MouseToolType.Pan,Atalasoft.Utils.MouseToolType.None),"function"==typeof n&&n()};at(e,!0,a,o)}function rt(){}function it(){}function st(){if(!Xt){Et.bind("mousedown",pt),Atalasoft.Utils.Browser.Features.Touch&&Et.bind("touchstart",pt);for(var e=0;e<Bt.length;e++)Bt[e]._draw.toFront();Xt=!0}}function lt(){if(Xt){Et.unbind("mousedown",pt),Atalasoft.Utils.Browser.Features.Touch&&Et.unbind("touchstart",pt);for(var e=0;e<Bt.length;e++)Bt[e]._draw.reset();Xt=!1}}function pt(e){Jt=!0,Et.unbind("mousedown",pt),Atalasoft.Utils.Browser.Features.Touch&&Et.unbind("touchstart",pt);var t=Gt.activeanno.getClonedData();Ot.trigger({type:"annotationdrawstart",annotation:t,ann:t}),Gt.activeanno._pageindex=Gt.activepage._index,Gt.activeanno.startDraw(e,Gt.activepage._paper,{}),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8&&Gt.activepage._draw.height(Gt.activepage.height())}function ct(){ft(),gt(Gt.activeanno),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8&&Gt.activepage._draw.height("100%")}function dt(){Gt.activeanno.dispose(),Gt.activeanno=null,Jt&&ft(!0)}function ut(){Xt&&(Jt?dt():(Gt.activeanno&&(Gt.activeanno.dispose(),Gt.activeanno=null),lt()),it({annotation:null}),it=function(){})}function ft(e){Jt=!1,lt();var t=e?null:Gt.activeanno.getClonedData();Ot.trigger({type:"annotationdrawend",annotation:t,ann:t,cancelled:e?!0:!1})}function gt(e){var t=Gt.activepage,n=t?t._index:0;Gt.annos[n]?Gt.annos[n].push(e):Gt.annos[n]=[e],Gt.activeanno.unbind({drawn:ct,cancelled:dt}),ht(Gt.activeanno),Ut.select(Gt.activeanno,t,!1),rt({annotation:e}),rt=function(){};var a=e.getClonedData();Ot.trigger({type:Zt.annocreate,anno:a,annotation:a,page:n})}function ht(e){function t(t){var n=e.getClonedData();Ot.trigger({type:Zt[t.type],anno:n,annotation:n})}e.bind({dragstart:function(){var t=e.getClonedData();Ot.trigger({type:"annotationdragstart",ann:t,annotation:t})},dragend:function(){var t=e.getClonedData();Ot.trigger({type:"annotationdragend",annotation:t,ann:t})},interactstart:function(){Gt.activepage&&Gt.activepage._paper===e.getObject().paper||A(e.getObject().paper._page),Gt.activeanno=e},selected:vt,deselected:vt,reselected:vt,contextmenu:C,serverrenderurlrequested:yt,moved:t,rotated:t,annoresized:t,interactend:t,touchstart:t,touchmove:t,pinchmove:t,click:t,dblclick:t,rightclick:t,mousedown:t,mousedownleft:t,mousedownright:t,mousemove:t,mouseout:t,mouseup:t,mouseover:t,repaint:t})}function vt(e){var t=e.page||e.pageindex>=0?e.pageindex:Gt.activepage,n=Ut.resolvePage(t);n&&(t=n),"selected"===e.type||"reselected"===e.type?(Gt.activeanno=e.ann,Ut.select(e.ann,t,e.append),jt&&jt.isVisible()&&jt.show(e.ann)):(Ut.deselect(e.ann,t,e.append),jt&&jt.isVisible()&&jt.cancel()),n&&n._grips&&n._grips.repaint()}function yt(e){var t=e.complete,n=wt(e.data);"function"==typeof t&&t.call(n)}function mt(){var e=[];for(var t in Gt.annos)if(Gt.annos.hasOwnProperty(t)){e[t]={items:[]};var n=0,a=zt.getPageScale(t),o=Raphael.matrix();if(zt._config.persistrotation){n=zt.getPageRotation(t),o=zt.getViewerTransform(t);var r=1/a;o.scale(r,r,0,0),o.e*=r,o.f*=r}for(var i in Gt.annos[t])if(Gt.annos[t].hasOwnProperty(i)){var s=Rt.extend(!0,{},Gt.annos[t][i].get());if(s.rotation||n){var l=Gt.annos[t][i].getBox(),p=l.width/2,c=l.height/2,d=Raphael.matrix(),u=Gt.annos[t][i].getTransform();d.add(o.a,o.b,o.c,o.d,o.e,o.f),d.add(u.a,u.b,u.c,u.d,u.e,u.f);var f={x:d.x(l.x+p,l.y+c),y:d.y(l.x+p,l.y+c)},g=f.x-p-l.x,h=f.y-c-l.y;if(s.points)for(var v=0;v<s.points.length;v++)if("line"===s.type){var y=d.x(s.points[v].x,s.points[v].y);s.points[v].y=d.y(s.points[v].x,s.points[v].y),s.points[v].x=y}else s.points[v].x+=g,s.points[v].y+=h;else"custom"!==s.type&&s.points||(s.x+=g,s.y+=h);s.rotation="line"!==s.type?(s.rotation+n)%360:0}e[t].items[i]=s,_t(s)}}return JSON.stringify(e)}function wt(e){return _t(e),JSON.stringify(e)}function _t(e){for(var t in e)if("color"===t&&null!=e[t]){var n=Raphael.getRGB(e[t]);n.error&&(n.hex="#000000"),e[t]=n.hex}else"points"!==t&&"object"===_typeof(e[t])&&_t(e[t])}function xt(e,t,n,a,o){n=n||Ot.config.documenturl;var r={type:"annodata",serverurl:e,query:"?atalaanndata=",method:"GET",data:{atala_annurl:t,atala_docurl:n,atala_a_ofs:a,atala_a_len:o},cancel:!1,info:{layers:[],offset:a||0,length:o,error:void 0}};for(var i in r.data)r.data.hasOwnProperty(i)&&null===r.data[i]&&(r.data[i]=void 0);return r}function bt(e,t,n){function a(a){if(void 0!==e.info.docIndex&&(a.offset=e.info.docIndex),!a.layers&&a.error&&t)for(var o=a.offset;o<a.offset+e.info.length;o++)Gt.annos[o]=[];Dt(a),"function"==typeof n&&n.call()}"function"==typeof t&&(n=t,t=!1),t||F(),zt.makeHandlerRequest(e,a,a)}function At(e,t,n,a,o,r,i){var s=Array.prototype.slice.call(arguments);i=s.pop(),"function"!=typeof i&&s.push(i),e=s.shift(),t=s.shift(),n=s.shift(),a=s.shift(),o=s.shift(),r=s.shift();var l=xt(e,t,n,a,o);void 0!==r&&(l.info.docIndex=r),bt(l,a>=0&&o>=1,i)}function Dt(e){if(e)if("undefined"!=typeof Raphael){var t={type:"annotationsloaded"};if(e.layers)for(var n=0;n<e.layers.length;n++){e.offset=e.offset||0;var o=e.offset+n;Gt.annos[o]&&Gt.annos[o].length>0?Gt.annos[o].length=0:Gt.annos[o]=[];var r=e.layers[n];if(r&&(r._index=isFinite(r._index)&&r._index>=0?r._index:o,r.visible=void 0!==r.visible?r.visible:!0,r.items))for(var i=0;i<r.items.length;i++){r.items[i].visible=r.items[i].visible&&r.visible,Gt.annos[o][i]=new Atalasoft.Annotations.Annotation(r.items[i],Gt),Gt.annos[o][i]._pageindex=r._index;var s=Gt.annos[o][i].getClonedData();Ot.trigger({type:Zt.annoload,anno:s,annotation:s}),ht(Gt.annos[o][i])}}else e.error&&(t.error=e.error);t.offset=e.offset,t.length=e.layers?e.layers.length:0,Ot.trigger(t)}else a(function(){Dt(e)})}function kt(e){return e.type="stamp",e.text&&(Pt(e.text),e.text.readonly=!0),e}function Pt(e){return e&&e.font&&e.font.size&&(e.font.size=parseFloat(e.font.size)),e}function Tt(e){return e.type="image",e}function Vt(e){e.type="custom"}var Rt=Atalasoft.$,Ct=2.1,St=this,Ot=e,zt=t,Ut=new Atalasoft.Annotations.AnnotationSelector,Wt={/**
+ */Atalasoft.Annotations.AnnotationController=function(t,e,n){var w=Atalasoft.$,a=this,s=t,_=e,o=new Atalasoft.Annotations.AnnotationSelector,r={
+/** @lends Atalasoft.Controls.WebDocumentViewer~AnnotationController */
+annotations:{events:{
+/**
          * @callback AnnotationCallback
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
@@ -1204,7 +1676,8 @@ function X(e){Mt.annotations.custom=e;for(var t=0;t<e.length;t++)Vt(e[t]);if(It)
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationclicked:null,/**
+annotationclicked:null,
+/**
          * This event is triggered when annotation is created, whether through mouse/touch events or programmatically.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationcreated
          * @type {AnnotationCallback}
@@ -1213,7 +1686,8 @@ annotationclicked:null,/**
          * @param {number} page - event.Index of the page where annotation is created.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationcreated:null,/**
+annotationcreated:null,
+/**
          * Triggers when the user uses the mouse to double-click on an annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationdoubleclicked
          * @type {AnnotationCallback}
@@ -1221,164 +1695,206 @@ annotationcreated:null,/**
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationdoubleclicked:null,/**
+annotationdoubleclicked:null,
+/**
          *  Triggers when an annotation is loaded into the document. There are multiple ways how annotaions could be loaded, for example passing the {@link WebDocumentViewerConfig.annotationsurl| annotationsurl} in the constructor, or by calling {@link Atalasoft.Controls.WebDocumentViewer#openUrl | viewer.openUrl}. In this case event will be fired for each loaded annotation from all layers.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationloaded
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
+         * @param {Object} event.customData - The event customer data from server.
          */
-annotationloaded:null,/** Triggers when the user has depressed a mouse button on an annotation.
+annotationloaded:null,
+/**
+         *  Triggers when all annotations are loaded into the document. There are multiple ways how annotaions could be loaded, for example passing the {@link WebDocumentViewerConfig.annotationsurl| annotationsurl} in the constructor, or by calling {@link Atalasoft.Controls.WebDocumentViewer#openUrl | viewer.openUrl}. In this case event will be fired for each loaded annotation from all layers.
+         * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationsloaded
+         * @type {AnnotationCallback}
+         * @param {Object} event - Event data object.
+         * @param {Object} event.customData - The event customer data from server.
+         */
+annotationsloaded:null,
+/** Triggers when the user has depressed a mouse button on an annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationmousedown
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationmousedown:null,/** Triggers when the user has depressed the left mouse button on an annotation.
+annotationmousedown:null,
+/** Triggers when the user has depressed the left mouse button on an annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationmousedownleft
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationmousedownleft:null,/** Triggers when the user has depressed the right mouse button on an annotation.
+annotationmousedownleft:null,
+/** Triggers when the user has depressed the right mouse button on an annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationmousedownright
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationmousedownright:null,/** Triggers when the user moves the mouse pointer over an annotation.
+annotationmousedownright:null,
+/** Triggers when the user moves the mouse pointer over an annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationmousemove
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationmousemove:null,/** Triggers when the user has moved the mouse pointer out of the bounds of the annotation.
+annotationmousemove:null,
+/** Triggers when the user has moved the mouse pointer out of the bounds of the annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationmouseout
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationmouseout:null,/** Triggers when the user has moved the mouse pointer into the bounds of the annotation.
+annotationmouseout:null,
+/** Triggers when the user has moved the mouse pointer into the bounds of the annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationmouseover
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationmouseover:null,/** Triggers when the user has released a mouse button on an annotation.
+annotationmouseover:null,
+/** Triggers when the user has released a mouse button on an annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationmouseup
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationmouseup:null,/** Triggers when an annotation has been moved.
+annotationmouseup:null,
+/** Triggers when an annotation has been moved.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationmoved
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationmoved:null,/** Triggers when an annotation has been rotated.
+annotationmoved:null,
+/** Triggers when an annotation has been rotated.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationrotated
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationrotated:null,/** Triggers when a pinch gesture has been detected on an annotation.
+annotationrotated:null,
+/** Triggers when a pinch gesture has been detected on an annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationpinchresize
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationpinchresize:null,/** Triggers when an annotation has been repainted.
+annotationpinchresize:null,
+/** Triggers when an annotation has been repainted.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationrepainted
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationrepainted:null,/** Triggers when an annotation has been resized.
+annotationrepainted:null,
+/** Triggers when an annotation has been resized.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationresized
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationresized:null,/** Triggers when the user right clicks on an annotation.
+annotationresized:null,
+/** Triggers when the user right clicks on an annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationrightclicked
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationrightclicked:null,/** Triggers when a touch end event has been finished on an annotation.
+annotationrightclicked:null,
+/** Triggers when a touch end event has been finished on an annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationtouchend
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationtouchend:null,/** Triggers when a touch move event is happening on an annotation.
+annotationtouchend:null,
+/** Triggers when a touch move event is happening on an annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationtouchmove
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationtouchmove:null,/** Triggers when a touch event has started on an annotation.
+annotationtouchmove:null,
+/** Triggers when a touch event has started on an annotation.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationtouchstart
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationtouchstart:null,/** Triggers when a layer has been inserted into the document.
+annotationtouchstart:null,
+/** Triggers when user finishes text edit for Text annotation and Text annotation edit mode is switched off.
+        * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationtextchanged
+        * @type {AnnotationCallback}
+        * @param {Object} event - Event data object.
+        * @param {AnnotationData} event.annotation - Annotation object related to the event.
+        * @param {AnnotationData} event.anno - Deprecated. Please use `annotation` property. This property will be removed soon.
+        */
+annotationtextchanged:null,
+/** Triggers when a layer has been inserted into the document.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#layerinserted
          * @param {Object} event - Event data object.
          * @param {number} event.index - Index of the inserted layer.
          */
-layerinserted:null,/** Triggers when a layer has moved from one index to another within the document.
+layerinserted:null,
+/** Triggers when a layer has moved from one index to another within the document.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#layermoved
          * @param {Object} event - Event arguments.
          * @param {number} event.srcindex - Index from which layer was moved.
          * @param {number} event.destindex - Index of the moved layer.
          */
-layermoved:null,/** Triggers when a layer has been removed from the document.
+layermoved:null,
+/** Triggers when a layer has been removed from the document.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#layerremoved
          * @param {Object} event - Event arguments.
          * @param {number} event.index - Index from which layer was removed.
          * @param {AnnotationData[]} event.layer - The removed layer data.
          */
-layerremoved:null,/** Triggers when a layer has been changed. Fired by any type of layers structure: {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#insertLayer|insertLayer},  {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#moveLayer|moveLayer} or {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#removeLayer|removeLayer}.
+layerremoved:null,
+/** Triggers when a layer has been changed. Fired by any type of layers structure: {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#insertLayer|insertLayer},  {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#moveLayer|moveLayer} or {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#removeLayer|removeLayer}.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#layerschanged
          * @type {NotificationCallback}
          */
-layerschanged:null,/** Triggers when all annotations have been deleted.
+layerschanged:null,
+/** Triggers when all annotations have been deleted.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationscleared
          */
-annotationscleared:null,/** Triggers when an annotation is deleted.
+annotationscleared:null,
+/** Triggers when an annotation is deleted.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationdeleted
          * @param {Object} event - Event arguments.
          * @param {number} event.page - Index of the page where annotation has been removed.
          * @param {number} event.index - Index at which annotation has been removed.
          */
-annotationdeleted:null,/** Triggers when a user has started drawing an annotation with the mouse or a touch event.
+annotationdeleted:null,
+/** Triggers when a user has started drawing an annotation with the mouse or a touch event.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationdrawstart
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.ann - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationdrawstart:null,/** Triggers when a user has finished drawing an annotation with the mouse or a touch event.
+annotationdrawstart:null,
+/** Triggers when a user has finished drawing an annotation with the mouse or a touch event.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationdrawend
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
@@ -1386,21 +1902,24 @@ annotationdrawstart:null,/** Triggers when a user has finished drawing an annota
          * @param {boolean} event.cancelled - Indicates whether annotation draw was cancelled.
          * @param {AnnotationData} event.ann - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationdrawend:null,/** Triggers when an annotation has started dragging.
+annotationdrawend:null,
+/** Triggers when an annotation has started dragging.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationdragstart
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.ann - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationdragstart:null,/** Triggers when an annotation has finished dragging.
+annotationdragstart:null,
+/** Triggers when an annotation has finished dragging.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#annotationdragend
          * @type {AnnotationCallback}
          * @param {Object} event - Event data object.
          * @param {AnnotationData} event.annotation - Annotation object related to the event.
          * @param {AnnotationData} event.ann - Deprecated. Please use `annotation` property. This property will be removed soon.
          */
-annotationdragend:null,/**
+annotationdragend:null,
+/**
          * @callback AnnotationHandler
          * @param {AnnotationData} annotation - annotation data object on which action is performed.
          */
@@ -1424,44 +1943,52 @@ annotationdragend:null,/**
          * @param {AnnotationContextMenu} menu - The menu configuration. Keys of this object is treated as menu titles and values under those keys are handler functions.
          * This object could be modified by application to extend or modify current menu instance.
          */
-contextmenu:null,/** Triggers when the Raphael dependency has finished loading.
+contextmenu:null,
+/** Triggers when the Raphael dependency has finished loading.
          * @event Atalasoft.Controls.WebDocumentViewer~AnnotationController#raphaelloaded
+         * @deprecated WDV doesn't try to load any dependencies by its own. You need to add all necessary scripts to page's head section manually.
          */
-raphaelloaded:null},Ft={/** @lends Atalasoft.Controls.WebDocumentViewer~AnnotationController */
-annotations:{events:Wt,/**
+raphaelloaded:null},
+/**
              * Gets an array of selected annotation data objects.
              * @returns {AnnotationData[]} - Annotation data objects for selected annotations only.
              * @instance
              * @function
              */
-getSelected:Ut.getSelected,/**
+getSelected:o.getSelected,
+/**
              * Selects all annotations on every page.
              * @instance
              * @function
              */
-selectAll:Ut.selectAll,/**
+selectAll:o.selectAll,
+/**
              * Deselects all annotations on every page.
              * @instance
              * @function
              */
-deselectAll:Ut.deselectAll,/**
+deselectAll:o.deselectAll,
+/**
              * Selects all annotations on the given page.
              * @param {number} index - The index of the page the annotations should be selected on.
              * @instance
              * @function
              */
-selectAllOnPage:Ut.selectPage,/**
+selectAllOnPage:o.selectPage,
+/**
              * Deselects all annotations on the given page.
              * @param {number} index - The index of the page the annotations should be deselected on.
              * @instance
              * @function
              */
-deselectAllOnPage:Ut.deselectPage,/**
+deselectAllOnPage:o.deselectPage,
+/**
              * Cancels the drawing of an annotation and returns the viewer to the previous tool.
              * @instance
              * @function
              */
-cancelDraw:ut,/**
+cancelDraw:pt,
+/**
              * Setups the viewport to create an annotation
              * @param {AnnotationData} aConfig - Configuration for the annotation to draw
              * @param {NotificationCallback} [callback] - function to call when the annotation has finished drawing.
@@ -1469,14 +1996,16 @@ cancelDraw:ut,/**
              * @instance
              * @function
              */
-drawAnnotation:ot,/**
+drawAnnotation:function(t,e,n){_._controllers.mouseTool.setTool(Atalasoft.Utils.MouseToolType.None,Atalasoft.Utils.MouseToolType.None),at(t,!0,function(){_._controllers.mouseTool.setTool(Atalasoft.Utils.MouseToolType.Pan,Atalasoft.Utils.MouseToolType.None),"function"==typeof e&&e()},function(){_._controllers.mouseTool.setTool(Atalasoft.Utils.MouseToolType.Pan,Atalasoft.Utils.MouseToolType.None),"function"==typeof n&&n()})},
+/**
              * Gets an array of annotion data objects located on the given zero based page index.
              * @param {number} index - The page index the annotations are located on.
              * @returns {AnnotationData[]} Annotation data objects on the given page.
              * @instance
              * @function
              */
-getFromPage:L,/**
+getFromPage:Z,
+/**
              * Creates an annotation on the desired page with the given annotation data.
              * @param {AnnotationData} annotationConfig - Key value pairs representing annotation data.
              * @param {number} index - The index of the page the annotation should be created on.
@@ -1484,14 +2013,16 @@ getFromPage:L,/**
              * @instance
              * @function
              */
-createOnPage:B,/**
+createOnPage:q,
+/**
              * Deletes an annotation on the given page by it's index on the page.
              * @param {number} pageIndex - Page index the annotation is located on.
              * @param {number} annIndex - Index of the annotation on the page.
              * @instance
              * @function
              */
-deleteFromPage:I,/**
+deleteFromPage:G,
+/**
              * Shows the editor dialog for text annotations. Ignores other types of annotations.
              * @param {AnnotationData} annotation - the annotation object to show editor for.
              *
@@ -1499,34 +2030,39 @@ deleteFromPage:I,/**
              * @instance
              * @function
              */
-showEditor:Z,/**
+showEditor:function(t){return tt(t,!0)},
+/**
              * Hides the text annotation editor. Applies only to text annotations and ignores other types of annotations.
              * @param {AnnotationData} annotation - The annotation object to hide editor for.
              * @instance
              * @function
              */
-hideEditor:Y,/**
+hideEditor:function(t){return tt(t,!1)},
+/**
              * Sets the default annotation properties for initially created annotations. This accepts the same input as the {@link WebDocumentViewerConfig.annotations|config.annotations.defaults}.
              * @param {AnnotationData[]} aConfig - Default configurations for different types of the annotations.
              * @returns {Atalasoft.Controls.WebDocumentViewer}
              * @instance
              * @function
              */
-setDefaults:G,/**
+setDefaults:X,
+/**
              * Sets the default annotation properties for image annotations. This accepts the same input as the {@link WebDocumentViewerConfig.annotations|config.annotations.images}
              * @param {AnnotationData[]} aConfig - Default configurations image annotations.
              * @returns {Atalasoft.Controls.WebDocumentViewer}
              * @instance
              * @function
              */
-setImages:J,/**
+setImages:$,
+/**
              * Sets the default annotation properties for stamp annotations. This accepts the same input as the {@link WebDocumentViewerConfig.annotations|config.annotations.stamps}.
              * @param {AnnotationData[]} aConfig - Default configurations stamp annotations.
              * @returns {Atalasoft.Controls.WebDocumentViewer}
              * @instance
              * @function
              */
-setStamps:Q,/**
+setStamps:Y,
+/**
              * Inserts a layer of annotations at the source URL and index into the given page index. Single layer of annotations corresponds to single document page.
              * @param {string} sourceUrl - Reserved for future use.
              * @param {AnnotationData[]} layer - The annotation layer data.
@@ -1535,14 +2071,16 @@ setStamps:Q,/**
              * @instance
              * @function
              */
-insertLayer:j,/**
+insertLayer:function(t,e,n,a){n=k(t,e,n),"function"==typeof a&&a();s.trigger({type:m.layerinserted,srcurl:t,srcindex:e,index:n}),s.trigger(m.layerschanged)},
+/**
              * Removes a layer(page annotation) of annotations. All other layers are shifted. This operation corresponds to removing page from the document.
              * @param {number} index - index of the layer to be removed.
              * @param {NotificationCallback} [callback] - Function to be called when the operation has completed.
              * @instance
              * @function
              */
-removeLayer:H,/**
+removeLayer:function(t,e){var n=P(t);"function"==typeof e&&e();s.trigger({type:m.layerremoved,layer:n,index:t}),s.trigger(m.layerschanged)},
+/**
              * Moves a layer of annotations from one page index to another.
              * @param {number} sourceIndex - index of the layer to be moved.
              * @param {number} destIndex - Destination zero based page index.
@@ -1550,149 +2088,198 @@ removeLayer:H,/**
              * @instance
              * @function
              */
-moveLayer:q},/**
+moveLayer:function(t,e,n){e=T(t,e),"function"==typeof n&&n();s.trigger({type:m.layermoved,srcindex:t,destindex:e}),s.trigger(m.layerschanged)},
+/**
+             * Scrolls viewer to the specified annotation.
+             * @param {AnnotationData} anno - the annotation object to scroll to.
+             * @param {NotificationCallback} [callback] - Function to be called when the operation has completed.
+             * @instance
+             * @function 
+             */
+scrollTo:function(t,e){var n=function(){"function"==typeof e&&e()},a=t.getPageIndex(),o=J(t,a);if(o){var r=o.getZoom(),i=Atalasoft.Annotations.AnnotationTypes,s={x:0,y:0};if(t.type===i.line||t.type===i.lines||t.type===i.freehand){var l=t.points.map(function(t){return t.x}),c=t.points.map(function(t){return t.y});s.x=(Math.min.apply(Math,_toConsumableArray(l))+Math.max.apply(Math,_toConsumableArray(l)))/2,s.y=(Math.min.apply(Math,_toConsumableArray(c))+Math.max.apply(Math,_toConsumableArray(c)))/2}else s.x=t.x+t.width/2,s.y=t.y+t.height/2;s.x*=r,s.y*=r,_.showPagePoint(a,s,Atalasoft.Utils.PageSelection.Center,!0,n)}else n();return}},
+/**
          * @instance
          * @memberOf Atalasoft.Controls.WebDocumentViewer
          * @function
          * @deprecated Please use {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#deselectAll|annotations.deselectAll} instead.
          */
-deselectAll:Ut.deselectAll,/**
+deselectAll:o.deselectAll,
+/**
          * @instance
          * @memberOf Atalasoft.Controls.WebDocumentViewer
          * @function
          * @deprecated Please use {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#createOnPage|annotations.createOnPage} instead.
          */
-createAnnotationOnPage:B,/**
+createAnnotationOnPage:q,
+/**
          * @instance
          * @memberOf Atalasoft.Controls.WebDocumentViewer
          * @function
          * @deprecated Please use {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#getFromPage|annotations.getFromPage} instead.
          */
-getAnnotationsFromPage:L,/**
+getAnnotationsFromPage:Z,
+/**
          * @instance
          * @memberOf Atalasoft.Controls.WebDocumentViewer
          * @function
          * @deprecated Please use {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#deleteFromPage|annotations.deleteFromPage} instead.
          */
-deleteAnnotationOnPageAtIndex:I,/**
+deleteAnnotationOnPageAtIndex:G,
+/**
          * @instance
          * @memberOf Atalasoft.Controls.WebDocumentViewer
          * @function
          * @deprecated Please use {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#setDefaults|annotations.setDefaults} instead.
          */
-setAnnotationDefaults:G,/**
+setAnnotationDefaults:X,
+/**
          * @instance
          * @memberOf Atalasoft.Controls.WebDocumentViewer
          * @function
          * @deprecated Please use {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#setImages|annotations.setImages} instead.
          */
-setImages:J,/**
+setImages:$,
+/**
          * @instance
          * @memberOf Atalasoft.Controls.WebDocumentViewer
          * @function
          * @deprecated Please use {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#setStamps|annotations.setStamps} instead.
          */
-setStamps:Q};if(Atalasoft.Annotations.AnnotationController.__exposedApi=Ft.annotations,!e)return null;var Mt=t._config,Bt=t._pages,It=!1,Et=null,Lt=null,Nt=null,jt=null,Ht=[],qt=null,Gt={annos:[],activepage:null,activeanno:null,readonly:n?!0:!1,zoom:Ot.getZoom(),getZoom:zt.getPageScale,getViewerTransform:zt.getViewerTransform,getPageRotation:zt.getPageRotation},Qt={},Jt=!1,Xt=!1,Zt={click:"annotationclicked",dblclick:"annotationdoubleclicked",touchstart:"annotationtouchstart",interactend:"annotationtouchend",touchmove:"annotationtouchmove",pinchmove:"annotationpinchresize",rightclick:"annotationrightclicked",mousedown:"annotationmousedown",mousedownleft:"annotationmousedownleft",mousedownright:"annotationmousedownright",mousemove:"annotationmousemove",mouseout:"annotationmouseout",mouseup:"annotationmouseup",mouseover:"annotationmouseover",annocreate:"annotationcreated",annoload:"annotationloaded",moved:"annotationmoved",rotated:"annotationrotated",annoresized:"annotationresized",repaint:"annotationrepainted",layerinserted:"layerinserted",layerremoved:"layerremoved",layermoved:"layermoved",layerschanged:"layerschanged"};"undefined"==typeof Raphael?(Atalasoft.Utils._scriptLoader=Atalasoft.Utils.__loadDependencies(Mt.scripturl,Mt.allowannotations),Atalasoft.Utils._scriptLoader&&Atalasoft.Utils._scriptLoader.bind({scriptsloaded:r})):r(),p(),St.__exposedApi=Ft.annotations,St.addDrawingSurface=f,St.removeDrawingSurface=g,St.insertLayer=h,St.removeLayer=v,St.moveLayer=y,St.showLayer=x,St.clear=F,St.createAnnotation=M,St.deleteAnnoOnPage=I,St.drawAnnotation=at,St.getAnnosFromPage=L,St.setStamps=Q,St.setAnnotationDefaults=G,St.setImages=J,St.setCustom=X,St.dispose=s,/**
+setStamps:Y};if(Atalasoft.Annotations.AnnotationController.__exposedApi=r.annotations,!t)return null;var i=e._config,l=e._pages,c=!1,p=null,d=null,u=null,f=null,g=null,x={annos:[],activepage:null,activeanno:null,readonly:!!n,zoom:s.getZoom(),getZoom:_.getPageScale,getViewerTransform:_.getViewerTransform,getPageRotation:_.getPageRotation},h={},v=!1,y=!1,m={click:"annotationclicked",dblclick:"annotationdoubleclicked",touchstart:"annotationtouchstart",interactend:"annotationtouchend",touchmove:"annotationtouchmove",pinchmove:"annotationpinchresize",rightclick:"annotationrightclicked",mousedown:"annotationmousedown",mousedownleft:"annotationmousedownleft",mousedownright:"annotationmousedownright",mousemove:"annotationmousemove",mouseout:"annotationmouseout",mouseup:"annotationmouseup",mouseover:"annotationmouseover",annocreate:"annotationcreated",annoload:"annotationloaded",moved:"annotationmoved",rotated:"annotationrotated",annoresized:"annotationresized",repaint:"annotationrepainted",layerinserted:"layerinserted",layerremoved:"layerremoved",layermoved:"layermoved",layerschanged:"layerschanged",annotationchanged:"annotationchanged",annotationtextchanged:"annotationtextchanged"};function b(){c=!0,x.readonly||(d=U(u),f=new B,null!=i.annotations.defaults&&X(i.annotations.defaults),null!=i.annotations.stamps&&Y(i.annotations.stamps),null!=i.annotations.images&&$(i.annotations.images),null!=i.annotations.custom&&K(i.annotations.custom))}
+/**
+    * [Internal] Disposes memory intensive objects
+    * @returns undefined
+    */function A(t){g.translate(t.dx,t.dy)}function D(t){x.zoom=t.zoom}function k(t,e,n){if(t||"number"!=typeof e||(e=P(e)),e=e||[],null==n?n=x.annos.length:n<0&&(n=0),n>x.annos.length){var a=x.annos.length;x.annos[n]=e;for(var o=a;o<x.annos.length;++o)x.annos[o]||(x.annos[o]=[])}else x.annos.splice(n,0,e);return n}function P(t){return t<x.annos.length?x.annos.splice(t,1)[0]:null}function T(t,e){return k(null,P(t),e)}function C(t){t&&t.remove&&!t.grip&&t.paper&&t.paper._trash&&t.paper._trash.push(t)}function V(t){S(t.index,t.page)}function S(t,e){if(t<x.annos.length&&(M(e),x.annos[t]&&x.annos[t].length))for(var n=void 0,a=0;a<x.annos[t].length;a++)(n=x.annos[t][a])._pageindex=t,n.repaint(e._paper),n.get("selected")&&o.select(n,t,!0)}function M(t){t._grips.clear(),t._paper._annos.remove(),t._paper._annos.clear(),t._paper.forEach(function(t){t&&t.remove&&!t.grip&&t.paper&&t.paper._trash&&t.paper._trash.push(t)}),t._paper._trash.remove(),t._paper._trash.clear(),pt()}function O(t){x.activepage=t}function z(t){t.page._paper&&(M(t.page),t.page.append(t.page._paper.canvas))}function R(t){W(t.page)}function W(t){if(t&&0<=t._index&&x.annos[t._index]){for(var e=0;e<x.annos[t._index].length;e++)x.annos[t._index][e].repaint();t&&t._grips.repaint()}}function B(){var t=this,p=w("<div />"),d=w("<div />"),u=null,a=null,o={fill:{color:!0,opacity:!0},rotation:!0,outline:{color:!0,opacity:!0,width:!0,startcap:{style:["None:none","Arrow:open","Filled Arrow:block","Filled Ellipse:oval","Filled Diamond:diamond"],width:["medium","long","short"],height:["medium","wide","narrow"]},endcap:{style:["None:none","Arrow:open","Filled Arrow:block","Filled Ellipse:oval","Filled Diamond:diamond"],width:["medium","long","short"],height:["medium","wide","narrow"]}},text:{font:{bold:!0,italic:!0,color:!0,family:!0,size:!0}}};function e(){p.dialog("close")}function n(){r(),e()}function r(){u.set(a,!0),u.updateView(),u.repaint(),d.empty(),f(u.get(),"",o),v()}function f(n,t,e){function a(t){if(this.value&&"boolean"!=typeof this.value)if("number"==typeof n[this.title]){var e=parseFloat(this.value);isNaN(e)||"rotation"!==this.title||e===n[this.title]?"opacity"===this.title&&0<=e&&e<=1||"opacity"!==this.title&&0<=this.value?n[this.title]=e:this.value=n[this.title]:(u.set({rotation:e}),u.repaint())}else n[this.title]=this.value;else t&&"boolean"==typeof this.value?n[this.title]=0<=t.target.id.indexOf("true"):this.value=n[this.title];u.updateView(),u.repaint(),v()}for(var o in n)if(n.hasOwnProperty(o))if("object"===_typeof(n[o])){var r="text"!==o?h(o):"";e[o]&&("text"!==o||"text"===o&&"text"===u.get("type"))&&f(n[o],(t?t+" ":t)+r,e[o])}else if("type"===o)p.dialog("option","title",h(n[o].replace("fillrect","rectangle"))+" Annotation Properties");else if(e[o]){var i=w("<div/>"),s=g(o,n[o],a,e[o]);i.addClass("ui-helper-clearfix atala-ui-dialog-clearfix"),i.css({overflow:"hidden"}),s.appendTo(i),l=i,c=(t?t+" ":t)+h(o)+":",l.append(w("<span/>").text(c)),i.appendTo(d)}var l,c}function g(t,e,n,a){var o=void 0===e?"undefined":_typeof(e),r=null;if(w.isArray(a))r=w("<select/>").attr({title:t}),w.each(a,function(t,e){var n=e,a=e,o=e.split(":");1<o.length&&(a=o[0],n=o[1]),r.append(w("<option/>",{value:n,text:a}))}),r.change(n),r.val(e);else if("string"===o||"number"===o)(r=w("<input/>").attr({type:"text",title:t})).val(e),r.change(n),r.focus(function(){this.select(),this._focused=!0}),r.mouseup(function(t){this._focused&&(t.preventDefault(),this._focused=!1)});else if("boolean"===o){var i="bool"+t;s(r=w("<div/>").attr({title:t}),i+!0,i,"True",e),s(r,i+!1,i,"False",!e),r.controlgroup(),r.change(n),r[0].value=e}else r=w("<div>"+e+"</div>");return r.css({float:"right"}),r}function s(t,e,n,a,o){t.append(w("<input/>").attr({type:"radio",id:e,name:n,checked:o})),t.append(w("<label/>").attr({for:e}).text(a))}function h(t){return t.charAt(0).toUpperCase()+t.slice(1)}function v(){var t=u.getObject();t&&t.paper&&t.paper._page&&t.paper._page._grips.repaint()}return t.show=function(t){for(var e in u=t,d.empty(),a={},o)if(o.hasOwnProperty(e)){var n={};n[e]=u.get(e),w.extend(!0,a,n)}f(u.get(),"",o),p.dialog("open")},t.hide=e,t.isVisible=function(){return p.dialog("isOpen")},t.cancel=n,t.reset=r,d.appendTo(p),p.dialog({minWidth:320,classes:{"ui-dialog":"atala-ui"},resizable:!1,autoOpen:!1,buttons:{Ok:e,Reset:r,Cancel:n}}),t}function F(t){d&&(d.visible&&I(),d.remove());var e=w.extend(!0,{},u);if(s.trigger("contextmenu",[x.activeanno.getClonedData(),e]),w.isEmptyObject(e))d=null;else{for(var n in e)e.hasOwnProperty(n)&&(e[n]=E(e[n]));d=U(e)}!function(t){if(d){if(x.activeanno.get("readonly"))d.children(":contains(Properties)").unbind("click").children("a, div").css("color","#cdc9c9");else{var e=d.children(":contains(Properties)");void 0!==e.data("events")&&"click"in e.data("events")||e.bind("click",j),e.children("a").css("color","#000000")}0===d.closest().length&&p.prepend(d);var n={x:t.x-6,y:t.y-6};d.css({left:n.x,top:n.y}),d.show(),d.visible=!0}}(t)}function I(){d&&(d.hide(),d.visible=!1)}function U(t){var e=_.createMenu(t);return e.css({position:"fixed","z-index":99999}),e.mouseleave(I),e.visible=!1,e}function E(t){return function(){return I(),t.call(this,x.activeanno.getClonedData())}}function N(){var t=x.activepage?x.activepage._index:0;if(x.annos[t]){var e=w.inArray(x.activeanno,x.annos[t]);-1!==e&&(x.activeanno=null,Q(e,t))}I()}function j(){I(),f.show(x.activeanno)}
+/**
+    * Clears the annotations and related data from all pages
+    */
+function L(){if(0<x.annos.length){if(x.annos.length=0,l)for(var t=0;t<l.length;t++)l[t]._grips.clear(),l[t]._paper.forEach(C),l[t]._paper._trash.remove(),l[t]._paper._trash.clear(),l[t]._paper._annos.remove(),l[t]._paper._annos.clear();s.trigger({type:"annotationscleared"})}}
+/**
+    * Creates an annotation on the desired page with the given annotation data.
+    * @param aConfig: object, Key value pairs representing annotation data.
+    * @param pgNum: number, The zero based index of the page the annotation should be created on.
+    * @param callback: function, Function to be called when the operation has completed.
+    * @returns object: Atalasoft.Annotations.Annotation.
+    */function H(t,e,n){var a={};t.multiview?a=t:(t&&t.type&&h[t.type]&&w.extend(!0,a,h[t.type]),w.extend(!0,a,t));var o=new Atalasoft.Annotations.Annotation(a,x);return o._pageindex=e,void 0===x.annos[e]&&(x.annos[e]=[]),x.annos[e].push(o),_.redrawPageFromIndex(e,!0),"function"==typeof n&&n(o),ut(o),o}function q(t,e,n){var a=H(t,e,n).getClonedData();return s.trigger({type:m.annocreate,anno:a,annotation:a,page:e}),a}function G(t,e){Q(e,t)}
+/**
+    * Deletes an annotation on the given z-index and zero based page index.
+    * @param annIndex: number, Zero based z-index of the annotation.
+    * @param pgNum: number, Zero based page index the annotation is located on.
+    */function Q(t,e){var n=x.annos[e].splice(t,1)[0];x.activepage&&x.activepage._paper&&x.activepage._paper._annos.exclude(n.getObject()),x.activeanno===n&&(x.activeanno=null),n.dispose(),x.activepage&&x.activepage._grips&&x.activepage._grips.repaint(),s.trigger({type:"annotationdeleted",page:e,index:t})}function Z(t){var e=[];if(0===x.annos.length||void 0===x.annos[t])return e;for(var n=0;n<x.annos[t].length;n++)e[n]=x.annos[t][n].getClonedData();return e}function J(t,e){if(isFinite(e)){if(e<x.annos.length)for(var n=0;n<x.annos[e].length;++n)if(x.annos[e][n].isCloneSource(t))return x.annos[e][n]}else for(var a=0;a<x.annos.length;++a){var o=J(t,a);if(o)return o}return null}function X(t){i.annotations.defaults=t;for(var e=0;e<t.length;e++)"string"==typeof t[e].type&&(h[t[e].type]=t[e]);return s}function Y(t){i.annotations.stamps=t;for(var e=0;e<t.length;e++)_t(t[e]);if(c){var n={type:"button",id:_._id+"_toolbar_Button_Stamp",icon:"stamp",tooltip:"Draw Stamp",text:""},a=_.createDropDownButton(n);n.onclick=_.drawAnnotation,_.createDropDownMenu(a,n,t)}return s}function $(t){i.annotations.images=t;for(var e=0;e<t.length;e++)xt(t[e]);if(c){var n={type:"button",id:_._id+"_toolbar_Button_Image",icon:"image",tooltip:"Draw Image",text:""},a=_.createDropDownButton(n);n.onclick=_.drawAnnotation,_.createDropDownMenu(a,n,t)}return s}
+/**
+    * Sets the default annotation properties for initially created custom annotations.  This accepts the same input as the main config.
+    * @param cConfig: array, An array of JSON objects representing custom annotation types.
+    * @returns object: Atalasoft.Controls.WebDocumentViewer
+    */function K(t){i.annotations.custom=t;for(var e=0;e<t.length;e++)t[e].type="custom";if(c){var n={type:"button",id:_._id+"_toolbar_Button_Custom",icon:"image",tooltip:"Draw Custom",text:""},a=_.createDropDownButton(n);n.onclick=_.drawAnnotation,_.createDropDownMenu(a,n,t)}return s}function tt(t,e){if("text"===t.type&&t){var n=t.getPageIndex(),a=J(t,n);if(e)t.visible&&(_.isPageInView(n)?et(a,n):s.showPage(t.getPageIndex(),function(){et(a,n)}));else a.trigger("hideeditor")}}function et(t,e){t&&(!1!==t.get("selectable")&&o.select(t,e,!1),t.trigger("showeditor"))}function nt(t){O(t),o.deselectPage(t),I()}function at(t,e,n,a){if(v)return null;var o=w.extend(!0,{},t);return t&&t.type&&h[t.type]&&(o=w.extend(!0,o,h[t.type]),e&&(o=w.extend(!0,o,t))),o.rotation=0,x.activeanno&&null===x.activeanno.getObject()&&ct(),function(){if(!y){p.bind("mousedown",st),Atalasoft.Utils.Browser.Features.Touch&&p.bind("touchstart",st);for(var t=0;t<l.length;t++)l[t]._draw.toFront();y=!0}}(),x.activeanno=new Atalasoft.Annotations.Annotation(o,x),x.activeanno.bind({drawn:lt,cancelled:ct}),"function"==typeof n&&(ot=n),"function"==typeof a&&(rt=a),x.activeanno}function ot(){}function rt(){}function it(){if(y){p.unbind("mousedown",st),Atalasoft.Utils.Browser.Features.Touch&&p.unbind("touchstart",st);for(var t=0;t<l.length;t++)l[t]._draw.reset();y=!1}}function st(t){v=!0,p.unbind("mousedown",st),Atalasoft.Utils.Browser.Features.Touch&&p.unbind("touchstart",st);var e=x.activeanno.getClonedData();s.trigger({type:"annotationdrawstart",annotation:e,ann:e}),x.activeanno._pageindex=x.activepage._index,x.activeanno.startDraw(t,x.activepage._paper,{}),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8&&x.activepage._draw.height(x.activepage.height())}function lt(){dt(),function(t){var e=x.activepage,n=e?e._index:0;x.annos[n]?x.annos[n].push(t):x.annos[n]=[t];x.activeanno.unbind({drawn:lt,cancelled:ct}),ut(x.activeanno),o.select(x.activeanno,e,!1),ot({annotation:t}),ot=function(){};var a=t.getClonedData();s.trigger({type:m.annocreate,anno:a,annotation:a,page:n})}(x.activeanno),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8&&x.activepage._draw.height("100%")}function ct(){x.activeanno.dispose(),x.activeanno=null,v&&dt(!0)}function pt(){y&&(v?ct():(x.activeanno&&(x.activeanno.dispose(),x.activeanno=null),it()),rt({annotation:null}),rt=function(){})}function dt(t){v=!1,it();var e=t?null:x.activeanno.getClonedData();s.trigger({type:"annotationdrawend",annotation:e,ann:e,cancelled:!!t})}function ut(n){function t(t){var e=n.getClonedData();s.trigger({type:m[t.type],anno:e,annotation:e})}n.bind({dragstart:function(){var t=n.getClonedData();s.trigger({type:"annotationdragstart",ann:t,annotation:t})},dragend:function(){var t=n.getClonedData();s.trigger({type:"annotationdragend",annotation:t,ann:t})},interactstart:function(t){x.activepage&&x.activepage._paper===n.getObject().paper||O(n.getObject().paper._page),x.activeanno=n},selected:ft,deselected:ft,reselected:ft,contextmenu:F,serverrenderurlrequested:gt,moved:t,rotated:t,annoresized:t,interactend:t,touchstart:t,touchmove:t,pinchmove:t,click:t,dblclick:t,rightclick:t,mousedown:t,mousedownleft:t,mousedownright:t,mousemove:t,mouseout:t,mouseup:t,mouseover:t,repaint:t,annotationchanged:t,annotationtextchanged:t})}function ft(t){var e=t.page||0<=t.pageindex?t.pageindex:x.activepage,n=o.resolvePage(e);n&&(e=n),"selected"===t.type||"reselected"===t.type?(x.activeanno=t.ann,o.select(t.ann,e,t.append),f&&f.isVisible()&&f.show(t.ann)):(o.deselect(t.ann,e,t.append),f&&f.isVisible()&&f.cancel()),n&&n._grips&&n._grips.repaint()}function gt(t){var e=t.complete,n=ht(t.data);"function"==typeof e&&e.call(n)}function ht(t){return vt(t),JSON.stringify(t)}function vt(t){for(var e in t)if("color"===e&&null!=t[e]){var n=Raphael.getRGB(t[e]);n.error&&(n.hex="#000000"),t[e]=n.hex}else"points"!==e&&"object"===_typeof(t[e])&&vt(t[e])}function yt(t,e,n,a,o){var r={type:"annodata",serverurl:t,query:"?atalaanndata=",method:"GET",data:{atala_annurl:e,atala_docurl:n=n||s.config.documenturl,atala_a_ofs:a,atala_a_len:o},cancel:!1,info:{layers:[],offset:a||0,length:o,error:void 0}};for(var i in r.data)r.data.hasOwnProperty(i)&&null===r.data[i]&&(r.data[i]=void 0);return r}function mt(n,a,o){function t(t){if(void 0!==n.info.docIndex&&(t.offset=n.info.docIndex),!t.layers&&t.error&&a)for(var e=t.offset;e<t.offset+n.info.length;e++)x.annos[e]=[];wt(t),"function"==typeof o&&o.call(void 0,t.error,t)}"function"==typeof a&&(o=a,a=!1),a||L(),_.makeHandlerRequest(n,t,t)}function wt(t){if(t){var e={type:"annotationsloaded",customData:t.customData};if(t.layers)for(var n=0;n<t.layers.length;n++){t.offset=t.offset||0;var a=t.offset+n;x.annos[a]&&0<x.annos[a].length?x.annos[a].length=0:x.annos[a]=[];var o=t.layers[n];if(o&&(o._index=isFinite(o._index)&&0<=o._index?o._index:a,o.visible=void 0===o.visible||o.visible,o.items))for(var r=0;r<o.items.length;r++){o.items[r].visible=o.items[r].visible&&o.visible,x.annos[a][r]=new Atalasoft.Annotations.Annotation(o.items[r],x),x.annos[a][r]._pageindex=o._index;var i=x.annos[a][r].getClonedData();s.trigger({type:m.annoload,anno:i,annotation:i,customData:t.customData}),ut(x.annos[a][r])}}else t.error&&(e.error=t.error);e.offset=t.offset,e.length=t.layers?t.layers.length:0,s.trigger(e)}}function _t(t){var e;return t.type="stamp",t.text&&((e=t.text)&&e.font&&e.font.size&&(e.font.size=parseFloat(e.font.size)),t.text.readonly=!0),t}function xt(t){return t.type="image",t}o.setAnnos(x.annos),o.setPages(l),function(){var P,T,C,p=Raphael.svg&&!Atalasoft.Utils.Browser.Features.foreignObject;function r(t,e,n,a,o,r){var i=p||r?"image":"foreignObject",s=d(this,this,"http://www.w3.org/2000/svg",i,e,n,a,o),l=null;if(!p){l=document.createElementNS("http://www.w3.org/1999/xhtml","div");var c="http://www.w3.org/2000/xmlns/";l.setAttributeNS(c,"xmlns",c),l.innerHTML=t||"",s.node.appendChild(l),s.isHtml=!0}return s.innerDom=l,s}function d(t,e,n,a,o,r,i,s,l){var c=null===n?document.createElement(a):document.createElementNS(n,a);e.canvas&&e.canvas.appendChild&&e.canvas.appendChild(c);var p=new t.constructor.el.constructor(c,t);for(var d in p.attrs={x:o,y:r,width:i,height:s,r:l||0,rx:l||0,ry:l||0,fill:"none",stroke:"#000"},p.skew={},"g"===(p.type=a)&&(p.canvas=p.node),p.attrs)p.attrs.hasOwnProperty(d)&&void 0!==p.attrs[d]&&c.setAttribute(d,p.attrs[d]+"");return p}Raphael.vml?Raphael.fn.html=function(t,e,n,a,o){var r=d(this,this,null,"div",e,n,a,o),i=r.node;function s(t){var e=r.matrix.split();if(t.hasOwnProperty("x")&&void 0!==t.x&&t.hasOwnProperty("y")&&void 0!==t.y){var n={x:t.x*e.scalex,y:t.y*e.scaley};if(0!==e.rotate){var a=Atalasoft.Utils.__calcPathBounds([{x:t.x,y:t.y},{x:t.x+t.width,y:t.y},{x:t.x+t.width,y:t.y+t.height},{x:t.x,y:t.y+t.height}],r.matrix);n=a}i.style.left=Math.round(n.x)+"px",i.style.top=Math.round(n.y)+"px"}}return i.innerHTML=t||"",(r.innerDom=i).style.position="absolute",r.__tsfm=r.transform,r.transform=function(){this.__tsfm.apply(this,arguments),this.repaint(),s(this.attrs)},r.backgroundColor=function(t){i.style.backgroundColor=t,this.repaint()},r.repaint=function(){i.style.filter='progid:DXImageTransform.Microsoft.Chroma(color="'+i.style.backgroundColor+'"); '+this.matrix.toFilter()},r.__attr=r.attr,r.attr=function(t){this.__attr.apply(this,arguments),t&&(s(t),t.hasOwnProperty("width")&&(i.style.width=t.width+"px"),t.hasOwnProperty("height")&&(i.style.height=t.height+"px"))},r.isHtml=!0,r}:(Raphael.fn.html=function(t,e,n,a,o){return r.call(this,t,e,n,a,o)},P={block:"M5,0 0,2.5 5,5z",classic:"M5,0 0,2.5 5,5 3.5,3 3.5,2z",diamond:"M2.5,0 5,2.5 2.5,5 0,2.5z",open:"M6,1 1,3.5 6,6",oval:"M2.5,0A2.5,2.5,0,0,1,2.5,5 2.5,2.5,0,0,1,2.5,0z"},T={},C=function t(e,n){if(n)for(var a in"string"==typeof e&&(e=t(e)),n)n.hasOwnProperty(a)&&("xlink:"===a.substring(0,6)?e.setAttributeNS("http://www.w3.org/1999/xlink",a.substring(6),String(n[a])):e.setAttribute(a,String(n[a])));else(e=Raphael._g.doc.createElementNS("http://www.w3.org/2000/svg",e)).style&&(e.style.webkitTapHighlightColor="rgba(0,0,0,0)");return e},Raphael.fn.addArrow=function(t,e,n){if("path"===t.type){for(var a=String(e).toLowerCase().split("-"),o=t.paper,r=n?"end":"start",i=t.node,s=t.attrs,l=s["stroke-width"],c=a.length,p="classic",d=void 0,u=void 0,f=void 0,g=void 0,h=void 0,v=3,y=3,m=5;c--;)switch(a[c]){case"block":case"classic":case"oval":case"diamond":case"open":case"none":p=a[c];break;case"wide":y=5;break;case"narrow":y=2;break;case"long":v=5;break;case"short":v=2}if(h="open"===p?(v+=2,y+=2,m+=2,f=1,g=n?4:1,{fill:"none",stroke:s.stroke}):(g=f=v/2,{fill:s.stroke,stroke:"none"}),t._.WDVarrows?n?(t._.WDVarrows.endPath&&T[t._.WDVarrows.endPath]--,t._.WDVarrows.endMarker&&T[t._.WDVarrows.endMarker]--):(t._.WDVarrows.startPath&&T[t._.WDVarrows.startPath]--,t._.WDVarrows.startMarker&&T[t._.WDVarrows.startMarker]--):t._.WDVarrows={},"none"!==p){var w=Math.random().toString(36).substring(7),_="dave-marker-"+p,x="dave-marker-"+r+p+v+y+w;Raphael._g.doc.getElementById(_)?T[_]++:(o.defs.appendChild(C(C("path"),{"stroke-linecap":"round",d:P[p],id:_})),T[_]=1);var b=Raphael._g.doc.getElementById(x),A=void 0;b?(T[x]++,A=b.getElementsByTagName("use")[0]):(b=C(C("marker"),{id:x,markerHeight:y,markerWidth:v,orient:"auto",refX:g,refY:y/2}),A=C(C("use"),{"xlink:href":"#"+_,transform:(n?"rotate(180 "+v/2+" "+y/2+") ":"")+"scale("+v/m+","+y/m+")","stroke-width":(1/((v/m+y/m)/2)).toFixed(4)}),b.appendChild(A),o.defs.appendChild(b),T[x]=1),C(A,h);var D=f*("diamond"!==p&&"oval"!==p);u=(u=n?(d=t._.WDVarrows.startdx*l||0,Raphael.getTotalLength(s.path)-D*l):(d=D*l,Raphael.getTotalLength(s.path)-(t._.WDVarrows.enddx*l||0)))<0?0:u,(h={})["marker-"+r]="url(#"+x+")",(u||d)&&(h.d=Raphael.getSubpath(s.path,d,u)),C(i,h),t._.WDVarrows[r+"Path"]=_,t._.WDVarrows[r+"Marker"]=x,t._.WDVarrows[r+"dx"]=D,t._.WDVarrows[r+"Type"]=p,t._.WDVarrows[r+"String"]=e}else u=n?(d=t._.WDVarrows.startdx*l||0,Raphael.getTotalLength(s.path)-d):(d=0,Raphael.getTotalLength(s.path)-(t._.WDVarrows.enddx*l||0)),t._.WDVarrows[r+"Path"]&&C(i,{d:Raphael.getSubpath(s.path,d,u)}),delete t._.WDVarrows[r+"Path"],delete t._.WDVarrows[r+"Marker"],delete t._.WDVarrows[r+"dx"],delete t._.WDVarrows[r+"Type"],delete t._.WDVarrows[r+"String"];for(h in T)if(T.hasOwnProperty(h)&&!T[h]){var k=Raphael._g.doc.getElementById(h);k&&k.parentNode.removeChild(k)}}}),Raphael.fn.atalaImage=function(t,e,n,a,o){return r.call(this,t,e,n,a,o,!0)}}(),g=Raphael.matrix(1,0,0,1,0,0),s.bind({scroll:A,pagerecycled:z,pageshown:V,zoomchanged:D,pagerotated:R}),u={Delete:N,Properties:j},_._state.initialized?b():s.bind({initialized:b}),"Atalasoft.Controls.WebDocumentViewer"===s.typeOf&&w.extend(s,r),a.__exposedApi=r.annotations,a.addDrawingSurface=function(n){if(n instanceof jQuery){n._paper=Raphael(n[0]),n._paper.canvas.style.position="absolute",n._paper.canvas.style.zIndex="2",0<i.pageborderwidth&&(n._paper.canvas.style.left=i.pageborderwidth+"px",n._paper.canvas.style.top=i.pageborderwidth+"px"),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<=10&&(n._paper.canvas.style.backgroundColor="rgba(255,255,255,0.01)"),n._paper._annos=n._paper.set(),n._paper._trash=n._paper.set(),(n._paper._page=n)._matrix=Raphael.matrix(1,0,0,1,0,0),n._matrix.translate(-n.offset().left,-n.offset().top),n._grips=new Atalasoft.Annotations.Grips(n,x);var t=function(){nt(n)};return n.bind("mousedown",t),Atalasoft.Utils.Browser.Features.Touch&&n.bind("touchstart",t),n.bind({pageresize:function(t){var e;t.page=n,(e=t).page._paper.setSize(e.width,e.height),e.page._paper.canvas.style.width=e.width,e.page._paper.canvas.style.height=e.height,W(e.page)},pagezoom:function(t){var a;t.page=n,a=t,isFinite(a.width)&&isFinite(a.height)&&a.width&&a.height&&(x.zoom=a.zoom,a.page._paper.setSize(a.width,a.height),a.page._paper.canvas.style.width=a.width,a.page._paper.canvas.style.height=a.height,a.page._paper.forEach(function(t){if(t&&t.transform&&!t.grip){void 0!==t._linewidth&&t.attr("stroke-width",t._linewidth*x.zoom);var e=t.attr("clip-rect");if("object"===(void 0===e?"undefined":_typeof(e))&&"number"==typeof e.length){if(Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<9)for(var n=0;n<e.length;n++)e[n]=e[n]/a.prevzoom*a.zoom;t.attr("clip-rect",e)}}}),W(a.page))}}),!0}return!1},a.removeDrawingSurface=function(t){if(t instanceof jQuery)return t._paper&&(t._paper._annos=null,t._paper._page=null,t._paper=null),t._matrix=null,!(t._grips=null);return!1},a.insertLayer=k,a.removeLayer=P,a.moveLayer=T,a.showLayer=S,a.clear=L,a.createAnnotation=H,a.deleteAnnoOnPage=G,a.drawAnnotation=at,a.getAnnosFromPage=Z,a.setStamps=Y,a.setAnnotationDefaults=X,a.setImages=$,a.setCustom=K,a.dispose=function(){f=u=d=p=l=i=_=s=a=null,x.annos.length=0,x.activepage=null,x.activeanno=null,x.zoom=null,o.dispose(),o=null},
+/**
     * [Internal] Gets debug info object
     * @returns debug info object if available, otherwise null
     */
-St.__getDebugInfo=et,/**
+a.__getDebugInfo=function(){var t={};return w.extend(!0,t,{data:x,defaults:h,drawing:v,drawready:y,matrix:g,menu:d,menuconfig:u,pages:l,props:f,viewport:p}),t}
+/**
     * [Internal] Links the annotation data between two controls
     * @param linker internal object of type __LVlinker
     * @returns undefined
-    */
-St.__linkAnnotations=tt,St.setViewPort=nt,St.stringifyChanges=mt,St.stringifyAnnotationData=wt,St.createHandlerRequest=xt,St.makeHandlerRequest=bt,St.loadAnnotationsUrl=At,St.loadAnnotations=Dt};
-"use strict";Atalasoft.Annotations.Grips=function(t,e){function n(){var e;for(var n in z)if(z.hasOwnProperty(n)){var a=t._paper.rect(0,0,B,B),o=r(a,n);U.push(o),U[z[n]]=o,e=Raphael.matrix(),e.rotate(z[n]),R[n]={x:e.x(1,0),y:e.y(1,0)}}S=i(),_()}function r(t,e){return t.attr({fill:"#FFFFE1",cursor:(e||"ne")+"-resize"}),t.grip=!0,t.rect=t.getBBox(),t.hide(),t.center=function(t,e,n,r){n=n||1;var i=B/n,a=B/n,o=i/2,s=Math.round(i/2)+.5,h=Math.round(a/2)+.5;Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)>8&&(h-=.5);var u=Math.round(t)-s,d=Math.round(e)-h;this.ellipse?(u+=o,this.attr({cx:u,cy:d,r:o,"stroke-width":1})):this.attr({x:u,y:d,width:i,height:a,"stroke-width":1}),this.node.setAttribute("stroke-width",1),this.transform(r)},e&&(t.d={key:e,n:~e.indexOf("n"),s:~e.indexOf("s"),w:~e.indexOf("w"),e:~e.indexOf("e")},t.mousedown(function(t){return m(t,this.d)})),t}function i(){var e=t._paper.circle(0,0,B/2),n=r(e).attr({fill:"#00FF40",cursor:"pointer"});return n.ellipse=!0,U.push(n),n.mousedown(function(t){return p(t,n)}),n}function a(t){return-1!==j.inArray(t,I)}function o(){for(var t=0;t<I.length;t++)h(I[t]);I.length=0,G.clear(),U.hide()}function s(t){t.getEventObject().bind(Z)}function h(t){t.getEventObject().unbind(Z)}function u(){G.length>0?f():I.length>0?o():U.hide()}function d(t){for(var e in z)z.hasOwnProperty(e)&&P(U[z[e]],t)}function f(){if(G.length>0){var t=1===G.length?I[0].getBox():G.getBBox();Y.x=t.x,Y.y=t.y,Y.width=t.width,Y.height=t.height,Y.x2=t.x+t.width,Y.y2=t.y+t.height,Y.xmid=t.x+t.width/2,Y.ymid=t.y+t.height/2,g()}}function x(t,e,n,r){0===X&&(Y.x=t,Y.width=Math.max(n,1),Y.x2=t+Y.width,Y.xmid=t+Y.width/2),0===A&&(Y.y=e,Y.height=Math.max(r,1),Y.y2=e+Y.height,Y.ymid=e+Y.height/2),g()}function y(){for(var t=0;t<I.length;t++)I[t].transform(Y.x,Y.y,Y.width,Y.height)}function g(){var e=1===G.length,n=Raphael.matrix(),r=1,i="",a=V.getViewerTransform(t._index);if(n.add(a.a,a.b,a.c,a.d,a.e,a.f),e){var o=I[0].getTransform();o&&n.add(o.a,o.b,o.c,o.d,o.e,o.f),r=V.getZoom(t._index),i=n.toTransformString(!0)}U[z.nw].center(Y.x,Y.y,r,i),U[z.ne].center(Y.x2,Y.y,r,i),U[z.sw].center(Y.x,Y.y2,r,i),U[z.se].center(Y.x2,Y.y2,r,i),U[z.n].center(Y.xmid,Y.y,r,i),U[z.w].center(Y.x,Y.ymid,r,i),U[z.e].center(Y.x2,Y.ymid,r,i),U[z.s].center(Y.xmid,Y.y2,r,i);var s=I[0].get();s.rotatable||!s.hasOwnProperty("rotatable")?(S.show(),S.center(Y.xmid,Y.y-E/r,r,i)):S.hide();var h=1===I.length?I[0].get().rotation:0;d(h+V.getPageRotation(t._index))}function c(e){var n=t.offset(),r=Atalasoft.Utils.getSVGOffset(t._paper.canvas,t),i={x:e.pageX-(n.left+r.left),y:e.pageY-(n.top+r.top)};return i}function p(e){if(e.stopPropagation(),1===I.length&&1===G.length){for(var n=0;n<I.length;n++){var r=I[n].get();if(r.hasOwnProperty("rotatable")&&!r.rotatable)return}j.extend(C,Y);var i=I[0].getTransform(),a=i.x(C.xmid,C.ymid);C.ymid=i.y(C.xmid,C.ymid),C.xmid=a,j(t._paper.canvas).bind({mouseup:v,mousemove:l})}}function l(e){e.stopPropagation();var n=k(c(e)),r=180*Math.atan2(n.y-C.ymid,n.x-C.xmid)/Math.PI+90;return 1===I.length&&(I[0].set({rotation:r}),I[0].repaint()),t._grips.repaint(),!1}function v(e){return e.stopPropagation(),j(t._paper.canvas).unbind({mouseup:v,mousemove:l}),1===I.length&&I[0].getEventObject().trigger("rotated"),!1}function m(e,n){if(e.stopPropagation(),!(I.length>1)){for(var r=0;r<I.length;r++)if(!I[r].get("resizable"))return;return j.extend(C,Y),X=z[n.key]===z.n||z[n.key]===z.s?1:0,A=z[n.key]===z.w||z[n.key]===z.e?1:0,(n.n||1===A)&&(C.y=C.y2),n.w&&(C.x=C.x2),j(t._paper.canvas).bind({mouseup:b,mousemove:w}),!1}}function w(t){if(t.stopPropagation(),1===G.length){var e=O(c(t)),n=Math.abs(e.x-C.x),r=Math.abs(e.y-C.y),i=e.x<C.x?C.x-n:C.x,a=e.y<C.y?C.y-r:C.y;x(i,a,n,r),y()}return!1}function b(e){e.stopPropagation();for(var n=0;n<I.length;n++)I[n].getEventObject().trigger("resized"),I[n].getEventObject().trigger("annoresized"),I[n].repaint();return G.length>0&&f(),j(t._paper.canvas).unbind({mouseup:b,mousemove:w}),!1}function O(t){if(G.length>0){var e="set"===G[0].type?G[0][0]:G[0],n=e.matrix.invert(),r={x:n.x(t.x,t.y),y:n.y(t.x,t.y)};return r}return t}function k(e){var n=V.getViewerTransform(t._index).invert(),r=n.x(e.x,e.y);return e.y=n.y(e.x,e.y),e.x=r,e}function P(t,e){if(t&&t.d&&t.d.key){var n=Raphael.matrix();n.rotate(e);var r={x:n.x(R[t.d.key].x,R[t.d.key].y),y:n.y(R[t.d.key].x,R[t.d.key].y)};for(var i in T)if(T.hasOwnProperty(i)&&M(r,T[i].start,T[i].end)){t.attr({cursor:(T[i].dir||"ne")+"-resize"});break}}}function _(){var t=Raphael.matrix();t.rotate(F,0,0);for(var e=function(e,n){var r={dir:n,start:{x:t.x(R[e].x,R[e].y),y:t.y(R[e].x,R[e].y)},end:{x:t.x(R[n].x,R[n].y),y:t.y(R[n].x,R[n].y)}};return r},n=["e","ne","n","nw","w","sw","s","se"],r=0;r<n.length-1;++r)0===r&&(T[n[r]]=e(n[n.length-1],n[r])),T[n[r+1]]=e(n[r],n[r+1])}function M(t,e,n){function r(t,e){return-t.x*e.y+t.y*e.x>0}return!r(e,t)&&r(n,t)}var A,j=Atalasoft.$,B=8,E=25,F=-22.5,z={e:0,ne:315,n:270,nw:225,w:180,sw:135,s:90,se:45},R={},T={},V=e,U=t._paper.set(),G=t._paper.set(),I=[],S=null,C={},X=null,Y={x:0,y:0,width:1,height:1,x2:1,y2:1},Z={dragstart:function(){},dragmove:function(){U.hide()},moved:function(){u(),U.show();for(var t=0;t<I.length;++t){var e=I[t].get();e.hasOwnProperty("rotatable")&&!e.rotatable&&S.hide()}}};n(),this.push=function(t){a(t)||(I.push(t),G.push(t.getObject()),t.get("selectable")===!0&&s(t),u(),U.toFront(),U.show())},this.contains=a,this.remove=function(t){for(var e=0;e<I.length;e++)I[e]===t&&I.splice(e,1);G.exclude(t.getObject()),h(t)},this.clear=o,this.repaint=u,this.updateCursor=d};
-"use strict";var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};Atalasoft.Annotations.AnnotationSelector=function(e,n){function t(e){b=e}function o(e){m=e}function r(){_=null,b=null,m=null,A.length=0}function l(e,n,t){f(!0,e,n,t)}function i(e,n,t){f(!1,e,n,t)}function f(e,n,t,o){var r,l,i=[].concat(n),f=null;f=a(t),f===t&&null!==f&&(t=f._index),o||p(f||t);for(var u=0;u<i.length;u++)r=i[u],l=h.inArray(r,A[t]),l>=0?e||A[t][l]!==r||A[t].splice(l,1):e&&(A[t]?A[t].push(r):A[t]=[r]),f&&(e?f._grips.push(r):f._grips.remove(r)),r.get("selected")!==e&&r.toggleSelected({append:!0,pageindex:t,page:f})}function u(e,n){var t="object"===("undefined"==typeof n?"undefined":_typeof(n))?n._index:n;b[t]&&f(e,b[t],n,!0)}function c(e){for(var n=[],t=0;t<e.length;t++)if(e[t]){n[t]=[];for(var o=0;o<e[t].length;o++)n[t][o]=e[t][o].getClonedData()}return n}function a(e){var n=null;if("object"===("undefined"==typeof e?"undefined":_typeof(e)))n=e;else{e=Math.max(e,0);var t=h.grep(m,function(n){return n._index===e});t.length>=1&&(n=t[0])}return n}function s(e){u(!0,e)}function p(e){u(!1,e);var n=a(e);n&&n._grips&&n._grips.repaint()}function g(){for(var e=0;e<b.length;e++)s(e)}function d(){for(var e=0;e<b.length;e++)p(e)}function y(){return c(A)}/**
+    */,a.__linkAnnotations=function(t){t&&(t._annos?w.isArray(t._annos)&&(x.annos=t._annos):t._annos=x.annos)}
+/**
+     * [Internal] Clears all selection of annotations
+     */,a.__clearAllSelection=nt,a.setViewPort=function(t){t&&(t instanceof jQuery||(t=w(t)),p=t)},a.stringifyChanges=function(t){var e=[];for(var n in x.annos)if(x.annos.hasOwnProperty(n)){e[n]={items:[]};var a=0,o=_.getPageScale(n),r=Raphael.matrix();if(_._config.persistrotation){a=_.getPageRotation(n),r=_.getViewerTransform(n);var i=1/o;r.scale(i,i,0,0),r.e*=i,r.f*=i}for(var s in x.annos[n])if(x.annos[n].hasOwnProperty(s)){var l=w.extend(!0,{},x.annos[n][s].get());if(l.rotation||a){var c=x.annos[n][s].getBox(),p=c.width/2,d=c.height/2,u=Raphael.matrix(),f=x.annos[n][s].getTransform();u.add(r.a,r.b,r.c,r.d,r.e,r.f),u.add(f.a,f.b,f.c,f.d,f.e,f.f);var g={x:u.x(c.x+p,c.y+d),y:u.y(c.x+p,c.y+d)},h=g.x-p-c.x,v=g.y-d-c.y;if(l.points)for(var y=0;y<l.points.length;y++)if("line"===l.type){var m=u.x(l.points[y].x,l.points[y].y);l.points[y].y=u.y(l.points[y].x,l.points[y].y),l.points[y].x=m}else l.points[y].x+=h,l.points[y].y+=v;else"custom"!==l.type&&l.points||(l.x+=h,l.y+=v);l.rotation="line"!==l.type?(l.rotation+a)%360:0}vt(e[n].items[s]=l)}}return JSON.stringify(e)},a.stringifyAnnotationData=ht,a.createHandlerRequest=yt,a.makeHandlerRequest=mt,a.loadAnnotationsUrl=function(t,e,n,a,o,r,i){var s=Array.prototype.slice.call(arguments);"function"!=typeof(i=s.pop())&&s.push(i);t=s.shift(),e=s.shift(),n=s.shift(),a=s.shift(),o=s.shift(),r=s.shift();var l=yt(t,e,n,a,o);void 0!==r&&(l.info.docIndex=r);mt(l,0<=a&&1<=o,i)},a.loadAnnotations=wt};
+"use strict";Atalasoft.Annotations.Grips=function(s,t){var d,a=Atalasoft.$,x=8,h=25,o=-22.5,u={e:0,ne:315,n:270,nw:225,w:180,sw:135,s:90,se:45},f={},y={},g=t,c=s._paper.set(),p=s._paper.set(),l=[],v=null,m={},w=null,b={x:0,y:0,width:1,height:1,x2:1,y2:1},e={dragstart:function(){},dragmove:function(){c.hide()},moved:function(){k(),c.show();for(var t=0;t<l.length;++t){var e=l[t].get();e.hasOwnProperty("rotatable")&&!e.rotatable&&v.hide()}}};function O(t,e){return t.attr({fill:"#FFFFE1",cursor:(e||"ne")+"-resize"}),t.grip=!0,t.rect=t.getBBox(),t.hide(),t.center=function(t,e,r,n){var i=x/(r=r||1),a=x/r,o=i/2,s=Math.round(i/2)+.5,h=Math.round(a/2)+.5;Atalasoft.Utils.Browser.Explorer&&8<parseInt(Atalasoft.Utils.Browser.Version,10)&&(h-=.5);var u=Math.round(t)-s,d=Math.round(e)-h;this.ellipse?(u+=o,this.attr({cx:u,cy:d,r:o,"stroke-width":1})):this.attr({x:u,y:d,width:i,height:a,"stroke-width":1}),this.node.setAttribute("stroke-width",1),this.transform(n)},e&&(t.d={key:e,n:~e.indexOf("n"),s:~e.indexOf("s"),w:~e.indexOf("w"),e:~e.indexOf("e")},t.mousedown(function(t){return function(t,e){if(t.stopPropagation(),1<l.length)return;for(var r=0;r<l.length;r++)if(!l[r].get("resizable"))return;a.extend(m,b),w=u[e.key]===u.n||u[e.key]===u.s?1:0,d=u[e.key]===u.w||u[e.key]===u.e?1:0,(e.n||1===d)&&(m.y=m.y2);e.w&&(m.x=m.x2);return a(s._paper.canvas).bind({mouseup:F,mousemove:E}),!1}(t,this.d)})),t}function r(t){return-1!==a.inArray(t,l)}function n(){for(var t=0;t<l.length;t++)i(l[t]);l.length=0,p.clear(),c.hide()}function i(t){t.getEventObject().unbind(e)}function k(){0<p.length?_():0<l.length?n():c.hide()}function P(t){for(var e in u)u.hasOwnProperty(e)&&z(c[u[e]],t)}function _(){if(0<p.length){var t=1===p.length?l[0].getBox():p.getBBox();b.x=t.x,b.y=t.y,b.width=t.width,b.height=t.height,b.x2=t.x+t.width,b.y2=t.y+t.height,b.xmid=t.x+t.width/2,b.ymid=t.y+t.height/2,M()}}function M(){var t=1===p.length,e=Raphael.matrix(),r=1,n="",i=g.getViewerTransform(s._index);if(e.add(i.a,i.b,i.c,i.d,i.e,i.f),t){var a=l[0].getTransform();a&&e.add(a.a,a.b,a.c,a.d,a.e,a.f),r=g.getZoom(s._index),n=e.toTransformString(!0)}c[u.nw].center(b.x,b.y,r,n),c[u.ne].center(b.x2,b.y,r,n),c[u.sw].center(b.x,b.y2,r,n),c[u.se].center(b.x2,b.y2,r,n),c[u.n].center(b.xmid,b.y,r,n),c[u.w].center(b.x,b.ymid,r,n),c[u.e].center(b.x2,b.ymid,r,n),c[u.s].center(b.xmid,b.y2,r,n);var o=l[0].get();o.rotatable||!o.hasOwnProperty("rotatable")?(v.show(),v.center(b.xmid,b.y-h/r,r,n)):v.hide(),P((1===l.length?l[0].get().rotation:0)+g.getPageRotation(s._index))}function A(t){var e=s.offset(),r=Atalasoft.Utils.getSVGOffset(s._paper.canvas,s);return{x:t.pageX-(e.left+r.left),y:t.pageY-(e.top+r.top)}}function j(t){t.stopPropagation();var e,r,n,i=(e=A(t),r=g.getViewerTransform(s._index).invert(),n=r.x(e.x,e.y),e.y=r.y(e.x,e.y),e.x=n,e),a=180*Math.atan2(i.y-m.ymid,i.x-m.xmid)/Math.PI+90;return 1===l.length&&(l[0].set({rotation:a}),l[0].repaint()),s._grips.repaint(),!1}function B(t){return t.stopPropagation(),a(s._paper.canvas).unbind({mouseup:B,mousemove:j}),1===l.length&&l[0].getEventObject().trigger("rotated"),!1}function E(t){if(t.stopPropagation(),1===p.length){var e=function(t){if(0<p.length){var e="set"===p[0].type?p[0][0]:p[0],r=e.matrix.invert(),n={x:r.x(t.x,t.y),y:r.y(t.x,t.y)};return n}return t}(A(t)),r=Math.abs(e.x-m.x),n=Math.abs(e.y-m.y),i=e.x<m.x?m.x-r:m.x,a=e.y<m.y?m.y-n:m.y;o=i,s=a,h=r,u=n,0===w&&(b.x=o,b.width=Math.max(h,1),b.x2=o+b.width,b.xmid=o+b.width/2),0===d&&(b.y=s,b.height=Math.max(u,1),b.y2=s+b.height,b.ymid=s+b.height/2),M(),function(){for(var t=0;t<l.length;t++)l[t].transform(b.x,b.y,b.width,b.height)}()}var o,s,h,u;return!1}function F(t){t.stopPropagation();for(var e=0;e<l.length;e++)l[e].getEventObject().trigger("resized"),l[e].getEventObject().trigger("annoresized"),l[e].repaint();return 0<p.length&&_(),a(s._paper.canvas).unbind({mouseup:F,mousemove:E}),!1}function z(t,e){if(t&&t.d&&t.d.key){var r=Raphael.matrix();r.rotate(e);var n={x:r.x(f[t.d.key].x,f[t.d.key].y),y:r.y(f[t.d.key].x,f[t.d.key].y)};for(var i in y)if(y.hasOwnProperty(i)&&R(n,y[i].start,y[i].end)){t.attr({cursor:(y[i].dir||"ne")+"-resize"});break}}}function R(t,e,r){function n(t,e){return 0<-t.x*e.y+t.y*e.x}return!n(e,t)&&n(r,t)}!function(){var t;for(var e in u)if(u.hasOwnProperty(e)){var r=s._paper.rect(0,0,x,x),n=O(r,e);c.push(n),c[u[e]]=n,(t=Raphael.matrix()).rotate(u[e]),f[e]={x:t.x(1,0),y:t.y(1,0)}}i=O(s._paper.circle(0,0,x/2)).attr({fill:"#00FF40",cursor:"pointer"}),i.ellipse=!0,c.push(i),i.mousedown(function(t){return function(t){if(t.stopPropagation(),1===l.length&&1===p.length){for(var e=0;e<l.length;e++){var r=l[e].get();if(r.hasOwnProperty("rotatable")&&!r.rotatable)return}a.extend(m,b);var n=l[0].getTransform(),i=n.x(m.xmid,m.ymid);m.ymid=n.y(m.xmid,m.ymid),m.xmid=i,a(s._paper.canvas).bind({mouseup:B,mousemove:j})}}(t)}),v=i,function(){var n=Raphael.matrix();n.rotate(o,0,0);for(var t=function(t,e){var r={dir:e,start:{x:n.x(f[t].x,f[t].y),y:n.y(f[t].x,f[t].y)},end:{x:n.x(f[e].x,f[e].y),y:n.y(f[e].x,f[e].y)}};return r},e=["e","ne","n","nw","w","sw","s","se"],r=0;r<e.length-1;++r)0===r&&(y[e[r]]=t(e[e.length-1],e[r])),y[e[r+1]]=t(e[r],e[r+1])}();var i}(),this.push=function(t){r(t)||(l.push(t),p.push(t.getObject()),!0===t.get("selectable")&&t.getEventObject().bind(e),k(),c.toFront(),c.show())},this.contains=r,this.remove=function(t){for(var e=0;e<l.length;e++)l[e]===t&&l.splice(e,1);p.exclude(t.getObject()),i(t)},this.clear=n,this.repaint=k,this.updateCursor=P};
+"use strict";var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};Atalasoft.Annotations.AnnotationSelector=function(e,n){var u=Atalasoft.$,t=this,o=e,r=n,a=[];function i(e,n,t,o){var r,i,l=[].concat(n),f=null;(f=s(t))===t&&null!==f&&(t=f._index),o||g(f||t);for(var c=0;c<l.length;c++)r=l[c],0<=(i=u.inArray(r,a[t]))?e||a[t][i]!==r||a[t].splice(i,1):e&&(a[t]?a[t].push(r):a[t]=[r]),f&&(e?f._grips.push(r):f._grips.remove(r)),r.get("selected")!==e&&r.toggleSelected({append:!0,pageindex:t,page:f})}function l(e,n){var t="object"===(void 0===n?"undefined":_typeof(n))?n._index:n;o[t]&&i(e,o[t],n,!0)}function f(e){for(var n=[],t=0;t<e.length;t++)if(e[t]){n[t]=[];for(var o=0;o<e[t].length;o++)n[t][o]=e[t][o].getClonedData()}return n}function s(n){var e=null;if("object"===(void 0===n?"undefined":_typeof(n)))e=n;else{n=Math.max(n,0);var t=u.grep(r,function(e){return e._index===n});1<=t.length&&(e=t[0])}return e}function c(e){l(!0,e)}function g(e){l(!1,e);var n=s(e);n&&n._grips&&n._grips.repaint()}t.dispose=function(){r=o=t=null,a.length=0},t.select=function(e,n,t){i(!0,e,n,t)},t.deselect=function(e,n,t){i(!1,e,n,t)},t.setAnnos=function(e){o=e},t.setPages=function(e){r=e},t.resolvePage=s,t.deselectAll=function(){for(var e=0;e<o.length;e++)g(e)},t.deselectPage=g,t.getAnnotations=
+/**
     * Gets an array of all annotation data objects.
     * @returns array of arrays containing annotation data objects for each page of the document.
     */
-function v(){return c(b)}var h=Atalasoft.$,_=this,b=e,m=n,A=[];_.dispose=r,_.select=l,_.deselect=i,_.setAnnos=t,_.setPages=o,_.resolvePage=a,_.deselectAll=d,_.deselectPage=p,_.getAnnotations=v,_.getSelected=y,_.selectAll=g,_.selectPage=s};
-"use strict";Atalasoft.Annotations.Annotation=function(e,t){function n(){e.multiview||z(e.type),f(e,!0),c(),"custom"===nt.type&&(Y=new Atalasoft.Annotations.AnnotationCustomRenderer(nt,G)),X=new Atalasoft.Annotations.DrawHandler(nt,$,G,q,Y),i({repaint:X.events.update,viewchanged:X.events.viewchanged,drawn:B,resized:d}),nt.points&&(nt.x>0||nt.y>0)&&(E(nt.x,nt.y),nt.x=0,nt.y=0,nt.width=1,nt.height=1),a()}function a(){ot={selectable:{selectchange:w},movable:{dragstart:X.events.dragstart,dragmove:X.events.dragmove,dragend:X.events.dragend},resizable:{pinchstart:X.events.pinchstart,pinchmove:X.events.pinchmove,pinchend:X.events.pinchend},boundEvents:{resizable:!1,movable:!1,selectable:!1},isBound:function(e){return this.boundEvents[e]},bound:function(e){this.boundEvents[e]=!0},unbound:function(e){this.boundEvents[e]=!1}}}function o(){nt.selected&&w(),G&&G.unbind(),M&&M.remove(),Q&&Q.dispose(),W&&W.remove(),X&&X.unbindEvents(),X=null,$=null,q=null,G=null,M=null,Q=null,W=null,nt=null}function i(){G.bind.apply(G,arguments)}function l(){G.unbind.apply(G,arguments)}function r(){return G.trigger.apply(G,arguments),q}function s(){/**
-         * Represents generic annotation data object.
-         *
-         * This basic object structure is applied to all annotations. Individual types of annotation could ignored some of those properties.
-         * This structure is used when configuring default values for particular annotation types using {@link WebDocumentViewerConfig.annotations}, creating annotations using {@link Atalasoft.Controls.WebDocumentViewer~AnnotationController#createOnPage|annotations.createOnPage} or retrieving annotations data using corresponding api.
-         *
-         * *Note*, Annotation could have only one of two positioning models
-         * - Box model, i.e. annotation position and size is defined by {@link AnnotationData.x | X}, {@link AnnotationData.y | Y}, {@link AnnotationData.width | width} and {@link AnnotationData.height | height} properties.
-         * For example, `rectangle` or `text` annotations.
-         *
-         * - Points model, which means that annotation consist of an array of individual points stored in {@link AnnotationData.points | points} property.
-         * For example, `lines` or `freehand` annotations.
-         *
-         * It's expected that annotation have only one of positioning model, and often rendering is performed basing on existence or absence of {@link AnnotationData.points | points} value. I.e. in case if {@link AnnotationData.points | points} is set, {@link AnnotationData.x | X}, {@link AnnotationData.y | Y}, {@link AnnotationData.width | width} and {@link AnnotationData.height | height} values could be ignored.
-         *
-         * @atalaconfig
-         * @alias AnnotationData
-         */
-var e={/**
+function(){return f(o)},t.getSelected=function(){return f(a)},t.selectAll=function(){for(var e=0;e<o.length;e++)c(e)},t.selectPage=c};
+"use strict";Atalasoft.Annotations.Annotation=function(t,e){var n=Atalasoft.$,a=e,i=this,o=new Atalasoft.Annotations.EventHelper(i),l=null,r=null,s=null,u=null,d=null,c=null,p=null,f=null,b=t.multiview?t:{
+/**
              * @property {Atalasoft.Annotations.AnnotationTypes} type - Annotation type.
              */
-type:"",/**
+type:"",
+/**
              * @property {number} [x=0] - X axis annotation coordinate in document coordinate space.
              */
-x:0,/**
+x:0,
+/**
              * @property {number} [y=0] - Y axis annotation coordinate in document coordinate space.
              */
-y:0,/**
+y:0,
+/**
              * @property {number} [width=0] - Width of the annotation box.
              */
-width:0,/**
+width:0,
+/**
              * @property {number} [height=0] - Height of the annotation box.
              */
-height:0,/**
+height:0,
+/**
              * @property {Point[]} [points=undefined] - Array of annotation points.
              */
-points:void 0,/**
+points:void 0,
+/**
              * @property {number} [rotation=0] - Represents annotation rotation angle.
              *
              * Note, this property is ignored when annotation is created from UI, i.e. when specified in {@link WebDocumentViewerConfig.annotations} configurations.
              */
-rotation:0,/**
+rotation:0,
+/**
              * @private
              */
-transform:Raphael.matrix(),/**
+transform:Raphael.matrix(),
+/**
              * @property {boolean} [visible=true] - Indicates whether annotation is visible.
              */
-visible:!0,/**
+visible:!0,
+/**
              * @property {boolean} [movable=true] - Indicates whether annotation could be moved through UI.
              */
-movable:!0,/**
+movable:!0,
+/**
              * @property {boolean} [rotatable=true] -Indicates whether annotation could be rotated through UI.
              */
-rotatable:!0,/**
+rotatable:!0,
+/**
              * @property {boolean} [resizable=true] - Indicates whether annotation could be resized through UI.
              */
-resizable:!0,/**
+resizable:!0,
+/**
              * @property {boolean} [selected=false] - Indicates whether annotation is currently selected.
              */
-selected:!1,/**
+selected:!1,
+/**
              * @property {boolean} [selectable=true] - Indicates whether annotation is selectable.
              */
-selectable:!0,/**
+selectable:!0,
+/**
              * @property {boolean} [readonly=false] - Indicates whether annotation is readonly. If set to true annotation couldn't be modified through UI and context menu couldn't be shown for it.
              */
-readonly:!1,/**
+readonly:!1,
+/**
              * @property {boolean} [burn=false] - Indicates whether this annotation should be "burned" to output document on save. If set to true, annotation will be rendered on top of the image for all output formats except PDF. For PDF documents, annotations will be rendered and added as a separate layer on top of the document content.
              */
-burn:!1,/**
+burn:!1,
+/**
              * @property {string} [tooltip] - Annotation tooltip.
              */
-tooltip:"",/**
+tooltip:"",
+/**
              * @property {string} name - Annotation type title. This will be shown as a caption for toolbar buttons representing "extended" types annotations. This applies to `stamp` and `image` types of annotation. I.e. name should be set to annotations defined by application using {@link WebDocumentViewerConfig.annotations| annotations.stamps} and {@link WebDocumentViewerConfig.annotations| annotations.images}.
              */
-name:"",/**
+name:"",
+/**
              * @property {string} [username] - Corresponds to server side `AnnotationData.UserName` property.
              */
-username:"",/**
+username:"",
+/**
              * @ignore
              */
-aspectratio:0,/**
+aspectratio:0,
+/**
              * @property {number} [cornerradius=0] - Represents corner rounding radius for Stamp annotations.
              *
              */
-cornerradius:0,/**
+cornerradius:0,
+/**
              * Represents annotation fill configuration.
              * @typedef {Object} AnnotationFill
              * @property {string} [color='white'] - Fill color.
@@ -1701,9 +2288,10 @@ cornerradius:0,/**
 /**
              * @property {AnnotationFill} [fill] - Represents annotation fill.
              */
-fill:{color:"white",opacity:1},/**
+fill:{color:"white",opacity:1},
+/**
              * @typedef AnnotationLineCap
-             * @property {string} [style] - Style of the cap. Valid values are `'classic'`, `'block'`, `'open'`, `'oval'`, `'diamond'`, and `'none'`.
+             * @property {string} [style] - Style of the cap. Valid values are `'block'`, `'open'`, `'oval'`, `'diamond'`, and `'none'`.
              * @property {string} [width] - Width of the cap. Valid values are `'wide'`, `'narrow'`, and `'medium'`
              * @property {string} [height] - Height of the cap. Valid values are `'long'`, `'short'`, and `'medium'`.
              */
@@ -1719,10 +2307,12 @@ fill:{color:"white",opacity:1},/**
 /**
              * @property {AnnotationOutline} [outline] - Annotation outline.
              */
-outline:{color:"black",opacity:1,width:2,startcap:null,endcap:null},/**
+outline:{color:"black",opacity:1,width:2,startcap:null,endcap:null},
+/**
              * @property {string} [src] - Url of the image displayed by the "image" annotation.
              */
-src:"",/**
+src:"",
+/**
              * Represents configuration for text based annotations like 'text' or 'stamp'.
              * @typedef {Object} AnnotationTextConfig
              * @property {string} [value] - Displayed annotation text.
@@ -1746,218 +2336,159 @@ src:"",/**
 /**
              * @property {AnnotationTextConfig} [text] - Annotation text configuration.
              */
-text:{value:null,align:"left",font:{bold:!1,italic:!1,strike:!1,underline:!1,color:"black",family:"Arial",size:12},readonly:!1,replies:null,parent:null,autoscale:!1},/**
+text:{value:null,align:"left",font:{bold:!1,italic:!1,strike:!1,underline:!1,color:"black",family:"Arial",size:12},readonly:!1,replies:null,parent:null,autoscale:!1},
+/**
              * @property {Object} [extra] - Additional data that could be stored along with annotation. Application specific properties is expected to be inserted into this object.
              * Those data will be transacted to extra properties of the server-side `AnnotationData` object.
              */
-extra:{}};/**
-         * Synchronizes user instance of the annotation data with corresponding internal state. Triggers UI invalidation if necessary.
-         *
-         * This method should be called to apply any property changes made by applicaion.
-         * @function AnnotationData#update
-         * @instance
-         */
+extra:{}},h={highlight:{readonly:!0,fill:{color:"yellow",opacity:.5},outline:{opacity:0}},image:{readonly:!0,fill:{color:null},outline:{opacity:0}},rectangle:{fill:{opacity:0}},stamp:{readonly:!0,cornerradius:0,text:{autoscale:!0}},line:{fill:{color:null},outline:{opacity:1,startcap:{width:"medium",height:"medium",style:"none"},endcap:{width:"medium",height:"medium",style:"none"}}},lines:{fill:{color:null},outline:{opacity:1}},freehand:{fill:{color:null},outline:{opacity:1}},ellipse:{},fillrect:{},polygon:{},text:{}},y={};function g(){o.bind.apply(o,arguments)}function m(){return o.trigger.apply(o,arguments),i}function v(){var e=Raphael.matrix(),t=O();e.rotate(b.rotation,t.x,t.y),b.transform=e}function x(){var e,t,n=O(),a=(e=z(),t=n,{x:e.x(t.x,t.y),y:e.y(t.x,t.y)});a.x===n.x&&a.y===n.y||R(a.x-n.x,a.y-n.y)}function w(e,t){if(e){var n=b.rotation;e.hasOwnProperty("rotation")&&(e.rotation=(e.rotation+360)%360),A(e,t),n!==b.rotation&&function(e,t){var n=(e-t+360)%360,a=Raphael.matrix(),i=z();a.add(i.a,i.b,i.c,i.d,i.e,i.f);var o=O();a.rotate(n,o.x+o.width/2,o.y+o.height/2);var l=a.x(o.x,o.y),r=a.y(o.x,o.y);R(l-o.x,r-o.y),v()}(b.rotation,n)}}function A(e,t){t?n.extend(!0,b,e):n.extend(b,e)}function z(){return b.transform}function B(){p={update:function(e){b.selected!==p.selected&&T();var t=!1;e||(t=function e(t,n,a){if(t!==n)return!!t;for(var i in t)if(t.hasOwnProperty(i)){if("extra"===i)continue;if(n.hasOwnProperty(i)){if("points"===i){if(t.points===n.points)return!t.points;if(t.points.length!==n.points.length)return!0;for(var o=0;o<t.points.length;o++)if(e(t.points[o],n.points[o],[]))return!0}if(-1<a.indexOf(i)){if(e(t[i],n[i],V[i]))return!0}else if(t[i]!==n[i])return!0}}return!1}(p,b,["fill","outline","text"]),w(p,!0)),b.update&&delete b.update,b.getPageIndex&&delete b.getPageIndex,C(),j(),null!==l&&(b.selectable?(y.isBound("selectable")||(o.bind(y.selectable),y.bound("selectable")),b.movable&&!y.isBound("movable")?(o.bind(y.movable),y.bound("movable")):!b.movable&&y.isBound("movable")&&(o.unbind(y.movable),y.unbound("movable")),Atalasoft.Utils.Browser.Features.Touch&&(b.resizable&&!y.isBound("resizable")?(o.bind(y.resizable),y.bound("resizable")):!b.resizable&&y.isBound("resizable")&&(o.unbind(y.resizable),y.unbound("resizable")))):!b.selectable&&y.isBound("selectable")&&(o.unbind(y.selectable),y.unbound("selectable"),o.unbind(y.movable),y.unbound("movable"),o.unbind(y.resizable),y.unbound("resizable"))),t&&m({type:"annotationchanged",ann:i})},getPageIndex:function(){return i._pageindex}},n.extend(!0,p,b)}function k(){return JSON.stringify(b)}function T(e){if(b){var t={ann:i,append:!0,page:null,pageindex:i._pageindex,type:""};e&&(t.append=e.shiftKey||e.ctrlKey||void 0!==e.append&&e.append,t.page=e.page,t.pageindex=e.pageindex),t.append||!b.selected?(b.selected=!b.selected,t.type=b.selected?"selected":"deselected"):b.selected&&!t.append&&(t.type="reselected"),""!==t.type&&m(t)}}function _(e){var t=null;switch(b.type){case"image":(t=e.image()).attr("src",b.src);break;case"highlight":case"rectangle":case"fillrect":case"text":case"stamp":t=e.rect();break;case"ellipse":case"line":case"lines":case"freehand":case"polygon":t=e.path();break;case"custom":t=c.construct(e)}return e._annos&&e._annos.push(t),t}function E(){null!==l&&(r?o.unbind(r,l):o.unbind(l));var e={};b.selectable&&(n.extend(e,y.selectable),y.bound("selectable"),!a.readonly&&b.movable&&(n.extend(e,y.movable),y.bound("movable")),!a.readonly&&b.resizable&&Atalasoft.Utils.Browser.Features.Touch&&(n.extend(e,y.resizable),y.bound("resizable"))),l=e,o.bind(r,e)}
 /**
-         * Returns the page index for particular annotation.
-         * @function AnnotationData#getPageIndex
-         * @instance
-         * @returns {number}
-         */
-return e}function u(e,t){var n=(e-t+360)%360,a=Raphael.matrix(),o=h();a.add(o.a,o.b,o.c,o.d,o.e,o.f);var i=_();a.rotate(n,i.x+i.width/2,i.y+i.height/2);var l=a.x(i.x,i.y),r=a.y(i.x,i.y);E(l-i.x,r-i.y),c()}function c(){var e=Raphael.matrix(),t=_();e.rotate(nt.rotation,t.x,t.y),nt.transform=e}function d(){var e=_(),t=K(h(),e);(t.x!==e.x||t.y!==e.y)&&E(t.x-e.x,t.y-e.y)}function p(e,t){if(e){var n=nt.rotation;e.hasOwnProperty("rotation")&&(e.rotation=(e.rotation+360)%360),f(e,t,!1),n!==nt.rotation&&u(nt.rotation,n)}}function f(e,t){t?N.extend(!0,nt,e):N.extend(nt,e)}function b(e){return e?nt[e]:nt}function h(){return nt.transform}function y(){function e(){nt.update&&delete nt.update,nt.getPageIndex&&delete nt.getPageIndex}et={update:function(t){nt.selected!==et.selected&&w(),t||p(et,!0),e(),C(),j(),T()},getPageIndex:function(){return q._pageindex}},N.extend(!0,et,nt)}function g(){return et?N.extend(!0,et,nt):y(),delete et.transform,et}function m(){return M}function v(){return G}function x(){return JSON.stringify(nt)}function w(e){if(nt){var t={ann:q,append:!0,page:null,pageindex:q._pageindex,type:""};e&&(t.append=e.shiftKey||e.ctrlKey||"undefined"!=typeof e.append&&e.append,t.page=e.page,t.pageindex=e.pageindex),t.append||!nt.selected?(nt.selected=!nt.selected,t.type=nt.selected?"selected":"deselected"):nt.selected&&!t.append&&(t.type="reselected"),""!==t.type&&r(t)}}function A(e){return et&&et===e}function z(e){N.extend(!0,nt,at[e])}function k(e){var t=null;switch(nt.type){case"image":t=e.image(),t.attr("src",nt.src);break;case"highlight":t=e.rect();break;case"rectangle":t=e.rect();break;case"fillrect":t=e.rect();break;case"text":t=e.rect();break;case"stamp":t=e.rect();break;case"ellipse":t=e.path();break;case"line":t=e.path();break;case"lines":t=e.path();break;case"freehand":t=e.path();break;case"polygon":t=e.path();break;case"custom":t=Y.construct(e)}return e._annos&&e._annos.push(t),t}function B(){null!==L&&(M?G.unbind(M,L):G.unbind(L));var e={};nt.selectable&&(N.extend(e,ot.selectable),ot.bound("selectable"),!$.readonly&&nt.movable&&(N.extend(e,ot.movable),ot.bound("movable")),!$.readonly&&nt.resizable&&Atalasoft.Utils.Browser.Features.Touch&&(N.extend(e,ot.resizable),ot.bound("resizable"))),L=e,G.bind(M,e)}function T(){null!==L&&(nt.selectable?(ot.isBound("selectable")||(G.bind(ot.selectable),ot.bound("selectable")),nt.movable&&!ot.isBound("movable")?(G.bind(ot.movable),ot.bound("movable")):!nt.movable&&ot.isBound("movable")&&(G.unbind(ot.movable),ot.unbound("movable")),Atalasoft.Utils.Browser.Features.Touch&&(nt.resizable&&!ot.isBound("resizable")?(G.bind(ot.resizable),ot.bound("resizable")):!nt.resizable&&ot.isBound("resizable")&&(G.unbind(ot.resizable),ot.unbound("resizable")))):!nt.selectable&&ot.isBound("selectable")&&(G.unbind(ot.selectable),ot.unbound("selectable"),G.unbind(ot.movable),ot.unbound("movable"),G.unbind(ot.resizable),ot.unbound("resizable")))}/**
      * Returns bounding box of the annotation in document space.
     */
-function _(){!tt&&nt.points&&(tt=Atalasoft.Utils.__calcPathBounds(nt.points));var e=nt.points?tt:nt;return{x:e.x,y:e.y,width:e.width,height:e.height}}function E(e,t){if(nt.points){for(var n=0;n<nt.points.length;n++)nt.points[n].x+=e,nt.points[n].y+=t;tt&&(tt.x+=e,tt.y+=t)}"custom"!==nt.type&&nt.points||(nt.x+=e,nt.y+=t),c(),O()}function R(e,t,n,a){var o=_(),i=n/o.width,l=a/o.height;if(nt.points&&nt.points.length>0&&"custom"!==nt.type){for(var s=0;s<nt.points.length;s++)nt.points[s].x=e+(nt.points[s].x-o.x)*i,nt.points[s].y=t+(nt.points[s].y-o.y)*l;tt.x=e,tt.y=t,tt.width*=i,tt.height*=l}else nt.x=e,nt.y=t,nt.width*=i,nt.height*=l;r({type:"annoresizing"}),O()}function U(){X.transformUI.apply(X,arguments)}function I(){X.commitTransform()}function O(){it||(it=!0,setTimeout(P,lt))}function P(){it=!1,j()}function S(e,t,n){p(n),M=k(t),M.transform(X.getTransform()),("text"===nt.type||"stamp"===nt.type)&&(Q=new Atalasoft.Annotations.TextAnnotationUI(q,t,$)),C(),X.drawStart(e,M,Q)}function j(e){e&&(W&&(W=null),M=k(e),Y&&Y.render(M,nt),C(),B(),"text"!==nt.type&&"stamp"!==nt.type||null!==Q||(Q=new Atalasoft.Annotations.TextAnnotationUI(q,e,$)),Q&&Q.changepaper(e),r({type:"viewchanged",annview:M,textview:Q})),r("repaint")}function C(){if(M){var e=Z();N.extend(e,F()),M.attr(e),H(),nt.visible?M.show():M.hide()}D(),V()}function D(){Q&&(Q.set(nt.text),Q.updateView())}function V(){M&&""!==nt.src&&"image"===nt.type&&("unknown"!=typeof M.node.src&&M.node.src?M.node.src=nt.src:M.node.href.baseVal=nt.src)}function Z(){return{fill:nt.fill.color,"fill-opacity":nt.fill.opacity}}function F(){var e={stroke:nt.outline.color,"stroke-width":nt.outline.width*$.getZoom(q._pageindex),"stroke-opacity":nt.outline.opacity};return M._linewidth=nt.outline.width,Raphael.fn.addArrow||(nt.outline.startcap&&(e["arrow-start"]=J(nt.outline.startcap)),nt.outline.endcap&&(e["arrow-end"]=J(nt.outline.endcap))),e}function H(){Raphael.fn.addArrow&&(nt.outline.startcap&&Raphael.fn.addArrow(M,J(nt.outline.startcap),!1),nt.outline.endcap&&Raphael.fn.addArrow(M,J(nt.outline.endcap),!0))}function J(e){return[e.style,"-",e.width,"-",e.height].join("")}function K(e,t){return{x:e.x(t.x,t.y),y:e.y(t.x,t.y)}}var N=Atalasoft.$,$=t,q=this,G=new Atalasoft.Annotations.EventHelper(q),L=null,M=null,Q=null,W=null,X=null,Y=null,et=null,tt=null,nt=e.multiview?e:s(),at={highlight:{readonly:!0,fill:{color:"yellow",opacity:.5},outline:{opacity:0}},image:{readonly:!0,fill:{color:null},outline:{opacity:0}},rectangle:{fill:{opacity:0}},stamp:{readonly:!0,cornerradius:0,text:{autoscale:!0}},line:{fill:{color:null},outline:{opacity:1,startcap:{width:"medium",height:"medium",style:"none"},endcap:{width:"medium",height:"medium",style:"none"}}},lines:{fill:{color:null},outline:{opacity:1}},freehand:{fill:{color:null},outline:{opacity:1}},ellipse:{},fillrect:{},polygon:{},text:{}},ot={};n(),q.dispose=o,q.bind=i,q.unbind=l,q.trigger=r,q.set=p,q.get=b,q.getTransform=h,q.getClonedData=g,q.getObject=m,q.getEventObject=v,q.getZoom=function(){return $.getZoom(q._pageindex)},q.stringify=x,q.getJSON=x,q.toggleSelected=w,q.isCloneSource=A,q.getBox=_,q.translate=E,q.transform=R,q.transformUI=U,q.commitTransform=I;var it=!1,lt=Atalasoft.Utils.Browser.Explorer?20:5;return q.startDraw=S,q.repaint=j,q.updateView=C,q};
-"use strict";Atalasoft.Annotations.EventHelper=function(t){function n(){P=new Atalasoft.Annotations.PointerHandler,P.bind({click:b,dblclick:w,mousedown:A,mousemove:E,mouseover:R,mouseout:T,mouseup:k,touchmove:X,touchstart:B,interactstart:a,interactend:c,pinchstart:m,pinchmove:f,pinchend:h,selectchange:d,contextmenu:x,showeditor:v,annoresized:Y})}function e(t){$.px=$.mx,$.py=$.my,t.originalEvent?($.mx=t.originalEvent.targetTouches[0].pageX,$.my=t.originalEvent.targetTouches[0].pageY):($.mx=t.targetTouches[0].pageX,$.my=t.targetTouches[0].pageY),$.dx=$.mx-$.px,$.dy=$.my-$.py}function o(t){$.px=$.mx,$.py=$.my,$.mx=t.screenX,$.my=t.screenY,$.dx=$.mx-$.px,$.dy=$.my-$.py}function r(t){var n=arguments;!t||t.constructor.prototype!==Raphael.el&&t.constructor.prototype!==Raphael.st||(t.drag(l,s,p),t.hover(y,g),"set"!==t.type?F(t[0]).bind(P.events):t.forEach(function(t){F(t[0]).bind(P.events)}),n=Array.prototype.slice.call(n,1)),n.length>0&&U.bind.apply(U,n)}function u(t){var n=arguments;!t||t.constructor.prototype!==Raphael.el&&t.constructor.prototype!==Raphael.st?null===t&&n.length>1&&(n=Array.prototype.slice.call(n,1)):(t.undrag(),t.unhover(y,g),"set"!==t.type?F(t[0]).unbind(P.events):t.forEach(function(t){F(t[0]).unbind(P.events)}),n=Array.prototype.slice.call(n,1)),U.unbind.apply(U,n)}function i(){U.trigger.apply(U,arguments)}function a(){i({type:"interactstart",target:z})}function c(){i({type:"interactend",target:z})}function l(t,n,r,u,a){(t||n)&&(Atalasoft.Utils.Browser.Features.Touch&&a.target!==$.target||(null===$.px&&s(null,null,a),a.touches?e(a):o(a),i({type:"dragmove",dx:$.dx,dy:$.dy,mx:$.mx,my:$.my,originalEvent:a})))}function s(t,n,r){$.target=r.target,a(),r.touches?e(r):o(r),i({type:"dragstart",mx:$.mx,my:$.my,originalEvent:r})}function p(t){Atalasoft.Utils.Browser.Features.Touch&&t.target!==$.target||($.target=null,$.px=null,$.py=null,$.mx=null,$.my=null,i({type:"dragend",originalEvent:t}))}function y(){i("hoverin")}function g(){i("hoverout")}function m(t){i(t)}function f(t){i(t)}function h(t){$.px=null,$.py=null,i(t)}function d(t){i(t)}function x(t){i(t)}function v(t){i(t)}function b(t){i(t)}function w(t){i(t)}function A(t){i(t),1===t.which?i("mousedownleft"):3===t.which&&i("mousedownright")}function E(t){i(t)}function T(t){i(t)}function R(t){i(t)}function k(t){i(t),3===t.which&&i("rightclick")}function X(t){i(t)}function Y(t){i(t)}function B(t){i(t)}var F=Atalasoft.$,H=this,U=F({}),z=t,P=null,$={target:null,mx:null,my:null,px:null,py:null,dx:null,dy:null};n(),H.bind=r,H.unbind=u,H.trigger=i};
-"use strict";Atalasoft.Annotations.DrawHandler=function(t,e,n,a,i){function r(){}function o(t){var e=Atalasoft.Utils.getMousePositionJquery(t);if(q.paper){var n=Atalasoft.Utils.getSVGOffset(q.paper.canvas,q.paper._page);e.x-=n.left,e.y-=n.top}return e}function s(t){var e=L.getViewerTransform(J._pageindex).invert(),n=e.x(t.x,t.y);return t.y=e.y(t.x,t.y),t.x=n,t}function p(){N.trigger.apply(N,arguments)}function u(t,e,n){q=e,G=n,t.stopPropagation(),t.preventDefault();var a=s(o(t));I.visible=!0,$={x:a.x,y:a.y},I.x=Math.round(a.x),I.y=Math.round(a.y),I.width=1,I.height=1,"path"===q.type&&"custom"!==I.type?"ellipse"!==I.type?(I.points=[{x:I.x,y:I.y}],("lines"===I.type||"polygon"===I.type)&&I.points.push({x:I.x,y:I.y}),I.x=0,I.y=0,Q=l,W=C):(Q=y,W=P):(Q=y,W=U),B(),O={events:Atalasoft.Utils.Browser.Features.Touch?{touchend:d,touchmove:h,mouseup:d,mousemove:h}:{mouseup:d,mousemove:h},src:z(t.srcElement||t.target),main:z(t.currentTarget)},O.src.bind(O.events),O.main.bind({mouseup:d})}function c(){O&&(O.src.unbind(O.events),O.main.unbind({mouseup:d}))}function h(t){t.stopPropagation(),Q(t),B()}function l(t){var e=s(o(t));switch(I.type){case"line":I.points[1]=e;break;case"freehand":I.points.push(e);break;case"lines":I.points[I.points.length-1]=e;break;case"polygon":I.points[I.points.length-1]=e}"path"===q.type&&("ellipse"===I.type?E():V(),q._&&0===q._.dirty&&(q._.dirty=1))}function y(t){var e=s(o(t)),n=$.x,a=$.y,i=Math.max(Math.abs(e.x-$.x),1),r=Math.max(Math.abs(e.y-$.y),1);if(I.aspectratio>0){var p=Math.abs((e.y-$.y)/(e.x-$.x));p>1/I.aspectratio?i=Math.round(r/I.aspectratio):r=Math.round(i/I.aspectratio)}e.x<$.x&&(n=$.x-i),e.y<$.y&&(a=$.y-r),I.x=n,I.y=a,I.width=i,I.height=r}function d(t){t.stopPropagation();var e=!1;if("lines"===I.type||"polygon"===I.type){if(L.activepage._index!==J._pageindex)return;if(I.points.push(s(o(t))),2!==t.button)return}else I.points?I.points&&I.points.length<2&&"custom"!==I.type&&(e=!0):(I.width<4&&I.height<4&&(I.width=100,I.height=100),B());c(),O=null,e?p("cancelled"):p("drawn")}function f(t){if(!L.readonly){t.originalEvent.stopPropagation();var e=J.getBox();$={x:e.x,y:e.y}}}function x(t){if(!L.readonly){t.originalEvent.stopPropagation();var e=s({x:0,y:0}),n=s({x:t.dx,y:t.dy});J.translate(n.x-e.x,n.y-e.y),p("moving")}}function g(t){if(!L.readonly){t.originalEvent.stopPropagation();var e=J.getBox();if(q.paper&&q.paper._page){var n=q.getBBox(),a={x:0,y:0,width:q.paper._page.width(),height:q.paper._page.height()};if(!X(a,n))return J.translate($.x-e.x,$.y-e.y),void 0}($.x!==e.x||$.y!==e.y)&&p("moved")}}function v(t){if(!I.points&&!L.readonly){var e=s({x:t.touches[0].clientX,y:t.touches[0].clientY}),n=s({x:t.touches[1].clientX,y:t.touches[1].clientY}),a=J.getBox();K={start:Atalasoft.Utils.CalcDistance(e.x,e.y,n.x,n.y),rect:a}}}function m(t){if(K){var e=s({x:t.touches[0].clientX,y:t.touches[0].clientY}),n=s({x:t.touches[1].clientX,y:t.touches[1].clientY}),a=Atalasoft.Utils.CalcDistance(e.x,e.y,n.x,n.y,K.start),i=a.x-K.start.x,r=a.y-K.start.y,o=K.rect.x-a.dx,p=K.rect.y-a.dy,u=K.rect.width+i,c=K.rect.height+r;I.points?J.transform(o,p,u,c):(I.x=o,I.y=p,I.width=u,I.height=c),q.paper&&q.paper._page&&q.paper._page._grips&&q.paper._page._grips.repaint(),B()}}function w(){p("resized"),p("annoresized"),K=null}function _(){B()}function b(t){q=t.annview,G=t.textview,"path"===q.type&&"custom"!==I.type?"ellipse"!==I.type?(Q=l,W=C):(Q=y,W=P):(Q=y,W=U)}function M(){q.transform(j.toTransformString()),G&&G.repaint()}function A(){q.transform(T()),B()}function B(){W(),q&&q.transform(T()),G&&G.repaint()}function T(){var t=Raphael.matrix(),e=L.getViewerTransform(J._pageindex),n=J.getTransform();return t.add(e.a,e.b,e.c,e.d,e.e,e.f),t.add(n.a,n.b,n.c,n.d,n.e,n.f),t.toTransformString()}function U(){q.attr({x:I.x,y:I.y,width:I.width,height:I.height}),H&&H.render(q,I),Atalasoft.Utils.Browser.Features.VML&&q.transform(T())}function P(){E(),q._&&0===q._.dirty&&(q._.dirty=1)}function C(){V(),q._&&0===q._.dirty&&(q._.dirty=1)}function E(){var t=I.width/2,e=I.height/2,n=te*t,a=te*e,i=I.x+I.width/2,r=I.y+I.height/2,o=["M",i,r-e,"C",i+n,r-e,i+t,r-a,i+t,r,"C",i+t,r+a,i+n,r+e,i,r+e,"C",i-n,r+e,i-t,r+a,i-t,r,"C",i-t,r-a,i-n,r-e,i,r-e,"Z"];q.attr({path:o})}function V(){if(I.points&&0!==I.points.length){for(var t=["M",I.points[0].x,I.points[0].y],e=1;e<I.points.length;e++)t=t.concat(["L",I.points[e].x,I.points[e].y]);"polygon"===I.type&&t.push("Z"),q.attr({path:t}),D()}}/**
+function O(){!f&&b.points&&(f=Atalasoft.Utils.__calcPathBounds(b.points));var e=b.points?f:b;return{x:e.x,y:e.y,width:e.width,height:e.height}}function R(e,t){if(b.points){for(var n=0;n<b.points.length;n++)b.points[n].x+=e,b.points[n].y+=t;f&&(f.x+=e,f.y+=t)}"custom"!==b.type&&b.points||(b.x+=e,b.y+=t),v(),P()}!function(){t.multiview||(e=t.type,n.extend(!0,b,h[e]));var e;A(t,!0),v(),"custom"===b.type&&(c=new Atalasoft.Annotations.AnnotationCustomRenderer(b,o));g({repaint:(d=new Atalasoft.Annotations.DrawHandler(b,a,o,i,c)).events.update,viewchanged:d.events.viewchanged,drawn:E,resized:x}),b.points&&(0<b.x||0<b.y)&&(R(b.x,b.y),b.x=0,b.y=0,b.width=1,b.height=1);y={selectable:{selectchange:T},movable:{dragstart:d.events.dragstart,dragmove:d.events.dragmove,dragend:d.events.dragend},resizable:{pinchstart:d.events.pinchstart,pinchmove:d.events.pinchmove,pinchend:d.events.pinchend},boundEvents:{resizable:!1,movable:!1,selectable:!1},isBound:function(e){return this.boundEvents[e]},bound:function(e){this.boundEvents[e]=!0},unbound:function(e){this.boundEvents[e]=!1}}}(),i.dispose=function(){b.selected&&T();o&&o.unbind();r&&r.remove();s&&s.dispose();u&&u.remove();d&&d.unbindEvents();b=u=s=r=o=i=a=d=null},i.bind=g,i.unbind=function(){o.unbind.apply(o,arguments)},i.trigger=m,i.set=w,i.get=function(e){return e?b[e]:b},i.getTransform=z,i.getClonedData=function(){p?n.extend(!0,p,b):B();return delete p.transform,p},i.getObject=function(){return r},i.getEventObject=function(){return o},i.getZoom=function(){return a.getZoom(i._pageindex)},i.stringify=k,i.getJSON=k,i.toggleSelected=T,i.isCloneSource=function(e){return p&&p===e},i.getBox=O,i.translate=R,i.transform=function(e,t,n,a){var i=O(),o=n/i.width,l=a/i.height;if(b.points&&0<b.points.length&&"custom"!==b.type){for(var r=0;r<b.points.length;r++)b.points[r].x=e+(b.points[r].x-i.x)*o,b.points[r].y=t+(b.points[r].y-i.y)*l;f.x=e,f.y=t,f.width*=o,f.height*=l}else b.x=e,b.y=t,b.width*=o,b.height*=l;m({type:"annoresizing"}),P()},i.transformUI=function(){d.transformUI.apply(d,arguments)};var U=!(i.commitTransform=function(){d.commitTransform()}),I=Atalasoft.Utils.Browser.Explorer?20:5;function P(){U||(U=!0,setTimeout(S,I))}function S(){U=!1,j()}function j(e){e&&(u&&(u=null),r=_(e),c&&c.render(r,b),C(),E(),"text"!==b.type&&"stamp"!==b.type||null!==s||(s=new Atalasoft.Annotations.TextAnnotationUI(i,e,a)),s&&s.changepaper(e),m({type:"viewchanged",annview:r,textview:s})),m("repaint")}function C(){if(r){var e={fill:b.fill.color,"fill-opacity":b.fill.opacity};n.extend(e,function(){var e={stroke:b.outline.color,"stroke-width":b.outline.width*a.getZoom(i._pageindex),"stroke-opacity":b.outline.opacity};r._linewidth=b.outline.width,Raphael.fn.addArrow||(b.outline.startcap&&(e["arrow-start"]=D(b.outline.startcap)),b.outline.endcap&&(e["arrow-end"]=D(b.outline.endcap)));return e}()),r.attr(e),Raphael.fn.addArrow&&(b.outline.startcap&&Raphael.fn.addArrow(r,D(b.outline.startcap),!1),b.outline.endcap&&Raphael.fn.addArrow(r,D(b.outline.endcap),!0)),b.visible?r.show():r.hide()}s&&(s.set(b.text),s.updateView()),r&&r.node&&""!==b.src&&"image"===b.type&&("unknown"!=typeof r.node.src&&r.node.src?r.node.src=b.src:r.node.href.baseVal=b.src)}function D(e){return[e.style,"-",e.width,"-",e.height].join("")}i.startDraw=function(e,t,n){w(n),(r=_(t)).transform(d.getTransform()),("text"===b.type||"stamp"===b.type)&&(s=new Atalasoft.Annotations.TextAnnotationUI(i,t,a));C(),d.drawStart(e,r,s)},i.repaint=j,i.updateView=C;var V={fill:[],outline:["startcap","endcap"],text:["font"],font:[],startcap:[],endcap:[]};return i};
+"use strict";Atalasoft.Annotations.EventHelper=function(t){var e=Atalasoft.$,n=this,o=e({}),r=t,u=null,i={target:null,mx:null,my:null,px:null,py:null,dx:null,dy:null};function c(t){i.px=i.mx,i.py=i.my,t.originalEvent?(i.mx=t.originalEvent.targetTouches[0].pageX,i.my=t.originalEvent.targetTouches[0].pageY):(i.mx=t.targetTouches[0].pageX,i.my=t.targetTouches[0].pageY),i.dx=i.mx-i.px,i.dy=i.my-i.py}function l(t){i.px=i.mx,i.py=i.my,i.mx=t.screenX,i.my=t.screenY,i.dx=i.mx-i.px,i.dy=i.my-i.py}function a(){o.trigger.apply(o,arguments)}function p(t){a({type:"interactstart",target:r})}function s(t){a({type:"interactend",target:r})}function y(t,n,e,o,r){(t||n)&&(Atalasoft.Utils.Browser.Features.Touch&&r.target!==i.target||(null===i.px&&f(null,null,r),r.touches?c(r):l(r),a({type:"dragmove",dx:i.dx,dy:i.dy,mx:i.mx,my:i.my,originalEvent:r})))}function f(t,n,e){i.target=e.target,p(),e.touches?c(e):l(e),a({type:"dragstart",mx:i.mx,my:i.my,originalEvent:e})}function g(t){Atalasoft.Utils.Browser.Features.Touch&&t.target!==i.target||(i.target=null,i.px=null,i.py=null,i.mx=null,i.my=null,a({type:"dragend",originalEvent:t}))}function m(){a("hoverin")}function h(){a("hoverout")}function d(t){a(t)}function x(t){a(t)}function v(t){i.px=null,i.py=null,a(t)}function b(t){a(t)}function w(t){a(t)}function A(t){a(t)}function E(t){a(t)}function T(t){a(t)}function R(t){a(t),1===t.which?a("mousedownleft"):3===t.which&&a("mousedownright")}function k(t){a(t)}function X(t){a(t)}function Y(t){a(t)}function B(t){a(t),3===t.which&&a("rightclick")}function F(t){a(t)}function H(t){a(t)}function U(t){a(t)}(u=new Atalasoft.Annotations.PointerHandler).bind({click:E,dblclick:T,mousedown:R,mousemove:k,mouseover:Y,mouseout:X,mouseup:B,touchmove:F,touchstart:U,interactstart:p,interactend:s,pinchstart:d,pinchmove:x,pinchend:v,selectchange:b,contextmenu:w,showeditor:A,annoresized:H}),n.bind=function(t){var n=arguments;!t||t.constructor.prototype!==Raphael.el&&t.constructor.prototype!==Raphael.st||(t.drag(y,f,g),t.hover(m,h),"set"!==t.type?e(t[0]).bind(u.events):t.forEach(function(t){e(t[0]).bind(u.events)}),n=Array.prototype.slice.call(n,1));0<n.length&&o.bind.apply(o,n)},n.unbind=function(t){var n=arguments;!t||t.constructor.prototype!==Raphael.el&&t.constructor.prototype!==Raphael.st?null===t&&1<n.length&&(n=Array.prototype.slice.call(n,1)):(t.undrag(),t.unhover(m,h),"set"!==t.type?e(t[0]).unbind(u.events):t.forEach(function(t){e(t[0]).unbind(u.events)}),n=Array.prototype.slice.call(n,1));o.unbind.apply(o,n)},n.trigger=a};
+"use strict";Atalasoft.Annotations.DrawHandler=function(t,e,n,a,i){var r=Atalasoft.$,o=this,u=t,s=e,p=n,l=null,h=null,c=i,y=a,d=null,x=null,f=null,g=null,v=function(){},m=function(){};function w(t){var e=Atalasoft.Utils.getMousePositionJquery(t);if(l.paper){var n=Atalasoft.Utils.getSVGOffset(l.paper.canvas,l.paper._page);e.x-=n.left,e.y-=n.top}return e}function _(t){var e=s.getViewerTransform(y._pageindex).invert(),n=e.x(t.x,t.y);return t.y=e.y(t.x,t.y),t.x=n,t}function b(){p.trigger.apply(p,arguments)}function M(t,e,n){l=e,h=n,t.stopPropagation(),t.preventDefault();var a=_(w(t));u.visible=!0,x={x:a.x,y:a.y},u.x=Math.round(a.x),u.y=Math.round(a.y),u.width=1,u.height=1,m="path"===l.type&&"custom"!==u.type?"ellipse"!==u.type?(u.points=[{x:u.x,y:u.y}],"lines"!==u.type&&"polygon"!==u.type||u.points.push({x:u.x,y:u.y}),u.x=0,u.y=0,v=T,R):(v=U,D):(v=U,V),C(),(d={events:Atalasoft.Utils.Browser.Features.Touch?{touchend:P,touchmove:B,mouseup:P,mousemove:B}:{mouseup:P,mousemove:B},src:r(t.srcElement||t.target),main:r(t.currentTarget)}).src.bind(d.events),d.main.bind({mouseup:P})}function A(){d&&(d.src.unbind(d.events),d.main.unbind({mouseup:P}))}function B(t){t.stopPropagation(),v(t),C()}function T(t){var e=_(w(t));switch(u.type){case"line":u.points[1]=e;break;case"freehand":u.points.push(e);break;case"lines":case"polygon":u.points[u.points.length-1]=e}"path"===l.type&&("ellipse"===u.type?X():Y(),l._&&0===l._.dirty&&(l._.dirty=1))}function U(t){var e=_(w(t)),n=x.x,a=x.y,i=Math.max(Math.abs(e.x-x.x),1),r=Math.max(Math.abs(e.y-x.y),1);0<u.aspectratio&&(Math.abs((e.y-x.y)/(e.x-x.x))>1/u.aspectratio?i=Math.round(r/u.aspectratio):r=Math.round(i/u.aspectratio));e.x<x.x&&(n=x.x-i),e.y<x.y&&(a=x.y-r),u.x=n,u.y=a,u.width=i,u.height=r}function P(t){t.stopPropagation();var e=!1;if("lines"===u.type||"polygon"===u.type){if(s.activepage._index!==y._pageindex)return;if(u.points.push(_(w(t))),2!==t.button)return}else u.points?u.points&&u.points.length<2&&"custom"!==u.type&&(e=!0):(u.width<4&&u.height<4&&(u.width=100,u.height=100),C());A(),d=null,b(e?"cancelled":"drawn")}function C(){m(),l&&l.transform(E()),h&&h.repaint()}function E(){var t=Raphael.matrix(),e=s.getViewerTransform(y._pageindex),n=y.getTransform();return t.add(e.a,e.b,e.c,e.d,e.e,e.f),t.add(n.a,n.b,n.c,n.d,n.e,n.f),t.toTransformString()}function V(){l.attr({x:u.x,y:u.y,width:u.width,height:u.height}),c&&c.render(l,u),Atalasoft.Utils.Browser.Features.VML&&l.transform(E())}function D(){X(),l._&&0===l._.dirty&&(l._.dirty=1)}function R(){Y(),l._&&0===l._.dirty&&(l._.dirty=1)}o.events={drawstart:M,drawmove:B,drawend:P,dragstart:function(t){if(s.readonly)return;t.originalEvent.stopPropagation();var e=y.getBox();x={x:e.x,y:e.y}},dragmove:function(t){if(s.readonly)return;t.originalEvent.stopPropagation();var e=_({x:0,y:0}),n=_({x:t.dx,y:t.dy});y.translate(n.x-e.x,n.y-e.y),b("moving")},dragend:function(t){if(s.readonly)return;t.originalEvent.stopPropagation();var e=y.getBox();if(l.paper&&l.paper._page){var n=l.getBBox(),a={x:0,y:0,width:l.paper._page.width(),height:l.paper._page.height()};if(!(k(i=a,(r=n).x,r.y)||k(i,r.x+r.width,r.y)||k(i,r.x,r.y+r.height)||k(i,r.x+r.width,r.y+r.height)))return void y.translate(x.x-e.x,x.y-e.y)}var i,r;x.x===e.x&&x.y===e.y||b("moved")},update:function(t){C()},viewchanged:function(t){l=t.annview,h=t.textview,m="path"===l.type&&"custom"!==u.type?"ellipse"!==u.type?(v=T,R):(v=U,D):(v=U,V)},pinchstart:function(t){if(u.points||s.readonly)return;var e=_({x:t.touches[0].clientX,y:t.touches[0].clientY}),n=_({x:t.touches[1].clientX,y:t.touches[1].clientY}),a=y.getBox();g={start:Atalasoft.Utils.CalcDistance(e.x,e.y,n.x,n.y),rect:a}},pinchmove:function(t){if(!g)return;var e=_({x:t.touches[0].clientX,y:t.touches[0].clientY}),n=_({x:t.touches[1].clientX,y:t.touches[1].clientY}),a=Atalasoft.Utils.CalcDistance(e.x,e.y,n.x,n.y,g.start),i=a.x-g.start.x,r=a.y-g.start.y,o=g.rect.x-a.dx,s=g.rect.y-a.dy,p=g.rect.width+i,h=g.rect.height+r;u.points?y.transform(o,s,p,h):(u.x=o,u.y=s,u.width=p,u.height=h);l.paper&&l.paper._page&&l.paper._page._grips&&l.paper._page._grips.repaint();C()},pinchend:function(t){b("resized"),b("annoresized"),g=null}},o.drawStart=M,o.unbindEvents=A,o.repaint=C,o.getTransform=E;var S=.5522847498307936;function X(){var t=u.width/2,e=u.height/2,n=S*t,a=S*e,i=u.x+u.width/2,r=u.y+u.height/2,o=["M",i,r-e,"C",i+n,r-e,i+t,r-a,i+t,r,"C",i+t,r+a,i+n,r+e,i,r+e,"C",i-n,r+e,i-t,r+a,i-t,r,"C",i-t,r-a,i-n,r-e,i,r-e,"Z"];l.attr({path:o})}function Y(){if(u.points&&0!==u.points.length){for(var t=["M",u.points[0].x,u.points[0].y],e=1;e<u.points.length;e++)t=t.concat(["L",u.points[e].x,u.points[e].y]);"polygon"===u.type&&t.push("Z"),l.attr({path:t}),
+/**
     * Work around outlined by this post:
     * http://stackoverflow.com/questions/15693178/svg-line-markers-not-updating-when-line-moves-in-ie10
     */
-function D(){if(Atalasoft.Utils.Browser.Explorer){var t=parseInt(Atalasoft.Utils.Browser.Version,10);t>=10&&12>t&&q.node&&q.node.parentNode&&q.node.parentNode.insertBefore(q.node,q.node)}}function R(){z.extend(I,Z(j,L.getZoom(J._pageindex))),A(),ee=null}function S(t,e,n,a){j=Raphael.matrix(n,0,0,a,t,e),ee||(ee=k(I,1)),j.add(ee.a,ee.b,ee.c,ee.d,ee.e,ee.f),M()}function X(t,e){return Y(t,e.x,e.y)||Y(t,e.x+e.width,e.y)||Y(t,e.x,e.y+e.height)||Y(t,e.x+e.width,e.y+e.height)}function Y(t,e,n){return e>=t.x&&e<=t.x+t.width&&n>=t.y&&n<=t.y+t.height}function k(t,e){var n;if(t.points&&t.points.length>1){var a=J.getBox();n=Raphael.matrix(1,0,0,1,0,0),n.scale(1/a.width,1/a.height,0,0),n.translate(-a.x,-a.y)}else n=Raphael.matrix(e,0,0,e,0,0),n.translate(t.x,t.y),n.scale(t.width,t.height,0,0);return n}function Z(t,e){var n=t.split(),a={x:n.dx/e,y:n.dy/e,width:n.scalex/e,height:n.scaley/e};return a}var z=Atalasoft.$,F=this,I=t,L=e,N=n,q=null,G=null,H=i,J=a,O=null,$=null,j=null,K=null,Q=function(){},W=function(){};F.events={drawstart:u,drawmove:h,drawend:d,dragstart:f,dragmove:x,dragend:g,update:_,viewchanged:b,pinchstart:v,pinchmove:m,pinchend:w},r(),F.drawStart=u,F.unbindEvents=c,F.repaint=B,F.getTransform=T;var te=.5522847498307936;F.commitTransform=R,F.transformUI=S;var ee=null};
-"use strict";/**
+function(){if(Atalasoft.Utils.Browser.Explorer){var t=parseInt(Atalasoft.Utils.Browser.Version,10);10<=t&&t<12&&l.node&&l.node.parentNode&&l.node.parentNode.insertBefore(l.node,l.node)}}()}}o.commitTransform=function(){r.extend(u,(t=f,e=s.getZoom(y._pageindex),n=t.split(),{x:n.dx/e,y:n.dy/e,width:n.scalex/e,height:n.scaley/e})),l.transform(E()),C(),Z=null;var t,e,n},o.transformUI=function(t,e,n,a){f=Raphael.matrix(n,0,0,a,t,e),Z||(Z=function(t,e){var n;if(t.points&&1<t.points.length){var a=y.getBox();(n=Raphael.matrix(1,0,0,1,0,0)).scale(1/a.width,1/a.height,0,0),n.translate(-a.x,-a.y)}else(n=Raphael.matrix(e,0,0,e,0,0)).translate(t.x,t.y),n.scale(t.width,t.height,0,0);return n}(u,1));f.add(Z.a,Z.b,Z.c,Z.d,Z.e,Z.f),l.transform(f.toTransformString()),h&&h.repaint()};var Z=null;function k(t,e,n){return e>=t.x&&e<=t.x+t.width&&n>=t.y&&n<=t.y+t.height}};
+"use strict";
+/**
 * Mouse and Touch event handler for annotations
 * @private
-*/
-Atalasoft.Annotations.PointerHandler=function(){function t(){return M.bind.apply(M,arguments),w}function n(){return M.unbind.apply(M,arguments),w}function e(){M.trigger.apply(M,arguments)}function o(){e({type:"interactstart"})}function i(){e({type:"interactend"})}function u(t){e(t)}function a(t){e(t);var n=Atalasoft.Utils.getMousePositionJquery(t);e({type:"showeditor",x:n.x,y:n.y})}function c(t){return o(),e(t),e({type:"selectchange",shiftKey:t.shiftKey,ctrlKey:t.ctrlKey}),3===t.which&&e({type:"contextmenu",x:t.pageX,y:t.pageY,event:t}),!1}function s(t){e(t)}function r(t){e(t)}function l(t){e(t)}function p(t){e(t),i()}function h(t){t.stopPropagation(),t.preventDefault(),K.pinching=!0,e({type:"pinchstart",touches:t.originalEvent.touches})}function g(t){t.stopPropagation(),t.preventDefault(),e({type:"pinchmove",touches:t.originalEvent.touches})}function f(t){t.stopPropagation(),t.preventDefault(),K.pinching=!1,e({type:"pinchend",touches:t.originalEvent.touches}),1===t.originalEvent.touches.length&&y(t)}function y(t){if(K.e=t,o(),e(t),2===t.originalEvent.touches.length&&b(t.originalEvent.touches))P(),K.touching=!1,h(t);else if(1===t.originalEvent.touches.length){e("selectchange"),K.touching=!0;var n=Atalasoft.Utils.getMousePositionJquery(t);K.point.x=n.x,K.point.y=n.y,K.hold=setTimeout(E,1500)}}function v(t){K.e=t,e(t),K.pinching?g(t):K.moves++}function d(t){K.e=t,e(t),K.pinching?f(t):K.touching&&(K.touching=!1,P(),K.moves=0,K.tapped?x(t):(K.tapped=!0,setTimeout(m,300))),i()}function m(){K.tapped=!1}function x(t){K.e=t,e({type:"showeditor",x:K.point.x,y:K.point.y})}function E(){if(K.moves>0&&null!==K.e){var t=Atalasoft.Utils.getMousePositionJquery(K.e);Math.abs(K.point.x-t.x)<5&&Math.abs(K.point.y-t.y)<5&&(K.moves=0)}0===K.moves&&K.touching&&K.e&&(K.touching=!1,e({type:"contextmenu",x:K.e.originalEvent.touches[0].pageX,y:K.e.originalEvent.touches[0].pageY}))}function P(){null!==K.hold&&(clearTimeout(K.hold),K.hold=null)}function b(t){for(var n=null,e=0;e<t.length;e++){var o=t[e].target;if(!o||!o.raphael&&!o.raphaelParent)return!1;if(null===n)n=o;else if(n!==o)return!1}return!0}var A=Atalasoft.$,w=this,M=A({}),K={drawing:!1,hold:null,pinching:!1,tapped:!1,touching:!1,delta:{x:0,y:0},origin:{x:0,y:0},point:{x:0,y:0},moves:0,e:null};w.events={click:u,dblclick:a,mousedown:c,mousemove:s,mouseout:r,mouseover:l,mouseup:p},Atalasoft.Utils.Browser.Features.Touch&&A.extend(!0,w.events,{touchstart:y,touchmove:v,touchend:d}),w.bind=t,w.unbind=n,w.trigger=e};
-"use strict";Atalasoft.Annotations.FontUI=function(n,t){function o(){e(n)}function i(){h=null,w=null,A=null}function e(n){n&&m.extend(A,n),r()}function l(n){return n?A[n]:A}function r(n,t,o){n=n?n:w,n&&(t=void 0!==t?t:g,o||s(),u(n,t))}function u(n,t){var o="none";(A.strike||A.underline)&&(o=A.strike?"line-through ":"",o+=A.underline?"underline":""),n.css({color:A.color,"font-family":A.family,"font-style":A.italic?"italic":"normal","font-weight":A.bold?"bold":"normal","font-size":A.size*(t||1)+"pt","text-decoration":o})}function s(){var n=document.width||window.outerWidth,t=n/window.innerWidth;p!==t&&(p=t),g=A.size*y<z?z/p/A.size:y}function a(){return s(),g}function c(){return s(),p}function f(){return y}function d(n){y=n,r()}var m=Atalasoft.$,h=this,w=t,A={bold:!1,italic:!1,strike:!1,underline:!1,color:"#000000",family:"Arial",size:12},g=1,y=1,p=1,z=Atalasoft.Utils.Browser.Mobile.Any()?18:8;o(),h.dispose=i,h.set=e,h.get=l,h.repaint=r,h.applyTo=u,h.getAdjustedZoom=a,h.getUserZoom=c,h.getZoom=f,h.setZoom=d};
-"use strict";Atalasoft.Annotations.AnnotationTextRenderer=function(t,e){function n(){i(),d=s("<canvas "+(p?'dir="rtl"':"")+"/>"),c=s('<span style="position:absolute; visibility:hidden; left: -5000px;">{[|,0123456789Thqkbfjplyg</span>'),s(document.body).append(c)}function i(){var t,e=document.body;e.currentStyle?t=e.currentStyle.direction:window.getComputedStyle&&(t=document.defaultView.getComputedStyle(e,null).getPropertyValue("direction")),"rtl"===t.toLowerCase()&&(p=!0)}function l(){g=null,x=null,f=null,d&&d.remove&&(d.remove(),d=null),c&&c.remove&&(c.remove(),c=null)}function a(t){d&&c||n(),f.applyTo(c),d[0].width=t.width,d[0].height=t.height;var e=d[0].getContext("2d"),i=h(e,x.text.value,t.width),l=r(i.length),a=x.text.autoscale?l:x.text.font.size,o=[x.text.font.italic?"italic":"normal",x.text.font.bold?"bold":"normal",a+"px",x.text.font.family];e.font=o.join(" "),e.fillStyle=x.text.font.color,e.textBaseline="top";var u,s=0,g=i.length?i[0]:"";for(u=0;u<i.length;u++)i[u].length>g.length&&(g=i[u]);var w=e.measureText(g).width,v=p?w:0;if(x.text.autoscale&&"left"!==x.text.align)switch(x.text.align){case"center":e.textAlign=x.text.align,v=w/2;break;case"right":e.textAlign=x.text.align,v=p?0:w;break;default:e.textAlign="start",v=p?w:0}if(x.text.autoscale){var m=t.width/w;e.scale(m,1)}if(!x.text.autoscale)switch(x.text.align){case"center":e.textAlign=x.text.align,v=t.width/2;break;case"right":e.textAlign=x.text.align,v=t.width}for(u=0;u<i.length;u++)e.fillText(i[u],v,s,w),s+=l;return d[0].toDataURL()}function o(e,n){var i=v;i&&i.width===n.width&&i.height===n.height&&i.text===t.text.value&&i.align===t.text.align||(v={width:n.width,height:n.height,text:t.text.value,align:t.text.align},e.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",a(n)))}function r(t){if(x.text.autoscale){var e=Math.max(0,x.height-2*x.outline.width);return t>0?Math.floor(e/t):e}return f.applyTo(c,1),c[0].offsetHeight}function h(t,e,n){var i=[];if("string"==typeof e){var l="\n";if(x.text.autoscale)return e.split(l);for(var a=e,o=n,r=u(a),h="",g="",f=[],d=0;d<r.length;d++)if(h=g,g=r[d],t.measureText(g).width>o)for(var c=g.split(""),p=0;p<c.length;p++)f.push(c[p]),t.measureText(f.join("")).width>o&&(f.pop(),i.push(f.join("")),f.length=0,f.push(c[p]));else f.push(g),(t.measureText(s.trim(f.join(""))).width>o||h.indexOf(l)>=0)&&(f.pop(),i.push(f.join("")),f.length=0,f.push(g));f.length>0&&(i.push(f.join("")),f.length=0)}return i}function u(t){for(var e=[],n="",i=0,l=0;l<t.length;l++){var a=t[l];w[n]&&(e.push(t.substr(i,l-i)),i=l),n=a}return l>i&&e.push(t.substr(i,l-i)),e}var s=Atalasoft.$,g=this,x=t,f=e,d=null,c=null,p=!1,w={" ":!0,"-":!0,"?":!0,"\n":!0,"	":!0},v=null;g.dispose=l,g.renderToDataURL=a,g.renderToSVGImage=o};
-"use strict";Atalasoft.Annotations.AnnotationCustomRenderer=function(n,r){function t(){p=g.constructor?g.constructor:s,b=g.renderer?g.renderer:a}function u(){m=null,g=null,p=null,b=null}function e(){return y.bind.apply(y,arguments),m}function o(){return y.unbind.apply(y,arguments),m}function c(){return y.trigger.apply(y,arguments),m}function i(n){return p(n,g)}function l(n){b(n,g)}function s(n){return n.image()}function a(n){g.customurl?n.attr("src",g.customurl):f()}function f(){c("serverrenderurlrequested",{data:g,complete:d})}function d(n){n.customurl=n}var m=this,g=n,p=null,b=null,y=r;return m.dispose=u,m.bind=e,m.unbind=o,m.trigger=c,m.construct=i,m.render=l,t(),m};
-"use strict";Atalasoft.Annotations.PathHelper=function(n){function o(){A.points&&(A.points.length=0)}function t(){v=null,A=null,m.length=0,m=null}function c(n,o,t){m=m.concat([t?"m":"M",n,o]),p(n,o)}function i(n,o,t){m=m.concat([t?"l":"L",n,o]),p(n,o)}function u(n,o){m=m.concat([o?"h":"H",n]),p(n,null)}function l(n,o){m=m.concat([o?"v":"V",n]),p(null,n)}function a(n,o,t,c,i,u,l){m=m.concat([l?"c":"C",n,o,t,c,i,u]),p(i,u)}function e(n,o,t,c,i){m=m.concat([i?"s":"S",n,o,t,c])}function r(n,o,t,c,i){m=m.concat([i?"q":"Q",n,o,t,c])}function f(n,o,t){m=m.concat([t?"t":"T",n,o])}function s(n,o,t,c,i,u,l,a){m=m.concat([a?"a":"A",n,o,t,c,i,u,l])}function h(){m.push("Z")}function T(){return m}function p(n,o){A.points.push({x:n,y:o})}var v=this,A=n,m=[];return v.dispose=t,v.moveTo=c,v.lineTo=i,v.lineToHorizontal=u,v.lineToVertical=l,v.curveTo=a,v.curveToSmooth=e,v.curveToQuadratic=r,v.curveToQuadraticSmooth=f,v.ellipticalArc=s,v.close=h,v.toArray=T,o(),v};
-"use strict";Atalasoft.Forms.Field=function(e,t,n){function i(){Atalasoft.Forms.Field.__staticInitOccured||(Atalasoft.Forms.Field.__staticInitOccured=!0,Atalasoft.Utils.Browser.Explorer&&Atalasoft.Utils.Browser.Version<=9&&!function(){var e=null,t=null,n=null,i={get:function(){return n.get.call(this)},set:function(e){t=e,n.set.call(this,e)}},a=function(n){if("value"===n.propertyName){var i=n.srcElement.value;i!==t&&(t=i,null!=R(n.srcElement).data("ataladata")&&R(e).trigger("input"))}},o=function(o){e=o,t=o.value,n=Object.getOwnPropertyDescriptor(o.constructor.prototype,"value"),Object.defineProperty(e,"value",i),e.attachEvent("onpropertychange",a)},r=function(){e&&(delete e.value,e.detachEvent("onpropertychange",a),e=null,t=null,n=null)};R(document).on("focusin",function(e){("TEXTAREA"===e.target.nodeName||"INPUT"===e.target.nodeName&&("text"===e.target.type||"password"===e.target.type))&&(r(),o(e.target))}),R(document).on("focusout",function(){r()}),R(document).on("selectionchange keyup keydown",function(n){e&&e.value!==t&&(t=e.value,null!=R(n.srcElement).data("ataladata")&&R(e).trigger("input"))})}())}function a(){V._pageindex=n,o(e.type),c(e,!0)}function o(e){R.extend(!0,W,L[e])}function r(){j&&j.unbind(),H=null,V=null,j=null,W=null}function l(){j.bind.apply(j,arguments)}function s(){j.unbind.apply(j,arguments)}function u(){return j.trigger.apply(j,arguments),V}function c(e,t){e&&(t?R.extend(!0,W,e):R.extend(W,e))}function d(e){return e?W[e]:W}function g(e){J=e,V.hasOwnProperty("_pageindex")&&(V._pageindex=e)}function f(){function e(){W.update&&delete W.update}D={update:function(){R.extend(!0,W,D),e(),S(),B(),w()}},R.extend(!0,D,W)}function h(){return D?R.extend(!0,D,W):f(),D}function p(){return Z}function x(){return j}function b(){return JSON.stringify(W)}function m(e){var t,n,i,a,o,r=0,l=0;return"number"==typeof e.selectionStart&&"number"==typeof e.selectionEnd?(r=e.selectionStart,l=e.selectionEnd):(n=document.selection.createRange(),n&&n.parentElement()===e&&(a=e.value.length,t=e.value.replace(/\r\n/g,"\n"),i=e.createTextRange(),i.moveToBookmark(n.getBookmark()),o=e.createTextRange(),o.collapse(!1),i.compareEndPoints("StartToEnd",o)>-1?r=l=a:(r=-i.moveStart("character",-a),r+=t.slice(0,r).split("\n").length-1,i.compareEndPoints("EndToEnd",o)>-1?l=a:(l=-i.moveEnd("character",-a),l+=t.slice(0,l).split("\n").length-1)))),{start:r,end:l}}function v(e,t){return t-(e.value.slice(0,t).split("\r\n").length-1)}function y(e,t){if("number"==typeof e.selectionStart&&"number"==typeof e.selectionEnd)e.selectionStart=t.start,e.selectionEnd=t.end;else{var n=e.createTextRange(),i=v(e,t.start);n.collapse(!0),t.start===t.end?n.move("character",i):(n.moveEnd("character",v(e,t.end)),n.moveStart("character",i)),n.select()}}function k(e){var t=null;switch(W.type){case"button":t=R("<button/>"),t.click(function(){return u({type:"buttonclicked",name:W.fieldname}),!1});break;case"textbox":case"signature":t=W.text.multiline?R('<textarea style="overflow-y:'+(W.text.scrollable?"auto":"hidden")+';resize:none"></textarea>'):R('<input type="text" />'),W.text.value=t.val(W.text.value).val();var n=!1;t.on("paste",function(){return n=!0,!0}),t.on("input",function(e){-1===W.text.maximumfieldheight&&(W.text.maximumfieldheight=R(this).get(0).scrollHeight);var t=W.text.maxlength>0&&R(this).val().length>W.text.maxlength,i=!W.text.scrollable&&R(this).get(0).scrollHeight>W.text.maximumfieldheight,a=R(this).val().length>W.text.value.length;if(a&&(t||i)){var o=m(e.target);if(n&&W.text.maxlength>0){var r=R(this).val(),l=r.length===o.start;if(l)R(this).val(r.substr(0,W.text.maxlength));else{var s=r.length-W.text.value.length,u=W.text.maxlength-W.text.value.length,c=r.substr(0,o.start-s+u),d=W.text.value.substr(o.start-s);R(this).val(c+d),y(e.target,{start:c.length,end:c.length})}}else R(this).val(W.text.value),y(e.target,{start:o.start-1,end:o.start-1})}!W.text.preserveoverflow&&R(this).get(0).scrollHeight<W.text.maximumfieldheight&&(W.text.maximumfieldheight=R(this).get(0).scrollHeight),W.text.value=R(this).val(),n=!1});break;case"checkbox":t=R('<input type="checkbox" />').prop({name:W.group,checked:W.checked}),t.val(W.value);break;case"radio":t=R('<input type="radio" />').prop({name:W.group,checked:W.checked}),t.val(W.value);break;case"choice":if(t=R("<select></select>"),t.text(W.value),t.attr({multiple:W.multiple,size:W.multiline&&W.items?W.items.length:0}),W.items){t.items=[];for(var i in W.items)if(W.items.hasOwnProperty(i)){var a=R("<option></option>",{selected:W.items[i].checked,value:W.items[i].value,text:W.items[i].text});t.append(a),t.items[i]=a}}if(W.multiline&&W.items){var o=function(){R(this).trigger("change")};t.bind({mouseup:o,touchend:o})}break;case"generic":t=R("<div></div>")}if(t){if("textbox"===W.type||"signature"===W.type){var r=W.text.font.paddingtop,l=W.text.font.linespacing>0?W.text.font.linespacing+"px":"1.14pt";t.css({resize:"none",position:"absolute",paddingTop:W.multiline?r:0,paddingBottom:W.multiline?"2pt":0,lineHeight:l,margin:0,"-webkit-box-sizing":"border-box","-moz-box-sizing":"border-box","box-sizing":"border-box"})}else t.css({resize:"none",position:"absolute",padding:0,margin:0,"-webkit-box-sizing":"border-box","-moz-box-sizing":"border-box","box-sizing":"border-box"});t.bind({click:Atalasoft.Utils.__sp,mousedown:Atalasoft.Utils.__sp,mouseup:Atalasoft.Utils.__sp,change:A,uncheck:_,focusin:O,focusout:P})}return e._fields&&e._fields.push(t),Atalasoft.Utils.Browser.Explorer&&Atalasoft.Utils.Browser.Version<=9&&t.data("ataladata",{}),e.append(t),t}function w(){null!==M&&(W.selectable?(X.isBound("selectable")||(j.bind(X.selectable),X.bound("selectable")),W.movable&&!X.isBound("movable")?(j.bind(X.movable),X.bound("movable")):!W.movable&&X.isBound("movable")&&(j.unbind(X.movable),X.unbound("movable")),Atalasoft.Utils.Browser.Features.Touch&&(W.resizable&&!X.isBound("resizable")?(j.bind(X.resizable),X.bound("resizable")):!W.resizable&&X.isBound("resizable")&&(j.unbind(X.resizable),X.unbound("resizable")))):!W.selectable&&X.isBound("selectable")&&(j.unbind(X.selectable),X.unbound("selectable"),j.unbind(X.movable),X.unbound("movable"),j.unbind(X.resizable),X.unbound("resizable")))}function z(){var e=W.fieldname.lastIndexOf(".");return e>=0?W.fieldname.substr(0,e):null}function E(){var e=W.fieldname.lastIndexOf(".");return e>=0?W.fieldname.substr(e+1):W.fieldname}function A(e){switch(W.type){case"button":break;case"textbox":case"signature":W.text.value=this.value;var t=z(W);if(H.multiviewFields.hasOwnProperty(t)){var n=H.multiviewFields[t];for(var i in n)if(n.hasOwnProperty(i)){var a=n[i];if(a!==V){var o=a.get();o.text.value=this.value,a.updateView()}}}break;case"checkbox":W.checked=this.checked,W.group&&W.checked&&(R('input[name="'+W.group+'"]').trigger("uncheck"),W.checked=!0,this.checked=!0);break;case"radio":W.group&&R('input[name="'+W.group+'"]').trigger("uncheck"),W.checked=this.checked;break;case"choice":var r=[];if("undefined"!=typeof e.target.selectedOptions)r=e.target.selectedOptions;else if(e.target.multiple)for(var l=0;l<e.target.options.length;l++)e.target.options[l].selected&&r.push(e.target.options[l]);else e.target.selectedIndex>=0&&r.push(e.target.options[e.target.selectedIndex]);for(var s in W.items)if(W.items.hasOwnProperty(s)){var u=W.items[s];u.checked=!1;for(var c in r)if(r.hasOwnProperty(c)){var d=r[c];d.value===u.value&&(u.checked=!0)}}}}function _(e){"checkbox"===e.target.type&&(e.target.checked=!1),W.checked=!1}function O(){U(!0),u({type:"fieldfocusin",field:V})}function P(){U(!1),u({type:"fieldfocusout",field:V})}function B(e){e&&(Z=k(e),Z.zoom=q,S(),u({type:"viewchanged",fieldview:Z})),u("repaint")}function S(){if(Z){if(W.hidden||W.noview)return Z.hide(),void 0;Z.show();var e=R.extend({},F(),T());Z.css(e),I(),N(),"textbox"===W.type?U(Z.is(":focus")):"button"===W.type&&Z.text(W.text.value)}}function T(){var e=W.border&&"underline"===W.border.style;return{backgroundColor:W.backgroundcolor,color:W.color||W.text.font.color,borderStyle:W.border&&W.border.style&&!e?W.border.style:"none",borderBottomStyle:e?"solid":"inherit",borderColor:W.border?W.border.color:null,fontFamily:W.text.font.family,fontStyle:W.text.font.italic?"italic":W.text.font.oblique?"oblique":"normal",fontWeight:W.text.font.bold?"bold":"",textAlign:W.text.align}}function F(){var e=H.getViewerTransform(J),t=C(e,W.x,W.y),n=C(e,W.x+W.width,W.y+W.height),i=H.getZoom(J),a=W.width*i,o=W.height*i,r={x:(t.x+n.x-a)/2,y:(t.y+n.y-o)/2},l=H.getPageRotation(J)+W.rotation,s="rotate("+l+"deg)",u={left:Math.round(r.x)+"px",top:Math.round(r.y)+"px",width:a+"px",height:o+"px","max-width":a+"px","max-height":o+"px"},c=0!==l?Atalasoft.Utils.__htmlTransformStyle(s):Atalasoft.Utils.__htmlTransformStyle("");return R.extend(u,c),("textbox"===W.type||"signature"===W.type)&&(u.cursor=l%180===0?"text":"vertical-text"),u.visibility=Atalasoft.Utils.Browser.Explorer8&&l%180!==0?"hidden":"visible",u}function U(e){"textbox"===W.type&&(e||(W.text.value?Z.val()!==W.text.value&&Z.val(W.text.value):Z.val(W.text.defaultvalue)))}function I(){H.highlighted?(Z.addClass("atala-ui-form-highlight"),W.required?Z.addClass("atala-ui-form-required"):Z.removeClass("atala-ui-form-required")):Z.removeClass("atala-ui-form-highlight")}function N(){W.readonly?Z.attr("readonly","readonly"):Z.removeAttr("readonly")}function q(e){e=e||H.getZoom(J),Z.css({fontSize:Math.round((W.text.font.size||12)*e*(H.dpi/96)),borderWidth:W.border?Math.round(W.border.width*e):0}),W.text&&W.text.align&&Z.css({paddingLeft:W.text.leftPadding*e+"px",paddingRight:W.text.rightPadding*e+"px"}),S()}function C(e,t,n){return{x:e.x(t,n),y:e.y(t,n)}}var R=Atalasoft.$,H=t,V=this,j=R({}),M=null,Z=null,D=null,J=n,W={type:"",backgroundcolor:"",color:null,fieldname:"",hidden:!1,isfieldrequired:!1,items:null,locked:!1,norotate:!1,noview:!1,nozoom:!1,readonly:!1,required:!1,x:0,y:0,width:0,height:0,rotation:0,border:{color:"#000",style:"none",radius:{vertical:0,horizontal:0},width:0},text:{value:null,align:"left",font:{bold:!1,italic:!1,strike:!1,underline:!1,color:"black",family:"Arial",size:12,paddingtop:0,linespacing:0},ismultiline:!1,ispassword:!1,isrichtext:!1,scrollable:!1,maxlength:0,maximumfieldheight:-1,preserveoverflow:!1}},L={button:{},checkbox:{checked:!1,group:null},radio:{checked:!1,group:null},textbox:{text:{leftPadding:2,rightPadding:2,preserveoverflow:!1}},signature:{text:{leftPadding:2,rightPadding:2,preserveoverflow:!1}},choice:{multiline:!1}},X={};return i(),a(),V.dispose=r,V.bind=l,V.unbind=s,V.trigger=u,V.set=c,V.get=d,V.setPageIndex=g,V.getClonedData=h,V.getObject=p,V.getEventObject=x,V.getZoom=function(){return H.zoom},V.stringify=b,V.getJSON=b,V.getParentName=z,V.getName=E,V.repaint=B,V.updateView=S,V.zoom=q,V},Atalasoft.Forms.Field.__staticInitOccured=!1;
-"use strict";/**
- * WebDocuemntViewer PDF Forms API.
+*/Atalasoft.Annotations.PointerHandler=function(){var t=Atalasoft.$,e=this,n=t({}),o={drawing:!1,hold:null,pinching:!1,tapped:!1,touching:!1,delta:{x:0,y:0},origin:{x:0,y:0},point:{x:0,y:0},moves:0,e:null};function i(){n.trigger.apply(n,arguments)}function u(){i({type:"interactstart"})}function a(){i({type:"interactend"})}function c(t){if(o.e=t,u(),i(t),2===t.originalEvent.touches.length&&function(t){for(var e=null,n=0;n<t.length;n++){var o=t[n].target;if(!o||!o.raphael&&!o.raphaelParent)return!1;if(null===e)e=o;else if(e!==o)return!1}return!0}(t.originalEvent.touches))l(),o.touching=!1,(n=t).stopPropagation(),n.preventDefault(),o.pinching=!0,i({type:"pinchstart",touches:n.originalEvent.touches});else if(1===t.originalEvent.touches.length){i("selectchange"),o.touching=!0;var e=Atalasoft.Utils.getMousePositionJquery(t);o.point.x=e.x,o.point.y=e.y,o.hold=setTimeout(s,1500)}var n}function r(){o.tapped=!1}function s(){if(0<o.moves&&null!==o.e){var t=Atalasoft.Utils.getMousePositionJquery(o.e);Math.abs(o.point.x-t.x)<5&&Math.abs(o.point.y-t.y)<5&&(o.moves=0)}0===o.moves&&o.touching&&o.e&&(o.touching=!1,i({type:"contextmenu",x:o.e.originalEvent.touches[0].pageX,y:o.e.originalEvent.touches[0].pageY}))}function l(){null!==o.hold&&(clearTimeout(o.hold),o.hold=null)}e.events={click:function(t){i(t)},dblclick:function(t){i(t);var e=Atalasoft.Utils.getMousePositionJquery(t);i({type:"showeditor",x:e.x,y:e.y})},mousedown:function(t){u(),i(t),i({type:"selectchange",shiftKey:t.shiftKey,ctrlKey:t.ctrlKey}),3===t.which&&i({type:"contextmenu",x:t.pageX,y:t.pageY,event:t});return!1},mousemove:function(t){i(t)},mouseout:function(t){i(t)},mouseover:function(t){i(t)},mouseup:function(t){i(t),a()}},Atalasoft.Utils.Browser.Features.Touch&&t.extend(!0,e.events,{touchstart:c,touchmove:function(t){i(o.e=t),o.pinching?((e=t).stopPropagation(),e.preventDefault(),i({type:"pinchmove",touches:e.originalEvent.touches})):o.moves++;var e},touchend:function(t){i(o.e=t),o.pinching?((n=t).stopPropagation(),n.preventDefault(),o.pinching=!1,i({type:"pinchend",touches:n.originalEvent.touches}),1===n.originalEvent.touches.length&&c(n)):o.touching&&(o.touching=!1,l(),o.moves=0,o.tapped?(e=t,o.e=e,i({type:"showeditor",x:o.point.x,y:o.point.y})):(o.tapped=!0,setTimeout(r,300)));var e;var n;a()}}),e.bind=function(){return n.bind.apply(n,arguments),e},e.unbind=function(){return n.unbind.apply(n,arguments),e},e.trigger=i};
+"use strict";Atalasoft.Annotations.FontUI=function(t,n){var o=Atalasoft.$,i=this,e=n,r={bold:!1,italic:!1,strike:!1,underline:!1,color:"#000000",family:"Arial",size:12},l=1,s=1,u=1,a=Atalasoft.Utils.Browser.Mobile.Any()?18:8;function c(t){t&&o.extend(r,t),f()}function f(t,n,o){(t=t||e)&&(n=void 0!==n?n:l,o||m(),d(t,n))}function d(t,n){var o="none";(r.strike||r.underline)&&(o=r.strike?"line-through ":"",o+=r.underline?"underline":""),t.css({color:r.color,"font-family":r.family,"font-style":r.italic?"italic":"normal","font-weight":r.bold?"bold":"normal","font-size":r.size*(n||1)+"pt","text-decoration":o})}function m(){var t=(document.width||window.outerWidth)/window.innerWidth;u!==t&&(u=t),l=r.size*s<a?a/u/r.size:s}c(t),i.dispose=function(){r=e=i=null},i.set=c,i.get=function(t){return t?r[t]:r},i.repaint=f,i.applyTo=d,i.getAdjustedZoom=function(){return m(),l},i.getUserZoom=function(){return m(),u},i.getZoom=function(){return s},i.setZoom=function(t){s=t,f()}};
+"use strict";Atalasoft.Annotations.AnnotationTextRenderer=function(i,t){var f=Atalasoft.$,e=this,d=i,x=t,c=null,p=null,w=!1,v={" ":!0,"-":!0,"?":!0,"\n":!0,"\t":!0},l=null;function m(){!function(){var t,e=document.body;e.currentStyle?t=e.currentStyle.direction:window.getComputedStyle&&(t=document.defaultView.getComputedStyle(e,null).getPropertyValue("direction"));"rtl"===t.toLowerCase()&&(w=!0)}(),c=f("<canvas "+(w?'dir="rtl"':"")+"/>"),p=f('<span style="position:absolute; visibility:hidden; left: -5000px;">{[|,0123456789Thqkbfjplyg</span>'),f(document.body).append(p)}function a(t){c&&p||m(),x.applyTo(p),c[0].width=t.width,c[0].height=t.height;var e=c[0].getContext("2d"),n=function(t,e,n){var i=[];if("string"==typeof e){if(d.text.autoscale)return e.split("\n");for(var l=e,a=n,o=function(t){for(var e=[],n="",i=0,l=0;l<t.length;l++){var a=t[l];v[n]&&(e.push(t.substr(i,l-i)),i=l),n=a}i<l&&e.push(t.substr(i,l-i));return e}(l),r="",h="",u=[],s=0;s<o.length;s++)if(r=h,h=o[s],t.measureText(h).width>a)for(var g=h.split(""),x=0;x<g.length;x++)u.push(g[x]),t.measureText(u.join("")).width>a&&(u.pop(),i.push(u.join("")),u.length=0,u.push(g[x]));else u.push(h),(t.measureText(f.trim(u.join(""))).width>a||0<=r.indexOf("\n"))&&(u.pop(),i.push(u.join("")),u.length=0,u.push(h));0<u.length&&(i.push(u.join("")),u.length=0)}return i}(e,d.text.value,t.width),i=function(t){{if(d.text.autoscale){var e=Math.max(0,d.height-2*d.outline.width);return 0<t?Math.floor(e/t):e}return x.applyTo(p,1),p[0].offsetHeight}}(n.length),l=d.text.autoscale?i:d.text.font.size,a=[d.text.font.italic?"italic":"normal",d.text.font.bold?"bold":"normal",l+"px",d.text.font.family];e.font=a.join(" "),e.fillStyle=d.text.font.color,e.textBaseline="top";var o,r=0,h=n.length?n[0]:"";for(o=0;o<n.length;o++)n[o].length>h.length&&(h=n[o]);var u=e.measureText(h).width,s=w?u:0;if(d.text.autoscale&&"left"!==d.text.align)switch(d.text.align){case"center":e.textAlign=d.text.align,s=u/2;break;case"right":e.textAlign=d.text.align,s=w?0:u;break;default:e.textAlign="start",s=w?u:0}if(d.text.autoscale){var g=t.width/u;e.scale(g,1)}if(!d.text.autoscale)switch(d.text.align){case"center":e.textAlign=d.text.align,s=t.width/2;break;case"right":e.textAlign=d.text.align,s=t.width}for(o=0;o<n.length;o++)e.fillText(n[o],s,r,u),r+=i;return c[0].toDataURL()}e.dispose=function(){x=d=e=null,c&&c.remove&&(c.remove(),c=null);p&&p.remove&&(p.remove(),p=null)},e.renderToDataURL=a,e.renderToSVGImage=function(t,e){var n=l;n&&n.width===e.width&&n.height===e.height&&n.text===i.text.value&&n.align===i.text.align||(l={width:e.width,height:e.height,text:i.text.value,align:i.text.align},t.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",a(e)))}};
+"use strict";Atalasoft.Annotations.AnnotationCustomRenderer=function(n,r){var t=this,u=n,e=null,o=null,c=r;function i(){return c.trigger.apply(c,arguments),t}function s(n){return n.image()}function l(n){u.customurl?n.attr("src",u.customurl):i("serverrenderurlrequested",{data:u,complete:a})}function a(n){n.customurl=n}return t.dispose=function(){o=e=u=t=null},t.bind=function(){return c.bind.apply(c,arguments),t},t.unbind=function(){return c.unbind.apply(c,arguments),t},t.trigger=i,t.construct=function(n){return e(n,u)},t.render=function(n){o(n,u)},e=u.constructor?u.constructor:s,o=u.renderer?u.renderer:l,t};
+"use strict";Atalasoft.Annotations.PathHelper=function(n){var o=this,t=n,e=[];function l(n,o){t.points.push({x:n,y:o})}return o.dispose=function(){t=o=null,e.length=0,e=null},o.moveTo=function(n,o,t){e=e.concat([t?"m":"M",n,o]),l(n,o)},o.lineTo=function(n,o,t){e=e.concat([t?"l":"L",n,o]),l(n,o)},o.lineToHorizontal=function(n,o){e=e.concat([o?"h":"H",n]),l(n,null)},o.lineToVertical=function(n,o){e=e.concat([o?"v":"V",n]),l(null,n)},o.curveTo=function(n,o,t,c,i,u,a){e=e.concat([a?"c":"C",n,o,t,c,i,u]),l(i,u)},o.curveToSmooth=function(n,o,t,c,i){e=e.concat([i?"s":"S",n,o,t,c])},o.curveToQuadratic=function(n,o,t,c,i){e=e.concat([i?"q":"Q",n,o,t,c])},o.curveToQuadraticSmooth=function(n,o,t){e=e.concat([t?"t":"T",n,o])},o.ellipticalArc=function(n,o,t,c,i,u,a,l){e=e.concat([l?"a":"A",n,o,t,c,i,u,a])},o.close=function(){e.push("Z")},o.toArray=function(){return e},t.points&&(t.points.length=0),o};
+"use strict";Atalasoft.Forms.Field=function(e,t,n){var i,m=Atalasoft.$,c=t,d=this,a=m({}),o=null,r=null,l=null,g=n,v={type:"",backgroundcolor:"",color:null,fieldname:"",hidden:!1,isfieldrequired:!1,items:null,locked:!1,norotate:!1,noview:!1,nozoom:!1,readonly:!1,required:!1,x:0,y:0,width:0,height:0,rotation:0,border:{color:"#000",style:"none",radius:{vertical:0,horizontal:0},width:0},text:{value:null,align:"left",font:{bold:!1,italic:!1,strike:!1,underline:!1,color:"black",family:"Arial",size:12,paddingtop:0,linespacing:0},ismultiline:!1,ispassword:!1,isrichtext:!1,scrollable:!1,maxlength:0,maximumfieldheight:-1,preserveoverflow:!1}},s={button:{},checkbox:{checked:!1,group:null},radio:{checked:!1,group:null},textbox:{text:{leftPadding:2,rightPadding:2,preserveoverflow:!1}},signature:{text:{leftPadding:2,rightPadding:2,preserveoverflow:!1}},choice:{multiline:!1}},u={};function h(){return a.trigger.apply(a,arguments),d}function f(e,t){e&&(t?m.extend(!0,v,e):m.extend(v,e))}function p(){l={update:function(){m.extend(!0,v,l),v.update&&delete v.update,P(),O(),null!==o&&(v.selectable?(u.isBound("selectable")||(a.bind(u.selectable),u.bound("selectable")),v.movable&&!u.isBound("movable")?(a.bind(u.movable),u.bound("movable")):!v.movable&&u.isBound("movable")&&(a.unbind(u.movable),u.unbound("movable")),Atalasoft.Utils.Browser.Features.Touch&&(v.resizable&&!u.isBound("resizable")?(a.bind(u.resizable),u.bound("resizable")):!v.resizable&&u.isBound("resizable")&&(a.unbind(u.resizable),u.unbound("resizable")))):!v.selectable&&u.isBound("selectable")&&(a.unbind(u.selectable),u.unbound("selectable"),a.unbind(u.movable),u.unbound("movable"),a.unbind(u.resizable),u.unbound("resizable")))}},m.extend(!0,l,v)}function x(){return JSON.stringify(v)}function b(e,t){return t-(e.value.slice(0,t).split("\r\n").length-1)}function y(e,t){if("number"==typeof e.selectionStart&&"number"==typeof e.selectionEnd)e.selectionStart=t.start,e.selectionEnd=t.end;else{var n=e.createTextRange(),i=b(e,t.start);n.collapse(!0),t.start===t.end?n.move("character",i):(n.moveEnd("character",b(e,t.end)),n.moveStart("character",i)),n.select()}}function k(e){var t=null;switch(v.type){case"button":(t=m("<button/>")).click(function(){return h({type:"buttonclicked",name:v.fieldname}),!1});break;case"textbox":case"signature":t=v.text.multiline?m('<textarea style="overflow-y:'+(v.text.scrollable?"auto":"hidden")+';resize:none"></textarea>'):m('<input type="text" />'),v.text.value=t.val(v.text.value).val();var b=!1;t.on("paste",function(){return b=!0}),t.on("input",function(e){-1===v.text.maximumfieldheight&&(v.text.maximumfieldheight=m(this).get(0).scrollHeight);var t,n,i,a,o,r,l,s,u=0<v.text.maxlength&&m(this).val().length>v.text.maxlength,d=!v.text.scrollable&&m(this).get(0).scrollHeight>v.text.maximumfieldheight;if(m(this).val().length>v.text.value.length&&(u||d)){var c=(t=e.target,s=l=0,"number"==typeof t.selectionStart&&"number"==typeof t.selectionEnd?(l=t.selectionStart,s=t.selectionEnd):(i=document.selection.createRange())&&i.parentElement()===t&&(o=t.value.length,n=t.value.replace(/\r\n/g,"\n"),(a=t.createTextRange()).moveToBookmark(i.getBookmark()),(r=t.createTextRange()).collapse(!1),-1<a.compareEndPoints("StartToEnd",r)?l=s=o:(l=-a.moveStart("character",-o),l+=n.slice(0,l).split("\n").length-1,-1<a.compareEndPoints("EndToEnd",r)?s=o:(s=-a.moveEnd("character",-o),s+=n.slice(0,s).split("\n").length-1))),{start:l,end:s});if(b&&0<v.text.maxlength){var g=m(this).val();if(g.length===c.start)m(this).val(g.substr(0,v.text.maxlength));else{var h=g.length-v.text.value.length,f=v.text.maxlength-v.text.value.length,p=g.substr(0,c.start-h+f),x=v.text.value.substr(c.start-h);m(this).val(p+x),y(e.target,{start:p.length,end:p.length})}}else m(this).val(v.text.value),y(e.target,{start:c.start-1,end:c.start-1})}!v.text.preserveoverflow&&m(this).get(0).scrollHeight<v.text.maximumfieldheight&&(v.text.maximumfieldheight=m(this).get(0).scrollHeight),v.text.value=m(this).val(),b=!1});break;case"checkbox":(t=m('<input type="checkbox" />').prop({name:v.group,checked:v.checked})).val(v.value);break;case"radio":(t=m('<input type="radio" />').prop({name:v.group,checked:v.checked})).val(v.value);break;case"choice":if((t=m("<select></select>")).text(v.value),t.attr({multiple:v.multiple,size:v.multiline&&v.items?v.items.length:0}),v.items)for(var n in t.items=[],v.items)if(v.items.hasOwnProperty(n)){var i=m("<option></option>",{selected:v.items[n].checked,value:v.items[n].value,text:v.items[n].text});t.append(i),t.items[n]=i}if(v.multiline&&v.items){var a=function(e){m(this).trigger("change")};t.bind({mouseup:a,touchend:a})}break;case"generic":t=m("<div></div>")}if(t){if("textbox"===v.type||"signature"===v.type){var o=v.text.font.paddingtop,r=0<v.text.font.linespacing?v.text.font.linespacing+"px":"1.14pt";t.css({resize:"none",position:"absolute",paddingTop:v.multiline?o:0,paddingBottom:v.multiline?"2pt":0,lineHeight:r,margin:0,"-webkit-box-sizing":"border-box","-moz-box-sizing":"border-box","box-sizing":"border-box"})}else t.css({resize:"none",position:"absolute",padding:0,margin:0,"-webkit-box-sizing":"border-box","-moz-box-sizing":"border-box","box-sizing":"border-box"});t.bind({click:Atalasoft.Utils.__sp,mousedown:Atalasoft.Utils.__sp,mouseup:Atalasoft.Utils.__sp,change:z,uncheck:E,focusin:A,focusout:_})}return e._fields&&e._fields.push(t),Atalasoft.Utils.Browser.Explorer&&Atalasoft.Utils.Browser.Version<=9&&t.data("ataladata",{}),e.append(t),t}function w(){var e=v.fieldname.lastIndexOf(".");return 0<=e?v.fieldname.substr(0,e):null}function z(e){switch(v.type){case"button":break;case"textbox":case"signature":v.text.value=this.value;var t=w();if(c.multiviewFields.hasOwnProperty(t)){var n=c.multiviewFields[t];for(var i in n)if(n.hasOwnProperty(i)){var a=n[i];if(a!==d)a.get().text.value=this.value,a.updateView()}}break;case"checkbox":v.checked=this.checked,v.group&&v.checked&&(m('input[name="'+v.group+'"]').trigger("uncheck"),v.checked=!0,this.checked=!0);break;case"radio":v.group&&m('input[name="'+v.group+'"]').trigger("uncheck"),v.checked=this.checked;break;case"choice":var o=[];if(void 0!==e.target.selectedOptions)o=e.target.selectedOptions;else if(e.target.multiple)for(var r=0;r<e.target.options.length;r++)e.target.options[r].selected&&o.push(e.target.options[r]);else 0<=e.target.selectedIndex&&o.push(e.target.options[e.target.selectedIndex]);for(var l in v.items)if(v.items.hasOwnProperty(l)){var s=v.items[l];for(var u in s.checked=!1,o){if(o.hasOwnProperty(u))o[u].value===s.value&&(s.checked=!0)}}}}function E(e){"checkbox"===e.target.type&&(e.target.checked=!1),v.checked=!1}function A(e){B(!0),h({type:"fieldfocusin",field:d})}function _(e){B(!1),h({type:"fieldfocusout",field:d})}function O(e){e&&((r=k(e)).zoom=S,P(),h({type:"viewchanged",fieldview:r})),h("repaint")}function P(){if(r){if(v.hidden||v.noview)return void r.hide();r.show();var e=m.extend({},function(){var e=c.getViewerTransform(g),t=T(e,v.x,v.y),n=T(e,v.x+v.width,v.y+v.height),i=c.getZoom(g),a=v.width*i,o=v.height*i,r={x:(t.x+n.x-a)/2,y:(t.y+n.y-o)/2},l=c.getPageRotation(g)+v.rotation,s="rotate("+l+"deg)",u={left:Math.round(r.x)+"px",top:Math.round(r.y)+"px",width:a+"px",height:o+"px","max-width":a+"px","max-height":o+"px"},d=0!==l?Atalasoft.Utils.__htmlTransformStyle(s):Atalasoft.Utils.__htmlTransformStyle("");m.extend(u,d),("textbox"===v.type||"signature"===v.type)&&(u.cursor=l%180==0?"text":"vertical-text");Atalasoft.Utils.Browser.Explorer8&&l%180!=0?u.visibility="hidden":u.visibility="visible";return u}(),(t=v.border&&"underline"===v.border.style,{backgroundColor:v.backgroundcolor,color:v.color||v.text.font.color,borderStyle:v.border&&v.border.style&&!t?v.border.style:"none",borderBottomStyle:t?"solid":"inherit",borderColor:v.border?v.border.color:null,fontFamily:v.text.font.family,fontStyle:v.text.font.italic?"italic":v.text.font.oblique?"oblique":"normal",fontWeight:v.text.font.bold?"bold":"",textAlign:v.text.align}));r.css(e),c.highlighted?(r.addClass("atala-ui-form-highlight"),v.required?r.addClass("atala-ui-form-required"):r.removeClass("atala-ui-form-required")):r.removeClass("atala-ui-form-highlight"),v.readonly?r.attr("readonly","readonly"):r.removeAttr("readonly"),"textbox"===v.type?B(r.is(":focus")):"button"===v.type&&r.text(v.text.value)}var t}function B(e){"textbox"===v.type&&(e||(v.text.value?r.val()!==v.text.value&&r.val(v.text.value):r.val(v.text.defaultvalue)))}function S(e){e=e||c.getZoom(g),r.css({fontSize:Math.round((v.text.font.size||12)*e*(c.dpi/96)),borderWidth:v.border?Math.round(v.border.width*e):0}),v.text&&v.text.align&&r.css({paddingLeft:v.text.leftPadding*e+"px",paddingRight:v.text.rightPadding*e+"px"}),P()}function T(e,t,n){return{x:e.x(t,n),y:e.y(t,n)}}return function(){{if(Atalasoft.Forms.Field.__staticInitOccured)return;Atalasoft.Forms.Field.__staticInitOccured=!0}Atalasoft.Utils.Browser.Explorer&&Atalasoft.Utils.Browser.Version<=9&&(a=i=n=null,o={get:function(){return a.get.call(this)},set:function(e){i=e,a.set.call(this,e)}},r=function(e){if("value"===e.propertyName){var t=e.srcElement.value;t!==i&&(i=t,null!=m(e.srcElement).data("ataladata")&&m(n).trigger("input"))}},l=function(){n&&(delete n.value,n.detachEvent("onpropertychange",r),a=i=n=null)},m(document).on("focusin",function(e){var t;"TEXTAREA"!==e.target.nodeName&&("INPUT"!==e.target.nodeName||"text"!==e.target.type&&"password"!==e.target.type)||(l(),t=e.target,i=(n=t).value,a=Object.getOwnPropertyDescriptor(t.constructor.prototype,"value"),Object.defineProperty(n,"value",o),n.attachEvent("onpropertychange",r))}),m(document).on("focusout",function(){l()}),m(document).on("selectionchange keyup keydown",function(e){n&&n.value!==i&&(i=n.value,null!=m(e.srcElement).data("ataladata")&&m(n).trigger("input"))}));var n,i,a,o,r,l}(),d._pageindex=n,i=e.type,m.extend(!0,v,s[i]),f(e,!0),d.dispose=function(){a&&a.unbind();v=a=d=c=null},d.bind=function(){a.bind.apply(a,arguments)},d.unbind=function(){a.unbind.apply(a,arguments)},d.trigger=h,d.set=f,d.get=function(e){return e?v[e]:v},d.setPageIndex=function(e){g=e,d.hasOwnProperty("_pageindex")&&(d._pageindex=e)},d.getClonedData=function(){l?m.extend(!0,l,v):p();return l},d.getObject=function(){return r},d.getEventObject=function(){return a},d.getZoom=function(){return c.zoom},d.stringify=x,d.getJSON=x,d.getParentName=w,d.getName=function(){var e=v.fieldname.lastIndexOf(".");if(0<=e)return v.fieldname.substr(e+1);return v.fieldname},d.repaint=O,d.updateView=P,d.zoom=S,d},Atalasoft.Forms.Field.__staticInitOccured=!1;
+"use strict";
+/**
+ * WebDocumentViewer PDF Forms API.
  * @class
  * @inner
  * @name FormController
  * @memberOf Atalasoft.Controls.WebDocumentViewer
  * @ignore
- */
-Atalasoft.Forms.FormController=function(e,i,t){function l(){ti.bind({pagerecycled:h,pageshown:p,zoomchanged:r,pagerotated:F}),li._state.initialized?n():ti.bind({initialized:n})}function n(){fi=!0}function o(){ii=null,ti=null,li=null,oi=null,ri=null,di.fields.length=0,di.multiviewFields=null,di.activepage=null,di.activefield=null}function f(){"Atalasoft.Controls.WebDocumentViewer"===ti.typeOf&&ei.extend(ti,ni)}function r(){}function d(e){if(e instanceof jQuery){e._form=li.createDiv(e),e._form.css({position:"absolute",zIndex:4}),e._form._fields=[],e._form._page=e;var i=function(){w(e)};return e.bind("mousedown",i),Atalasoft.Utils.Browser.Features.Touch&&e.bind("touchstart",i),e.bind({pageresize:function(i){i.page=e,_(i)},pagezoom:function(i){i.page=e,y(i)}}),!0}return!1}function a(e,i,t){if(null==e&&"number"==typeof i&&(i=s(i)),i=i||[],null==t?t=di.fields.length:0>t&&(t=0),t>di.fields.length){var l=di.fields.length;di.fields[t]=i;for(var n=l;n<di.fields.length;++n)di.fields[n]||(di.fields[n]=[])}else di.fields.splice(t,0,i)}function s(e){return e<di.fields.length?di.fields.splice(e,1)[0]:null}function u(e,i){a(null,s(e),i)}function c(e){return e instanceof jQuery?(e._form&&(e._form._fields=null,e._form._page=null,e._form=null),!0):!1}function g(e,i){if(e<di.fields.length&&di.fields[e]&&di.fields[e].length){var t;m(i);for(var l=0;l<di.fields[e].length;l++)t=di.fields[e][l],t.setPageIndex(e),t.repaint(i._form)}}function m(e){e._form&&e._form._fields&&(e._form._fields.length=0,e._form.empty())}function p(e){g(e.index,e.page)}function v(){null!=ci.field&&ci.field.getObject()[0].blur()}function h(e){e.page._form&&m(e.page)}function _(e){b(e.page)}function w(e){di.activepage=e}function y(e){for(var i in e.page._form._fields)e.page._form._fields.hasOwnProperty(i)&&e.page._form._fields[i].zoom(li.getPageScale(e.index))}function F(e){b(e.page)}function b(e){if(e&&di.fields.length&&di.fields[e._index])for(var i=0;i<di.fields[e._index].length;i++)di.fields[e._index][i].updateView()}/**
+ */Atalasoft.Forms.FormController=function(e,i,t){var n=Atalasoft.$,l=this,d=e,r=i,o={forms:{events:{
+/** Triggers when the user uses the mouse to click on a field. Populated keys: e.field */
+fieldclicked:null,
+/** Triggers when the user uses the mouse to create a field. Populated keys: e.field */
+fieldcreated:null,
+/** Triggers when the user uses the mouse to double-click on a field. Populated keys: e.field */
+fielddoubleclicked:null,
+/** Triggers when a field is loaded into the document. Populated keys: e.field */
+fieldloaded:null,
+/** Triggers when the user has depressed a mouse button on a field. Populated keys: e.field */
+fieldmousedown:null,
+/** Triggers when the user has depressed the left mouse button on a field. Populated keys: e.field */
+fieldmousedownleft:null,
+/** Triggers when the user has depressed the right mouse button on a field. Populated keys: e.field */
+fieldmousedownright:null,
+/** Triggers when the user moves the mouse pointer over a field. Populated keys: e.field */
+fieldmousemove:null,
+/** Triggers when the user has moved the mouse pointer out of the bounds of the field. Populated keys: e.field */
+fieldmouseout:null,
+/** Triggers when the user has moved the mouse pointer into the bounds of the field. Populated keys: e.field */
+fieldmouseover:null,
+/** Triggers when the user has released a mouse button on a field. Populated keys: e.field */
+fieldmouseup:null,
+/** Triggers when a field has been moved. Populated keys: e.field */
+fieldmoved:null,
+/** Triggers when a pinch gesture has been detected on a field. Populated keys: e.field */
+fieldpinchresize:null,
+/** Triggers when a field has been repainted. Populated keys: e.field */
+fieldrepainted:null,
+/** Triggers when a field has been resized. Populated keys: e.field */
+fieldresized:null,
+/** Triggers when the user right clicks on a field. Populated keys: e.field */
+fieldrightclicked:null,
+/** Triggers when a touch end event has finished on a field. Populated keys: e.field */
+fieldtouchend:null,
+/** Triggers when a touch move event is happening on a field. Populated keys: e.field */
+fieldtouchmove:null,
+/** Triggers when a touch event has started on a field. Populated keys: e.field */
+fieldtouchstart:null},createOnPage:
+/**
     * Creates a field on the desired page with the given field data.
     * @param fConfig: object, Key value pairs representing field data.
     * @param pgNum: number, The zero based index of the page the field should be created on.
     * @param callback: function, Function to be called when the operation has completed.
     * @returns object, Key value pairs representing field data.
     */
-function x(e,i,t){var l=B(e,i,t).getClonedData();return ti.trigger({type:gi.fieldcreate,field:l}),l}/**
+function(e,i,t){var l=B(e,i,t).getClonedData();return d.trigger({type:p.fieldcreate,field:l}),l}
+/**
     * Deletes a field on the given z-index and zero based page index.
     * @param pgNum: number, Zero based page index the field is located on.
     * @param fieldIndex: number, Zero based z-index of the field.
-    */
-function A(e,i){I(i,e)}/**
-    * Gets an array of field data objects located on the given zero based page index.
-    * @param pageNum: number, Zero based page index the fields are located on.
-    * @returns array: Array of field data objects on the given page index. 
-    */
-function P(e){var i=[];if(0===di.fields.length||"undefined"==typeof di.fields[e])return i;for(var t=0;t<di.fields[e].length;t++)i[t]=di.fields[e][t].getClonedData();return i}/**
+    */,deleteFromPage:D,getFromPage:C,insertForm:
+/**
     * Inserts a form from the source URL and index into the given page index.
     * @param sourceUrl: string, Url of the desired form.
     * @param sourceIndex: number, Zero based page index the form is copied from.
     * @param index: number, Zero based page index the form is to be inserted into.
     * @param callback: function, Function to be called when the operation has completed.
     */
-function k(e,i,t,l){a(e,i,t),"function"==typeof l&&l(),ti.trigger({type:gi.forminserted,srcurl:e,srcindex:i,index:t}),ti.trigger(gi.formschanged)}/**
+function(e,i,t,l){_(e,i,t),"function"==typeof l&&l();d.trigger({type:p.forminserted,srcurl:e,srcindex:i,index:t}),d.trigger(p.formschanged)}
+/**
     * Removes a form from the given page index.
     * @param index: number, Zero based page index of the form to be removed.
     * @param callback: function, Function to be called when the operation has completed.
-    */
-function O(e,i){s(e),"function"==typeof i&&i(),ti.trigger({type:gi.formremoved,index:e}),ti.trigger(gi.formschanged)}/**
+    */,moveForm:
+/**
     * Moves a form from one page index to another.
     * @param sourceIndex: number, Zero based page index of the form to be moved.
     * @param destIndex: number, Destination zero based page index.
     * @param callback: function, Function to be called when the operation has completed.
     */
-function z(e,i,t){u(e,i),"function"==typeof t&&t(),ti.trigger({type:gi.formmoved,srcindex:e,destindex:i}),ti.trigger(gi.formschanged)}function C(){var e={};return ei.extend(!0,e,{data:di,pages:oi,viewport:ri}),e}function D(e){e&&(e._fields?ei.isArray(e._fields)&&(di.fields=e._fields):e._fields=di.fields)}function U(){if(di.fields.length>0){if(di.fields.length=0,oi)for(var e=0;e<oi.length;e++)m(oi[e]);ti.trigger({type:"formscleared"})}}function B(e,i,t){var l={};e&&e.type&&ai[e.type]&&ei.extend(!0,l,ai[e.type]),ei.extend(!0,l,e);var n=new Atalasoft.Forms.Field(l,di,i);return"undefined"==typeof di.fields[i]&&(di.fields[i]=[]),di.fields[i].push(n),li.redrawVisiblePages(),"function"==typeof t&&t(n),W(n),n}function I(e,i){var t=di.fields[i].splice(e,1)[0];di.activepage&&di.activepage._form._fields.splice(e,1),t.dispose(),ti.trigger({type:"fielddeleted",page:i,index:e})}function V(e){e&&(e instanceof jQuery||(e=ei(e)),ri=e)}function j(e,i,t){return si?null:(e&&e.type&&ai[e.type]&&ei.extend(!0,e,ai[e.type]),di.activefield&&null===di.activefield.getObject()&&N(),q(),di.activefield=new Atalasoft.Forms.Field(e,di,di.activepage?di.activepage._index:void 0),di.activefield.bind({drawn:L,cancelled:N}),"function"==typeof i&&(T=i),"function"==typeof t&&(R=t),di.activefield)}function T(){}function R(){}function q(){if(!ui){ri.bind("mousedown",H),Atalasoft.Utils.Browser.Features.Touch&&ri.bind("touchstart",H);for(var e=0;e<oi.length;e++)oi[e]._draw.toFront();ui=!0}}function E(){if(ui){ri.unbind("mousedown",H),Atalasoft.Utils.Browser.Features.Touch&&ri.unbind("touchstart",H);for(var e=0;e<oi.length;e++)oi[e]._draw.reset();ui=!1}}function H(e){si=!0,ri.unbind("mousedown",H),Atalasoft.Utils.Browser.Features.Touch&&ri.unbind("touchstart",H),ti.trigger({type:"fielddrawstart",field:di.activefield.getClonedData()}),di.activefield._pageindex=di.activepage._index,di.activefield.startDraw(e,di.activepage._form,{}),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8&&di.activepage._draw.height(di.activepage.height())}function L(){J(di.activefield),Q(),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8&&di.activepage._draw.height("100%")}function N(){di.activefield.dispose(),di.activefield=null,si&&Q(!0)}function Q(e){si=!1,E(),ti.trigger({type:"fielddrawend",field:e?null:di.activefield.getClonedData(),cancelled:e?!0:!1})}function S(e){ci=e,ti.bind("scroll",v)}function G(){ti.unbind("scroll",v)}function J(e){var i=di.activepage,t=i?i._index:0;di.fields[t]?di.fields[t].push(e):di.fields[t]=[e],di.activefield.unbind({}),W(di.activefield),T({field:e}),T=function(){},ti.trigger({type:gi.fieldcreate,field:e.getClonedData()})}function W(e){function i(i){ti.trigger({type:gi[i.type],field:e.getClonedData()})}e.bind({interactstart:function(){di.activepage&&di.activepage._form===e.getObject().form||w(e.getObject().form._page),di.activefield=e},moved:i,resized:i,interactend:i,touchstart:i,touchmove:i,pinchmove:i,click:i,dblclick:i,rightclick:i,mousedown:i,mousedownleft:i,mousedownright:i,mousemove:i,mouseout:i,mouseup:i,mouseover:i,repaint:i,fieldfocusin:S,fieldfocusout:G})}function Z(){var e={},i=!1;for(var t in di.fields)if(di.fields.hasOwnProperty(t)&&di.fields[t].length>0){e[t]=[];for(var l in di.fields[t])di.fields[t].hasOwnProperty(l)&&(i=!0,e[t][l]=di.fields[t][l].get())}return i?JSON.stringify({forms:{fields:e}}):void 0}function $(e){var i=e.getParentName(),t=e.getName();t.indexOf("<~Atala_Unnamed_")>=0&&(di.multiviewFields.hasOwnProperty(i)?di.multiviewFields[i].push(e):di.multiviewFields[i]=[e])}function K(e,i,t,l,n){t=t||ti.config.documenturl;var o={type:"formdata",serverurl:e,query:"?atalaformdata=",method:"GET",data:{atala_formurl:i,atala_docurl:t,atala_a_ofs:l,atala_a_len:n},cancel:!1,info:{fields:[],length:n,error:void 0}};for(var f in o.data)o.data.hasOwnProperty(f)&&null===o.data[f]&&(o.data[f]=void 0);return o}function M(e,i,t){function l(i){void 0!==e.info.docIndex&&(i.offset=e.info.docIndex),Y(i),"function"==typeof t&&t.call()}"function"==typeof i&&(t=i,i=!1),i||U(),li.makeHandlerRequest(e,l,l)}function X(e,i,t,l,n,o,f){var r=Array.prototype.slice.call(arguments);f=r.pop(),"function"!=typeof f&&r.push(f),e=r.shift(),i=r.shift(),t=r.shift(),l=r.shift(),n=r.shift(),o=r.shift();var d=K(e,i,t,l,n);void 0!==o&&(d.info.docIndex=o),M(d,l>=0&&n>=1,f)}function Y(e){if(e){var i={type:"formsloaded"};if(e.dpi&&(di.dpi=e.dpi),e.forms&&e.forms.fields)for(var t=0;t<e.forms.fields.length;t++){e.offset=e.offset||0;var l=e.offset+t;di.fields[l]&&di.fields[l].length>0?di.fields[l].length=0:di.fields[l]=[];var n=e.forms.fields[t];if(n&&n.length>0)for(var o=0;o<n.length;o++)di.fields[l][o]=new Atalasoft.Forms.Field(n[o],di,l),$(di.fields[l][o]),ti.trigger({type:gi.load,field:di.fields[l][o].getClonedData()}),W(di.fields[l][o])}else e.error&&(i.error=e.error);ti.trigger(i)}}var ei=Atalasoft.$,ii=this,ti=e,li=i,ni={forms:{events:{/** Triggers when the user uses the mouse to click on a field. Populated keys: e.field */
-fieldclicked:null,/** Triggers when the user uses the mouse to create a field. Populated keys: e.field */
-fieldcreated:null,/** Triggers when the user uses the mouse to double-click on a field. Populated keys: e.field */
-fielddoubleclicked:null,/** Triggers when a field is loaded into the document. Populated keys: e.field */
-fieldloaded:null,/** Triggers when the user has depressed a mouse button on a field. Populated keys: e.field */
-fieldmousedown:null,/** Triggers when the user has depressed the left mouse button on a field. Populated keys: e.field */
-fieldmousedownleft:null,/** Triggers when the user has depressed the right mouse button on a field. Populated keys: e.field */
-fieldmousedownright:null,/** Triggers when the user moves the mouse pointer over a field. Populated keys: e.field */
-fieldmousemove:null,/** Triggers when the user has moved the mouse pointer out of the bounds of the field. Populated keys: e.field */
-fieldmouseout:null,/** Triggers when the user has moved the mouse pointer into the bounds of the field. Populated keys: e.field */
-fieldmouseover:null,/** Triggers when the user has released a mouse button on a field. Populated keys: e.field */
-fieldmouseup:null,/** Triggers when a field has been moved. Populated keys: e.field */
-fieldmoved:null,/** Triggers when a pinch gesture has been detected on a field. Populated keys: e.field */
-fieldpinchresize:null,/** Triggers when a field has been repainted. Populated keys: e.field */
-fieldrepainted:null,/** Triggers when a field has been resized. Populated keys: e.field */
-fieldresized:null,/** Triggers when the user right clicks on a field. Populated keys: e.field */
-fieldrightclicked:null,/** Triggers when a touch end event has finished on a field. Populated keys: e.field */
-fieldtouchend:null,/** Triggers when a touch move event is happening on a field. Populated keys: e.field */
-fieldtouchmove:null,/** Triggers when a touch event has started on a field. Populated keys: e.field */
-fieldtouchstart:null},createOnPage:x,deleteFromPage:A,getFromPage:P,insertForm:k,moveForm:z,removeForm:O}};if(Atalasoft.Forms.FormController.__exposedApi=ni.forms,!e)return null;var oi=i._pages,fi=!1,ri=null,di={fields:[],multiviewFields:{},activepage:null,activefield:null,highlighted:!0,readonly:t?!0:!1,getZoom:li.getPageScale,getViewerTransform:li.getViewerTransform,getPageRotation:li.getPageRotation,dpi:96},ai={},si=!1,ui=!1,ci=null,gi={click:"fieldclicked",dblclick:"fielddoubleclicked",touchstart:"fieldtouchstart",interactend:"fieldtouchend",touchmove:"fieldtouchmove",pinchmove:"fieldpinchresize",rightclick:"fieldrightclicked",mousedown:"fieldmousedown",mousedownleft:"fieldmousedownleft",mousedownright:"fieldmousedownright",mousemove:"fieldmousemove",mouseout:"fieldmouseout",mouseup:"fieldmouseup",mouseover:"fieldmouseover",create:"fieldcreated",load:"fieldloaded",moved:"fieldmoved",resized:"fieldresized",repaint:"fieldrepainted"};ii.dispose=o,ii.addFormLayer=d,ii.insertForm=a,ii.removeForm=s,ii.moveForm=u,ii.removeFormLayer=c,ii.showLayer=g,ii.__exposedApi=ni.forms,ii.__getDebugInfo=C,ii.__linkForms=D,ii.clear=U,ii.createField=B,ii.deleteFieldOnPage=A,ii.getFieldsFromPage=P,ii.setViewPort=V,ii.drawField=j,ii.stringifyChanges=Z,ii.createHandlerRequest=K,ii.makeHandlerRequest=M,ii.loadFormUrl=X,ii.loadForms=Y,f(),l()};
-"use strict";/**
- * WebDocuemntViewer Text Layer operations API.
+function(e,i,t){y(e,i),"function"==typeof t&&t();d.trigger({type:p.formmoved,srcindex:e,destindex:i}),d.trigger(p.formschanged)},removeForm:function(e,i){w(e),"function"==typeof i&&i();d.trigger({type:p.formremoved,index:e}),d.trigger(p.formschanged)}}};if(Atalasoft.Forms.FormController.__exposedApi=o.forms,!e)return null;var f=i._pages,a=null,s={fields:[],multiviewFields:{},activepage:null,activefield:null,highlighted:!0,readonly:!!t,getZoom:r.getPageScale,getViewerTransform:r.getViewerTransform,getPageRotation:r.getPageRotation,dpi:96},u={},c=!1,g=!1,m=null,p={click:"fieldclicked",dblclick:"fielddoubleclicked",touchstart:"fieldtouchstart",interactend:"fieldtouchend",touchmove:"fieldtouchmove",pinchmove:"fieldpinchresize",rightclick:"fieldrightclicked",mousedown:"fieldmousedown",mousedownleft:"fieldmousedownleft",mousedownright:"fieldmousedownright",mousemove:"fieldmousemove",mouseout:"fieldmouseout",mouseup:"fieldmouseup",mouseover:"fieldmouseover",create:"fieldcreated",load:"fieldloaded",moved:"fieldmoved",resized:"fieldresized",repaint:"fieldrepainted"};function v(){!0}function h(e){}function _(e,i,t){if(null==e&&"number"==typeof i&&(i=w(i)),i=i||[],null==t?t=s.fields.length:t<0&&(t=0),t>s.fields.length){var l=s.fields.length;s.fields[t]=i;for(var o=l;o<s.fields.length;++o)s.fields[o]||(s.fields[o]=[])}else s.fields.splice(t,0,i)}function w(e){return e<s.fields.length?s.fields.splice(e,1)[0]:null}function y(e,i){_(null,w(e),i)}function F(e,i){if(e<s.fields.length&&s.fields[e]&&s.fields[e].length){var t;b(i);for(var l=0;l<s.fields[e].length;l++)(t=s.fields[e][l]).setPageIndex(e),t.repaint(i._form)}}function b(e){e._form&&e._form._fields&&(e._form._fields.length=0,e._form.empty())}function x(e){F(e.index,e.page)}function A(e){null!=m.field&&m.field.getObject()[0].blur()}function P(e){e.page._form&&b(e.page)}function k(e){s.activepage=e}function O(e){z(e.page)}function z(e){if(e&&s.fields.length&&s.fields[e._index])for(var i=0;i<s.fields[e._index].length;i++)s.fields[e._index][i].updateView()}function D(e,i){!function(e,i){var t=s.fields[i].splice(e,1)[0];s.activepage&&s.activepage._form._fields.splice(e,1);t.dispose(),d.trigger({type:"fielddeleted",page:i,index:e})}(i,e)}
+/**
+    * Gets an array of field data objects located on the given zero based page index.
+    * @param pageNum: number, Zero based page index the fields are located on.
+    * @returns array: Array of field data objects on the given page index. 
+    */function C(e){var i=[];if(0===s.fields.length||void 0===s.fields[e])return i;for(var t=0;t<s.fields[e].length;t++)i[t]=s.fields[e][t].getClonedData();return i}function U(){if(0<s.fields.length){if(s.fields.length=0,f)for(var e=0;e<f.length;e++)b(f[e]);d.trigger({type:"formscleared"})}}function B(e,i,t){var l={};e&&e.type&&u[e.type]&&n.extend(!0,l,u[e.type]),n.extend(!0,l,e);var o=new Atalasoft.Forms.Field(l,s,i);return void 0===s.fields[i]&&(s.fields[i]=[]),s.fields[i].push(o),r.redrawVisiblePages(),"function"==typeof t&&t(o),H(o),o}function I(){}function V(e){c=!0,a.unbind("mousedown",V),Atalasoft.Utils.Browser.Features.Touch&&a.unbind("touchstart",V),d.trigger({type:"fielddrawstart",field:s.activefield.getClonedData()}),s.activefield._pageindex=s.activepage._index,s.activefield.startDraw(e,s.activepage._form,{}),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8&&s.activepage._draw.height(s.activepage.height())}function j(){!function(e){var i=s.activepage,t=i?i._index:0;s.fields[t]?s.fields[t].push(e):s.fields[t]=[e];s.activefield.unbind({}),H(s.activefield),I({field:e}),I=function(){},d.trigger({type:p.fieldcreate,field:e.getClonedData()})}(s.activefield),R(),Atalasoft.Utils.Browser.Explorer&&parseInt(Atalasoft.Utils.Browser.Version,10)<8&&s.activepage._draw.height("100%")}function T(){s.activefield.dispose(),s.activefield=null,c&&R(!0)}function R(e){c=!1,function(){if(g){a.unbind("mousedown",V),Atalasoft.Utils.Browser.Features.Touch&&a.unbind("touchstart",V);for(var e=0;e<f.length;e++)f[e]._draw.reset();g=!1}}(),d.trigger({type:"fielddrawend",field:e?null:s.activefield.getClonedData(),cancelled:!!e})}function q(e){m=e,d.bind("scroll",A)}function E(e){d.unbind("scroll",A)}function H(i){function e(e){d.trigger({type:p[e.type],field:i.getClonedData()})}i.bind({interactstart:function(e){s.activepage&&s.activepage._form===i.getObject().form||k(i.getObject().form._page),s.activefield=i},moved:e,resized:e,interactend:e,touchstart:e,touchmove:e,pinchmove:e,click:e,dblclick:e,rightclick:e,mousedown:e,mousedownleft:e,mousedownright:e,mousemove:e,mouseout:e,mouseup:e,mouseover:e,repaint:e,fieldfocusin:q,fieldfocusout:E})}function L(e,i,t,l,o){var n={type:"formdata",serverurl:e,query:"?atalaformdata=",method:"GET",data:{atala_formurl:i,atala_docurl:t=t||d.config.documenturl,atala_a_ofs:l,atala_a_len:o},cancel:!1,info:{fields:[],length:o,error:void 0}};for(var r in n.data)n.data.hasOwnProperty(r)&&null===n.data[r]&&(n.data[r]=void 0);return n}function N(i,e,t){function l(e){void 0!==i.info.docIndex&&(e.offset=i.info.docIndex),Q(e),"function"==typeof t&&t.call(void 0,e.error,e)}"function"==typeof e&&(t=e,e=!1),e||U(),r.makeHandlerRequest(i,l,l)}function Q(e){if(e){var i={type:"formsloaded",forms:e.forms,customData:e.customData};if(e.dpi&&(s.dpi=e.dpi),e.forms&&e.forms.fields)for(var t=0;t<e.forms.fields.length;t++){e.offset=e.offset||0;var l=e.offset+t;s.fields[l]&&0<s.fields[l].length?s.fields[l].length=0:s.fields[l]=[];var o=e.forms.fields[t];if(o&&0<o.length)for(var n=0;n<o.length;n++)s.fields[l][n]=new Atalasoft.Forms.Field(o[n],s,l),r=s.fields[l][n],void 0,f=r.getParentName(),0<=r.getName().indexOf("<~Atala_Unnamed_")&&(s.multiviewFields.hasOwnProperty(f)?s.multiviewFields[f].push(r):s.multiviewFields[f]=[r]),d.trigger({type:p.load,field:s.fields[l][n].getClonedData()}),H(s.fields[l][n])}else e.error&&(i.error=e.error);d.trigger(i)}var r,f}l.dispose=function(){a=f=r=d=l=null,s.fields.length=0,s.multiviewFields=null,s.activepage=null,s.activefield=null},l.addFormLayer=function(i){if(i instanceof jQuery){i._form=r.createDiv(i),i._form.css({position:"absolute",zIndex:4}),i._form._fields=[],i._form._page=i;var e=function(){k(i)};return i.bind("mousedown",e),Atalasoft.Utils.Browser.Features.Touch&&i.bind("touchstart",e),i.bind({pageresize:function(e){e.page=i,z(e.page)},pagezoom:function(e){e.page=i,function(e){for(var i in e.page._form._fields)e.page._form._fields.hasOwnProperty(i)&&e.page._form._fields[i].zoom(r.getPageScale(e.index))}(e)}}),!0}return!1},l.insertForm=_,l.removeForm=w,l.moveForm=y,l.removeFormLayer=function(e){if(e instanceof jQuery)return e._form&&(e._form._fields=null,e._form._page=null,e._form=null),!0;return!1},l.showLayer=F,l.__exposedApi=o.forms,l.__getDebugInfo=function(){var e={};return n.extend(!0,e,{data:s,pages:f,viewport:a}),e},l.__linkForms=function(e){e&&(e._fields?n.isArray(e._fields)&&(s.fields=e._fields):e._fields=s.fields)},l.clear=U,l.createField=B,l.deleteFieldOnPage=D,l.getFieldsFromPage=C,l.setViewPort=function(e){e&&(e instanceof jQuery||(e=n(e)),a=e)},l.drawField=function(e,i,t){if(c)return null;e&&e.type&&u[e.type]&&n.extend(!0,e,u[e.type]);s.activefield&&null===s.activefield.getObject()&&T();(function(){if(!g){a.bind("mousedown",V),Atalasoft.Utils.Browser.Features.Touch&&a.bind("touchstart",V);for(var e=0;e<f.length;e++)f[e]._draw.toFront();g=!0}})(),s.activefield=new Atalasoft.Forms.Field(e,s,s.activepage?s.activepage._index:void 0),s.activefield.bind({drawn:j,cancelled:T}),"function"==typeof i&&(I=i);"function"==typeof t&&t;return s.activefield},l.stringifyChanges=function(e){var i={},t=!1;for(var l in s.fields)if(s.fields.hasOwnProperty(l)&&0<s.fields[l].length)for(var o in i[l]=[],s.fields[l])s.fields[l].hasOwnProperty(o)&&(t=!0,i[l][o]=s.fields[l][o].get());return t?JSON.stringify({forms:{fields:i}}):void 0},l.createHandlerRequest=L,l.makeHandlerRequest=N,l.loadFormUrl=function(e,i,t,l,o,n,r){var f=Array.prototype.slice.call(arguments);"function"!=typeof(r=f.pop())&&f.push(r);e=f.shift(),i=f.shift(),t=f.shift(),l=f.shift(),o=f.shift(),n=f.shift();var d=L(e,i,t,l,o);void 0!==n&&(d.info.docIndex=n);N(d,0<=l&&1<=o,r)},l.loadForms=Q,"Atalasoft.Controls.WebDocumentViewer"===d.typeOf&&n.extend(d,o),d.bind({pagerecycled:P,pageshown:x,zoomchanged:h,pagerotated:O}),r._state.initialized?v():d.bind({initialized:v})};
+"use strict";
+/**
+ * WebDocumentViewer Text Layer operations API.
  * @class
  * @inner
  * @name TextController
  * @memberOf Atalasoft.Controls.WebDocumentViewer
- */
-Atalasoft.Text.TextController=function(e,t,n){function r(){Gt.bind({pagerecycled:x,pageshown:v,zoomchanged:c,documentchanged:w}),Wt.bind({textselectstart:L,textselectmove:O,textselectend:k,textselectcopy:U}),It._state.initialized?o():Gt.bind({initialized:o})}function o(){$t=!0}function i(){Gt.unbind({pagerecycled:x,pageshown:v,zoomchanged:c,documentchanged:w}),Wt.unbind({textselectstart:L,textselectmove:O,textselectend:k}),Et=null,Gt=null,Kt=null,Yt.searchQuery=null,Yt.selectionCache=[],$t=!1,Yt.activepage=null}function a(e){return It._controllers.document.getPageText(e)}function s(){"Atalasoft.Controls.WebDocumentViewer"===Gt.typeOf&&Vt.extend(Gt,Ht)}/**
-    * jQuery trigger shortcut
-    * @returns object, WebDocumentViewer
-    */
-function l(e){return Gt.trigger(e),Et}function u(){return Wt.trigger.apply(Wt,arguments),Et}function g(e,t){Gt.trigger({type:"throwerror",name:e,msg:t})}function c(){}function d(e){return e instanceof jQuery?(e._text&&(e._text._page=null,e._text=null),!0):!1}function h(e){return e instanceof jQuery?(e._text=It.createDOM("canvas",e),e._text.css({width:"100%",height:"100%",position:"absolute",zIndex:0}),e._text.attr("width",e.width()).attr("height",e.height()),e._text._page=e,e.bind(Atalasoft.Utils.Browser.Features.Touch?"touchstart":"mousedown",function(){b(e)}),e.bind({pageresize:function(t){t.page=e,y(t)},pagezoom:function(t){t.page=e,m(t)}}),!0):!1}function f(e,t){if(t._text){p(t);var n=a(e);if(n){var r=yt(t,n);if(r&&n.searchResult&&j(r,n),r&&n.selection)for(var o=n.selection,i=0;i<o.regions.length;i++)for(var s=0;s<o.regions[i].lines.length;s++)for(var l=o.regions[i].lines[s],u=0;l.words&&u<l.words.length;u++){var g=l.words[u];et(r,g.bounds.x,g.bounds.y,g.bounds.width,g.bounds.height,Zt.selection)}}}}function x(e){p(e.page)}function v(e){f(e.index,e.page)}function p(e){e._text&&Q(e._index)}function y(e){e.page._text.attr("width",e.width).attr("height",e.height),e.page._text.width(e.width),e.page._text.height(e.height),f(e.index,e.page)}function b(e){Yt.activepage=e}function m(e){y(e)}function w(){if(Yt.searchQuery&&Yt.searchQuery.iterator){Yt.searchQuery.iterator.dispose(),Yt.searchQuery=null,gt();for(var e=0;e<Xt.length;e++)f(Xt[e]._index,Xt[e])}}function _(e){var t=a(e);return!(!t||t.loading)}function P(e,t,n,r,o,i){var a=Vt.Deferred(),s=Array.prototype.slice.call(arguments,1);return s.length>2&&"function"==typeof s[s.length-2]?(i=s.pop(),o=s.pop()):s.length>1&&"function"==typeof s[s.length-1]&&(o=s.pop()),t=s[0],n=s[1],r=s[2],ft(e).done(function(e,i){var s=i.bounds;void 0===t||!i.regions[t]||void 0!==n&&i.regions[t].lines[n]?(t=i.regions[t],void 0!==n&&t.lines[n]&&(n=t.lines[n],s=Z(n.bounds,t),void 0!==r&&n.words[r]&&(s=Z(n.words[r].bounds,t))),W(e,Ft(s.x,s.y),e,Ft(s.right,s.bottom))):I(e,t);var l=function(){Gt.config.mousetool.text.hookcopy&&It._dom.viewport.focus(),a.resolve(),o&&"function"==typeof o&&o()};It.isPageInView(e)?l():Gt.showPage(e,l)}).fail(function(){a.reject(),i&&"function"==typeof i&&i()}),a.promise()}function T(e,t,n){var r=Vt.Deferred();return ft(e).done(function(){var n="",o=a(e);if(o)for(var i=0;i<o.regions.length;i++){var s=N(o.regions[i]);s&&(n+=s)}r.resolve(n),t&&"function"==typeof t&&t(n)}).fail(function(){r.reject(),n&&"function"==typeof n&&n()}),r.promise()}function C(e){if(void 0===e||null===e)for(var t=0;t<It._controllers.document.getPageCount();t++)C(t);var n=a(e);n&&(It._controllers.document.updatePageText(e,null),Yt.selectionCache[e]&&(Yt.selectionCache[e]=null,It.findPageFromIndex(e)&&Q(e,null)))}function R(e,t,n){return C(e),ft(e).done(function(){t&&"function"==typeof t&&t(e)}).fail(function(){n&&"function"==typeof n&&n(e)})}function M(){var e={};return Vt.extend(!0,e,{data:Yt,pages:Xt,viewport:Kt}),e}function A(){}function S(){if(Yt.searchQuery=null,Yt.selectionCache=[],It._controllers.document.initDocumentText({pages:[]}),Xt)for(var e=0;e<Xt.length;e++)p(Xt[e])}function z(e){e&&(e instanceof jQuery||(e=Vt(e)),Kt=e)}function D(){for(var e=0;e<It._controllers.document.getPageCount();e++){var t=a(e);t&&t.selection&&(Q(e,t,!0),t.selection=null)}Yt.selectionCache.length=0}/** Clears the text selection */
-function Q(e,t,n){for(var r=0;r<Xt.length;r++)if(!isFinite(e)||Xt[r]._index===e){t=isFinite(e)&&r===e?t:a(Xt[r]._index);var o=yt(Xt[r],t);if(o){var i=It.getSourcePageSize(Xt[r]._index,t?t.rotation:0);o.clearRect(0,0,i.width,i.height),n&&j(o,t)}}}function j(e,t){if(t&&t.searchResult)for(var n=0;n<t.searchResult.length;n++){var r=t.searchResult[n].bounds;et(e,r.x,r.y,r.width,r.height,Zt.highlight)}}function L(e){var t=e.eventData,n=t.page,r=t.point;D();var o=a(n);o&&(o.selection=st(t.point,t.point),t.interval&&Yt.origin&&Yt.originPage>=0?(W(Yt.originPage,Yt.origin,n,r),t.complete=!0):(t.line||t.word)&&Math.abs(t.point.x-Yt.origin.x)<10&&Math.abs(t.point.y-Yt.origin.y)<10?(E(n,r,t.line,t.word),t.complete=!0):(Yt.origin=t.rectangular?t.viewerPoint:t.point,Yt.originPage=n,Yt.rectangular=t.rectangular)),t.handled=!0}function O(e){var t=e.eventData,n=t.page,r=Yt.rectangular?t.viewerPoint:t.point,o=a(n);if(o)if(o.loading)t.cursor=Atalasoft.Utils.MouseToolCursor.Wait;else{if(0===o.regions.length)return t.handled=!1,!0;var i=It.getPageRotation(n)+o.rotation;if(o.rotatedRegions)for(var s=0;s<o.rotatedRegions.length;s++)if(Qt(t.point,o.rotatedRegions[s].bounds)){i+=o.rotatedRegions[s].rotation;break}t.cursor=i%180===0?Atalasoft.Utils.MouseToolCursor.Text:Atalasoft.Utils.MouseToolCursor.VerticalText,t.selecting&&en(Yt.originPage,Vt.extend({},Yt.origin),n,r,Yt.rectangular)}return t.handled=!0,!1}function k(e){var t=e?e.eventData:{},n=!1;for(var r in Yt.selectionCache)if(Yt.selectionCache.hasOwnProperty(r)&&Yt.selectionCache[r].selection&&Yt.selectionCache[r].selection.regions.length){n=!0;break}n&&l({type:"textselected"}),Yt.rectangular=!1,t.handled=!0}function U(){q()}function q(){var e=It.createDiv();if(e[0]){var t=new Clipboard("wdv-dummy-selection-trigger",{text:function(){return B()}});t.on("success",function(){t.destroy()}),t.on("error",function(){t.destroy(),g("TextCopyError")}),t.onClick({currentTarget:e[0]})}}function B(){for(var e="",t=0;t<Yt.selectionCache.length;t++)if(Yt.selectionCache[t]){var n=Yt.selectionCache[t].selection;if(n&&n.regions&&n.regions.length>0)for(var r=0;r<n.regions.length;r++){var o=N(n.regions[r]);o&&(e+=o)}}return e}function F(e){for(var t="",n=0;e.words&&n<e.words.length;n++)if(Ut(e.words[n],n>=1?e.words[n-1]:null)&&(t+=" "),e.words[n].text)t+=e.words[n].text;else if(e.words[n].glyphs&&e.words[n].glyphs.length)for(var r=0;r<e.words[n].glyphs.length;r++)t+=e.words[n].glyphs[r].text;return t}function N(e){for(var t="",n=0;n<e.lines.length;n++){var r=F(e.lines[n]);r&&(t+=V(r))}return t}function V(e){return e+"\n"}function E(e,t,n,r){var o=a(e);if(o&&(n||r))for(var i=0;i<o.regions.length;i++){var s=o.regions[i];if(Qt(t,s.bounds))for(var l=0;l<s.lines.length;l++){var u=s.lines[l];if(Qt(t,u.bounds)){var g={region:i,line:l,bounds:u.bounds};if(r){for(var c=0;c<u.words.length;c++)if(Qt(t,u.words[c].bounds))return g.word=c,g.bounds=u.words[c].bounds,G(e,g),void 0}else if(n)return G(e,g),void 0}}}}function G(e,t){var n=a(e);if(n&&t&&n.regions[t.region]){D();var r=n.regions[t.region],o=yt(pt(e),n);if(Vt.isNumeric(t.line)&&r.lines[t.line]){for(var i=r.lines[t.line],s={words:[]},l={lines:[s],bounds:Vt.extend({},r.bounds)},u=Vt.isNumeric(t.word)&&i.words[t.word]?t.word:0,g=Vt.isNumeric(t.endWord)&&i.words[t.endWord]?t.endWord:Vt.isNumeric(t.word)?u:i.words.length-1,c=u;g>=c;++c){var d=i.words[c],h=!!d.glyphs.length;h&&c===u&&Vt.isNumeric(t.glyph)?d=X(d,t.glyph,u===g&&Vt.isNumeric(t.endGlyph)?t.endGlyph:d.glyphs.length-1):h&&c===g&&Vt.isNumeric(t.endGlyph)&&(d=X(d,0,t.endGlyph)),s.words.push(Vt.extend({},d)),o&&et(o,d.bounds.x,d.bounds.y,d.bounds.width,d.bounds.height)}n.selection=st(Ft(t.bounds.x,t.bounds.y),Ft(t.bounds.right,t.bounds.bottom)),at(n.selection.regions,l),Yt.selectionCache[e]=n}else I(e,t.region)}}function I(e,t){D();var n=a(e);if(n&&n.regions[t]){var r=n.regions[t],o=yt(pt(e),n);n.selection=st(Ft(r.bounds.x,r.bounds.y),Ft(r.bounds.right,r.bounds.bottom),!1);var i=$(o,r,n.selection.origin,n.selection.point);i&&i.lines.length>0&&(at(n.selection.regions,i),Yt.selectionCache[e]=n)}}function W(e,t,n,r,o){var i=Math.min(e,n),a=Math.max(e,n);for(var s in Yt.selectionCache)if(Yt.selectionCache.hasOwnProperty(s)){var l=parseInt(s,10);(i>l||l>a)&&(Q(l,Yt.selectionCache[l],!0),Yt.selectionCache[l].selection=null)}for(var u=o?Math.min(t.x,r.x):0,g=Ft(u,0),c=i;a>=c;c++){var d=It.getSourcePageSize(c);o&&(d=Vt.extend({},It.getPageSize(c)),d.width*=It.getPageScale(c),d.height*=It.getPageScale(c));var h,f,x=o?Math.max(t.x,r.x):d.width,v=Ft(x,d.height);i===a?(h=t,f=r):c===e?(h=t,f=c===i?v:g):c===a||c===i?(f=r,h=c===i?v:g):(h=g,f=v);var p=pt(c);o?Y(c,Ft(u,h.y),Ft(x,f.y),p):H(c,h,f,p)}}function H(e,t,n,r){var o=a(e);if(o&&tt(o,t,n,!1)&&o.regions.length>0){r&&r._text&&Q(e,o,!0),o.selection=st(t,n,!1);var i=J(o,t,n);if(i&&i.start&&i.end)for(var s=yt(r,o),l=0;l<o.regions.length;l++){var u=o.regions[l],g=null;u===i.start?g=u===i.end?$(s,u,i.startPoint,i.endPoint):$(s,u,i.startPoint,Bt(u)):u===i.end?g=$(s,u,qt(u),i.endPoint):nt(u,i.start,i.end)&&(g=$(s,u,qt(u),Bt(u))),g&&g.lines&&g.lines.length>0&&(at(o.selection.regions,g),Yt.selectionCache[e]=o)}}}function J(e,t,n){for(var r=Ft(Math.min(t.x,n.x),Math.min(t.y,n.y)),o=Ft(Math.max(t.x,n.x),Math.max(t.y,n.y)),i=Mt({x:r.x,y:r.y,width:o.x-r.x,height:o.y-r.y}),a=Mt({x:0,y:r.y,width:e.bounds.width,height:o.y-r.y}),s=t,l=n,u=null,g=null,c=null,d=null,h=0;h<e.regions.length&&(!u||!g);h++){var f=e.regions[h].bounds;jt(a,f)&&(c=!c||it(e.regions[h],c)?e.regions[h]:c),jt(i,f)&&(u=!u&&Qt(s,e.regions[h].bounds)?e.regions[h]:u,g=!g&&Qt(l,e.regions[h].bounds)?e.regions[h]:g,d=!d||rt(e.regions[h],d)?e.regions[h]:d)}if(u&&g){if(it(g,u)){var x=g;g=u,u=x,s=n,l=t}}else if(c&&d){var v;u?(v=ot(l),it(u,v)?(g=d,l=null):(g=u,l=s,u=c,s=null)):g?(v=ot(s),rt(g,v)?(u=c,s=null):(u=g,s=l,g=d,l=null)):(u=c,g=d,l=null,s=null),s=s||qt(u),l=l||Bt(g)}return{start:u,startPoint:s,end:g,endPoint:l}}function $(e,t,n,r){var o={lines:[],bounds:Vt.extend({},t.bounds)},i=a(t.page).bounds;if(0!==t.rotation&&(n=Atalasoft.Utils.rotatePoint(n,i,360-t.rotation),r=Atalasoft.Utils.rotatePoint(r,i,360-t.rotation)),St(n.y,r.y)){var s=n;n=r,r=s}for(var l=0;l<t.lines.length;l++){var u=t.lines[l],g={words:[]},c=Rt(u,i,t.rotation),d=St(c.y,n.y)&&At(c.bottom,r.y),h=!d&&Dt(n.y,c.y,c.bottom),f=!d&&Dt(r.y,c.y,c.bottom);if(h&&l>1){var x=Rt(t.lines[l-1],i,t.rotation);h=!Dt(n.y,x.y,x.bottom),d=!h&&!f}if(f&&l<t.lines.length-1){var v=Rt(t.lines[l+1],i,t.rotation);f=!Dt(r.y,v.y,v.bottom),d=!h&&!f}if(d||h||f){for(var p=0;u.words&&p<u.words.length;p++){var y=u.words[p],b=Rt(y,i,t.rotation),m=y.glyphs&&y.glyphs.length,w=d;if(!w){if(h&&f){if(St(n.x,r.x)){var _=n;n=r,r=_}w=St(m?b.x:b.right,n.x)&&At(m?b.right:b.x,r.x)}else h?w=St(m?b.x:b.right,n.x):f&&(w=At(m?b.right:b.x,r.x));if(!w&&m){var P=null;if(h&&Dt(n.x,b.x,b.right)){var T=f?Math.min(b.right,r.x):b.right;P=K(y,n.x,T)}if(f&&Dt(r.x,b.x,b.right)){var C=h?Math.max(b.x,n.x):b.x;P=K(y,C,r.x)}P&&(y=P,w=!0)}}w&&(g.words.push(Vt.extend({},y)),e&&et(e,y.bounds.x,y.bounds.y,y.bounds.width,y.bounds.height))}g.words.length>0&&o.lines.push(g)}}return o}function K(e,t,n){for(var r=null,o=null,i=0;i<e.glyphs.length;++i){var a=e.glyphs[i].normalizedBounds;if(null===r&&St(a.right,t)&&(r=i),!At(a.x,n))break;o=i}return null!==r&&null!==o?X(e,r,o):null}function X(e,t,n){var r={glyphs:[],text:"",omitSpace:e.omitSpace};if(t>=0&&n>=t&&e.glyphs[n]){r.glyphs=e.glyphs.slice(t,n+1);var o=e.glyphs[t].bounds,i=e.glyphs[n].bounds,a=Math.min(o.x,i.x),s=Math.min(o.y,i.y),l=Math.max(o.right,i.right),u=Math.max(o.bottom,i.bottom);return r.bounds={x:a,y:s,width:Math.abs(l-a),height:Math.abs(u-s)},Mt(r.bounds),r}return null}function Y(e,t,n,r){var o=a(e);if(o&&tt(o,t,n,!0)&&o.regions.length>0){r&&r._text&&Q(e,o,!0);var i=kt(e,o,t),s=kt(e,o,n);o.selection=st(t,n,!0);var l=Mt({x:Math.min(i.x,s.x),y:Math.min(i.y,s.y),width:Math.abs(s.x-i.x),height:Math.abs(s.y-i.y)});if(l=Ot(l,o.bounds)){for(var u,g=0;g<o.regions.length;g++)if(jt(l,o.regions[g].bounds)){u=u||yt(r,o);for(var c={lines:[],bounds:Vt.extend({},o.regions[g].bounds)},d=0;d<o.regions[g].lines.length;d++){for(var h=o.regions[g].lines[d],f={words:[]},x=0;h.words&&x<h.words.length;x++){var v=h.words[x];if(jt(l,v.bounds)){var p=Mt(Atalasoft.Utils.rotateRect(l,o.bounds,(360-o.regions[g].rotation)%360)),y=v.normalizedBounds,b=St(y.x,p.x),m=At(y.right,p.right);b&&m||(v=K(v,Math.max(y.x,p.x),Math.min(y.right,p.right))),v&&(f.words.push(Vt.extend({},v)),u&&et(u,v.bounds.x,v.bounds.y,v.bounds.width,v.bounds.height))}}f.words.length>0&&c.lines.push(f)}c.lines.length&&at(o.selection.regions,c)}o.selection.regions.length&&(o.selection.bounds=l,Yt.selectionCache[e]=o)}}}function Z(e,t){if(t){if(t.rotation%180===0){var n=(e.bottom+e.y)/2;return Mt({x:e.x,y:n,width:e.width,height:0})}var r=(e.right+e.x)/2;return Mt({x:r,y:e.y,width:0,height:e.height})}return null}function et(e,t,n,r,o,i){e&&(e.clearRect(t,n,r,o),i=i||Zt.selection,e.fillStyle=i.color,e.globalAlpha=i.alpha,e.fillRect(t,n,r,o))}function tt(e,t,n,r){return r=!!r,!e.selection||!zt(e.selection.origin,t)||!zt(e.selection.point,n)||r!==e.selection.rectangular}function nt(e,t,n){return rt(e,t)&&it(e,n)}function rt(e,t){if(St(e.bounds.bottom,t.bounds.y)){if(Lt(e.bounds,t.bounds))return e.bounds.x>t.bounds.x;var n=Ot(e.bounds,t.bounds);if(n)return n.width/n.height>=1?St(e.bounds.y,t.bounds.y):St(e.bounds.x,t.bounds.x);if(St(e.bounds.y,t.bounds.bottom))return!0;if(At(e.bounds.bottom,t.bounds.y))return!1;if(St(e.bounds.x,t.bounds.x))return!0}return!1}function ot(e){var t=Mt({x:e.x,y:e.y,width:0,height:0});return{lines:[],bounds:t}}function it(e,t){return!rt(e,t)}function at(e,t){for(var n=0;n<e.length&&!it(t,e[n]);n++);Array.prototype.splice.call(e,n,0,t)}function st(e,t,n){return{origin:e,point:t,rectangular:!!n,regions:[]}}function lt(e,t,n){if("function"==typeof t&&(n=t,t=0),gt(),e&&e.length>2&&n){var r={sourceQuery:e,text:e.toLocaleLowerCase(),start:t};Yt.searchQuery=r;var o=new ut(r,n);return Yt.searchQuery.iterator=o,o}for(var i=0;i<Xt.length;i++)f(Xt[i]._index,Xt[i])}/**
-     * Callback signature for {@link Atalasoft.Controls.WebDocumentViewer~TextController#search|text.search}, {@link Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#next|next}, {@link Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#prev|prev} methods.
-     * @callback TextSearchCallback
-     * @param {Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator} iterator - Current iterator instance.
-     *
-     * It's recommended to call {@link Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#isValid|isValid} method when callback is called, to check whether iterator is still active. In case if search is cancelled(new search started), callback on the obsolete iterator will be called once to indicate that search is finished for particular query.
-     *
-     * @param {TextSearchResult} [match] - Current search query match descriptor. If match argument is null, no subsequent result are found.
-     */
+ */Atalasoft.Text.TextController=function(e,t,n){var M=Atalasoft.$,r=this,A=e,S=t,O=(t?t._internalEvents:null)||M({}),o={
 /**
-     * @typedef {Object} TextSearchResult - Represents single search result descriptor.
-     * @property {number} page - Page index of the match.
-     * @property {number} region - Index of the text region where match is occurred.
-     * @property {number} line - Index of the text line within region where match is occurred.
-     * @property {number} word - Index of the word within text line where match is occurred.
-     */
-/**
-     * WebDocuemntViewer Search Results Iterator.
-     * @class
-     * @inner
-     * @name TextSearchIterator
-     * @alias TextSearchIterator
-     * @memberOf Atalasoft.Controls.WebDocumentViewer~TextController
-     */
-function ut(e,t){function n(){/**
-             * Indicates whether search should be wrapped around when first or last document page is match is reached.
-             * @name Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#wrap
-             * @type {boolean}
-             */
-z.wrap=!0,Wt.bind("pagetextloaded",m),Gt.bind({pageshown:w}),setTimeout(function(){if(Xt.length&&R>=Xt[0]._index&&R<=Xt[Xt.length-1]._index)for(var n=0;n<Xt.length;n++){var o=a(Xt[n]._index);o&&!o.loading&&(o.searchResult=v(o,e.text),o.searchResult.length&&(f(Xt[n]._index,Xt[n]),Xt[n]._index===R&&(S=o.searchResult.length,M=R)))}r(t)},0)}function r(e){Q.push({action:s,args:[!0,_(e)]}),i()}function o(e){Q.push({action:s,args:[!1,_(e)]}),i()}function i(){if(!T&&Q.length){var e=Q.shift();e&&"function"==typeof e.action&&e.action.apply(z,e.args)}}function s(t,n){if(u()){var r=t?1:-1,o=a(M),i=o&&o.searchResult&&o.searchResult.length,l=t?A>=-1&&S-1>A:A>0&&S>=A;if(i&&l){A+=r;var g=o.searchResult[A];j=P(M,g),G(M,g);var c=o?o.rotation:0,h=It.getViewerTransform(M,c),f=Z(g.bounds,o.regions[g.region]),x=Ft(h.x(f.x,f.y),h.y(f.x,f.y));It.showPagePoint(M,x,Atalasoft.Utils.PageSelection.Center,function(){n(z,P(M,g))})}else T=T||d(e.text,M>=0?M+r:R,t).done(function(e,r){u()?e>=0&&r&&(M=e,S=r.searchResult.length,A=t?-1:S,s(t,n)):n(z,null)}).fail(function(){n(z,null)})}else n(z,null)}function l(){return e.sourceQuery}function u(){var t=Yt.searchQuery===e;return t||b(),t}function g(){return u()&&(T||Q.length>0)}function c(){if(u()&&j&&j.page>=0){var e=a(j.page);if(e&&e.regions[j.region]&&e.regions[j.region].lines[j.line])return F(e.regions[j.region].lines[j.line])}return null}function d(t,n,r,o,i){o=o||Vt.Deferred();var s;return u()&&setTimeout(function(){for(;n>=0&&n<It._controllers.document.getPageCount();n+=r?1:-1){var l=a(n);if(l&&!l.loading){if(l.searchResult=v(l,e.text),l.searchResult.length>0)return o.resolve(n,l),void 0}else{if(l&&l.loading&&l.promise)return h(t,n,r,o,i,l),void 0;if(!l){if(D[n])continue;return s=!0,x(t,n,r,o),void 0}}}return!z.wrap||s||i?(o.reject(),void 0):(0>n&&!r?n=It._controllers.document.getPageCount()-1:n>=It._controllers.document.getPageCount()&&r&&(n=0),d(t,n,r,o,!0),void 0)},0),o.promise()}function h(e,t,n,r,o,i){i.promise.then(function(){d(e,t,n,r,o)})}function x(e,t,n,r){var o=p(t,n);o.pages.length?y(e,o,C).done(function(t){if(null===t)if(u()){var i=o.pages[o.pages.length-1],s=i.hasOwnProperty("di")?i.di:i.i;d(e,s,n,r)}else r.reject();else{var l=a(t);r.resolve(t,l)}}).fail(function(){r.reject()}):r.reject()}function v(e,t){var n=t.length,r=[];if(e.searchResult)r=e.searchResult;else for(var o=0;o<e.regions.length;o++)for(var i=0;i<e.regions[o].lines.length;i++){for(var a=e.regions[o].lines[i],s=0,l=[],u="",g=0;g<a.words.length;g++){var c=a.words[g],d=c.glyphs&&c.glyphs.length;Ut(c,g>=1?a.words[g-1]:null)&&(u+=" ",++s);for(var h=0;h<(d?c.glyphs.length:c.text.length);h++)l[s++]={bounds:d?c.glyphs[h].bounds:c.bounds,region:o,line:i,word:g,glyph:I?h:-1},u+=(d?c.glyphs[h].text:c.text[h]).toLocaleLowerCase()}var f=0;do if(f=u.indexOf(t,f),f>=0){for(var x=l[f],v=Math.min(f+n-1,l.length);!l[v]&&v>f;)--v;var p=l[v],y=Mt({x:x.bounds.x,y:x.bounds.y,width:Math.abs(p.bounds.right-x.bounds.x),height:Math.abs(p.bounds.bottom-x.bounds.y)});r.push({bounds:y,region:x.region,line:x.line,word:x.word,glyph:x.glyph,endWord:p.word,endGlyph:p.glyph})}while(f++>=0)}return r}function p(e,t){for(var n=e,r=null,o=[];n>=0&&n<It._controllers.document.getPageCount()&&o.length<=20;n+=t?1:-1){var i=null,s=It._controllers.document.getPageDefinition(n),l=s.index;if(s.uri&&(i=s.uri),r!==i&&n!==e)break;r=i;var u={i:l};l!==n&&(u.di=n),o.push(u);var g=a(n);if(g&&!g.loading)break}var c={textUrl:r||Gt.config.documenturl,pages:o};return c}function y(e,t,n){var r=Vt.Deferred(),o={type:"pagetextsearch",serverurl:Gt.config.serverurl,query:"?pagetextsearch=",method:"POST",data:{atala_query:e,atala_docurl:t.textUrl,atala_maxcount:n||C,atala_pages:JSON.stringify(t.pages)},cancel:!1},i=function(e){if(u()){var t=-1;if(e&&e.length)for(var n=0;n<e.length;n++){var o=e[n],i=o.hasOwnProperty("di")?o.di:o.i,s=a(i);!s&&o.text&&(It._controllers.document.updatePageText(i,o.text),vt(o.text,o.text,i)),o.count<=0&&0>t?s?s.searchResult=[]:D[i]=[]:0>t&&o.count>0&&(t=i)}r.resolve(t>=0?t:null)}else r.reject()},s=function(){r.reject()};return It.makeHandlerRequest(o,i,s),r.promise()}function b(){Wt.unbind("pagetextloaded",m),Gt.unbind({pageshown:w}),D=[]}function m(t){var n=t.text,r=t.index;if(u()&&n&&(n.searchResult=v(n,e.text),D[r]&&Array.prototype.splice.call(D,r,1),n.searchResult.length)){var o=It.findPageFromIndex(r);o&&f(r,o)}}function w(t){if(u()&&t.page&&t.index>=0){var n=a(t.index);!n||n.loading||n.searchResult||setTimeout(function(){n.searchResult=v(n,e.text),f(t.index,t.page)},0)}}function _(e){return function(){T=null,e&&e.apply(this,arguments),i()}}function P(e,t){return{page:e,region:t?t.region:0,line:t?t.line:0,word:t?t.word:0}}var T,C=3,R=e.start||0,M=-1,A=-1,S=0,z=this,D=[],Q=[],j=P(-1);n(),/**
-         * Advances current item to the next query match or adds operation to the queue in case if next match is currently awaited.
-         * @param {TextSearchCallback} callback - function that that is called when next match is found.
-         * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#next
-         */
-z.next=r,/**
-         * Advances current item to the previous query match or adds operation to the queue in case if next match is currently awaited.
-         * @param {TextSearchCallback} callback - Function that that is called when previous match is found.
-         * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#prev
-         */
-z.prev=o,/**
-        * Gets the query text for this iterator.
-        * @returns {string}
-        * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#getQuery
-        */
-z.getQuery=l,/**
-         * Indicates whether this iterator corresponds to the active search.
-         *
-         * If `false`, next/prev methods are always returning `null` match.
-         * @returns {boolean}
-         *
-         * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#isValid
-         */
-z.isValid=u,/**
-         * Indicates whether this is executing background search.
-         * If `true`, subsequent next/prev calls are stored into the search queue.
-         *
-         * Method could be used, for example, to determine whether search will be continued after particular callback call, and thus to hide or preserve search loading mask.
-         *
-         * @returns {boolean}
-         * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#isSearching
-         */
-z.isSearching=g,/**
-         * Returns the formatted text for the whole line containing current match.
-         * @returns {string}
-         *
-         * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#getCurrentLineText
-         */
-z.getCurrentLineText=c,/**
-         * Disposes the current iterator. Calling this method is optional. Abandoned iterators will be disposed automatically.
-         * @ignore
-         *
-         * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#dispose
-         */
-z.dispose=b}function gt(){for(var e=[],t=0;t<It._controllers.document.getPageCount();t++){var n=a(t);n&&n.searchResult&&(n.searchResult.length&&(e[t]=!0),n.searchResult=null)}for(var r=0;r<Xt.length;++r)e[r]&&f(r,Xt[r]);Yt.searchQuery=null}function ct(e,t){var n={type:"textdata",serverurl:e,query:"?atalatextdata=",method:"GET",data:{atala_docurl:t},cancel:!1,info:{ocr:{},error:void 0}};return n}function dt(e,t){function n(e){ht(e),"function"==typeof t&&t.call()}S(),It.makeHandlerRequest(e,n,n)}function ht(e){if(e){if(e.error&&(g("TextLoadError",e.error),S()),e.text.pages)for(var t=0;t<e.text.pages.length;++t)mt(e.text.pages[t],t);It._controllers.document.initDocumentText(e.text),l({type:"textloaded"})}}function ft(e){var t=Vt.Deferred(),n=a(e),r=It._controllers.document.getPageDefinition(e);if(!n&&r){n={loading:!0,regions:[],promise:t},It._controllers.document.updatePageText(e,n);var o=r.uri||Gt.config.documenturl,i=Gt.config.serverurl;setTimeout(function(){var a={type:"pagetextdata",serverurl:i,query:"?atalapagetext=",method:"GET",data:{atala_docurl:o,atala_index:r.index},cancel:!1,info:{page:n,error:void 0}},s=bt(n,e,t);It.makeHandlerRequest(a,s,s)},0)}else t.resolve(e,n);return t.promise()}function xt(e,t,n){var r=ct(e,t);dt(r,n)}function vt(e,t,n,r){if(e)if(t.promise===r&&(t.loading=!1,t.promise=void 0),e.error)g("TextLoadError",e.error),t.regions=[],r&&r.reject&&r.reject(n);else{mt(e,n),t.regions=e.regions?e.regions:[],Vt.extend(t,e);var o={type:"pagetextloaded",index:n,text:t};u(o),l(o),r&&r.resolve&&r.resolve(n,t)}}function pt(e){for(var t=0;t<Xt.length;t++)if(Xt[t]._index===e)return Xt[t];return null}function yt(e,t){if(e&&e._text){var n=e._text[0];if(n.getContext){var r=n.getContext("2d"),o=t?t.rotation:0,i=It.getViewerTransform(e._index,o);return r.setTransform(i.a,i.b,i.c,i.d,i.e,i.f),r}}return null}function bt(e,t,n){return function(r){vt(r,e,t,n)}}function mt(e,t){if(e){Ct(e),e.regions=e.regions||[],e.rotatedRegions=[],e.rotation=e.rotation||0;for(var n=e.regions.length-1;n>=0;--n)e.regions[n].page=t,wt(e.regions[n],e.bounds)?(e.regions[n].index=n,e.regions[n].rotation&&e.rotatedRegions.push(e.regions[n])):Array.prototype.splice.call(e.regions,n,1);e.regions.sort(function(e,t){return it(e,t)?-1:1})}}function wt(e,t){if(!Ct(e))return!1;e.rotation=e.rotation||0,e.lines=e.lines||[];for(var n=e.lines.length,r=e.lines.length-1;r>=0;--r)_t(e.lines[r],t,e.rotation)||Array.prototype.splice.call(e.lines,r,1);return n>0&&0===e.lines.length&&g("TextLoadError","Invalid region data received."),n>0?e.lines.length>0:!0}function _t(e,t,n){if(!Ct(e,t,n))return!1;e.words=e.words||[];for(var r=e.words.length,o=e.words.length-1;o>=0;--o)Pt(e.words[o],t,n)||Array.prototype.splice.call(e.words,o,1);return r>0?e.words.length>0:!0}function Pt(e,t,n){if(!Ct(e,t,n))return!1;e.glyphs=e.glyphs||[],e.text=e.text||"",e.os&&(e.omitSpace=e.os,delete e.os);for(var r=e.glyphs.length-1;r>=0;--r){var o=e.glyphs[r];Tt(o,t,n)||Array.prototype.splice.call(e.glyphs,r,1)}return!0}function Tt(e,t,n){return Ct(e,t,n)?e.text?!0:!1:!1}function Ct(e,t,n){var r=!1;if(e)if(e.b&&"string"==typeof e.b){var o=e.b.split(";");e.bounds={x:parseFloat(o[0]),y:parseFloat(o[1]),width:parseFloat(o[2]),height:parseFloat(o[3])},delete e.b,r=!0}else e.bounds&&e.bounds.hasOwnProperty("x")&&e.bounds.hasOwnProperty("y")&&e.bounds.hasOwnProperty("width")&&e.bounds.hasOwnProperty("height")&&(Mt(e.bounds),r=!0);else e={};return e.bounds||(e.bounds={x:0,y:0,width:0,height:0}),Mt(e.bounds),e.bounds&&(e.normalizedBounds=Rt(e,t,n)),r}function Rt(e,t,n){if(!e.normalizedBounds){if(n%360===0)return e.normalizedBounds=e.bounds,e.normalizedBounds;e.normalizedBounds=Mt(Atalasoft.Utils.rotateRect(e.bounds,t,360-n))}return e.normalizedBounds}function Mt(e){return e.right=e.x+e.width,e.bottom=e.y+e.height,e}function At(e,t){return t+Jt>e}function St(e,t){return e>t-Jt}function zt(e,t){return e&&t&&e.x===t.x&&e.y===t.y}function Dt(e,t,n){return St(e,t)&&At(e,n)}function Qt(e,t){return t?Dt(e.x,t.x,t.right)&&Dt(e.y,t.y,t.bottom):!1}function jt(e,t){if(!e&&!t)return!1;var n=St(e.right,t.x)&&St(t.right,e.x)&&St(e.bottom,t.y)&&St(t.bottom,e.y)||Lt(e,t);return n}function Lt(e,t){if(!e&&!t)return!1;var n=e.width>t.width?e:t;return t=n===e?t:e,At(n.x,t.x)&&St(n.right,t.right)&&At(n.y,t.y)&&St(n.bottom,t.bottom)}function Ot(e,t){if(!jt(e,t))return null;var n={x:Math.max(e.x,t.x),y:Math.max(e.y,t.y),right:Math.min(e.right,t.right),bottom:Math.min(e.bottom,t.bottom)};return n.x<n.right&&n.y<n.bottom?(n.width=Math.abs(n.right-n.x),n.height=Math.abs(n.bottom-n.y),n):null}function kt(e,t,n){var r=It.getViewerTransform(e,t.rotation?t.rotation:0).invert();return Ft(r.x(n.x,n.y),r.y(n.x,n.y))}function Ut(e,t){return e&&t&&!t.omitSpace?!0:!1}function qt(e){return Ft(e.bounds.x,e.bounds.y)}function Bt(e){return Ft(e.bounds.right,e.bounds.bottom)}function Ft(e,t){return{x:e,y:t}}function Nt(e,t){var n,r,o,i,a=0,s=function(){a=(new Date).getTime(),i=null,o=e.apply(n,r),i||(n=r=null)};return function(){var l=(new Date).getTime();a||(a=l-t);var u=t-(l-a);return n=this,r=arguments,0>=u||u>t?(i&&(clearTimeout(i),i=null),a=l,o=e.apply(n,r),i||(n=r=null)):i||(i=setTimeout(s,u)),o}}var Vt=Atalasoft.$,Et=this,Gt=e,It=t,Wt=(t?t._internalEvents:null)||Vt({}),Ht={/**
          * @lends Atalasoft.Controls.WebDocumentViewer~TextController
          */
-text:{events:{/**
+text:{events:{
+/**
                  * Triggers when page text loaded.
                  * @event Atalasoft.Controls.WebDocumentViewer#pagetextloaded
                  * @type {LoadPageTextCallback}
                  * @param {Object} event - The event object.
                  * @param {number} event.index - index of the page for which text data has been loaded.
+                 * @param {Object} event.customData - The event customer data from server.
                  */
-pagetextloaded:null,/**
+pagetextloaded:null,
+/**
                  * Triggers when UI text selection complete.
                  * @event Atalasoft.Controls.WebDocumentViewer#textselected
                  * @type {NotificationCallback}
                  */
-textselected:null},/**
+textselected:null},
+/**
              * Retrieves the selected text.
              * @return {string} Selected text. Line break is inserted after each line and region.
              * @instance
              * @function
              */
-getSelected:B,/**
+getSelected:V,
+/**
              * Copies selected text to clipboard. This method don't depend on {@link TextMouseToolConfig| TextMouseToolConfig.hookcopy} config option, i.e. text will be copied if `ctrl+c` copying is disabled for user.
              * @instance
              * @function
              */
-copySelected:q,/** Selects all text on the page.
+copySelected:F,
+/** Selects all text on the page.
             * Any optional arguments could be omitted and callback could be passed instead of it.
             * This method is intended to select whole page text or to be used in conjunction with text search API when `region`, `line`, `word` indexes are passed to application using search iterator.
             *
@@ -1980,7 +2511,8 @@ copySelected:q,/** Selects all text on the page.
             *       }
             *  });
             */
-selectPageText:P,/**
+selectPageText:function(e,o,i,a,s,t){var l=M.Deferred(),n=Array.prototype.slice.call(arguments,1);2<n.length&&"function"==typeof n[n.length-2]?(t=n.pop(),s=n.pop()):1<n.length&&"function"==typeof n[n.length-1]&&(s=n.pop());return o=n[0],i=n[1],a=n[2],pe(e).done(function(e,t){var n=t.bounds;void 0===o||!t.regions[o]||void 0!==i&&t.regions[o].lines[i]?(o=t.regions[o],void 0!==i&&o.lines[i]&&(n=te((i=o.lines[i]).bounds,o),void 0!==a&&i.words[a]&&(n=te(i.words[a].bounds,o))),$(e,Ee(n.x,n.y),e,Ee(n.right,n.bottom))):J(e,o);var r=function(){A.config.mousetool.text.hookcopy&&S._dom.viewport.focus(),l.resolve(),s&&"function"==typeof s&&s()};S.isPageInView(e)?r():A.showPage(e,r)}).fail(function(){l.reject(),t&&"function"==typeof t&&t()}),l.promise()},
+/**
              * @callback GetPageTextCallback
              * @param {string} text - The returned text.
              */
@@ -1993,18 +2525,21 @@ selectPageText:P,/**
             * @instance
             * @function
             */
-getPageText:T,/**
+getPageText:function(o,i,e){var a=M.Deferred();return pe(o).done(function(){var e="",t=Q(o);if(t)for(var n=0;n<t.regions.length;n++){var r=W(t.regions[n]);r&&(e+=r)}a.resolve(e),i&&"function"==typeof i&&i(e)}).fail(function(){a.reject(),e&&"function"==typeof e&&e()}),a.promise()},
+/**
              * Clears all text selection for the document.
              * @instance
              * @function
              */
-clearSelection:D,/**
+clearSelection:b,
+/**
             * Marks page text data for reload. After this call text data will be loaded next time page will be inserted into DOM on scrolling. I.e. this method won't triggered immediate text reload, even for visible pages.
             * @param {number} [index] - Index of the page to reset text data. If not specified whole document text data is reset.
             * @instance
             * @function
             */
-resetPageText:C,/**
+resetPageText:v,
+/**
              * Callback signature for {@link Atalasoft.Controls.WebDocumentViewer~TextController#reloadPageText|reloadPageText} method.
              * @callback ReloadPageTextCallback
              * @param {number} index - Index of the page for which operation has been performed.
@@ -2018,159 +2553,218 @@ resetPageText:C,/**
             * @instance
             * @function
             */
-reloadPageText:R,/**             
+reloadPageText:function(e,t,n){return v(e),pe(e).done(function(){t&&"function"==typeof t&&t(e)}).fail(function(){n&&"function"==typeof n&&n(e)})},
+/**             
             * Indicates whether page text is loaded.             
             * @param {number} index - Index of the page to check text data state.
             * @instance
             * @function
             */
-isPageTextLoaded:_,/**
+isPageTextLoaded:function(e){var t=Q(e);return!(!t||t.loading)},
+/**
              * Triggers text search. This method also triggers UI search behavior - highlight for matched text occurrences selection of current text result and scrolling during text results iteration.
-             * @param {string} [text] - Text to search for. Is empty, previous search results are dropped.
+             * @param {string} [text] - Text to search for. If empty, previous search results are dropped.
              * @param {number} [startPage] - Index of the page to start search from. If not specified first page in document is assumed to be the first in search.
-             * @param {TextSearchCallback} callback - Search callback that receives search results iterator.
+             * @param {TextSearchCallback} [callback] - Search callback that receives search results iterator.
+             * @returns search results iterator that allows navigation over search results
+             *
+             * @instance
+             * @function
+             * @deprecated - Use the {@link Atalasoft.Controls.WebDocumentViewer~TextController#searchOnPages|searchOnPages} method instead.
+             */
+search:ue,
+/**
+             * Triggers text search for the specified pages. This method also triggers UI search behavior - highlight for matched text occurrences selection of current text result and scrolling during text results iteration.
+             * @param {string} [text] - Text to search for. If empty, previous search results are dropped.
+             * @param {number} [startPage] - Index of the page to start search from. If not specified first page in document is assumed to be the first in search.
+             * @param {number} [endPage] - Index of the page to end search where. If not specified last page in document is assumed to be the last in search.
+             * @param {number} [activePage] - Index of the page from that viewer should start scrolling to the next search result.
+             * @param {TextSearchCallback} [callback] - Search callback that receives search results iterator.
              * @returns search results iterator that allows navigation over search results
              *
              * @instance
              * @function
              */
-search:lt}};if(Atalasoft.Text.TextController.__exposedApi=Ht.text,!e)return null;var Jt=.1,$t=!1,Kt=null,Xt=t._pages,Yt={activepage:null,origin:Ft(0,0),originPage:-1,rectangular:!1,selectionCache:[],searchQuery:null},Zt={};Vt.extend(Zt,n||{}),Et.dispose=i,Et.removeTextLayer=d,Et.addTextLayer=h,Et.showLayer=f,Et.__exposedApi=Ht.text,Et.__getDebugInfo=M,Et.__linkText=A,Et.clear=S,Et.setViewPort=z,Et.search=lt,Et.clearSelection=D,Et.ensurePageTextLoaded=ft;var en=Nt(W,Gt.config.mousetool.text.throttlingtreshold);Et.createHandlerRequest=ct,Et.makeHandlerRequest=dt,Et.loadText=ht,Et.loadPageText=xt,s(),r()};
-"use strict";Atalasoft.Annotations.TextAnnotationUI=function(t,e,o){function n(){a(),x(),t.bind(R)}function a(){if(null==B&&(B=new Atalasoft.Annotations.FontUI(O.font)),S){var o=S.removed!==!0?S:null;k.unbind(o,{showeditor:d,hideeditor:c})}var n=j,a=O.autoscale;S=a?e.atalaImage():e.html(),(!S.isHtml||a)&&(S.renderer=new Atalasoft.Annotations.AnnotationTextRenderer(t.get(),B),m=w),null!=U&&e._page&&(e._page.append(U),e._page.bind(I)),Raphael.vml&&(t.getObject().node.style.overflow="hidden"),S.transform(v().toTransformString(!0)),k.bind(S,{showeditor:d,hideeditor:c}),n&&d()}function r(){U&&U.remove(),T&&T.remove(),B&&B.dispose(),S&&S.remove(),e&&e._page&&e._page.unbind(I),t.unbind(R),M=null,k=null,U=null,B=null,T=null,S=null,O=null}function i(t){t&&A.extend(O,t)}function l(t){return t?O[t]:O}function s(){return B}function d(){U||u(),g()}function h(e){e.stopPropagation(),O.value!==U.val()&&(O.value=U.val(),t.set({text:O}))}function u(){U=A("<textarea/>").hide(),e._page&&(e._page.append(U),e._page.bind(I)),U.bind("change keydown mouseup mousemove mousedown",h),U.bind({blur:c}),t.bind({deselected:c});var o=t.getObject();if(U.css({position:"absolute","overflow-x":"auto","overflow-y":"auto","z-index":99999,border:"0px solid",padding:"0px","background-color":"transparent","text-align":O.align}),Atalasoft.Utils.Browser.Mobile.Any()){var n=t.get(),a=Atalasoft.Utils.getSVGOffset(e.canvas,e._page);U.css({left:n.x+a.left+"px",top:n.y+a.top+"px",width:n.width+"px","max-width":n.width+"px",height:n.height+"px","max-height":n.height+"px",border:o.attr("stroke")+" "+o.attr("strokewidth")+"px","background-color":o.attr("fill")})}B.setZoom(t.getZoom()),(Atalasoft.Utils.Browser.Chrome||Atalasoft.Utils.Browser.Safari)&&U.css({resize:"none"}),null!=O.value&&U.val(O.value),O.readonly&&U.prop("readonly","readonly"),B.repaint(U)}function g(){var e=t?t.get("visible"):!0;e&&((U.is(":hidden")||!j)&&(S.hide(),U.prop("readonly",O.readonly?"readonly":""),U.show(),x()),Atalasoft.Utils.Browser.Touch&&U.focus(function(){U[0].setSelectionRange(0,9999)}),Atalasoft.Utils.Browser.Explorer&&7===parseInt(Atalasoft.Utils.Browser.Version,10)||U[0].focus(),j=!0)}function c(){U&&((U.is(":visible")||j)&&(U.hide(),S.show(),x()),U[0].blur(),j=!1)}function f(){var e=t?t.get("visible"):!0;e?j?d():S.show():S.hide(),S.backgroundColor&&S.backgroundColor(t.get("fill").color)}function p(t){t&&(e!==t||S.removed)&&(e=t,null!=T&&(T.remove(),T=null),a(),f())}function x(o){if(p(o),m(),U&&(!U.is(":hidden")||j)){var n=t.get("outline").width/2,a=t.get(),r=t.getZoom(),i=t.getBox(),l=v(),s=y(l,i.x,i.y),d=y(l,i.x+i.width,i.y+i.height),h=i.width*r,u=i.height*r,g={x:(s.x+d.x-h)/2,y:(s.y+d.y-u)/2},c=V*r,f=n*r,x=2*(c+f),w=Math.max(Math.ceil(h-x),z.width),b=Math.max(Math.ceil(u-x),z.height),M=Atalasoft.Utils.getSVGOffset(e.canvas,e._page),k=a.rotation+_.getPageRotation(t._pageindex),T=0!==k?"rotate("+k+"deg)":"",S={left:Math.round(g.x+M.left+f)+"px",top:Math.round(g.y+M.top+f)+"px",width:w+"px",height:b+"px","max-width":w+"px","max-height":b+"px",padding:Math.ceil(c)+"px"};if(A.extend(S,Atalasoft.Utils.__htmlTransformStyle(T)),Atalasoft.Utils.Browser.Explorer8){var I=t.getObject(),R=I.attr("strokewidth")||1;U.css({border:"solid "+R+"px "+I.attr("stroke"),"background-color":I.attr("fill")})}U.css(S)}B&&(B.set(O.font),B.setZoom(t.getZoom()),B.repaint(U))}function m(){var e=t.get();T||(T=A('<textarea selectable="false"/>'),A(S.innerDom).append(T),T.css({"background-color":"transparent",border:"0px solid","overflow-x":"hidden","overflow-y":"hidden","-moz-user-select":"none","-khtml-user-select":"none","-webkit-user-select":"none","user-select":"none",resize:"none",cursor:"inherit"}),T.attr("readonly","readonly"),T.bind({focus:function(){return this.blur(),!1}}),T[0].raphaelParent=!0),T.val(O.value);var o=t.get("outline").width/2,n=Math.max(Math.ceil(e.width-2*(o+V)),1),a=Math.max(Math.ceil(e.height-2*(o+V)),1);if(B&&(B.set(O.font),B.repaint(T,1,!0)),T.css({width:n+"px",height:a+"px","max-width":n+"px","max-height":a+"px",padding:V+"px","text-align":O.align}),S.attr({x:Math.round(o+e.x),y:Math.round(o+e.y),width:e.width,height:e.height}),e.cornerradius>=0){var r=t.getObject();A(r[0]).attr({rx:e.cornerradius||0,ry:e.cornerradius||0})}S.transform(v().toTransformString(!0))}function w(){var e=t.get("outline").width/2,o=t.get(),n=Math.max(Math.ceil(o.width-2*(e+V)),0),a=Math.max(Math.ceil(o.height-2*(e+V)),0);if(B&&B.set(O.font),S.attr({x:Math.round(e+V+o.x),y:Math.round(e+V+o.y),width:n,height:a}),o.cornerradius>=0){var r=t.getObject();A(r[0]).attr({rx:o.cornerradius||0,ry:o.cornerradius||0})}S.renderer&&S.renderer.renderToSVGImage(S[0],{width:n,height:a}),S.transform(v().toTransformString(!0))}function v(){var e=Raphael.matrix(),o=_.getViewerTransform(t._pageindex),n=t.getTransform();return e.add(o.a,o.b,o.c,o.d,o.e,o.f),e.add(n.a,n.b,n.c,n.d,n.e,n.f),e}function b(){S&&x()}function y(t,e,o){return{x:t.x(e,o),y:t.y(e,o)}}var A=Atalasoft.$,M=this,_=o,k=t.getEventObject(),U=null,T=null,B=null,S=null,O=t.get("text"),j=!1,V=3,z=Atalasoft.Utils.Browser.Mobile.Any()?{width:200,height:200}:{width:1,height:1},I={},R={moving:b,resized:b,moved:b,rotated:b};n(),M.dispose=r,M.set=i,M.get=l,M.getFont=s,M.updateView=f,M.changepaper=p,M.repaint=x};
-"use strict";var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};/**
+searchOnPages:ge}};if(Atalasoft.Text.TextController.__exposedApi=o.text,!e)return null;var i=.1,a=null,D=t._pages,z={activepage:null,origin:Ee(0,0),originPage:-1,rectangular:!1,selectionCache:[],searchQuery:null},g={};function s(){!0}function Q(e){return S._controllers.document.getPageText(e)}
+/**
+    * jQuery trigger shortcut
+    * @returns object, WebDocumentViewer
+    */
+function l(e){return A.trigger(e),r}function h(e,t){A.trigger({type:"throwerror",name:e,msg:t})}function u(e){}function U(e,t){if(t._text){f(t);var n=Q(e);if(n){var r=be(t,n);if(r&&n.searchResult&&w(r,n),r&&n.selection)for(var o=n.selection,i=0;i<o.regions.length;i++)for(var a=0;a<o.regions[i].lines.length;a++)for(var s=o.regions[i].lines[a],l=0;s.words&&l<s.words.length;l++){var u=s.words[l];ne(r,u.bounds.x,u.bounds.y,u.bounds.width,u.bounds.height,g.selection)}}}}function c(e){f(e.page)}function d(e){U(e.index,e.page)}function f(e){e._text&&m(e._index)}function x(e){e.page._text.attr("width",e.width).attr("height",e.height),e.page._text.width(e.width),e.page._text.height(e.height),U(e.index,e.page)}function p(){if(z.searchQuery&&z.searchQuery.iterator){z.searchQuery.iterator.dispose(),z.searchQuery=null,de();for(var e=0;e<D.length;e++)U(D[e]._index,D[e])}}function v(e){if(null==e)for(var t=0;t<S._controllers.document.getPageCount();t++)v(t);Q(e)&&(S._controllers.document.updatePageText(e,null),z.selectionCache[e]&&(z.selectionCache[e]=null,S.findPageFromIndex(e)&&m(e,null)))}function y(){if(z.searchQuery=null,z.selectionCache=[],S._controllers.document.initDocumentText({pages:[]}),D)for(var e=0;e<D.length;e++)f(D[e])}function b(){for(var e=0;e<S._controllers.document.getPageCount();e++){var t=Q(e);t&&t.selection&&(m(e,t,!0),t.selection=null)}z.selectionCache.length=0}
+/** Clears the text selection */function m(e,t,n){for(var r=0;r<D.length;r++)if(!isFinite(e)||D[r]._index===e){t=isFinite(e)&&r===e?t:Q(D[r]._index);var o=be(D[r],t);if(o){var i=S.getSourcePageSize(D[r]._index,t?t.rotation:0);o.clearRect(0,0,i.width,i.height),n&&w(o,t)}}}function w(e,t){if(t&&t.searchResult)for(var n=0;n<t.searchResult.length;n++){var r=t.searchResult[n].bounds;ne(e,r.x,r.y,r.width,r.height,g.highlight)}}function P(e){var t=e.eventData,n=t.page,r=t.point;b();var o=Q(n);o&&(o.selection=le(t.point,t.point),t.interval&&z.origin&&0<=z.originPage?($(z.originPage,z.origin,n,r),t.complete=!0):(t.line||t.word)&&Math.abs(t.point.x-z.origin.x)<10&&Math.abs(t.point.y-z.origin.y)<10?(!function(e,t,n,r){var o=Q(e);if(o&&(n||r))for(var i=0;i<o.regions.length;i++){var a=o.regions[i];if(ze(t,a.bounds))for(var s=0;s<a.lines.length;s++){var l=a.lines[s];if(ze(t,l.bounds)){var u={region:i,line:s,bounds:l.bounds};if(r){for(var g=0;g<l.words.length;g++)if(ze(t,l.words[g].bounds))return u.word=g,u.bounds=l.words[g].bounds,H(e,u)}else if(n)return H(e,u)}}}}(n,r,t.line,t.word),t.complete=!0):(z.origin=t.rectangular?t.viewerPoint:t.point,z.originPage=n,z.rectangular=t.rectangular)),t.handled=!0}M.extend(g,n||{}),r.dispose=function(){A.unbind({pagerecycled:c,pageshown:d,zoomchanged:u,documentchanged:p}),O.unbind({textselectstart:P,textselectmove:E,textselectend:q}),a=A=r=null,z.searchQuery=null,z.selectionCache=[],!1,z.activepage=null},r.removeTextLayer=function(e){if(e instanceof jQuery)return e._text&&(e._text._page=null,e._text=null),!0;return!1},r.addTextLayer=function(t){if(t instanceof jQuery)return t._text=S.createDOM("canvas",t),t._text.css({width:"100%",height:"100%",position:"absolute",zIndex:0}),t._text.attr("width",t.width()).attr("height",t.height()),(t._text._page=t).bind(Atalasoft.Utils.Browser.Features.Touch?"touchstart":"mousedown",function(){var e;e=t,z.activepage=e}),t.bind({pageresize:function(e){e.page=t,x(e)},pagezoom:function(e){e.page=t,x(e)}}),!0;return!1},r.showLayer=U,r.__exposedApi=o.text,r.__getDebugInfo=function(){var e={};return M.extend(!0,e,{data:z,pages:D,viewport:a}),e},r.__linkText=function(e){},r.clear=y,r.setViewPort=function(e){e&&(e instanceof jQuery||(e=M(e)),a=e)},r.search=ue,r.clearSelection=b,r.ensurePageTextLoaded=pe;var _,T,R,C,k,I,j,L,N=(_=$,T=A.config.mousetool.text.throttlingtreshold,I=k=C=R=void 0,j=0,L=function(){j=(new Date).getTime(),I=null,k=_.apply(R,C),I||(R=C=null)},function(){var e=(new Date).getTime();j||(j=e-T);var t=T-(e-j);return R=this,C=arguments,t<=0||T<t?(I&&(clearTimeout(I),I=null),j=e,k=_.apply(R,C),I||(R=C=null)):I||(I=setTimeout(L,t)),k});function E(e){var t=e.eventData,n=t.page,r=z.rectangular?t.viewerPoint:t.point,o=Q(n);if(o)if(o.loading)t.cursor=Atalasoft.Utils.MouseToolCursor.Wait;else{if(0===o.regions.length)return!(t.handled=!1);var i=S.getPageRotation(n)+o.rotation;if(o.rotatedRegions)for(var a=0;a<o.rotatedRegions.length;a++)if(ze(t.point,o.rotatedRegions[a].bounds)){i+=o.rotatedRegions[a].rotation;break}t.cursor=i%180==0?Atalasoft.Utils.MouseToolCursor.Text:Atalasoft.Utils.MouseToolCursor.VerticalText,t.selecting&&N(z.originPage,M.extend({},z.origin),n,r,z.rectangular)}return!(t.handled=!0)}function q(e){var t=e?e.eventData:{},n=!1;for(var r in z.selectionCache)if(z.selectionCache.hasOwnProperty(r)&&z.selectionCache[r].selection&&z.selectionCache[r].selection.regions.length){n=!0;break}n&&l({type:"textselected"}),z.rectangular=!1,t.handled=!0}function B(e){F()}function F(){var e=S.createDiv();if(e[0]){var t=new ClipboardJS("wdv-dummy-selection-trigger",{text:function(){return V()}});t.on("success",function(e){t.destroy()}),t.on("error",function(e){t.destroy(),h("TextCopyError")}),t.onClick({currentTarget:e[0]})}}function V(){for(var e="",t=0;t<z.selectionCache.length;t++)if(z.selectionCache[t]){var n=z.selectionCache[t].selection;if(n&&n.regions&&0<n.regions.length)for(var r=0;r<n.regions.length;r++){var o=W(n.regions[r]);o&&(e+=o)}}return e}function G(e){for(var t="",n=0;e.words&&n<e.words.length;n++)if(je(e.words[n],1<=n?e.words[n-1]:null)&&(t+=" "),e.words[n].text)t+=e.words[n].text;else if(e.words[n].glyphs&&e.words[n].glyphs.length)for(var r=0;r<e.words[n].glyphs.length;r++)t+=e.words[n].glyphs[r].text;return t}function W(e){for(var t="",n=0;n<e.lines.length;n++){var r=G(e.lines[n]);r&&(t+=r+"\n")}return t}function H(e,t){var n=Q(e);if(n&&t&&n.regions[t.region]){b();var r=n.regions[t.region],o=be(ye(e),n);if(M.isNumeric(t.line)&&r.lines[t.line]){for(var i=r.lines[t.line],a={words:[]},s={lines:[a],bounds:M.extend({},r.bounds)},l=M.isNumeric(t.word)&&i.words[t.word]?t.word:0,u=M.isNumeric(t.endWord)&&i.words[t.endWord]?t.endWord:M.isNumeric(t.word)?l:i.words.length-1,g=l;g<=u;++g){var c=i.words[g],d=!!c.glyphs.length;d&&g===l&&M.isNumeric(t.glyph)?c=Z(c,t.glyph,l===u&&M.isNumeric(t.endGlyph)?t.endGlyph:c.glyphs.length-1):d&&g===u&&M.isNumeric(t.endGlyph)&&(c=Z(c,0,t.endGlyph)),a.words.push(M.extend({},c)),o&&ne(o,c.bounds.x,c.bounds.y,c.bounds.width,c.bounds.height)}n.selection=le(Ee(t.bounds.x,t.bounds.y),Ee(t.bounds.right,t.bounds.bottom)),se(n.selection.regions,s),z.selectionCache[e]=n}else J(e,t.region)}}function J(e,t){b();var n=Q(e);if(n&&n.regions[t]){var r=n.regions[t],o=be(ye(e),n);n.selection=le(Ee(r.bounds.x,r.bounds.y),Ee(r.bounds.right,r.bounds.bottom),!1);var i=X(o,r,n.selection.origin,n.selection.point);i&&0<i.lines.length&&(se(n.selection.regions,i),z.selectionCache[e]=n)}}function $(e,t,n,r,o){var i=Math.min(e,n),a=Math.max(e,n);for(var s in z.selectionCache)if(z.selectionCache.hasOwnProperty(s)){var l=parseInt(s,10);(l<i||a<l)&&(m(l,z.selectionCache[l],!0),z.selectionCache[l].selection=null)}for(var u=o?Math.min(t.x,r.x):0,g=Ee(u,0),c=i;c<=a;c++){var d=S.getSourcePageSize(c);o&&((d=M.extend({},S.getPageSize(c))).width*=S.getPageScale(c),d.height*=S.getPageScale(c));var h=o?Math.max(t.x,r.x):d.width,f=Ee(h,d.height),x=void 0,p=void 0;i===a?(x=t,p=r):c===e?(x=t,p=c===i?f:g):c===a||c===i?(p=r,x=c===i?f:g):(x=g,p=f);var v=ye(c);o?ee(c,Ee(u,x.y),Ee(h,p.y),v):K(c,x,p,v)}}function K(e,t,n,r){var o,i,a,s=Q(e);if(s&&re(s,t,n,!1)&&0<s.regions.length){r&&r._text&&m(e,s,!0),s.selection=le(t,n,!1);var l=function(e,t,n){for(var r=Ee(Math.min(t.x,n.x),Math.min(t.y,n.y)),o=Ee(Math.max(t.x,n.x),Math.max(t.y,n.y)),i=Me({x:r.x,y:r.y,width:o.x-r.x,height:o.y-r.y}),a=Me({x:0,y:r.y,width:e.bounds.width,height:o.y-r.y}),s=t,l=n,u=null,g=null,c=null,d=null,h=0;h<e.regions.length&&(!u||!g);h++){var f=e.regions[h].bounds;Qe(a,f)&&(c=!c||ae(e.regions[h],c)?e.regions[h]:c),Qe(i,f)&&(u=!u&&ze(s,e.regions[h].bounds)?e.regions[h]:u,g=!g&&ze(l,e.regions[h].bounds)?e.regions[h]:g,d=!d||oe(e.regions[h],d)?e.regions[h]:d)}if(u&&g){if(ae(g,u)){var x=g;g=u,u=x,s=n,l=t}}else if(c&&d){var p=void 0;u?(p=ie(l),ae(u,p)?(g=d,l=null):(g=u,l=s,u=c,s=null)):g?(p=ie(s),oe(g,p)?(u=c,s=null):(u=g,s=l,g=d,l=null)):(u=c,g=d,s=l=null),s=s||Le(u),l=l||Ne(g)}return{start:u,startPoint:s,end:g,endPoint:l}}(s,t,n);if(l&&l.start&&l.end)for(var u=be(r,s),g=0;g<s.regions.length;g++){var c=s.regions[g],d=null;c===l.start?d=c===l.end?X(u,c,l.startPoint,l.endPoint):X(u,c,l.startPoint,Ne(c)):c===l.end?d=X(u,c,Le(c),l.endPoint):(o=c,i=l.start,a=l.end,oe(o,i)&&ae(o,a)&&(d=X(u,c,Le(c),Ne(c)))),d&&d.lines&&0<d.lines.length&&(se(s.selection.regions,d),z.selectionCache[e]=s)}}}function X(e,t,n,r){var o={lines:[],bounds:M.extend({},t.bounds)},i=Q(t.page).bounds;if(0!==t.rotation&&(n=Atalasoft.Utils.rotatePoint(n,i,360-t.rotation),r=Atalasoft.Utils.rotatePoint(r,i,360-t.rotation)),Se(n.y,r.y)){var a=n;n=r,r=a}for(var s=0;s<t.lines.length;s++){var l=t.lines[s],u={words:[]},g=Ce(l,i,t.rotation),c=Se(g.y,n.y)&&Ae(g.bottom,r.y),d=!c&&De(n.y,g.y,g.bottom),h=!c&&De(r.y,g.y,g.bottom);if(d&&1<s){var f=Ce(t.lines[s-1],i,t.rotation);c=!(d=!De(n.y,f.y,f.bottom))&&!h}if(h&&s<t.lines.length-1){var x=Ce(t.lines[s+1],i,t.rotation);h=!De(r.y,x.y,x.bottom),c=!d&&!h}if(c||d||h){for(var p=0;l.words&&p<l.words.length;p++){var v=l.words[p],y=Ce(v,i,t.rotation),b=v.glyphs&&v.glyphs.length,m=c;if(!m){if(d&&h){if(Se(n.x,r.x)){var w=n;n=r,r=w}m=Se(b?y.x:y.right,n.x)&&Ae(b?y.right:y.x,r.x)}else d?m=Se(b?y.x:y.right,n.x):h&&(m=Ae(b?y.right:y.x,r.x));if(!m&&b){var P=null;if(d&&De(n.x,y.x,y.right)){var _=h?Math.min(y.right,r.x):y.right;P=Y(v,n.x,_)}if(h&&De(r.x,y.x,y.right))P=Y(v,d?Math.max(y.x,n.x):y.x,r.x);P&&(v=P,m=!0)}}m&&(u.words.push(M.extend({},v)),e&&ne(e,v.bounds.x,v.bounds.y,v.bounds.width,v.bounds.height))}0<u.words.length&&o.lines.push(u)}}return o}function Y(e,t,n){for(var r=null,o=null,i=0;i<e.glyphs.length;++i){var a=e.glyphs[i].normalizedBounds;if(null===r&&Se(a.right,t)&&(r=i),!Ae(a.x,n))break;o=i}return null!==r&&null!==o?Z(e,r,o):null}function Z(e,t,n){var r={glyphs:[],text:"",omitSpace:e.omitSpace};if(0<=t&&t<=n&&e.glyphs[n]){r.glyphs=e.glyphs.slice(t,n+1);var o=e.glyphs[t].bounds,i=e.glyphs[n].bounds,a=Math.min(o.x,i.x),s=Math.min(o.y,i.y),l=Math.max(o.right,i.right),u=Math.max(o.bottom,i.bottom);return r.bounds={x:a,y:s,width:Math.abs(l-a),height:Math.abs(u-s)},Me(r.bounds),r}return null}function ee(e,t,n,r){var o=Q(e);if(o&&re(o,t,n,!0)&&0<o.regions.length){r&&r._text&&m(e,o,!0);var i=Ie(e,o,t),a=Ie(e,o,n);o.selection=le(t,n,!0);var s=Me({x:Math.min(i.x,a.x),y:Math.min(i.y,a.y),width:Math.abs(a.x-i.x),height:Math.abs(a.y-i.y)});if(s=ke(s,o.bounds)){for(var l=void 0,u=0;u<o.regions.length;u++)if(Qe(s,o.regions[u].bounds)){l=l||be(r,o);for(var g={lines:[],bounds:M.extend({},o.regions[u].bounds)},c=0;c<o.regions[u].lines.length;c++){for(var d=o.regions[u].lines[c],h={words:[]},f=0;d.words&&f<d.words.length;f++){var x=d.words[f];if(Qe(s,x.bounds)){var p=Me(Atalasoft.Utils.rotateRect(s,o.bounds,(360-o.regions[u].rotation)%360)),v=x.normalizedBounds,y=Se(v.x,p.x),b=Ae(v.right,p.right);y&&b||(x=Y(x,Math.max(v.x,p.x),Math.min(v.right,p.right))),x&&(h.words.push(M.extend({},x)),l&&ne(l,x.bounds.x,x.bounds.y,x.bounds.width,x.bounds.height))}}0<h.words.length&&g.lines.push(h)}g.lines.length&&se(o.selection.regions,g)}o.selection.regions.length&&(o.selection.bounds=s,z.selectionCache[e]=o)}}}function te(e,t){if(t){if(t.rotation%180!=0)return Me({x:(e.right+e.x)/2,y:e.y,width:0,height:e.height});var n=(e.bottom+e.y)/2;return Me({x:e.x,y:n,width:e.width,height:0})}return null}function ne(e,t,n,r,o,i){e&&(e.clearRect(t,n,r,o),i=i||g.selection,e.fillStyle=i.color,e.globalAlpha=i.alpha,e.fillRect(t,n,r,o))}function re(e,t,n,r){return r=!!r,!e.selection||!Oe(e.selection.origin,t)||!Oe(e.selection.point,n)||r!==e.selection.rectangular}function oe(e,t){if(Se(e.bounds.bottom,t.bounds.y)){if(Ue(e.bounds,t.bounds))return e.bounds.x>t.bounds.x;var n=ke(e.bounds,t.bounds);if(n)return 1<=n.width/n.height?Se(e.bounds.y,t.bounds.y):Se(e.bounds.x,t.bounds.x);if(Se(e.bounds.y,t.bounds.bottom))return!0;if(Ae(e.bounds.bottom,t.bounds.y))return!1;if(Se(e.bounds.x,t.bounds.x))return!0}return!1}function ie(e){return{lines:[],bounds:Me({x:e.x,y:e.y,width:0,height:0})}}function ae(e,t){return!oe(e,t)}function se(e,t){for(var n=0;n<e.length&&!ae(t,e[n]);n++);Array.prototype.splice.call(e,n,0,t)}function le(e,t,n){return{origin:e,point:t,rectangular:!!n,regions:[]}}function ue(e,t,n){return"function"==typeof t&&(n=t,t=0),ge(e,0,S._controllers.document.getPageCount()-1,t,n)}function ge(e,t,n,r,o){var i=S._controllers.document.getPageCount(),a=!1,s=function(e,t){if(a)return null;var n=!1,r=e;return"string"==typeof e&&(r=Atalasoft.Utils.ParseInt(e),n=!0),null===r&&!n||void 0===r||"number"==typeof r?r:(h("searchOnPages",t+" page '"+JSON.stringify(e)+"' is not a correct page index."),a=!0,null)},l=s(t,"Start"),u=s(n,"End"),g=s(r,"Active");if(a)return null;if(Atalasoft.Utils.IsInteger(l)||(l=0),Atalasoft.Utils.IsInteger(u)||(u=i-1),Atalasoft.Utils.IsInteger(g)||(g=l),l<0||i<=l)return h("searchOnPages","Start page "+l+" is out of range."),null;if(u<0||i<=u)return h("searchOnPages","End page "+u+" is out of range."),null;if(u<l)return h("searchOnPages","Start page is greater than end page."),null;if(g<l||u<g)return h("searchOnPages","Active page "+g+" is out of range."),null;if(null!=e&&"string"!=typeof e)return h("searchOnPages","Text to search value "+JSON.stringify(e)+" is not a valid text to search."),null;if(null!=o&&"function"!=typeof o)return h("searchOnPages","Callback value "+JSON.stringify(o)+" is not a valid callback function."),null;if(de(),e&&2<e.length&&o){var c={sourceQuery:e,text:e.toLocaleLowerCase(),start:l,end:u,active:g},d=new ce(z.searchQuery=c,o);return z.searchQuery.iterator=d}return D.forEach(function(e){e._index>=l&&e._index<=u&&U(e._index,e)}),null}
+/**
+     * Callback signature for {@link Atalasoft.Controls.WebDocumentViewer~TextController#searchOnPages|text.searchOnPages}, {@link Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#next|next}, {@link Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#prev|prev} methods.
+     * @callback TextSearchCallback
+     * @param {Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator} iterator - Current iterator instance.
+     *
+     * It's recommended to call {@link Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#isValid|isValid} method when callback is called, to check whether iterator is still active. In case if search is cancelled(new search started), callback on the obsolete iterator will be called once to indicate that search is finished for particular query.
+     *
+     * @param {TextSearchResult} [match] - Current search query match descriptor. If match argument is null, no subsequent result are found.
+     */
+/**
+     * @typedef {Object} TextSearchResult - Represents single search result descriptor.
+     * @property {number} page - Page index of the match.
+     * @property {number} region - Index of the text region where match is occurred.
+     * @property {number} line - Index of the text line within region where match is occurred.
+     * @property {number} word - Index of the word within text line where match is occurred.
+     */
+/**
+     * WebDocumentViewer Search Results Iterator.
+     * @class
+     * @inner
+     * @name TextSearchIterator
+     * @alias TextSearchIterator
+     * @memberOf Atalasoft.Controls.WebDocumentViewer~TextController
+     */function ce(u,r){var g=3,c=u.start,d=u.end,h=u.active,f=-1,x=-1,p=0,v=this,y=[],b=void 0,t=[],m=C(-1);function o(e){t.push({action:w,args:[!0,R(e)]}),n()}
+/**
+         * Advances current item to the previous query match or adds operation to the queue in case if next match is currently awaited.
+         * @param {TextSearchCallback} callback - Function that that is called when previous match is found.
+         * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#prev
+         */function n(){if(!b&&t.length){var e=t.shift();e&&"function"==typeof e.action&&e.action.apply(v,e.args)}}function w(n,r){if(P()){var e=n?1:-1,t=Q(f);if(t&&t.searchResult&&t.searchResult.length&&(n?-1<=x&&x<p-1:0<x&&x<=p)){x+=e;var o=t.searchResult[x];m=C(f,o),H(f,o);var i=t?t.rotation:0,a=S.getViewerTransform(f,i),s=te(o.bounds,t.regions[o.region]),l=Ee(a.x(s.x,s.y),a.y(s.x,s.y));S.showPagePoint(f,l,Atalasoft.Utils.PageSelection.Center,function(){r(v,C(f,o))})}else b=b||_(u.text,0<=f?f+e:h,n).done(function(e,t){P()?0<=e&&t&&(f=e,p=t.searchResult.length,x=n?-1:p,w(n,r)):r(v,null)}).fail(function(){r(v,null)})}else r(v,null)}
+/**
+        * Gets the query text for this iterator.
+        * @returns {string}
+        * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#getQuery
+        */function P(){var e=z.searchQuery===u;return e||i(),e}
+/**
+         * Indicates whether this is executing background search.
+         * If `true`, subsequent next/prev calls are stored into the search queue.
+         *
+         * Method could be used, for example, to determine whether search will be continued after particular callback call, and thus to hide or preserve search loading mask.
+         *
+         * @returns {boolean}
+         * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#isSearching
+         */function _(t,n,r,o,i){o=o||M.Deferred();var a=void 0;return P()&&setTimeout(function(){for(;c<=n&&n<=d;n+=r?1:-1){var e=Q(n);if(e&&!e.loading){if(e.searchResult=T(e,u.text),0<e.searchResult.length)return void o.resolve(n,e)}else{if(e&&e.loading&&e.promise)return void s(t,n,r,o,i,e);if(!e){if(y[n])continue;return a=!0,void l(t,n,r,o)}}}if(v.wrap&&!a&&!i)return n<c&&!r?n=d:d<n&&r&&(n=c),void _(t,n,r,o,!0);o.reject()},0),o.promise()}function s(e,t,n,r,o,i){i.promise.then(function(){_(e,t,n,r,o)})}function l(o,e,i,a){var t,n,r,s,l,u=function(e,t){for(var n=e,r=null,o=[];c<=n&&n<=d&&o.length<=20;n+=t?1:-1){var i=null,a=S._controllers.document.getPageDefinition(n),s=a.index;if(a.uri&&(i=a.uri),r!==i&&n!==e)break;r=i;var l={i:s};s!==n&&(l.di=n),o.push(l);var u=Q(n);if(u&&!u.loading)break}return{textUrl:r||A.config.documenturl,pages:o}}(e,i);u.pages.length?(t=o,n=u,r=g,s=M.Deferred(),l={type:"pagetextsearch",serverurl:A.config.serverurl,query:"?pagetextsearch=",method:"POST",data:{atala_query:t,atala_docurl:n.textUrl,atala_maxcount:r||g,atala_pages:JSON.stringify(n.pages)},cancel:!1},S.makeHandlerRequest(l,function(e){if(P()){var t=-1;if(e&&e.searchResults&&e.searchResults.length)for(var n=0;n<e.searchResults.length;n++){var r=e.searchResults[n],o=r.hasOwnProperty("di")?r.di:r.i,i=Q(o);!i&&r.text&&(S._controllers.document.updatePageText(o,r.text),ve({pageText:r.text,customData:e.customData},r.text,o)),r.count<=0&&t<0?i?i.searchResult=[]:y[o]=[]:t<0&&0<r.count&&(t=o)}s.resolve(0<=t?t:null)}else s.reject()},function(){s.reject()}),s.promise()).done(function(e){if(null===e)if(P()){var t=u.pages[u.pages.length-1],n=t.hasOwnProperty("di")?t.di:t.i;_(o,n,i,a)}else a.reject();else{var r=Q(e);a.resolve(e,r)}}).fail(function(){a.reject()}):a.reject()}function T(e,t){var n=t.length,r=[];if(e.searchResult)r=e.searchResult;else for(var o=0;o<e.regions.length;o++)for(var i=0;i<e.regions[o].lines.length;i++){for(var a=e.regions[o].lines[i],s=0,l=[],u="",g=0;g<a.words.length;g++){var c=a.words[g],d=c.glyphs&&c.glyphs.length;je(c,1<=g?a.words[g-1]:null)&&(u+=" ",++s);for(var h=0;h<(d?c.glyphs.length:c.text.length);h++)l[s++]={bounds:d?c.glyphs[h].bounds:c.bounds,region:o,line:i,word:g,glyph:h},u+=(d?c.glyphs[h].text:c.text[h]).toLocaleLowerCase()}var f=0;do{if(0<=(f=u.indexOf(t,f))){for(var x=l[f],p=Math.min(f+n-1,l.length);!l[p]&&f<p;)--p;var v=l[p],y=Me({x:x.bounds.x,y:x.bounds.y,width:Math.abs(v.bounds.right-x.bounds.x),height:Math.abs(v.bounds.bottom-x.bounds.y)});r.push({bounds:y,region:x.region,line:x.line,word:x.word,glyph:x.glyph,endWord:v.word,endGlyph:v.glyph})}}while(0<=f++)}return r}function i(){O.unbind("pagetextloaded",e),A.unbind({pageshown:a}),y=[]}function e(e){var t=e.text,n=e.index;if(P()&&t&&c<=n&&n<=d&&(t.searchResult=T(t,u.text),y[n]&&Array.prototype.splice.call(y,n,1),t.searchResult.length)){var r=S.findPageFromIndex(n);r&&U(n,r)}}function a(e){if(P()&&e.page&&e.index>=c&&e.index<=d){var t=Q(e.index);!t||t.loading||t.searchResult||setTimeout(function(){t.searchResult=T(t,u.text),U(e.index,e.page)},0)}}function R(e){return function(){b=null,e&&e.apply(this,arguments),n()}}function C(e,t){return{page:e,region:t?t.region:0,line:t?t.line:0,word:t?t.word:0}}
+/**
+             * Indicates whether search should be wrapped around when first or last document page is match is reached.
+             * @name Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#wrap
+             * @type {boolean}
+             */
+v.wrap=!0,O.bind("pagetextloaded",e),A.bind({pageshown:a}),setTimeout(function(){for(var e=0;e<D.length;e++){var t=D[e]._index;if(!(t<c||d<t)){var n=Q(t);n&&!n.loading&&(n.searchResult=T(n,u.text),n.searchResult.length&&(U(t,D[e]),t===h&&(p=n.searchResult.length,f=h)))}}o(r)},0),
+/**
+         * Advances current item to the next query match or adds operation to the queue in case if next match is currently awaited.
+         * @param {TextSearchCallback} callback - function that that is called when next match is found.
+         * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#next
+         */
+v.next=o,v.prev=function(e){t.push({action:w,args:[!1,R(e)]}),n()},v.getQuery=function(){return u.sourceQuery}
+/**
+         * Indicates whether this iterator corresponds to the active search.
+         *
+         * If `false`, next/prev methods are always returning `null` match.
+         * @returns {boolean}
+         *
+         * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#isValid
+         */,v.isValid=P,v.isSearching=function(){return P()&&(b||0<t.length)}
+/**
+         * Returns the formatted text for the whole line containing current match.
+         * @returns {string}
+         *
+         * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#getCurrentLineText
+         */,v.getCurrentLineText=function(){if(P()&&m&&0<=m.page){var e=Q(m.page);if(e&&e.regions[m.region]&&e.regions[m.region].lines[m.line])return G(e.regions[m.region].lines[m.line])}return null},
+/**
+         * Disposes the current iterator. Calling this method is optional. Abandoned iterators will be disposed automatically.
+         * @ignore
+         *
+         * @function Atalasoft.Controls.WebDocumentViewer~TextController~TextSearchIterator#dispose
+         */
+v.dispose=i}function de(){for(var e=[],t=0;t<S._controllers.document.getPageCount();t++){var n=Q(t);n&&n.searchResult&&(n.searchResult.length&&(e[t]=!0),n.searchResult=null)}for(var r=0;r<D.length;++r)e[r]&&U(r,D[r]);z.searchQuery=null}function he(e,t){return{type:"textdata",serverurl:e,query:"?atalatextdata=",method:"GET",data:{atala_docurl:t},cancel:!1,info:{ocr:{},error:void 0}}}function fe(e,t){function n(e){xe(e),"function"==typeof t&&t.call()}y(),S.makeHandlerRequest(e,n,n)}function xe(e){if(e){if(e.error&&(h("TextLoadError",e.error),y()),e.text.pages)for(var t=0;t<e.text.pages.length;++t)me(e.text.pages[t],t);S._controllers.document.initDocumentText(e.text),l({type:"textloaded"})}}function pe(i){var a=M.Deferred(),s=Q(i),l=S._controllers.document.getPageDefinition(i);if(!s&&l){s={loading:!0,regions:[],promise:a},S._controllers.document.updatePageText(i,s);var u=l.uri||A.config.documenturl,g=A.config.serverurl;setTimeout(function(){var t,n,r,e={type:"pagetextdata",serverurl:g,query:"?atalapagetext=",method:"GET",data:{atala_docurl:u,atala_index:l.index},cancel:!1,info:{page:s,error:void 0}},o=(t=s,n=i,r=a,function(e){ve(e,t,n,r)});S.makeHandlerRequest(e,o,o)},0)}else a.resolve(i,s);return a.promise()}function ve(e,t,n,r){if(e&&e.pageText)if(t.promise===r&&(t.loading=!1,t.promise=void 0),e.error)h("TextLoadError",e.error),t.regions=[],r&&r.reject&&r.reject(n);else{me(e.pageText,n),t.regions=e.pageText.regions?e.pageText.regions:[],M.extend(t,e.pageText);var o={type:"pagetextloaded",index:n,text:t,customData:e.customData};!function(){O.trigger.apply(O,arguments)}(o),l(o),r&&r.resolve&&r.resolve(n,t)}}function ye(e){for(var t=0;t<D.length;t++)if(D[t]._index===e)return D[t];return null}function be(e,t){if(e&&e._text){var n=e._text[0];if(n.getContext){var r=n.getContext("2d"),o=t?t.rotation:0,i=S.getViewerTransform(e._index,o);return r.setTransform(i.a,i.b,i.c,i.d,i.e,i.f),r}}return null}function me(e,t){if(e){Re(e),e.regions=e.regions||[],e.rotatedRegions=[],e.rotation=e.rotation||0;for(var n=e.regions.length-1;0<=n;--n)e.regions[n].page=t,we(e.regions[n],e.bounds)?(e.regions[n].index=n,e.regions[n].rotation&&e.rotatedRegions.push(e.regions[n])):Array.prototype.splice.call(e.regions,n,1);e.regions.sort(function(e,t){return ae(e,t)?-1:1})}}function we(e,t){if(!Re(e))return!1;e.rotation=e.rotation||0,e.lines=e.lines||[];for(var n=e.lines.length,r=e.lines.length-1;0<=r;--r)Pe(e.lines[r],t,e.rotation)||Array.prototype.splice.call(e.lines,r,1);return 0<n&&0===e.lines.length&&h("TextLoadError","Invalid region data received."),!(0<n)||0<e.lines.length}function Pe(e,t,n){if(!Re(e,t,n))return!1;e.words=e.words||[];for(var r=e.words.length,o=e.words.length-1;0<=o;--o)_e(e.words[o],t,n)||Array.prototype.splice.call(e.words,o,1);return!(0<r)||0<e.words.length}function _e(e,t,n){if(!Re(e,t,n))return!1;e.glyphs=e.glyphs||[],e.text=e.text||"",e.os&&(e.omitSpace=e.os,delete e.os);for(var r=e.glyphs.length-1;0<=r;--r){Te(e.glyphs[r],t,n)||Array.prototype.splice.call(e.glyphs,r,1)}return!0}function Te(e,t,n){return!!Re(e,t,n)&&!!e.text}function Re(e,t,n){var r=!1;if(e)if(e.b&&"string"==typeof e.b){var o=e.b.split(";");e.bounds={x:parseFloat(o[0]),y:parseFloat(o[1]),width:parseFloat(o[2]),height:parseFloat(o[3])},delete e.b,r=!0}else e.bounds&&e.bounds.hasOwnProperty("x")&&e.bounds.hasOwnProperty("y")&&e.bounds.hasOwnProperty("width")&&e.bounds.hasOwnProperty("height")&&(Me(e.bounds),r=!0);else e={};return e.bounds||(e.bounds={x:0,y:0,width:0,height:0}),Me(e.bounds),e.bounds&&(e.normalizedBounds=Ce(e,t,n)),r}function Ce(e,t,n){if(!e.normalizedBounds){if(n%360==0)return e.normalizedBounds=e.bounds,e.normalizedBounds;e.normalizedBounds=Me(Atalasoft.Utils.rotateRect(e.bounds,t,360-n))}return e.normalizedBounds}function Me(e){return e.right=e.x+e.width,e.bottom=e.y+e.height,e}function Ae(e,t){return e<t+i}function Se(e,t){return t-i<e}function Oe(e,t){return e&&t&&e.x===t.x&&e.y===t.y}function De(e,t,n){return Se(e,t)&&Ae(e,n)}function ze(e,t){return!!t&&(De(e.x,t.x,t.right)&&De(e.y,t.y,t.bottom))}function Qe(e,t){return!(!e&&!t)&&(Se(e.right,t.x)&&Se(t.right,e.x)&&Se(e.bottom,t.y)&&Se(t.bottom,e.y)||Ue(e,t))}function Ue(e,t){if(!e&&!t)return!1;var n=e.width>t.width?e:t;return t=n===e?t:e,Ae(n.x,t.x)&&Se(n.right,t.right)&&Ae(n.y,t.y)&&Se(n.bottom,t.bottom)}function ke(e,t){if(!Qe(e,t))return null;var n={x:Math.max(e.x,t.x),y:Math.max(e.y,t.y),right:Math.min(e.right,t.right),bottom:Math.min(e.bottom,t.bottom)};return n.x<n.right&&n.y<n.bottom?(n.width=Math.abs(n.right-n.x),n.height=Math.abs(n.bottom-n.y),n):null}function Ie(e,t,n){var r=S.getViewerTransform(e,t.rotation?t.rotation:0).invert();return Ee(r.x(n.x,n.y),r.y(n.x,n.y))}function je(e,t){return!(!e||!t||t.omitSpace)}function Le(e){return Ee(e.bounds.x,e.bounds.y)}function Ne(e){return Ee(e.bounds.right,e.bounds.bottom)}function Ee(e,t){return{x:e,y:t}}r.createHandlerRequest=he,r.makeHandlerRequest=fe,r.loadText=xe,r.loadPageText=function(e,t,n){fe(he(e,t),n)},"Atalasoft.Controls.WebDocumentViewer"===A.typeOf&&M.extend(A,o),A.bind({pagerecycled:c,pageshown:d,zoomchanged:u,documentchanged:p}),O.bind({textselectstart:P,textselectmove:E,textselectend:q,textselectcopy:B}),S._state.initialized?s():A.bind({initialized:s})};
+"use strict";Atalasoft.Annotations.TextAnnotationUI=function(M,_,t){var k=Atalasoft.$,e=this,U=t,n=M.getEventObject(),T=null,a=null,B=null,i=null,S=M.get("text"),O=!1,j=3,V=Atalasoft.Utils.Browser.Mobile.Any()?{width:200,height:200}:{width:1,height:1},r={},o={moving:f,resized:f,moved:f,rotated:f};function l(){if(null==B&&(B=new Atalasoft.Annotations.FontUI(S.font)),i){var t=!0!==i.removed?i:null;n.unbind(t,{showeditor:s,hideeditor:h})}var e=O,o=S.autoscale;(i=o?_.atalaImage():_.html()).isHtml&&!o||(i.renderer=new Atalasoft.Annotations.AnnotationTextRenderer(M.get(),B),I=c),null!=T&&_._page&&(_._page.append(T),_._page.bind(r)),Raphael.vml&&(M.getObject().node.style.overflow="hidden"),i.transform(R().toTransformString(!0)),n.bind(i,{showeditor:s,hideeditor:h}),e&&s()}function s(t){T||function(){T=k("<textarea/>").hide(),_._page&&(_._page.append(T),_._page.bind(r));T.bind("change keydown mouseup mousemove mousedown",d),T.bind({blur:h}),M.bind({deselected:h});var t=M.getObject();if(T.css({position:"absolute","overflow-x":"auto","overflow-y":"auto","z-index":99999,border:"0px solid",padding:"0px","background-color":"transparent","text-align":S.align}),Atalasoft.Utils.Browser.Mobile.Any()){var e=M.get(),o=Atalasoft.Utils.getSVGOffset(_.canvas,_._page);T.css({left:e.x+o.left+"px",top:e.y+o.top+"px",width:e.width+"px","max-width":e.width+"px",height:e.height+"px","max-height":e.height+"px",border:t.attr("stroke")+" "+t.attr("strokewidth")+"px","background-color":t.attr("fill")})}B.setZoom(M.getZoom()),(Atalasoft.Utils.Browser.Chrome||Atalasoft.Utils.Browser.Safari)&&T.css({resize:"none"});null!=S.value&&T.val(S.value);S.readonly&&T.prop("readonly","readonly");B.repaint(T)}(),function(){if(M&&!M.get("visible"))return;!T.is(":hidden")&&O||(i.hide(),T.prop("readonly",S.readonly?"readonly":""),T.show(),u());Atalasoft.Utils.Browser.Touch&&T.focus(function(){T[0].setSelectionRange(0,9999)});Atalasoft.Utils.Browser.Explorer&&7===parseInt(Atalasoft.Utils.Browser.Version,10)||T[0].focus();O=!0}()}function d(t){t.stopPropagation(),S.value!==T.val()&&(S.value=T.val(),M.set({text:S}))}function h(){T&&((T.is(":visible")||O)&&(T.hide(),i.show(),u()),1==O&&(0==arguments.length||1==arguments.length&&"blur"==arguments[0].type)&&n.trigger("annotationtextchanged"),T[0].blur(),O=!1)}function g(){!M||M.get("visible")?O?s():i.show():i.hide(),i.backgroundColor&&i.backgroundColor(M.get("fill").color)}function z(t){t&&(_!==t||i.removed)&&(_=t,null!=a&&(a.remove(),a=null),l(),g())}function u(t){if(z(t),I(),T&&(!T.is(":hidden")||O)){var e=M.get("outline").width/2,o=M.get(),n=M.getZoom(),r=M.getBox(),a=R(),i=Z(a,r.x,r.y),l=Z(a,r.x+r.width,r.y+r.height),s=r.width*n,d=r.height*n,h=(i.x+l.x-s)/2,g=(i.y+l.y-d)/2,u=j*n,c=e*n,f=2*(u+c),p=Math.max(Math.ceil(s-f),V.width),x=Math.max(Math.ceil(d-f),V.height),m=Atalasoft.Utils.getSVGOffset(_.canvas,_._page),w=o.rotation+U.getPageRotation(M._pageindex),v=0!==w?"rotate("+w+"deg)":"",b={left:Math.round(h+m.left+c)+"px",top:Math.round(g+m.top+c)+"px",width:p+"px",height:x+"px","max-width":p+"px","max-height":x+"px",padding:Math.ceil(u)+"px"};if(k.extend(b,Atalasoft.Utils.__htmlTransformStyle(v)),Atalasoft.Utils.Browser.Explorer8){var y=M.getObject(),A=y.attr("strokewidth")||1;T.css({border:"solid "+A+"px "+y.attr("stroke"),"background-color":y.attr("fill")})}T.css(b)}B&&(B.set(S.font),B.setZoom(M.getZoom()),B.repaint(T))}function I(){var t=M.get();a||(a=k('<textarea selectable="false"/>'),k(i.innerDom).append(a),a.css({"background-color":"transparent",border:"0px solid","overflow-x":"hidden","overflow-y":"hidden","-moz-user-select":"none","-khtml-user-select":"none","-webkit-user-select":"none","user-select":"none",resize:"none",cursor:"inherit"}),a.attr("readonly","readonly"),a.bind({focus:function(){return this.blur(),!1}}),a[0].raphaelParent=!0),a.val(S.value);var e=M.get("outline").width/2,o=Math.max(Math.ceil(t.width-2*(e+j)),1),n=Math.max(Math.ceil(t.height-2*(e+j)),1);if(B&&(B.set(S.font),B.repaint(a,1,!0)),a.css({width:o+"px",height:n+"px","max-width":o+"px","max-height":n+"px",padding:j+"px","text-align":S.align}),i.attr({x:Math.round(e+t.x),y:Math.round(e+t.y),width:t.width,height:t.height}),0<=t.cornerradius){var r=M.getObject();k(r[0]).attr({rx:t.cornerradius||0,ry:t.cornerradius||0})}i.transform(R().toTransformString(!0))}function c(){var t=M.get("outline").width/2,e=M.get(),o=Math.max(Math.ceil(e.width-2*(t+j)),0),n=Math.max(Math.ceil(e.height-2*(t+j)),0);if(B&&B.set(S.font),i.attr({x:Math.round(t+j+e.x),y:Math.round(t+j+e.y),width:o,height:n}),0<=e.cornerradius){var r=M.getObject();k(r[0]).attr({rx:e.cornerradius||0,ry:e.cornerradius||0})}i.renderer&&i.renderer.renderToSVGImage(i[0],{width:o,height:n}),i.transform(R().toTransformString(!0))}function R(){var t=Raphael.matrix(),e=U.getViewerTransform(M._pageindex),o=M.getTransform();return t.add(e.a,e.b,e.c,e.d,e.e,e.f),t.add(o.a,o.b,o.c,o.d,o.e,o.f),t}function f(){i&&u()}function Z(t,e,o){return{x:t.x(e,o),y:t.y(e,o)}}l(),u(),M.bind(o),e.dispose=function(){T&&T.remove();a&&a.remove();B&&B.dispose();i&&i.remove();_&&_._page&&_._page.unbind(r);M.unbind(o),S=i=a=B=T=n=e=null},e.set=function(t){t&&k.extend(S,t)},e.get=function(t){return t?S[t]:S},e.getFont=function(){return B},e.updateView=g,e.changepaper=z,e.repaint=u};
+"use strict";var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};
+/**
  * Control that shows thumbnails of document pages and annotations.
  * @param {WebThumbnailerConfig} [settings] Object of key value pairs representing initial settings
  * @param {OpenUrlCallback} [openCallback] callback that is called when document load complete(if {@link WebDocumentViewerConfig.documenturl| documenturl} is specified).
  * @class
  * @augments Atalasoft.Controls.WebDocumentViewer
  * @returns {WebDocumentThumbnailer} A new control with the given settings.
- */
-Atalasoft.Controls.WebDocumentThumbnailer=function(e,t){function n(){return{get:function(){return $t},detachViewer:u,activateViewer:d}}function a(){Gt&&(tn=Gt.__getViewerLink($t,nn),gn=tn.stateManager),$t.bind({statusmessage:Wt,pagerotated:mt,pageinserted:mt,pageremoved:mt,pagemoved:mt}),$t.bind({annotationsloaded:Ct,formsloaded:Mt,contextmenu:Tt,documentloaded:At,pageshown:Ht,pageresize:jt,scroll:Ut,zoomchanged:Xt,zoomstarted:Yt,zoomfinished:Bt,pagesizechanged:Kt}),_(),en={click:Et,touchstart:Vt,touchmove:Lt,touchend:Rt,mouseenter:Ot,mouseleave:St},o()}function o(){}function i(e,t){if(e){var n=t?e.bind:e.unbind,a=t?$t.unbind:$t.bind;n.call(e,{beforehandlerrequest:It,documentloaded:ht,scroll:wt,scrollFinished:yt,pagerotated:Dt,pageinserted:bt,pageremoved:vt,pagemoved:_t}),a.call($t,{pagerotated:mt,pageinserted:mt,pageremoved:mt,pagemoved:mt}),s(e,e.document.events,n),bn.allowannotations&&(n.call(e,{annotationresized:Pt,annotationmoved:Pt,annotationrotated:Pt,annotationcreated:xt,annotationdeleted:zt}),e.annotations&&s(e,e.annotations.events,n))}}function s(e,t,n){var a={};for(var o in t)t.hasOwnProperty(o)&&(a[o]=r);n.call(e,a)}function r(){$t.trigger.apply($t,arguments)}/**
-     * Checks whether current thumbnailer is controlling referenced viewer.
-     *
-     * If viewer is linked only to the current thumbnailer, this method always return `true`.
-     *
-     * If thumbnailer is not linked to any viewer, this method always return `false`.
-     * @function Atalasoft.Controls.WebDocumentThumbnailer#isActive
-     * @returns {boolean} `true` if current thumbnailer instance is controlling referenced viewer; `false` otherwise.
-     */
-function l(){return Gt&&(!gn||gn&&gn.isThumbnailerActive(n()))}/**
-     * Takes ownership over referenced viewer, i.e. if shared viewer is currently displaying other document, it's switched to display document from calling thumbnailer.
-     * @function Atalasoft.Controls.WebDocumentThumbnailer#activate
-     */
-function c(){d(Gt)}function d(e,t){if(!Gt&&e&&(Gt=e,tn=Gt.__getViewerLink($t,nn),gn=tn.stateManager),Gt&&Gt.isReady()&&(!l()||t)){var a=Gt&&!l();gn.activateThumbnailer(n(),g(),nn,bn,t),a&&(i(Gt,!0),h(Gt))}L(!0)}function u(){if(Gt&&Gt.isReady()&&(fn.viewer.zoom=Gt.getZoom(),fn.viewer.pagenumber=Gt.getCurrentPageIndex(),bn.allowforms&&fn.base.controllers.forms&&tn._fields)){var e={forms:{fields:ot(tn._fields)}};fn.base.controllers.forms.loadForms(e)}i(Gt,!1),m(Gt),L(!1)}function g(){var e={pagewidth:pn.size.width,pageheight:pn.size.height,pagecount:pn.count,dpi:pn.dpi,colordepth:fn.base.controllers.memory.colorDepth,vector:pn.vector,pagenumber:fn.viewer.pagenumber,zoom:fn.viewer.zoom};return bn.allowannotations&&nn._annos&&(e.layers=ot(nn._annos,"items")),bn.allowforms&&nn._fields&&(e.forms={fields:ot(nn._fields)}),e}function p(){y=nn.__createDiv,w=nn.__createDOM,P=nn.__getSelectedPagesIndices,nn.__getSelectedPagesIndices=A}function f(){return{thumb:{annotations:null,document:null,text:null,getCurrentPageIndex:null,getZoom:null,zoom:null,zoomIn:null,zoomOut:null,next:null,previous:null,save:null,showPage:null,setMouseTool:null},viewer:{reloadPage:function(e){return wn=e.reloadPage,j}}}}function h(e){var t=f();b(t.viewer,e,$t,fn.viewer.api),b(t.thumb,$t,e,fn.selfapi)}function m(e){var t=v(fn.viewer.api);b(t,e,fn.viewer.api,{});var n=v(fn.selfapi);b(n,$t,fn.selfapi,{})}function b(e,t,n,a){for(var o in e)e.hasOwnProperty(o)&&(t.hasOwnProperty(o)&&t[o]&&(a[o]=t[o]),"function"==typeof e[o]?t[o]=e[o](t,n):n.hasOwnProperty(o)&&n[o]&&(t[o]=n[o]))}function v(e){var t={};for(var n in e)e.hasOwnProperty(n)&&(t[n]=null);return t}function _(){O=$t.empty,E=$t.dispose,k=$t.openUrl,x=$t.getCurrentPageIndex,z=$t.__getDebugInfo,M=$t.next,C=$t.previous,I=$t.showPage,$t.empty=F,$t.dispose=S,$t.openUrl=$t.OpenUrl=q,$t.__getDebugInfo=D,$t.scrollToThumb=I,$t.zoom=$t.zoomIn=$t.zoomOut=function(){},yn=$t.reloadPage,$t.reloadPage=j,delete $t.fit,Nt.extend($t.events,_n)}function w(){}function y(){}function x(){}function z(){}function D(){if(bn.debug){var e=z(),t=A();return Nt.extend(!0,e,{thumbnailer:{config:bn,index:t[0],indices:t,links:{viewer:tn,self:nn},page:pn,thumb:mn,state:fn}}),e}return null}function P(){}/**
-    * Scrolls the viewer to the given page number and executes the callback when finished
-    * @function Atalasoft.Controls.WebDocumentThumbnailer#scrollToThumb
-    * @param {number} index - Index of the page to scroll to.
-    * @param {NotificationCallback} [callback] - Function to execute after this operation is done.
-    */
-function I(){}function C(){}function M(){}/**
-     * @summary Gets the selected thumbnail index.
-     * @description Gets the selected thumbnail index when Web Document Thumbnailer (WDT) setup to use singleselect. When WDT setup to use multiselect, then this method returns the first element of the selected page indices, with respect of {@link WebDocumentViewerConfig.selecteditemsorder| selecteditemsorder} parameter value.
-     * @function Atalasoft.Controls.WebDocumentThumbnailer#getSelectedPageIndex
-     * @returns {number}
-     */
-function T(){return A()[0]}/**
-     * @summary Gets the selected thumbnails indices.
-     * @description Gets the selected thumbnails indices with respect of {@link WebDocumentViewerConfig.selecteditemsorder| selecteditemsorder} parameter value.
-     * @function Atalasoft.Controls.WebDocumentThumbnailer#getSelectedPagesIndices
-     * @returns {number[]}
-     */
-function A(){var e=Jt.slice(0);return bn.selecteditemsorder===un.ItemIndexOrder&&e.sort(function(e,t){return e-t}),e}function F(e){var t=1,a=function(){t--,0>=t&&(l()&&gn&&Gt&&d(Gt,!0),"function"==typeof e&&e.call())};l()&&(gn?gn.closeDocument(n(),nn):Gt.isReady()&&(t++,Gt.empty(a))),O(a)}function O(){}function S(){l()&&(gn?gn.closeDocument(n(),nn):Gt.empty(),u()),E(),Gt=null,tn=null}function E(){}function q(e,t,a,o){ft(),null==o&&("function"==typeof t?(o=t,t=null):"function"==typeof a&&(o=a,a=null));var i=function(e){V(),Ft(e,o)};"string"==typeof e&&(gn.closeDocument(n(),nn),fn.viewer.pagenumber=0),k(e,t,a,i)}function k(){}function V(){$t.scrollTo(0,0,!1)}function L(e){if(fn.base){0===Jt.length&&Jt.push(0);for(var t=0;t<fn.base.dom.pageDivs.length;t++){var n=t>0?fn.base.dom.pageDivs[t-1]:null,a=fn.base.dom.pageDivs[t],o=!1;Jt.indexOf(a._index)>-1&&e?(a.removeClass("atala_groupped_selection"),a.addClass($t.domclasses.atala_active_thumb),null!==n&&Jt.indexOf(n._index)>-1&&(a.addClass("atala_groupped_selection"),n.addClass("atala_groupped_selection")),o=!0):(a.removeClass($t.domclasses.atala_active_thumb),a.removeClass("atala_groupped_selection")),B(a,o)}}}/** 
-     * Highlights the thumbnail at the given index, and scrolls to it in the linked viewer, if possible.
-     * @param {number|string} index - Index of the page to select. Can be passed as string representation of a number
-     * @param {boolean} [append] - Append index to the already selected thumbs or not. Its value ignores in single select mode.
-     * @function Atalasoft.Controls.WebDocumentThumbnailer#selectThumb
-     */
-function R(e,t){if(e=Atalasoft.Utils.ParseInt(e),!(null===e||0>e||e>=$t.getDocumentInfo().count||"undefined"!=typeof t&&"boolean"!=typeof t&&null!==t)){if(t=!!t&&bn.selectionmode!==dn.SingleSelect){if(Jt.indexOf(e)>-1)return;Jt.push(e)}else A().forEach(function(e){$t.trigger({type:"thumbdeselected",index:e})}),Jt.length=0,Jt.push(e);H(),$t.trigger({type:"thumbselected",index:e})}}/** 
-     * Resets the thumbnail highlight at the given index, and scrolls to the next selected thumbnail in the linked viewer, if possible.
-     *
-     * This function does't deselect the given index in the single select mode, and in multi select mode, if one page is selected.
-     * @param {number|string} index - Index of the page to deselect. Can be passed as string representation of a number
-     * @function Atalasoft.Controls.WebDocumentThumbnailer#deselectThumb
-     */
-function U(e){if(e=Atalasoft.Utils.ParseInt(e),null!==e){var t=Jt.indexOf(e);-1!==t&&1!==Jt.length&&(Jt.splice(t,1),H(),$t.trigger({type:"thumbdeselected",index:e}))}}function H(){var e=A();if(gn?(fn.viewer.pagenumber=e[0],d(Gt)):L(!0),!(Jt.length>1)&&Gt){var t=Gt.getCurrentPageIndex(),n=e[0];t>=0&&n!==t&&(fn.scrolling=!0,n===t-1?Gt.previous(1):n===t+1?Gt.next(1):Gt.showPage(n))}}/**
-     * Reloads the specified page. If the thumbnailer is linked with viewer, viewer page is reloaded and callback is called when both viewer and thumbnailer completely reloaded, including image data itself.
-     *
-     * Viewer page won't be reloaded if the viewer is currently controller by other thumbnailer and requested page was not loaded in viewer before. In such case page will be lazy-loaded as usual. If special parameters should be passed, {@link Atalasoft.Controls.WebDocumentViewer#event:beforehandlerrequest| beforehandlerrequest} event to modify request parameters.
-     * @param {number} index - The index of the page to reload.
-     * @param {string|boolean} [annotations=false] - Url of the annotation xmp file or flag indicating whether to reload annotations of boolean flag indicating whether to load annotations data.
-     * @param {string|boolean} [forms] - Url of the form file or flag indicating whether to reload forms of boolean flag indicating whether to load forms data.
-     * @param {object} [params] - A plain object containing optional reload parameters that will be passed to server.
-     * @param {NotificationCallback} [callback] - function that is called when page have been loaded.
-     *
-     * This object will be available on the server side hander as an key-values collection. This allows to pass specific load options for individual pages.
-     * @function Atalasoft.Controls.WebDocumentViewer#reloadPage
-     */
-function j(e,t,n,a,o){if(yn){var i=Array.prototype.slice.call(arguments);if(Gt&&Gt.isReady())if(l()){var s=Array.prototype.slice.call(i);o=i.pop(),"function"!=typeof o&&(i=Array.prototype.slice.call(s)),yn.apply(this,i).then(function(){wn&&wn.apply(this,s)})}else yn.apply(this,arguments);else yn.apply(this,arguments)}}function W(){if(fn.base){if(fn.initialized&&fn.base.dom.pageDivs.length>0&&null!=fn.base.dom.pageDivs[0]._img&&!fn.base.dom.pageDivs[0]._img._size.isEmpty()){var e=fn.base.dom.pageDivs[0]._img._size;mn.scale=e.width>e.height?mn.size/e.width:mn.size/e.height}else{var t=fn.base.page.size.width/fn.base.page.size.height<1,n=Math.ceil(fn.base.page.size.height*fn.base.config.zoom),a=Math.ceil(fn.base.page.size.width*fn.base.config.zoom),o=mn.size;bn.direction===cn.Vertical?mn.divsize=Math.ceil(fn.base.page.size.width*fn.base.config.zoom):bn.direction===cn.Horizontal&&(mn.divsize=Math.ceil(fn.base.page.size.height*fn.base.config.zoom)),o=0>=o?mn.divsize-2*bn.thumbpadding:o,dt(o),bn.tabular&&bn.columns>1&&bn.direction===cn.Vertical&&st();var i=t?n:a;mn.scale=i?fn.base.config.zoom*(mn.size/i):1,mn.zoomfull=mn.scale,bn.minwidth>fn.base.page.size.width*mn.scale&&fn.base.page.size.width&&(bn.minwidth=fn.base.page.size.width*mn.scale),fn.initialized=!0}var s=bn.showpageborder?2*bn.pageborderwidth:0,r=mn.size+2*bn.thumbpadding-s;if($t.trigger({type:"pagedivsresized",height:r,width:r,fullzoom:mn.zoomfull,minwidth:bn.minwidth}),bn.allowdragdrop){fn.base.dom.content.addClass($t.domclasses.atala_thumb_draggable),fn.base.dom.content.css({minWidth:r,minHeight:r});var l=Math.round(mn.size/2);fn.base.dom.content.sortable({containment:"window",connectWith:"."+$t.domclasses.atala_thumb_draggable,appendTo:document.body,placeholder:$t.domclasses.atala_drag_placeholder,cursorAt:{left:l,top:l},delay:bn.dragdelay,distance:4,helper:N,opacity:.65,scroll:!0,scrollSensitivity:l,scrollSpeed:10,start:$,receive:et,stop:Q,over:G,change:J,tolerance:"pointer",update:tt,zIndex:100})}Nt.each(fn.base.dom.pageDivs,function(e,t){t.width(mn.size),t.height(mn.size),t.thumbInitialized||(t.bind(en),t.css({padding:bn.thumbpadding,"background-color":bn.backcolor,cursor:"pointer","margin-bottom":bn.pagespacing+"px","text-align":"center",position:"relative"}),bn.tabular?t.css({"margin-right":bn.pagespacing+"px"}):bn.direction===cn.Horizontal&&t.css({"margin-right":bn.pagespacing+"px","margin-bottom":"0px"}),t._paper&&Atalasoft.Utils.Browser.Explorer&&(t._paper.canvas.style.top="",t._paper.canvas.style.width="",t._paper.canvas.style.height=""),t._grips&&(t._grips.push=function(){}),t.thumbInitialized=!0),X(t._img,t._paper)}),fn.base.dom.pageDivs.length>0&&nn.__adjustEdgeHeights(fn.base.dom.pageDivs[0]._index)}}function X(e,t,n,a){if(fn.base){var o=a||e&&e.getScaledSize(n);if(!o)return;var i=o.width,s=o.height,r=mn.size*(fn.base.config.zoom/mn.zoomfull);if(i>r||s>r){var l=1>i/s,c=n*(r/(l?s:i));i=Math.round(e._size.width*c),s=Math.round(e._size.height*c),n=c}e.width(i),e.height(s);var d=e.getDomElement();d[0].style.left="50%",d[0].style.top="50%",d[0].style.position="absolute",d[0].style.marginLeft=-Math.round(i/2)+"px",d[0].style.marginTop=-Math.round(s/2)+"px",t&&(t.canvas.style.left="50%",t.canvas.style.top="50%",t.canvas.style.marginLeft=-Math.round(i/2)+"px",t.canvas.style.marginTop=-Math.round(s/2)+"px",t.canvas.style.zIndex=1),e.trigger({type:"pagezoom",index:e._page._index,height:Math.round(s),width:Math.round(i),prevzoom:fn.base.config.zoom,zoom:n})}}function Y(e,t,n){var a=e.data("selected")?t:n;e.css("background-color",a)}function B(e,t){var n=t?bn.selectedcolor:bn.backcolor;e.data("selected",t),e.css("background-color",n)}function K(e){var t=this;this._initial=e,this._actual=e,this.scrollTop=function(){t._actual.scrollTop()},this.scrollLeft=function(){t._actual.scrollTop()},this.setObject=function(e){t._actual=e,this[0]=t._actual[0]},this.offset=function(){return t._actual.offset()},this.setObject(e)}function Z(e){var t=[];return e.hasClass($t.domclasses.atala_active_thumb)&&l()?A().forEach(function(e){for(var n=0;n<fn.base.dom.pageDivs.length;n++)if(fn.base.dom.pageDivs[n]._index===e){t.push(fn.base.dom.pageDivs[n]);break}}):t.push(e),t}function N(e,t){fn.dragdropping=!0,L(l());var n=Nt('<div class="atala_drag_helper"></div>'),a=Z(t);a.length>1&&(Nt(this).sortable("option","items","> *:not(.atala_groupped_selection)"),Nt(this).sortable("refresh"));for(var o=t.hasClass($t.domclasses.atala_active_thumb)&&l()?Math.min(3,A().length):1,i=0;i<a.length||o>i;i++){var s=i<a.length?a[i]:a[0];if(o>i){var r=s.find("."+$t.domclasses.atala_page_image_anchor).first().clone();r.css({position:"absolute",left:10*i+"px",top:-10*i+"px",right:"0px",bottom:"0px",margin:"","z-index":-i}),n.append(r)}}fn.base.dom.content.append(n);var c=n.scrollParent(),d=fn.base.dom.content.data(on)||fn.base.dom.content.data(sn);return n.hide(),setTimeout(function(){d&&(d.scrollParent=new K(c),a.forEach(function(e){e.data(rn,d.scrollParent)})),n.appendTo("body"),n.show()},1),n}function $(e,t){var n=it(t.item);if(null!==n){var a=[];n.forEach(function(e){a.push($t.document.getPageReference(e))});var o={start:n,end:n[0],updateHandled:!1,pageRefs:a,documenturl:"object"===_typeof(a[0])&&a[0].uri?a[0].uri:fn.base.config.documenturl,thumbLink:nn,thumb:$t,thumbId:nn._id,viewerId:tn._id,state:fn,externalDropIndex:null,insertAfterSelf:!1};t.item.data(an,o),fn.base.controllers.mouseTool.pauseTool(),t.placeholder.width(t.item.width()),t.placeholder.height(t.item.height()),t.placeholder.css({margin:t.item.css("margin"),display:fn.base.config.tabular||fn.base.config.direction===cn.Horizontal?"inline-block":"block",padding:Math.max(0,fn.base.config.thumbpadding-1)}),$t.trigger({type:"thumbdragstart",dragindex:o.start[0],dragindices:o.start})}}function G(e,t){if(!Atalasoft.Utils.Browser.Mobile.Any()){var n=t.placeholder.parents("."+$t.domclasses.atala_scroller),a=t.item.data(rn);n.length&&a&&a[0]!==n.first()[0]&&a.setObject(n.first())}}function J(e,t){var n=t.item.data(an);if(n){var a=t.placeholder.prev();n.insertAfterSelf=a.length&&t.item[0]===a.first()[0]}}function Q(e,t){var n=t.item.data(an),a={left:bn.parent.position().left,right:bn.parent.position().left+bn.parent.width(),top:bn.parent.position().top,bottom:bn.parent.position().top+bn.parent.height()},o={x:t.position.left+t.item.width()/2,y:t.position.top+t.item.height()/2},i=a.left<o.x&&a.right>o.x&&a.top<o.y&&a.bottom>o.y;if(n&&i){fn.base.controllers.mouseTool.resumeTool(),n.updateHandled||(n.end=nt(t),n.updateHandled=!0),n.insertAfterSelf&&++n.end,n.end=n.start[0]<n.end?n.end-1:n.end;var s={type:"thumbdragend",dragindex:n.start[0],dragindices:n.start,dropindex:n.end,source:n.thumb,sourcedocument:n.documenturl,target:$t,external:!1,pageref:n.pageRefs[0],pagerefs:n.pageRefs,cancel:!1};$t.trigger(s,s),s.cancel?Nt(this).sortable("cancel"):(tn&&l()&&Gt.isReady()?tn._controllers.document.movePages(n.start,n.end):fn.base.controllers.document.movePages(n.start,n.end),at(),Jt.length=0,Qt.length>0?(Qt.sort(function(e,t){return e-t}).forEach(function(e){R(e,!0)}),Qt.length=0):R(n.end,!1),s={type:"thumbdragcomplete",dragindex:n.start[0],dragindices:n.start,dropindex:n.end,source:n.thumb,target:$t},fn.dragdropping=!1,$t.trigger(s,s))}else n&&!i&&Nt(this).sortable("cancel");Nt(this).sortable("option","items","> *"),Nt(this).sortable("refresh"),t.item.data(an,null)}function et(e,t){Nt(t.sender).sortable("cancel");var n=t.item.data(an);if(n){n.thumbLink._controllers.mouseTool.resumeTool();var a=fn.base.dom.pageDivs.length?fn.base.dom.pageDivs[0]._index:0;n.end=n.externalDropIndex+a||0;var o={type:"thumbdragend",dragindex:n.start[0],dragindices:n.start,dropindex:n.end,source:n.thumb,sourcedocument:n.documenturl,target:$t,pageref:n.pageRefs[0],pagerefs:n.pageRefs,external:!0,cancel:!1,copyannotations:!0};if($t.trigger(o.type,o),!o.cancel){var i=[];o.copyannotations&&n.thumb.config.allowannotations&&$t.config.allowannotations&&n.start.forEach(function(e){i.push(n.thumb.annotations.getFromPage(e))}),n.thumb.selectThumb(n.thumb.getCurrentPageIndex(),!1),Gt&&d(Gt,!0),fn.scrolling=!0,n.thumb.document.removePages(n.start),$t.document.insertPages(null,n.pageRefs,n.end),at(),Jt.length=0,mt(function(){yt(),n.start.forEach(function(e,t){R(n.end+t,!0)})}),i.forEach(function(e,t){if(e)for(var a=0;a<e.length;a++)$t.annotations.createOnPage(e[a],n.end+t)}),$t.trigger("thumbdragcomplete",{type:"thumbdragcomplete",dragindex:n.start[0],dragindices:n.start,dropindex:n.end,source:n.thumb,target:$t}),fn.dragdropping=!1,n.state.dragdropping=!1}}t.item.data(an,null)}function tt(e,t){var n=t.item.data(an);n&&(fn.base.dom.content.has(t.item).length?(n.end=nt(t),n.thumbId===nn._id&&$t.trigger({type:"thumbsreordered",dragindex:n.start[0],dragindices:n.start,dropindex:n.end})):n.externalDropIndex=t.item.index(),n.updateHandled=!0)}function nt(e){for(var t=-1,n=e.item.prev().length?e.item.prev().first():[null],a=0;a<fn.base.dom.pageDivs.length;++a)if(fn.base.dom.pageDivs[a][0]===n[0]){t=fn.base.dom.pageDivs[a]._index;break}return t+1}function at(){var e=fn.base.dom.scroller[0];if(nn.__isObjectInRect(fn.base.dom.edges[1][0],e,e.scrollLeft,e.scrollTop,e.scrollLeft+e.clientWidth,e.scrollTop+e.clientHeight)){var t=fn.base.dom.pageDivs[0]._index,n=nn.__getIndexFromPos(e.scrollLeft,e.scrollTop),a=n-t;a<fn.base.dom.pageDivs.length&&a>0?nn.__showNext(a):(nn.__showPageAsync(n,!1),nn.__redrawVisiblePages())}}function ot(e,t){var n=[];for(var a in e)if(e.hasOwnProperty(a)){var o=[],i=t?{}:o;t&&(i[t]=o);for(var s in e[a])e[a].hasOwnProperty(s)&&(o[s]=e[a][s].get(),o[s].multiview=!0);n[a]=i}return n}function it(e){if(e.hasClass($t.domclasses.atala_active_thumb)&&l())return A();for(var t=0;t<fn.base.dom.pageDivs.length;t++)if(fn.base.dom.pageDivs[t][0]===e[0])return[fn.base.dom.pageDivs[t]._index];return null}function st(){if(bn.tabular){var e=void 0;if(bn.columns>1)e=(mn.size+2*bn.thumbpadding+bn.pagespacing)*Math.min(fn.base.controllers.document.getPageCount(),bn.columns);else if(bn.rows>1){var t=Math.ceil(rt()/bn.rows);e=(mn.size+2*bn.thumbpadding+bn.pagespacing)*t}e&&fn.base.dom.content.width(e)}}function rt(){return fn.base.controllers.document.getPageCount()}function lt(e){for(var t=0;t<fn.base.dom.pageDivs.length;t++)if(fn.base.dom.pageDivs[t]._index===e)return!0;return!1}function ct(){var e=fn.base.dom.pageDivs[0]._index;fn.base.dom.pageDivs.sort(function(e,t){return e.index()-t.index()});for(var t=0;t<fn.base.dom.pageDivs.length;t++){var n=fn.base.dom.pageDivs[t];n._index=e+t,null!=n._num&&n._num.text(n._index+1)}}function dt(e){0>=e&&$t.trigger({type:"throwerror",name:"Invalid thumb size",msg:"Thumb size cannot be "+e+". Check configuration parameters 'minwidth', 'thumbpadding' and 'thumbsize'. If 'thumbsize' is not specified, then 'minwidth' should be at least (2 * thumbpadding + 1)"}),mn.size=e,fn.base&&fn.base.config.forcepagesize&&(fn.base.config.forcepagesize.width=e,fn.base.config.forcepagesize.height=e)}function ut(){bn.allowdragdrop=bn.allowdragdrop?!0:!1,bn.selectedindex=pt(bn.selectedindex)?parseInt(bn.selectedindex,10):0,bn.thumbpadding=pt(bn.thumbpadding)?parseInt(bn.thumbpadding,10):8,bn.backcolor=gt(bn.backcolor,"#DCDCDC"),bn.hovercolor=gt(bn.hovercolor,"#667F9F"),bn.selectedcolor=gt(bn.selectedcolor,"#E0872D"),bn.selectedhovercolor=gt(bn.selectedhovercolor,"#FFC060")}function gt(e,t){var n={hex:"#FFFFFF",hexs:"#FFF",name:"white",rgb:"rgb(255, 255, 255)"},a=y(null,"dummy");return a.css("backgroundColor",n.name),a.css("backgroundColor",e),a.css("backgroundColor")===n.rgb&&(e=e.toLowerCase(),e!==n.name&&e!==n.hex&&e!==n.hexs&&e!==n.rgb&&(e=t)),e}function pt(e,t){return t?isFinite(parseFloat(e)):isFinite(parseInt(e,10))}function ft(){fn.base&&Nt.each(fn.base.dom.pageDivs,function(e,t){t.unbind(en),t.thumbInitialized=!1})}function ht(){}function mt(e,t){fn.base.state.batchoperation>0||("function"==typeof e&&(t=e),W(),nn.__redrawVisiblePages(!0),nn.__adjustVisiblePages(),fn.base&&tn&&l()&&Gt.isReady()?(tn.__redrawVisiblePages(!0),tn.__adjustVisiblePages(!1,t)):"function"==typeof t&&t())}function bt(e){fn.base&&(fn.base.controllers.annotations&&fn.base.controllers.annotations.insertLayer(null,null,e.destindex),fn.base.controllers.forms&&fn.base.controllers.forms.insertForm(null,null,e.destindex),tn._state.batchoperation<=0&&mt())}function vt(e){fn.base&&(fn.base.controllers.annotations&&fn.base.controllers.annotations.removeLayer(e.index),fn.base.controllers.forms&&fn.base.controllers.forms.removeForm(e.index),tn._state.batchoperation<=0&&mt())}function _t(e){if(fn.base&&(fn.base.controllers.annotations&&fn.base.controllers.annotations.moveLayer(e.shiftedsrcindex,e.destindex),fn.base.controllers.forms&&fn.base.controllers.forms.moveForm(e.shiftedsrcindex,e.destindex),ct(),tn._state.batchoperation<=0&&mt(),fn.dragdropping)){var t=e.destindex;Qt.sort(function(e,t){return t-e}).forEach(function(e){e===t&&t--}),Qt.push(t)}}function wt(){var e=Gt.getCurrentPageIndex(),t=A();t.length<=1&&t[0]!==e&&!fn.scrolling&&R(e)}function yt(){fn.scrolling=!1}function xt(e){if(fn.base){var t=tn._annos[e.page]||null,n=null;if(t){var a=t[t.length-1];n=a.get()}n&&n.type===e.anno.type&&(n.multiview=!0,fn.base.controllers.annotations.createAnnotation(n,e.page))}}function zt(e){fn.base&&fn.base.controllers.annotations.deleteAnnoOnPage(e.page,e.index)}function Dt(){fn.base&&tn._state.batchoperation<=0&&mt()}function Pt(e){if(fn.base){var t=T();if(lt(t))for(var n=fn.base.controllers.annotations.getAnnosFromPage(t),a=0;a<n.length;a++)n[a].type===e.anno.type&&n[a].update(!0)}}function It(e){if(("docinfo"===e.request.type||"annodata"===e.request.type||"formdata"===e.request.type)&&fn.base){e.request.cancel=!0,"docinfo"===e.request.type&&(e.request.info.pagewidth=pn.size.width,e.request.info.pageheight=pn.size.height,e.request.info.pagecount=pn.count,e.request.info.dpi=pn.dpi,e.request.info.colordepth=fn.base.controllers.memory.colorDepth,e.request.info.vector=pn.vector);var t=void 0!==e.request.info.docIndex?e.request.info.docIndex:e.request.info.offset||0,n=e.request.info.length>-1?e.request.info.length+t:void 0;if(e.request.info.offset=e.request.info.offset||0,bn.allowannotations&&("annodata"===e.request.type||e.request.data.atala_annurl)){var a=fn.base.controllers.annotations.__getDebugInfo().data;e.request.info.layers=ot(a.annos.slice(t,n),"items")}if(bn.allowforms&&("formdata"===e.request.type||e.request.data.atala_formurl)){var o=fn.base.controllers.forms.__getDebugInfo().data;e.request.info.forms={fields:ot(o.fields.slice(t,n))}}Gt.trigger({type:"handlerreturned",request:e.request})}}function Ct(){}function Mt(){}function Tt(e,t,n){for(var a in n)n.hasOwnProperty(a)&&delete n[a]}function At(){fn.base={config:nn._config,controllers:nn._controllers,dom:nn._dom,page:nn._page,state:nn._state,stateManager:nn.stateManager}}function Ft(e,t){pn.size.width=fn.base.page.size.width,pn.size.height=fn.base.page.size.height,pn.count=fn.base.page.count,pn.dpi=fn.base.page.dpi,pn.vector=fn.base.page.vector,W(),Zt(fn.base.dom.scrollH),Zt(fn.base.dom.scrollV);var n=function(){l()&&R(bn.selectedindex),t&&"function"==typeof t&&t(e)};fn.viewer.zoom=0,l()||gn&&!gn.isViewerActive()?(d(Gt,!0),n()):n()}function Ot(){Y(Nt(this),bn.selectedhovercolor,bn.hovercolor)}function St(){Y(Nt(this),bn.selectedcolor,bn.backcolor)}function Et(e){if(0===e.button){for(var t=e.currentTarget,n=-1,a=0;a<fn.base.dom.pageDivs.length;a++)if(fn.base.dom.pageDivs[a][0]===t){n=fn.base.dom.pageDivs[a]._index;break}if(-1!==n)if(bn.selectionmode===dn.MultiSelect){var o=e.shiftKey,i=e.ctrlKey;if(o){var s=Jt[Jt.length-1];if(s>n)for(var r=s-1;r>=n;r--)qt(r,!0);else for(var l=s+1;n>=l;l++)qt(l,!0)}else qt(n,i)}else R(n)}}function qt(e,t){t=t&&l(),-1!==Jt.indexOf(e)&&t?U(e):R(e,t)}function kt(e,t,n){if(!(e.originalEvent.touches.length>1)){e.preventDefault();var a=e.originalEvent.changedTouches[0],o=document.createEvent("MouseEvents");o.initMouseEvent(t,!0,!0,window,1,a.screenX,a.screenY,a.clientX,a.clientY,!1,!1,!1,!1,n,null),e.target.dispatchEvent(o)}}function Vt(e){if(hn.moves=0,hn.start={x:0/0,y:0/0},e.originalEvent.touches&&1===e.originalEvent.touches.length){var t=e.originalEvent.touches[0];hn.start.x=t.screenX,hn.start.y=t.screenY}kt(e,"mouseover",0),kt(e,"mousedown",0)}function Lt(e){if(e.originalEvent.touches&&e.originalEvent.touches.length){var t=e.originalEvent.touches[0],n=5;(e.originalEvent.touches.length>1||Math.abs(hn.start.x-t.screenX)>n||Math.abs(hn.start.y-t.screenY)>n)&&hn.moves++,kt(e,"mousemove",0)}}function Rt(e){kt(e,"mouseup",0),hn.moves>0?hn.moves=0:kt(e,"click",0),kt(e,"mouseout",0)}function Ut(){fn.dragdropping&&(L(l()),fn.base.dom.content.sortable("refresh"))}function Ht(e){if(bn.showthumbcaption){if(!e.page._caption){var t=Nt("<div/>");t.css({left:"3%",bottom:"16px",width:"94%",position:"absolute",zIndex:1,textAlign:"center",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}),t.addClass($t.domclasses.atala_thumb_caption),e.page._caption=t,e.page.append(t)}var n=e.page._index+1+"";nn._page.caption&&(n=nn._page.caption.replace("{0}",n),e.page.attr("title",n)),e.page._caption.text(n)}e.page&&e.page._img&&!e.page._img._loaded&&X(e.page._img,e.page._paper),B(e.page,Jt.indexOf(e.page._index)>-1&&l())}function jt(e){e.image&&(e.image._loaded?e.page&&X(e.image,e.page._paper,mn.scale,{width:e.width,height:e.height}):e.image.css({position:"absolute"}))}function Wt(e){tn&&tn.__status&&tn.__status(e.message)}function Xt(){if(fn.base){var e=fn.base.page.size.width/fn.base.page.size.height<1,t=Math.ceil(fn.base.page.size.height*fn.base.config.zoom),n=Math.ceil(fn.base.page.size.width*fn.base.config.zoom),a=Math.max(t,n),o=fn.base.config.zoom*(a/(e?t:n));mn.zoom=fn.base.config.zoom/mn.zoomfull,mn.scale=o,Nt.each(fn.base.dom.pageDivs,function(e,t){t.width(a),t.height(a)})}}function Yt(){}function Bt(){}function Kt(e){tn&&gn&&Gt&&Gt.isReady()&&tn.__updatePageSize(e,fn.base.controllers.document,fn.base.page.size,gn.isThumbnailerActive(n()))}function Zt(e){e&&(e._scrollSize<=0?e._tray.hide():e._tray.show())}var Nt=Atalasoft.$,$t=null,Gt=e.viewer||null,Jt=[],Qt=[],en=null,tn=null,nn=null,an="atala_dragdata",on="ui-sortable",sn="sortable",rn="atala_scroll_parent",ln=Atalasoft.Utils.Fitting,cn=Atalasoft.Utils.ScrollDirection,dn=Atalasoft.Utils.SelectionMode,un=Atalasoft.Utils.SelectedItemsOrder,gn=null,pn={size:{width:0,height:0},sizes:[{width:0,height:0}],count:0,number:-1,dpi:96,vector:!1},fn={base:null,loading:!1,initialized:!1,scrolling:!1,dragdropping:!1,viewer:{zoom:0,pagenumber:0,api:{}},selfapi:{}},hn={moves:0,start:{x:0/0,y:0/0}},mn={divsize:-1,scale:1,size:0,zoom:1,zoomfull:1},bn={direction:cn.Vertical,/**
+ */Atalasoft.Controls.WebDocumentThumbnailer=function(e,a){var g=Atalasoft.$,p=null,u=e.viewer||null,f=[],m=[],c=null,h=null,d=null,b="atala_dragdata",v="ui-sortable",_="sortable",w="atala_scroll_parent",t=Atalasoft.Utils.Fitting,y=Atalasoft.Utils.ScrollDirection,x=Atalasoft.Utils.SelectionMode,o=Atalasoft.Utils.SelectedItemsOrder,r=null,l={size:{width:0,height:0},sizes:[{width:0,height:0}],count:0,number:-1,dpi:96,vector:!1},z={base:null,loading:!1,initialized:!1,scrolling:!1,dragdropping:!1,viewer:{zoom:0,pagenumber:0,api:{}},selfapi:{}},n={moves:0,start:{x:NaN,y:NaN}},D={divsize:-1,scale:1,size:0,zoom:1,zoomfull:1},I={direction:y.Vertical,
+/**
         *  @property {number} [maxwidth=300] - Specifies the maximum amount of pixel width allowed for zooming in.
         *
         *  This property is intended to limit size of the images data transferred over the wire on big zoom values.
         */
-maxwidth:300,/**
+maxwidth:300,
+/**
          *  @property {number} [minwidth=80] - Specifies the minimum amount of pixel width allowed for zooming out.
          */
-minwidth:80,pageborderwidth:1,pagespacing:2,parent:null,showpagenumber:!1,toolbarparent:null,/**
+minwidth:80,pageborderwidth:1,pagespacing:2,parent:null,showpagenumber:!1,toolbarparent:null,
+/**
          * @property {boolean} [showthumbcaption=false] - Specifies whether captions will be added to the each thumbnail page. */
-showthumbcaption:!1,/**
+showthumbcaption:!1,
+/**
          * @property {string} [thumbcaptionformat] - Specifies default thumbnail caption format.
          *
          * {0} - will be substituted with page number.
          * {1} - will be substituted with the document file name.
          * Could also be set on server using DocumentInfoRequestedEventArgs arguments of DocumentInfoRequested event.
          */
-thumbcaptionformat:"",/**
+thumbcaptionformat:"",
+/**
          * @property {boolean} [allowdragdrop=false] - Indicates whether drag&drop through UI is enabled.
          */
-allowdragdrop:!1,/**
+allowdragdrop:!1,
+/**
          * @property {number} [dragdelay=250] - Delay in milliseconds before drag&drop operation is started.
          *
          * This delay is intended to support "pan" behavior when UI drag&drop support is enabled.
          *
          */
-dragdelay:250,/**
+dragdelay:250,
+/**
          * @property {number} [selectedindex=0] - Index of the initially selected page. This page will be selected after each new document will be loaded.
          */
-selectedindex:0,/**
+selectedindex:0,
+/**
          * @property {number} [thumbpadding=8] - Padding of the thumbnail image.
          */
-thumbpadding:8,/**
+thumbpadding:8,
+/**
          * @property {string} [backcolor='#DCDCDC'] - Thumbnail background color.
          */
-backcolor:"#DCDCDC",/**
+backcolor:"#DCDCDC",
+/**
          * @property {string} [hovercolor='#667F9F'] - Thumbnail :hover color.
          */
-hovercolor:"#667F9F",/**
+hovercolor:"#667F9F",
+/**
          * @property {string} [selectedcolor='#E0872D'] - Selected thumbnail background color.
          */
-selectedcolor:"#E0872D",/**
+selectedcolor:"#E0872D",
+/**
          * @property {string} [selectedhovercolor='#FFC060'] - Selected thumbnail :hover background color.
          */
-selectedhovercolor:"#FFC060",/**
+selectedhovercolor:"#FFC060",
+/**
          * @property {Atalasoft.Utils.SelectionMode} [selectionmode=SingleSelect] - Defines the WDT selection mode.
          */
-selectionmode:Atalasoft.Utils.SelectionMode.SingleSelect,/**
+selectionmode:Atalasoft.Utils.SelectionMode.SingleSelect,
+/**
          * @property {Atalasoft.Utils.SelectedItemsOrder} [selecteditemsorder=ItemIndexOrder] - Defines the order in which selected pages are to be processed.
          */
-selecteditemsorder:Atalasoft.Utils.SelectedItemsOrder.ItemIndexOrder},vn={type:"Atalasoft.Controls.WebDocumentThumbnailer",debug:!0,showpageborder:!0,forcepagefit:!0,toolbarparent:Nt("<div/>")},_n={/**
+selecteditemsorder:Atalasoft.Utils.SelectedItemsOrder.ItemIndexOrder},i={type:"Atalasoft.Controls.WebDocumentThumbnailer",debug:!0,showpageborder:!0,forcepagefit:!0,toolbarparent:g("<div/>")},s={
+/**
          * Triggers when thumbnail is selected.
          * @event Atalasoft.Controls.WebDocumentThumbnailer#thumbselected
          * @param {Object} event - The event object.
          * @param {number} event.index - Index of the page that was selected.
          */
-thumbselected:null,/**
+thumbselected:null,
+/**
          * Triggers when thumbnail is deselected.
          * @event Atalasoft.Controls.WebDocumentThumbnailer#thumbdeselected
          * @param {Object} event - The event object.
          * @param {number} event.index - Index of the page that was deselected.
          */
-thumbdeselected:null,/**
+thumbdeselected:null,
+/**
          *  Triggers when thumbnail drag & drop operation is started.
          *  @event Atalasoft.Controls.WebDocumentThumbnailer#thumbdragstart
          *  @param {Object} event - The event object.
          *  @param {number} event.dragindex - Index of the page being dragged.
          *  @param {number[]} event.dragindices - The indices of pages being dragged.
          */
-thumbdragstart:null,/**
+thumbdragstart:null,
+/**
          * Callback signature for {@link Atalasoft.Controls.WebDocumentThumbnailer#event:thumbdragend| WebDocumentThumbnailer.thumbdragend} event.
          * @callback ThumbDragEndCallback
          * @param {Object} event - The event object.
@@ -2204,7 +2798,8 @@ thumbdragstart:null,/**
          * If set by the application, page want be moved to the new position by the  {@link Atalasoft.Controls.WebDocumentThumbnailer|WebDocumentThumbnailer}.
          * This could be used by the application to inject additional logic, for example used confirmation dialog and move the page using API after that.
          **/
-thumbdragend:null,/**
+thumbdragend:null,
+/**
          * Callback signature for {@link Atalasoft.Controls.WebDocumentThumbnailer#event:thumbdragcomplete| WebDocumentThumbnailer.thumbdragcomplete} event.
          * @param {Object} event - The event object.
          * @param {ThumbDragCompleteEventArgs} args - The event data.
@@ -2224,4 +2819,66 @@ thumbdragend:null,/**
          * @param {Object} event - The event object.
          * @param {ThumbDragCompleteEventArgs} args - The event data.
          */
-thumbdragcomplete:null},wn=void 0,yn=void 0;return e&&("thumbsize"in e&&isFinite(e.thumbsize)&&e.thumbsize>0&&(dt(e.thumbsize),vn.forcepagesize={width:e.thumbsize,height:e.thumbsize}),Nt.extend(bn,e),Nt.extend(bn,vn),bn.showpagenumber=bn.showpagenumber&&!bn.showthumbcaption,"fitting"in e||(bn.fitting=bn.direction===cn.Vertical?ln.Width:ln.Height),Gt&&Gt.config&&(bn.allowtext=Gt.config.allowtext)),$t=Atalasoft.Controls.WebDocumentViewer.call(this,bn,function(e){Ft(e,t)}),nn=$t.__getViewerLink($t),bn=nn._config,p(),ut(),$t.getSelectedPageIndex=T,$t.getSelectedPagesIndices=A,$t.selectThumb=R,$t.deselectThumb=U,$t.isActive=l,$t.activate=c,a(),$t};
+thumbdragcomplete:null},P=void 0,C=void 0;function M(){return{get:function(){return p},detachViewer:E,activateViewer:O}}function T(e,t){if(e){var a=t?e.bind:e.unbind,o=t?p.unbind:p.bind;a.call(e,{beforehandlerrequest:Ce,documentloaded:be,scroll:xe,pagerotated:Ie,pageinserted:_e,pageremoved:we,pagemoved:ye}),o.call(p,{pagerotated:ve,pageinserted:ve,pageremoved:ve,pagemoved:ve}),A(e,e.document.events,a),I.allowannotations&&(a.call(e,{annotationresized:Pe,annotationmoved:Pe,annotationrotated:Pe,annotationchanged:Pe,annotationcreated:ze,annotationdeleted:De}),e.annotations&&A(e,e.annotations.events,a))}}function A(e,t,a){var o={};for(var n in t)t.hasOwnProperty(n)&&(o[n]=S);a.call(e,o)}function S(){p.trigger.apply(p,arguments)}
+/**
+     * Checks whether current thumbnailer is controlling referenced viewer.
+     *
+     * If viewer is linked only to the current thumbnailer, this method always return `true`.
+     *
+     * If thumbnailer is not linked to any viewer, this method always return `false`.
+     * @function Atalasoft.Controls.WebDocumentThumbnailer#isActive
+     * @returns {boolean} `true` if current thumbnailer instance is controlling referenced viewer; `false` otherwise.
+     */function F(){return u&&(!r||r&&r.isThumbnailerActive(M()))}
+/**
+     * Takes ownership over referenced viewer, i.e. if shared viewer is currently displaying other document, it's switched to display document from calling thumbnailer.
+     * @function Atalasoft.Controls.WebDocumentThumbnailer#activate
+     */function O(e,t,a){if(!u&&e&&(h=(u=e).__getViewerLink(p,d),r=h.stateManager),u&&u.isReady()&&(!F()||a)){var o=u&&!F(),n=function(){var e={pagewidth:l.size.width,pageheight:l.size.height,pagecount:l.count,dpi:l.dpi,colordepth:z.base.controllers.memory.colorDepth,vector:l.vector,pagenumber:z.viewer.pagenumber,zoom:z.viewer.zoom};I.allowannotations&&d._annos&&(e.layers=pe(d._annos,"items"));I.allowforms&&d._fields&&(e.forms={fields:pe(d._fields)});return e}();n.customData=null==t?void 0:t.customData,r.activateThumbnailer(M(),n,d,I,a),o&&(T(u,!0),q((s={thumb:{annotations:null,document:null,text:null,getCurrentPageIndex:null,getZoom:null,zoom:null,zoomIn:null,zoomOut:null,next:null,previous:null,save:null,showPage:null,setMouseTool:null},viewer:{reloadPage:function(e,t){return P=e.reloadPage,J}}}).viewer,i=u,p,z.viewer.api),q(s.thumb,p,i,z.selfapi))}var i,s;K(!0)}function E(){if(u&&u.isReady()&&(z.viewer.zoom=u.getZoom(),z.viewer.pagenumber=u.getCurrentPageIndex(),I.allowforms&&z.base.controllers.forms&&h._fields)){var e={forms:{fields:pe(h._fields)}};z.base.controllers.forms.loadForms(e)}var t;T(u,!1),t=u,q(k(z.viewer.api),t,z.viewer.api,{}),q(k(z.selfapi),p,z.selfapi,{}),K(!1)}function q(e,t,a,o){for(var n in e)e.hasOwnProperty(n)&&(t.hasOwnProperty(n)&&t[n]&&(o[n]=t[n]),"function"==typeof e[n]?t[n]=e[n](t,a):a.hasOwnProperty(n)&&a[n]&&(t[n]=a[n]))}function k(e){var t={};for(var a in e)e.hasOwnProperty(a)&&(t[a]=null);return t}function V(e,t,a){}function L(){}function R(){if(I.debug){var e=L(),t=H();return g.extend(!0,e,{thumbnailer:{config:I,index:t[0],indices:t,links:{viewer:h,self:d},page:l,thumb:D,state:z}}),e}return null}
+/**
+    * Scrolls the viewer to the given page number and executes the callback when finished
+    * @function Atalasoft.Controls.WebDocumentThumbnailer#scrollToThumb
+    * @param {number} index - Index of the page to scroll to.
+    * @param {NotificationCallback} [callback] - Function to execute after this operation is done.
+    */
+function U(){}
+/**
+     * @summary Gets the selected thumbnails indices.
+     * @description Gets the selected thumbnails indices with respect of {@link WebDocumentViewerConfig.selecteditemsorder| selecteditemsorder} parameter value.
+     * @function Atalasoft.Controls.WebDocumentThumbnailer#getSelectedPagesIndices
+     * @returns {number[]}
+     */
+function H(){var e=f.slice(0);return I.selecteditemsorder===o.ItemIndexOrder&&e.sort(function(e,t){return e-t}),e}function N(e){var t=1,a=function(){--t<=0&&(F()&&r&&u&&O(u,p.getDocumentInfo(),!0),"function"==typeof e&&e.call())};F()&&(r?r.closeDocument(M(),d):u.isReady()&&(t++,u.empty(a))),j(a)}function j(e){}function W(){F()&&(r?r.closeDocument(M(),d):u.empty(),E()),X(),h=u=null}function X(){}function Y(e,t,a,o){z.base&&g.each(z.base.dom.pageDivs,function(e,t){t.unbind(c),t.thumbInitialized=!1}),null==o&&("function"==typeof t?(o=t,t=null):"function"==typeof a&&(o=a,a=null));"string"==typeof e&&(r.closeDocument(M(),d),z.viewer.pagenumber=0),B(e,t,a,function(e,t){p.scrollTo(0,0,!1),Fe(e,t,o)})}function B(e,t,a,o){}function K(e){if(z.base){0===f.length&&f.push(0);for(var t=0;t<z.base.dom.pageDivs.length;t++){var a=0<t?z.base.dom.pageDivs[t-1]:null,o=z.base.dom.pageDivs[t],n=!1;-1<f.indexOf(o._index)&&e?(o.removeClass("atala_groupped_selection"),o.addClass(p.domclasses.atala_active_thumb),null!==a&&-1<f.indexOf(a._index)&&(o.addClass("atala_groupped_selection"),a.addClass("atala_groupped_selection")),n=!0):(o.removeClass(p.domclasses.atala_active_thumb),o.removeClass("atala_groupped_selection")),ae(o,n)}}}
+/** 
+     * Highlights the thumbnail at the given index, and scrolls to it in the linked viewer, if possible.
+     * @param {number|string} index - Index of the page to select. Can be passed as string representation of a number
+     * @param {boolean} [append] - Append index to the already selected thumbs or not. Its value ignores in single select mode.
+     * @param {NotificationCallback} [callback] - function that is called when thumbnail has been selected.
+     * @function Atalasoft.Controls.WebDocumentThumbnailer#selectThumb
+     */function Z(e,t,a){if(h._controllers.upload.abort(),!(null===(e=Atalasoft.Utils.ParseInt(e))||e<0||e>=p.getDocumentInfo().count||void 0!==t&&"boolean"!=typeof t&&null!==t||void 0!==a&&"function"!=typeof a&&null!==a)){if(t=!!t&&I.selectionmode!==x.SingleSelect){if(-1<f.indexOf(e))return;f.push(e)}else H().forEach(function(e){p.trigger({type:"thumbdeselected",index:e})}),f.length=0,f.push(e);G(),p.trigger({type:"thumbselected",index:e}),"function"==typeof a&&a()}}
+/** 
+     * Resets the thumbnail highlight at the given index, and scrolls to the next selected thumbnail in the linked viewer, if possible.
+     *
+     * This function does't deselect the given index in the single select mode, and in multi select mode, if one page is selected.
+     * @param {number|string} index - Index of the page to deselect. Can be passed as string representation of a number
+     * @param {NotificationCallback} [callback] - function that is called when thumbnail has been deselected.
+     * @function Atalasoft.Controls.WebDocumentThumbnailer#deselectThumb
+     */function $(e,t){if(null!==(e=Atalasoft.Utils.ParseInt(e))&&(void 0===t||"function"==typeof t||null===t)){var a=f.indexOf(e);-1!==a&&1!==f.length&&(f.splice(a,1),G(),p.trigger({type:"thumbdeselected",index:e}),"function"==typeof t&&t())}}function G(){var e=H();if(r?(z.viewer.pagenumber=e[0],O(u,p.getDocumentInfo())):K(!0),!(1<f.length)&&u){var t=u.getCurrentPageIndex(),a=e[0];0<=t&&a!==t&&(z.scrolling=!0,a===t-1?u.previous(1):a===t+1?u.next(1):u.showPage(a))}}
+/**
+     * Reloads the specified page. If the thumbnailer is linked with viewer, viewer page is reloaded and callback is called when both viewer and thumbnailer completely reloaded, including image data itself.
+     *
+     * Viewer page won't be reloaded if the viewer is currently controller by other thumbnailer and requested page was not loaded in viewer before. In such case page will be lazy-loaded as usual. If special parameters should be passed, {@link Atalasoft.Controls.WebDocumentViewer#event:beforehandlerrequest| beforehandlerrequest} event to modify request parameters.
+     * @param {number} index - The index of the page to reload.
+     * @param {string|boolean} [annotations=false] - Url of the annotation xmp file or flag indicating whether to reload annotations of boolean flag indicating whether to load annotations data.
+     * @param {string|boolean} [forms] - Url of the form file or flag indicating whether to reload forms of boolean flag indicating whether to load forms data.
+     * @param {object} [params] - A plain object containing optional reload parameters that will be passed to server.
+     * @param {NotificationCallback} [callback] - function that is called when page have been loaded.
+     *
+     * This object will be available on the server side hander as an key-values collection. This allows to pass specific load options for individual pages.
+     * @function Atalasoft.Controls.WebDocumentViewer#reloadPage
+     */function J(e,t,a,o,n){if(C){var i=Array.prototype.slice.call(arguments);if(u&&u.isReady())if(F()){var s=Array.prototype.slice.call(i);"function"!=typeof(n=i.pop())&&(i=Array.prototype.slice.call(s)),C.apply(this,i).then(function(){P&&P.apply(this,s)})}else C.apply(this,arguments);else C.apply(this,arguments)}}function Q(){if(z.base){if(z.initialized&&0<z.base.dom.pageDivs.length&&null!=z.base.dom.pageDivs[0]._img&&!z.base.dom.pageDivs[0]._img._size.isEmpty()){var e=z.base.dom.pageDivs[0]._img._size;e.width>e.height?D.scale=D.size/e.width:D.scale=D.size/e.height}else{var t=z.base.page.size.width/z.base.page.size.height<1,a=Math.ceil(z.base.page.size.height*z.base.config.zoom),o=Math.ceil(z.base.page.size.width*z.base.config.zoom),n=D.size;I.direction===y.Vertical?D.divsize=Math.ceil(z.base.page.size.width*z.base.config.zoom):I.direction===y.Horizontal&&(D.divsize=Math.ceil(z.base.page.size.height*z.base.config.zoom)),fe(n=n<=0?D.divsize-2*I.thumbpadding:n),I.tabular&&1<I.columns&&I.direction===y.Vertical&&function(){if(I.tabular){var e=void 0;if(1<I.columns)e=(D.size+2*I.thumbpadding+I.pagespacing)*Math.min(z.base.controllers.document.getPageCount(),I.columns);else if(1<I.rows){var t=Math.ceil(z.base.controllers.document.getPageCount()/I.rows);e=(D.size+2*I.thumbpadding+I.pagespacing)*t}e&&z.base.dom.content.width(e)}}();var i=t?a:o;D.scale=i?z.base.config.zoom*(D.size/i):1,D.zoomfull=D.scale,I.minwidth>z.base.page.size.width*D.scale&&z.base.page.size.width&&(I.minwidth=z.base.page.size.width*D.scale),z.initialized=!0}var s=I.showpageborder?2*I.pageborderwidth:0,r=D.size+2*I.thumbpadding-s;if(p.trigger({type:"pagedivsresized",height:r,width:r,fullzoom:D.zoomfull,minwidth:I.minwidth}),I.allowdragdrop){z.base.dom.content.addClass(p.domclasses.atala_thumb_draggable),z.base.dom.content.css({minWidth:r,minHeight:r});var l=Math.round(D.size/2);z.base.dom.content.sortable({containment:"window",connectWith:"."+p.domclasses.atala_thumb_draggable,appendTo:document.body,placeholder:p.domclasses.atala_drag_placeholder,cursorAt:{left:l,top:l},delay:I.dragdelay,distance:4,helper:ne,opacity:.65,scroll:!0,scrollSensitivity:l,scrollSpeed:10,start:ie,receive:ce,stop:le,over:se,change:re,tolerance:"pointer",update:de,zIndex:100})}g.each(z.base.dom.pageDivs,function(e,t){t.width(D.size),t.height(D.size),t.thumbInitialized||(t.bind(c),t.css({padding:I.thumbpadding,"background-color":I.backcolor,cursor:"pointer","margin-bottom":I.pagespacing+"px","text-align":"center",position:"relative"}),I.tabular?t.css({"margin-right":I.pagespacing+"px"}):I.direction===y.Horizontal&&t.css({"margin-right":I.pagespacing+"px","margin-bottom":"0px"}),t._paper&&Atalasoft.Utils.Browser.Explorer&&(t._paper.canvas.style.top="",t._paper.canvas.style.width="",t._paper.canvas.style.height=""),t._grips&&(t._grips.push=function(){}),t.thumbInitialized=!0),ee(t._img,t._paper)}),0<z.base.dom.pageDivs.length&&d.__adjustEdgeHeights(z.base.dom.pageDivs[0]._index)}}function ee(e,t,a,o){if(z.base){var n=o||e&&e.getScaledSize(a);if(!n)return;var i=n.width,s=n.height,r=D.size*(z.base.config.zoom/D.zoomfull);if(r<i||r<s){var l=a*(r/(i/s<1?s:i));i=Math.round(e._size.width*l),s=Math.round(e._size.height*l),a=l}e.width(i),e.height(s);var c=e.getDomElement();c[0].style.left="50%",c[0].style.top="50%",c[0].style.position="absolute",c[0].style.marginLeft=-Math.round(i/2)+"px",c[0].style.marginTop=-Math.round(s/2)+"px",t&&(t.canvas.style.left="50%",t.canvas.style.top="50%",t.canvas.style.marginLeft=-Math.round(i/2)+"px",t.canvas.style.marginTop=-Math.round(s/2)+"px",t.canvas.style.zIndex=1),e.trigger({type:"pagezoom",index:e._page._index,height:Math.round(s),width:Math.round(i),prevzoom:z.base.config.zoom,zoom:a})}}function te(e,t,a){var o=e.data("selected")?t:a;e.css("background-color",o)}function ae(e,t){var a=t?I.selectedcolor:I.backcolor;e.data("selected",t),e.css("background-color",a)}function oe(e){var t=this;this._initial=e,this._actual=e,this.scrollTop=function(){t._actual.scrollTop()},this.scrollLeft=function(){t._actual.scrollTop()},this.setObject=function(e){t._actual=e,this[0]=t._actual[0]},this.offset=function(){return t._actual.offset()},this.setObject(e)}function ne(e,t){z.dragdropping=!0,K(F());var a,o,n=g('<div class="atala_drag_helper"></div>'),i=(o=[],(a=t).hasClass(p.domclasses.atala_active_thumb)&&F()?H().forEach(function(e){for(var t=0;t<z.base.dom.pageDivs.length;t++)if(z.base.dom.pageDivs[t]._index===e){o.push(z.base.dom.pageDivs[t]);break}}):o.push(a),o);1<i.length&&(g(this).sortable("option","items","> *:not(.atala_groupped_selection)"),g(this).sortable("refresh"));for(var s=t.hasClass(p.domclasses.atala_active_thumb)&&F()?Math.min(3,H().length):1,r=0;r<i.length||r<s;r++){var l=r<i.length?i[r]:i[0];if(r<s){var c=l.find("."+p.domclasses.atala_page_image_anchor).first().clone();c.css({position:"absolute",left:10*r+"px",top:-10*r+"px",right:"0px",bottom:"0px",margin:"","z-index":-r}),n.append(c)}}z.base.dom.content.append(n);var d=n.scrollParent(),u=z.base.dom.content.data(v)||z.base.dom.content.data(_);return n.hide(),setTimeout(function(){u&&(u.scrollParent=new oe(d),i.forEach(function(e){e.data(w,u.scrollParent)})),n.appendTo("body"),n.show()},1),n}function ie(e,t){h._controllers.upload.abort();var a=function(e){if(e.hasClass(p.domclasses.atala_active_thumb)&&F())return H();for(var t=0;t<z.base.dom.pageDivs.length;t++)if(z.base.dom.pageDivs[t][0]===e[0])return[z.base.dom.pageDivs[t]._index];return null}(t.item);if(null!==a){var o=[];a.forEach(function(e){o.push(p.document.getPageReference(e))});var n={start:a,end:a[0],updateHandled:!1,pageRefs:o,documenturl:"object"===_typeof(o[0])&&o[0].uri?o[0].uri:z.base.config.documenturl,thumbLink:d,thumb:p,thumbId:d._id,viewerId:h._id,state:z,externalDropIndex:null,insertAfterSelf:!1};t.item.data(b,n),z.base.controllers.mouseTool.pauseTool(),t.placeholder.width(t.item.width()),t.placeholder.height(t.item.height()),t.placeholder.css({margin:t.item.css("margin"),display:z.base.config.tabular||z.base.config.direction===y.Horizontal?"inline-block":"block",padding:Math.max(0,z.base.config.thumbpadding-1)}),p.trigger({type:"thumbdragstart",dragindex:n.start[0],dragindices:n.start})}}function se(e,t){if(!Atalasoft.Utils.Browser.Mobile.Any()){var a=t.placeholder.parents("."+p.domclasses.atala_scroller),o=t.item.data(w);a.length&&o&&o[0]!==a.first()[0]&&o.setObject(a.first())}}function re(e,t){var a=t.item.data(b);if(a){var o=t.placeholder.prev();a.insertAfterSelf=o.length&&t.item[0]===o.first()[0]}}function le(e,t){var a=t.item.data(b),o=I.parent.offset().left,n=I.parent.offset().left+I.parent.width(),i=I.parent.offset().top,s=I.parent.offset().top+I.parent.height(),r=t.position.left+t.item.width()/2,l=t.position.top+t.item.height()/2,c=o<r&&r<n&&i<l&&l<s;if(a&&c){z.base.controllers.mouseTool.resumeTool(),a.updateHandled||(a.end=ue(t),a.updateHandled=!0),a.insertAfterSelf&&++a.end,a.end=a.start[0]<a.end?a.end-1:a.end;var d={type:"thumbdragend",dragindex:a.start[0],dragindices:a.start,dropindex:a.end,source:a.thumb,sourcedocument:a.documenturl,target:p,external:!1,pageref:a.pageRefs[0],pagerefs:a.pageRefs,cancel:!1};p.trigger(d,d),d.cancel?g(this).sortable("cancel"):(h&&F()&&u.isReady()?h._controllers.document.movePages(a.start,a.end):z.base.controllers.document.movePages(a.start,a.end),ge(),(f.length=0)<m.length?(m.sort(function(e,t){return e-t}).forEach(function(e){Z(e,!0)}),m.length=0):Z(a.end,!1),d={type:"thumbdragcomplete",dragindex:a.start[0],dragindices:a.start,dropindex:a.end,source:a.thumb,target:p},z.dragdropping=!1,p.trigger(d,d))}else a&&!c&&g(this).sortable("cancel");g(this).sortable("option","items","> *"),g(this).sortable("refresh"),t.item.data(b,null)}function ce(e,t){g(t.sender).sortable("cancel");var o=t.item.data(b);if(o){o.thumbLink._controllers.mouseTool.resumeTool();var a=z.base.dom.pageDivs.length?z.base.dom.pageDivs[0]._index:0;o.end=o.externalDropIndex+a||0;var n={type:"thumbdragend",dragindex:o.start[0],dragindices:o.start,dropindex:o.end,source:o.thumb,sourcedocument:o.documenturl,target:p,pageref:o.pageRefs[0],pagerefs:o.pageRefs,external:!0,cancel:!1,copyannotations:!0};if(p.trigger(n.type,n),!n.cancel){var i=[];n.copyannotations&&o.thumb.config.allowannotations&&p.config.allowannotations&&o.start.forEach(function(e){i.push(o.thumb.annotations.getFromPage(e))}),o.viewerId!==h._id&&o.thumb.selectThumb(o.thumb.getCurrentPageIndex(),!1),u&&O(u,!0),z.scrolling=!0,o.thumb.document.removePages(o.start),p.document.insertPages(null,o.pageRefs,o.end),ge(),f.length=0,I.selectionmode===x.SingleSelect?Z(o.end):o.start.forEach(function(e,t){Z(o.end+t,!0)}),i.forEach(function(e,t){if(e)for(var a=0;a<e.length;a++)p.annotations.createOnPage(e[a],o.end+t)}),p.trigger("thumbdragcomplete",{type:"thumbdragcomplete",dragindex:o.start[0],dragindices:o.start,dropindex:o.end,source:o.thumb,target:p}),z.dragdropping=!1,o.state.dragdropping=!1}}t.item.data(b,null)}function de(e,t){var a=t.item.data(b);a&&(z.base.dom.content.has(t.item).length?(a.end=ue(t),a.thumbId===d._id&&p.trigger({type:"thumbsreordered",dragindex:a.start[0],dragindices:a.start,dropindex:a.end})):a.externalDropIndex=t.item.index(),a.updateHandled=!0)}function ue(e){for(var t=-1,a=e.item.prev().length?e.item.prev().first():[null],o=0;o<z.base.dom.pageDivs.length;++o)if(z.base.dom.pageDivs[o][0]===a[0]){t=z.base.dom.pageDivs[o]._index;break}return t+1}function ge(){var e=z.base.dom.scroller[0];if(d.__isObjectInRect(z.base.dom.edges[1][0],e,e.scrollLeft,e.scrollTop,e.scrollLeft+e.clientWidth,e.scrollTop+e.clientHeight)){var t=z.base.dom.pageDivs[0]._index,a=d.__getIndexFromPos(e.scrollLeft,e.scrollTop),o=a-t;o<z.base.dom.pageDivs.length&&0<o?d.__showNext(o):(d.__showPageAsync(a,!1),d.__redrawVisiblePages())}}function pe(e,t){var a=[];for(var o in e)if(e.hasOwnProperty(o)){var n=[],i=t?{}:n;for(var s in t&&(i[t]=n),e[o])e[o].hasOwnProperty(s)&&(n[s]=e[o][s].get(),n[s].multiview=!0);a[o]=i}return a}function fe(e){e<=0&&p.trigger({type:"throwerror",name:"Invalid thumb size",msg:"Thumb size cannot be "+e+". Check configuration parameters 'minwidth', 'thumbpadding' and 'thumbsize'. If 'thumbsize' is not specified, then 'minwidth' should be at least (2 * thumbpadding + 1)"}),D.size=e,z.base&&z.base.config.forcepagesize&&(z.base.config.forcepagesize.width=e,z.base.config.forcepagesize.height=e)}function me(e,t){var a="#FFFFFF",o="#FFF",n="white",i="rgb(255, 255, 255)",s=V(null,"dummy");return s.css("backgroundColor",n),s.css("backgroundColor",e),s.css("backgroundColor")===i&&(e=e.toLowerCase())!==n&&e!==a&&e!==o&&e!==i&&(e=t),e}function he(e,t){return t?isFinite(parseFloat(e)):isFinite(parseInt(e,10))}function be(e){}function ve(e,t){0<z.base.state.batchoperation||("function"==typeof e&&(t=e),Q(),d.__redrawVisiblePages(!0),d.__adjustVisiblePages(),z.base&&h&&F()&&u.isReady()?(h.__redrawVisiblePages(!0),h.__adjustVisiblePages(!1,t)):"function"==typeof t&&t())}function _e(e){z.base&&(z.base.controllers.annotations&&z.base.controllers.annotations.insertLayer(null,null,e.destindex),z.base.controllers.forms&&z.base.controllers.forms.insertForm(null,null,e.destindex),h._state.batchoperation<=0&&ve())}function we(e){z.base&&(z.base.controllers.annotations&&z.base.controllers.annotations.removeLayer(e.index),z.base.controllers.forms&&z.base.controllers.forms.removeForm(e.index),h._state.batchoperation<=0&&ve())}function ye(e){if(z.base&&(z.base.controllers.annotations&&z.base.controllers.annotations.moveLayer(e.shiftedsrcindex,e.destindex),z.base.controllers.forms&&z.base.controllers.forms.moveForm(e.shiftedsrcindex,e.destindex),function(){var e=z.base.dom.pageDivs[0]._index;z.base.dom.pageDivs.sort(function(e,t){return e.index()-t.index()});for(var t=0;t<z.base.dom.pageDivs.length;t++){var a=z.base.dom.pageDivs[t];a._index=e+t,null!=a._num&&a._num.text(a._index+1)}}(),h._state.batchoperation<=0&&ve(),z.dragdropping)){var t=e.destindex;m.sort(function(e,t){return t-e}).forEach(function(e){e===t&&t--}),m.push(t)}}function xe(e){var t=u.getCurrentPageIndex(),a=H();a.length<=1&&a[0]!==t&&!z.scrolling&&Z(t)}function ze(e){if(z.base){var t=h._annos[e.page]||null,a=null;if(t)a=t[t.length-1].get();a&&a.type===e.anno.type&&(a.multiview=!0,z.base.controllers.annotations.createAnnotation(a,e.page))}}function De(e){z.base&&z.base.controllers.annotations.deleteAnnoOnPage(e.page,e.index)}function Ie(e){z.base&&h._state.batchoperation<=0&&ve()}function Pe(e){if(z.base){var t=e.anno.getPageIndex();if(function(e){for(var t=0;t<z.base.dom.pageDivs.length;t++)if(z.base.dom.pageDivs[t]._index===e)return!0;return!1}(t))for(var a=z.base.controllers.annotations.getAnnosFromPage(t),o=0;o<a.length;o++)a[o].type===e.anno.type&&a[o].update(!0)}}function Ce(e){if(("docinfo"===e.request.type||"annodata"===e.request.type||"formdata"===e.request.type)&&z.base){e.request.cancel=!0,"docinfo"===e.request.type&&(e.request.info.pagewidth=l.size.width,e.request.info.pageheight=l.size.height,e.request.info.pagecount=l.count,e.request.info.dpi=l.dpi,e.request.info.colordepth=z.base.controllers.memory.colorDepth,e.request.info.vector=l.vector);var t=void 0!==e.request.info.docIndex?e.request.info.docIndex:e.request.info.offset||0,a=-1<e.request.info.length?e.request.info.length+t:void 0;if(e.request.info.offset=e.request.info.offset||0,I.allowannotations&&("annodata"===e.request.type||e.request.data.atala_annurl)){var o=z.base.controllers.annotations.__getDebugInfo().data;e.request.info.layers=pe(o.annos.slice(t,a),"items")}if(I.allowforms&&("formdata"===e.request.type||e.request.data.atala_formurl)){var n=z.base.controllers.forms.__getDebugInfo().data;e.request.info.forms={fields:pe(n.fields.slice(t,a))}}u.trigger({type:"handlerreturned",request:e.request})}}function Me(e){}function Te(e){}function Ae(e,t,a){for(var o in a)a.hasOwnProperty(o)&&delete a[o]}function Se(){z.base={config:d._config,controllers:d._controllers,dom:d._dom,page:d._page,state:d._state,stateManager:d.stateManager}}function Fe(e,t,a){l.size.width=z.base.page.size.width,l.size.height=z.base.page.size.height,l.count=z.base.page.count,l.dpi=z.base.page.dpi,l.vector=z.base.page.vector,Q(),Ze(z.base.dom.scrollH),Ze(z.base.dom.scrollV);var o=function(){F()&&Z(I.selectedindex),a&&"function"==typeof a&&a(e)};z.viewer.zoom=0,(F()||r&&!r.isViewerActive())&&O(u,t,!0),o()}function Oe(e){te(g(this),I.selectedhovercolor,I.hovercolor)}function Ee(e){te(g(this),I.selectedcolor,I.backcolor)}function qe(e){if(0===e.button){for(var t=e.currentTarget,a=-1,o=0;o<z.base.dom.pageDivs.length;o++)if(z.base.dom.pageDivs[o][0]===t){a=z.base.dom.pageDivs[o]._index;break}if(-1!==a)if(I.selectionmode===x.MultiSelect){var n=e.shiftKey,i=e.ctrlKey;if(n){var s=f[f.length-1];if(a<s)for(var r=s-1;a<=r;r--)ke(r,!0);else for(var l=s+1;l<=a;l++)ke(l,!0)}else ke(a,i)}else Z(a)}}function ke(e,t){t=t&&F(),-1!==f.indexOf(e)&&t?$(e):Z(e,t)}function Ve(e,t,a){if(!(1<e.originalEvent.touches.length)){e.preventDefault();var o=e.originalEvent.changedTouches[0],n=document.createEvent("MouseEvents");n.initMouseEvent(t,!0,!0,window,1,o.screenX,o.screenY,o.clientX,o.clientY,!1,!1,!1,!1,a,null),e.target.dispatchEvent(n)}}function Le(e){if(n.moves=0,n.start={x:NaN,y:NaN},e.originalEvent.touches&&1===e.originalEvent.touches.length){var t=e.originalEvent.touches[0];n.start.x=t.screenX,n.start.y=t.screenY}Ve(e,"mouseover",0),Ve(e,"mousedown",0)}function Re(e){if(e.originalEvent.touches&&e.originalEvent.touches.length){var t=e.originalEvent.touches[0];(1<e.originalEvent.touches.length||5<Math.abs(n.start.x-t.screenX)||5<Math.abs(n.start.y-t.screenY))&&n.moves++,Ve(e,"mousemove",0)}}function Ue(e){Ve(e,"mouseup",0),0<n.moves?n.moves=0:Ve(e,"click",0),Ve(e,"mouseout",0)}function He(e){z.dragdropping&&(K(F()),z.base.dom.content.sortable("refresh"))}function Ne(e){if(I.showthumbcaption){if(!e.page._caption){var t=g("<div/>");t.css({left:"3%",bottom:"16px",width:"94%",position:"absolute",zIndex:1,textAlign:"center",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}),t.addClass(p.domclasses.atala_thumb_caption),e.page._caption=t,e.page.append(t)}var a=e.page._index+1+"";d._page.caption&&(a=d._page.caption.replace("{0}",a),e.page.attr("title",a)),e.page._caption.text(a)}e.page&&e.page._img&&!e.page._img._loaded&&ee(e.page._img,e.page._paper),ae(e.page,-1<f.indexOf(e.page._index)&&F())}function je(e){e.image&&(e.image._loaded?e.page&&ee(e.image,e.page._paper,D.scale,{width:e.width,height:e.height}):e.image.css({position:"absolute"}))}function We(e){h&&h.__status&&h.__status(e.message)}function Xe(e){if(z.base){var t=z.base.page.size.width/z.base.page.size.height<1,a=Math.ceil(z.base.page.size.height*z.base.config.zoom),o=Math.ceil(z.base.page.size.width*z.base.config.zoom),n=Math.max(a,o),i=z.base.config.zoom*(n/(t?a:o));D.zoom=z.base.config.zoom/D.zoomfull,D.scale=i,g.each(z.base.dom.pageDivs,function(e,t){t.width(n),t.height(n)})}}function Ye(e){}function Be(e){}function Ke(e){h&&r&&u&&u.isReady()&&h.__updatePageSize(e,z.base.controllers.document,z.base.page.size,r.isThumbnailerActive(M()))}function Ze(e){e&&(e._scrollSize<=0?e._tray.hide():e._tray.show())}return e&&("thumbsize"in e&&isFinite(e.thumbsize)&&0<e.thumbsize&&(fe(e.thumbsize),i.forcepagesize={width:e.thumbsize,height:e.thumbsize}),g.extend(I,e),g.extend(I,i),I.showpagenumber=I.showpagenumber&&!I.showthumbcaption,"fitting"in e||(I.fitting=I.direction===y.Vertical?t.Width:t.Height),u&&u.config&&(I.allowtext=u.config.allowtext)),p=Atalasoft.Controls.WebDocumentViewer.call(this,I,function(e,t){Fe(e,t,a)}),d=p.__getViewerLink(p),I=d._config,V=d.__createDiv,d.__createDOM,d.__getSelectedPagesIndices,d.__getSelectedPagesIndices=H,I.allowdragdrop=!!I.allowdragdrop,I.selectedindex=he(I.selectedindex)?parseInt(I.selectedindex,10):0,I.thumbpadding=he(I.thumbpadding)?parseInt(I.thumbpadding,10):8,I.backcolor=me(I.backcolor,"#DCDCDC"),I.hovercolor=me(I.hovercolor,"#667F9F"),I.selectedcolor=me(I.selectedcolor,"#E0872D"),I.selectedhovercolor=me(I.selectedhovercolor,"#FFC060"),p.getSelectedPageIndex=
+/**
+     * @summary Gets the selected thumbnail index.
+     * @description Gets the selected thumbnail index when Web Document Thumbnailer (WDT) setup to use singleselect. When WDT setup to use multiselect, then this method returns the first element of the selected page indices, with respect of {@link WebDocumentViewerConfig.selecteditemsorder| selecteditemsorder} parameter value.
+     * @function Atalasoft.Controls.WebDocumentThumbnailer#getSelectedPageIndex
+     * @returns {number}
+     */
+function(){return H()[0]},p.getSelectedPagesIndices=H,p.selectThumb=Z,p.deselectThumb=$,p.isActive=F,p.activate=function(){O(u,p.getDocumentInfo())},u&&(h=u.__getViewerLink(p,d),r=h.stateManager),p.bind({statusmessage:We,pagerotated:ve,pageinserted:ve,pageremoved:ve,pagemoved:ve}),p.bind({annotationsloaded:Me,formsloaded:Te,contextmenu:Ae,documentloaded:Se,pageshown:Ne,pageresize:je,scroll:He,zoomchanged:Xe,zoomstarted:Ye,zoomfinished:Be,pagesizechanged:Ke}),j=p.empty,X=p.dispose,B=p.openUrl,p.getCurrentPageIndex,L=p.__getDebugInfo,p.next,p.previous,U=p.showPage,p.empty=N,p.dispose=W,p.openUrl=p.OpenUrl=Y,p.__getDebugInfo=R,p.scrollToThumb=U,p.zoom=p.zoomIn=p.zoomOut=function(){},C=p.reloadPage,p.reloadPage=J,delete p.fit,g.extend(p.events,s),c={click:qe,touchstart:Le,touchmove:Re,touchend:Ue,mouseenter:Oe,mouseleave:Ee},p};

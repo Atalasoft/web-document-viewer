@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge" >
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>WebDocumentViewerConfig - Documentation</title>
+    <title>Tutorial: Upload files with Web Document Viewer - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -36,1263 +36,136 @@
 
 <div id="main">
     
-    <h1 class="page-title">WebDocumentViewerConfig</h1>
+    <h1 class="page-title">Tutorial: Upload files with Web Document Viewer</h1>
     
 
-    
-
-
-
-
-<section>
+    <section>
 
 <header>
     
-    
+
+    <h2>Upload files with Web Document Viewer</h2>
 </header>
 
 <article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Represents <a href="Atalasoft.Controls.WebDocumentViewer.html"><code>WebDocumentViewer</code></a> configuration.</p></div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-        
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th class="name">Name</th>
-        
-
-        <th class="type">Type</th>
-
-        
-        <th class="default">Default</th>
-        
-
-        <th class="description last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr id=".parent">
-            
-                <td class="name"><code>parent</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>jQuery object that the control will contain the control.</p></td>
-        </tr>
-
-    
-
-        <tr id=".serverurl">
-            
-                <td class="name"><code>serverurl</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Url location to the server handler.</p></td>
-        </tr>
-
-    
-
-        <tr id=".pagespacing">
-            
-                <td class="name"><code>[pagespacing]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    4
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the distance (in pixels) between pages displayed.</p></td>
-        </tr>
-
-    
-
-        <tr id=".allowannotations">
-            
-                <td class="name"><code>[allowannotations]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Turns annotation support on or off.
-This affects both UI annotations toolbar appearance and corresponding API methods behavior.
-If set to <code>false</code>, <a href="Atalasoft.Controls.WebDocumentViewer.html#annotations"><code>WebDocumentViewer.annotations</code></a> will be set to <code>null</code> and annotation-related methods of <code>WebDocumentViewer</code> will throw errors.</p></td>
-        </tr>
-
-    
-
-        <tr id=".allowforms">
-            
-                <td class="name"><code>[allowforms]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Turns forms support on or off.</p></td>
-        </tr>
-
-    
-
-        <tr id=".allowtext">
-            
-                <td class="name"><code>[allowtext]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Turns text selection support on or off.</p></td>
-        </tr>
-
-    
-
-        <tr id=".annotations">
-            
-                <td class="name"><code>[annotations]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#AnnotationsConfig">AnnotationsConfig</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Annotations specific config options, including predefined configurations for particular annotation types.</p></td>
-        </tr>
-
-    
-
-        <tr id=".annotationsurl">
-            
-                <td class="name"><code>[annotationsurl]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Identifier of the annotation data (an .xmp file on the server) that should be displayed along with the displayed document.</p>
-<p> By default <code>annotationsurl</code> is treated as an url to the serialized annotations data file on server(usually .xmp). Application could customize server behavior and in this case <code>annotationsurl</code> could contain arbitrary string.</p>
-<p> This property on the <a href="Atalasoft.Controls.WebDocumentViewer.html#config"><code>viewer.config</code></a> is updated internally each time new document is opened.</p></td>
-        </tr>
-
-    
-
-        <tr id=".columns">
-            
-                <td class="name"><code>[columns]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Number of columns to show when displaying tabular pages, -1 is automatic.</p></td>
-        </tr>
-
-    
-
-        <tr id=".direction">
-            
-                <td class="name"><code>[direction]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Atalasoft.Utils.html#.ScrollDirection">ScrollDirection</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    Vertical
-                
-                </td>
-            
-
-            <td class="description last"><p>Scroll direction of the viewer.</p>
-<p>i.e. controls whether document pages positioned in vertical or horizontal direction.</p></td>
-        </tr>
-
-    
-
-        <tr id=".documenturl">
-            
-                <td class="name"><code>[documenturl]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Identifier of the document (that is on the server) to be displayed when the document is first opened.</p>
-<p>By default <code>documenturl</code> is treated as an url to the image file on server. Application could customize server behavior and in this case <code>documenturl</code> could contain arbitrary string.
-If this parameter is specified, document will be opened right after viewer initialization completes. Otherwise document should be opened using <code> openUrl</code> method.</p>
-<p>This property on the <a href="Atalasoft.Controls.WebDocumentViewer.html#config"><code>viewer.config</code></a> is updated internally each time new document is opened.</p></td>
-        </tr>
-
-    
-
-        <tr id=".fitting">
-            
-                <td class="name"><code>[fitting]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Atalasoft.Utils.html#.Fitting">Fitting</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    Width
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the initial page image fit when document is opened in the viewer.</p>
-<p>Usually it makes sense to set initial fit to viewer width for vertical scrolling <a href="WebDocumentViewerConfig.html#.direction"><code>direction</code></a> and to height for horizontal.</p></td>
-        </tr>
-
-    
-
-        <tr id=".forcepagefit">
-            
-                <td class="name"><code>[forcepagefit]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether document pages should be unified basing on the expected document page size.</p>
-<p>Expected page size is sent by server when opening new document. By default it's the size of the first page in document, but any values could be provided when default behavior is overridden by application.</p>
-<p>It's recommended to set this option to <code>true</code> for most documents.</p>
-<p>Setting this property to true have following benefits:</p>
-<ul>
-<li><p>Pages looks similar even for documents containing pages with having different sizes(or different DPI). Aspect ratio is preserved when calculating unification zoom ratio, so pages are not completely same. But in most cases they would have same width or height.</p>
-</li>
-<li><p>Pages are requested on demand, so size of each individual page is not known util it's loaded from server. Thus when pages having different sizes are inserted into DOM, their sizes are different from expected. This would cause resizing of the DOM elements and thus cause visual shifts of the images. Especially such effect could be noticeable on big images, when rendering and load time is bigger then usual.</p>
-</li>
-</ul>
-<p>Setting this option to false is helpful when document having pages both &quot;small&quot; and &quot;big&quot; pages and those pages should be displayed as is, without additional zoom. For example, when driver license and scanned pages are displayed as a single document.</p></td>
-        </tr>
-
-    
-
-        <tr id=".formurl">
-            
-                <td class="name"><code>[formurl]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Identifier of the annotation data PDF form data (.pdf file on the server) that should be displayed along with the displayed document.</p>
-<p>In most cases this option should be omitted, so forms will be loaded from the PDF document specified by <code> documenturl</code></p>
-<p>This property on the <a href="Atalasoft.Controls.WebDocumentViewer.html#config"><code>viewer.config</code></a> is updated internally each time new document is opened.</p></td>
-        </tr>
-
-    
-
-        <tr id=".jpeg">
-            
-                <td class="name"><code>[jpeg]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Allows page images to be returned as jpeg instead of png.</p></td>
-        </tr>
-
-    
-
-        <tr id=".maxwidth">
-            
-                <td class="name"><code>[maxwidth]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    3000
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the maximum amount of pixel width allowed for zooming in.</p>
-<p> This property is intended to limit size of the images data transferred over the wire on big zoom values.</p></td>
-        </tr>
-
-    
-
-        <tr id=".memorythreshold">
-            
-                <td class="name"><code>[memorythreshold]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    500000000
-                
-                </td>
-            
-
-            <td class="description last"><p>Maximum number of bytes in memory before larger memory objects are recycled.</p>
-<p> DOM image objects are cached internally. This option allows to control memory usage on the browser page. Note, that estimated image sizes are not exactly match actual values - estimation is based on the expected document images color format and size. So actual memory usage in browser process could differ from the configured value.</p></td>
-        </tr>
-
-    
-
-        <tr id=".minwidth">
-            
-                <td class="name"><code>[minwidth]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    150
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the minimum amount of pixel width allowed for zooming out.</p></td>
-        </tr>
-
-    
-
-        <tr id=".mousetool">
-            
-                <td class="name"><code>[mousetool]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#MouseToolConfig">MouseToolConfig</a></span>
-|
-
-<span class="param-type"><a href="Atalasoft.Utils.html#.MouseToolType">MouseToolType</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the mouse tools settings. Could be set to Atalasoft.Utils.MouseToolType if no advanced settings specified.</p>
-<p>Mouse tool identifies how user mouse or touch actions ar interpreted. For example, this could be Pan tool to scroll pages, Zoom-Area tool to select image region and zoom to it, Text tool to select and copy document text, etc.</p>
-<p>Active mouse tool could be changed using <code> setMouseTool</code> method.</p></td>
-        </tr>
-
-    
-
-        <tr id=".pageborderwidth">
-            
-                <td class="name"><code>[pageborderwidth]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    1
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the pixel border width around each page in a document.</p></td>
-        </tr>
-
-    
-
-        <tr id=".pagebuffersize">
-            
-                <td class="name"><code>[pagebuffersize]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>The number of pages to keep in memory while scrolling. Negative values will automatically calculate the optimal number based on available screen space. Values lower than can be displayed will be ignored, and higher values will cause a degradation in performance.</p></td>
-        </tr>
-
-    
-
-        <tr id=".pageselectlocation">
-            
-                <td class="name"><code>[pageselectlocation]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Atalasoft.Utils.html#.PageSelection">PageSelection</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the location to determine the current page number.</p>
-<p>Current page number is displayed on the document toolbar, and also current page is used in some operation in default UI, like page rotation is applied to the current page or in <code> next</code>, <code> previous</code>, <code> showPage</code> methods.</p></td>
-        </tr>
-
-    
-
-        <tr id=".allowflick">
-            
-                <td class="name"><code>[allowflick]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Turns flick scrolling support on or off.</p></td>
-        </tr>
-
-    
-
-        <tr id=".persistrotation">
-            
-                <td class="name"><code>[persistrotation]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether to persist page rotation on document save.</p>
-<p>I.e of set to <code>false</code>, rotation applied in 'view-only' mode and ignored when document is saved.</p></td>
-        </tr>
-
-    
-
-        <tr id=".savefileformat">
-            
-                <td class="name"><code>[savefileformat]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the default file format for the document that will be used when saving multipage document to the server.</p>
-<p>The following formats are supported: pdf, tiff (or tif), jpeg (or jpg), png, bmp, tga, pcx, psd, tla, wbmp, emf, wmf.</p>
-<p>If set, this value is used when document save is performed using default UI or when <code> save</code> is called without save format parameter passed.</p>
-<p>If not specified, document is saved in it's own format. Note that it's not possible to save multipage documents(for example when document pages was added using JavaScript API) to the single page image format by default. Server behavior on save could be highly customized.</p></td>
-        </tr>
-
-    
-
-        <tr id=".savepath">
-            
-                <td class="name"><code>[savepath]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the path that the document, annotation data, and form data will be saved to on the server.</p></td>
-        </tr>
-
-    
-
-        <tr id=".scripturl">
-            
-                <td class="name"><code>[scripturl]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Url location to the server where all JavaScript files are put when not in the default location.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showbuttontext">
-            
-                <td class="name"><code>[showbuttontext]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>If the toolbar is displayed, this can be used to hide or show the button text for the toolbar items.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showerrors">
-            
-                <td class="name"><code>[showerrors]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether error messages are allowed to show up in the console instead of being caught.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showpageborder">
-            
-                <td class="name"><code>[showpageborder]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether a black border will be added around each page in the displayed document.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showpagenumber">
-            
-                <td class="name"><code>[showpagenumber]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether a page number will be added to the bottom left of each page.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showpagenumbertooltip">
-            
-                <td class="name"><code>[showpagenumbertooltip]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether a tooltip containing estimated current page number should be shown during fast scrolling.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showrotatetools">
-            
-                <td class="name"><code>[showrotatetools]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether page and annotations rotation UI handles and buttons are shown.</p>
-<p>Annotation rotation could be explicitly enabled or disabled for individual types of annotations using <a href="WebDocumentViewerConfig.html#.annotations"><code>annotations.defaults</code></a>.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showscrollbars">
-            
-                <td class="name"><code>[showscrollbars]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether scrollbars will be shown.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showselecttools">
-            
-                <td class="name"><code>[showselecttools]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether rubberband selection tools are shown in the toolbar.</p></td>
-        </tr>
-
-    
-
-        <tr id=".showstatus">
-            
-                <td class="name"><code>[showstatus]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether status messages will be output to an area in the toolbar.</p></td>
-        </tr>
-
-    
-
-        <tr id=".tabular">
-            
-                <td class="name"><code>[tabular]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies whether pages should be displayed in a tabular(grid) fashion, rather than one row or column.</p></td>
-        </tr>
-
-    
-
-        <tr id=".toolbarparent">
-            
-                <td class="name"><code>[toolbarparent]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the jQuery object where the toolbar will be created.</p></td>
-        </tr>
-
-    
-
-        <tr id=".upload">
-            
-                <td class="name"><code>[upload]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#FileUploadConfig">FileUploadConfig</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Specifies the file upload settings. If this section is not specified, the upload functionality is disabled.</p></td>
-        </tr>
-
-    
-
-        <tr id=".zoom">
-            
-                <td class="name"><code>[zoom]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Sets the initial zoom level of the document. Ignored when fitting set to anything besides Fitting.None.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-
-    
+    <p>Web Document Viewer (WDV) supports uploading files on a server. It can be done using WDV JavaScript API or WDV UI.</p>
+<h2>Enabling file upload</h2><p>File upload is disabled by default. By setting an 'upload' configuration section to any value, including the 'empty object,' you can enable it.</p>
+<h4>Minimal config to enable upload with default parameters and uploading to web application root.</h4><pre class="prettyprint source lang-js"><code>var viewer = new Atalasoft.Controls.WebDocumentViewer({
+    //... other viewer settings
+    upload: {}
+});</code></pre><h4>Config to enable upload with specified upload path.</h4><pre class="prettyprint source lang-js"><code>var viewer = new Atalasoft.Controls.WebDocumentViewer({
+    //... other viewer settings
+
+    upload: {
+        uploadpath: &quot;folder\\subfolder&quot;
+    },
+
+    //...
+});</code></pre><p>Using this section, you not only enable/disable upload feature but also configure it, to perform files filtering for upload on a client-side. Files can be filtered by size, extension or MIME-type. The viewer performs minimal filetypes checks, and for more thorough files filtering the server-side API should be used.</p>
+<p>There are also several flags that allow a developer to enable or disable multiple files upload using WDV UI which includes configuration of maximum active parallel file upload requests; to enable or disable for an end-user possibility to add files for upload using drag-and-drop mechanism.</p>
+<p>The last thing is 'enabled' flag. It allows to the developer disable upload feature even with if upload section is presented in WDV config.</p>
+<h4>Config section with all flags mentioned.</h4><pre class="prettyprint source lang-js"><code>var viewer = new Atalasoft.Controls.WebDocumentViewer({
+    //... other viewer settings
+    upload: {
+        enabled: false, // disable configured upload 
+        uploadpath: 'Upload/Viewer', // path where upload files should be saved
+        allowedfiletypes: '.jpg,image/tiff', // Allow to upload files with 'jpg' extension and 'image/tiff' MIME-type
+        allowedmaxfilesize: 10 * 1024 * 1024, // Allow to upload files not bigger than 10 MB 
+        allowmultiplefiles: true, // Allow to perform upload of several files simultaneously through UI
+        allowdragdrop: true, // Allow to add files for upload using Drag-and-Drop
+        filesuploadconcurrency: 2 // Only two files upload AJAX requests can run simultaneously
+        closeuiafterupload: false // Control will require user action to close it after upload.
+    }
+
+});</code></pre><h2>Upload API</h2><p>WDV provides API to perform files upload programmatically, this includes methods and events on both client and server APIs.</p>
+<h3>Client-side JS API</h3><p>The client-side API for upload includes new methods to actually upload files - <a href="Atalasoft.Controls.WebDocumentViewer.html#uploadFile"><code>uploadFile</code></a> and <a href="Atalasoft.Controls.WebDocumentViewer.html#uploadFiles"><code>uploadFiles</code></a>. These methods only upload files to the specified folder without any additional filtering from viewer config. To perform this filtering before the upload, a new method was added <a href="Atalasoft.Controls.WebDocumentViewer.html#filterFilesForUpload"><code>filterFilesForUpload</code></a>. By separating these two operations, the developer can collect all files for upload and validate them if needed, before sending any requests and upload operation start.</p>
+<p>To track the upload operation status and control it new events were introduced: <a href="Atalasoft.Controls.WebDocumentViewer.html#event:fileaddedtoupload"><code>fileaddedtoupload</code></a>, <a href="Atalasoft.Controls.WebDocumentViewer.html#event:uploadstarted"><code>uploadstarted</code></a>, <a href="Atalasoft.Controls.WebDocumentViewer.html#event:uploadfinished"><code>uploadfinished</code></a>, <a href="Atalasoft.Controls.WebDocumentViewer.html#event:fileuploadstarted"><code>fileuploadstarted</code></a>, <a href="Atalasoft.Controls.WebDocumentViewer.html#event:fileuploading"><code>fileuploading</code></a>, <a href="Atalasoft.Controls.WebDocumentViewer.html#event:fileuploadfinished"><code>fileuploadfinished</code></a>, <a href="Atalasoft.Controls.WebDocumentViewer.html#event:fileuploaderror"><code>fileuploaderror</code></a>. All these events can be used for additional end-user notification about process progress and gives an ability to abort operation at any moment.</p>
+<p>This feature also supports server requests customization from <a href="Atalasoft.Controls.WebDocumentViewer.html#event:beforehandlerrequest"><code>beforehandlerrequest</code></a> event, new <code>type</code> for such requests is a <a href="global.html#Request"><code>fileupload</code></a> type.</p>
+<h3>Server-side .NET events</h3><p>On the server-side, two new events are added to <code>WebDocumentRequestHandler</code>. These are <code>FileUpload</code>, <code>FileUploaded</code> and <code>FileUploadResponseSend</code> since this feature also supports response customization as others features do. The sample below is demonstrates how using these events and server-side files filtering and saving in custom destinations can be implemented</p>
+<pre class="prettyprint source lang-csharp"><code>public class MyWdv : WebDocumentRequestHandler
+{
+    public MyWdv()
+    {
+        FileUpload += MyWdv_FileUpload;
+        FileUploaded += MyWdv_FileUploaded;
+    }
+
+    private void MyWdv_FileUpload(object sender, FileUploadEventArgs e)
+    {
+        // Files that should be uploaded in wrong folder
+        // or have incorrect extension should be rejected
+        if (e.SaveFolder.Contains(&quot;StopWord&quot;) ||
+            e.FileName.EndsWith(&quot;.exe&quot;))
+            e.Cancel = true;
+
+        // Some files, for instance, we want to save in MemoryStream and not on
+        // file system. Probably then we would like to move them to another storage.
+        if (e.SaveFolder.Contains(&quot;Memory&quot;))
+            e.DestinationStream = new MemoryStream();
+    }
+
+    private void MyWdv_FileUploaded(object sender, FileUploadedEventArgs e)
+    {
+        //Free memory if needed
+        e.DestinationStream?.Dispose();
+    }
+}
+</code></pre><h2>Upload UI</h2><p>On the UI side, when upload is enabled, a new button appears on a WDV toolbar in the top-left corner. Using this button end user can upload files through UI. Also, new API methods became available to the developer.</p>
+<p><img src="img/wdv-upload-toolbar.png" alt=""></p>
+<p>The default scenario with file upload is to perform upload using only open file dialog from a browser. The open file dialog behavior can be customized by configuration properties <a href="WebDocumentViewerConfig.html#.upload"><code> config.upload.allowmultiplefiles</code></a> and <a href="WebDocumentViewerConfig.html#.upload"><code> config.upload.allowedfiletypes</code></a>.</p>
+<h3>Upload control</h3><p>Upload control is a new container for show upload UI and upload progress to end users, it also provides a possibility to handle files drag-and-drop operation in the case when WDV is configured to support it.</p>
+<h4>Single file</h4><p>When a web application is set up to perform an upload of a single file only, then when the user finished selecting files, WDV control is replaced by an upload control, as demonstrated below. This control shows upload progress and provides an ability to cancel the operation at any time, by clicking Cancel button or any thumbnail in Web Document Thumbnailer (WDT).</p>
+<p><img src="img/wdv-upload-single-file.png" alt=""></p>
+<h4>Multiple files</h4><p>In a case when the application is set up to support multiple files upload, the upload control represents a table with files ready to upload brief information about them. It also provides a possibility to cancel upload for each file individually, even if upload operation has started.</p>
+<p><img src="img/wdv-upload-multiple-files.png" alt=""></p>
+<h4>Drag-and-drop</h4><p>When the developer enables drag-and-drop support for WDV upload feature, then upload control changes its behavior. First of all it starts to support drop files into it, and even perform some checkings to notify user whether or not current dragdata can be used for upload. The other change is a new state, where upload control shows nothing except the notification to drop files into it. Of course the end-user still can add files using open file dialog by open it on click &quot;Add..&quot; button.</p>
+<p><img src="img/wdv-upload-drag-and-drop.png" alt=""></p>
+<h3>UI customization</h3><p>Upload control supports theming using jQuery-UI themes like also a other viewer parts, but also it provides set of CSS classes to customize it more accurately. Below is the list of using CSS classes for upload control customization:</p>
+<pre class="prettyprint source lang-css"><code>/* Buttons related classes. */
+.atala-upload-buttons /* Represents the class for internal buttons container. */
+.atala-upload-button /* Represents the base class for upload buttons Add, Ok, Cancel. */
+.atala-upload-close-button /* Represents the class for Close button. */
+.atala-upload-cancel-button /* Represents the class for Cancel button. */
+.atala-upload-ok-button /* Represents the class for OK button. */
+.atala-upload-add-button /* Represents the  class for Add button. */
+
+/* Drag-and-Drop related classes. */
+.atala-upload-drag-and-drop /* Represents the class for span element in D&D message. */
+.atala-upload-drag-and-drop-image /* Represents the class for image element in D&D message. */
+
+/* Upload progress classes. */
+.atala-upload-progress-file /* Represents the class for span element in file upload progress message for single file only. */
+.atala-upload-progress-file-image /* Represents the class for image elemen in file upload progress mesage for single file only. */
+
+/* Control elements structure classes. */
+.atala-upload-control /* Represents the class for top-level element in upload control. */
+.atala-upload-flex-area /* Represents the class for second-level control container with table layout. */
+.atala-upload-flex-area-non-table /* Represents the class for second-level control container with non-table layout. */
+.atala-upload-flex-buttons /* Represents the class for second-level upload control container. It's using for buttons container. */
+
+/* File(-s) upload controls. */
+.atala-upload-single-file /* Represents the class for single file upload container, including drag-and-drop. */
+.atala-upload-single-file-no-drag-drop /* Represents the class for single file upload progress container. */
+.atala-upload-multiple-files /* Represents the class for files table. */
+.atala-upload-multiple-files-drag-and-drop /* Represents the class for drag-and-drop area when multiple files upload enabled. */
+
+/* Files table classes. */
+.atala-upload-files-header-row /* Represents the class for header row in files table. */
+.atala-upload-files-header /* Represents the base class for header cell in files table. */
+.atala-upload-files-header-name /* Represents the class for Name header cell in files table. */
+.atala-upload-files-header-size /* Represents the class for Size header cell in files table. */
+.atala-upload-files-header-status /* Represents the class for Status header cell in files table. */
+.atala-upload-files-row /* Represents the class for file row in files table. */
+.atala-upload-files-cell /* Represents the base class for file cell in files table. */
+.atala-upload-files-cell-size /* Represents the class for files cell Size in files table. */
+.atala-upload-files-cell-status /* Represents the class for files cell Status in files table. */
+.atala-upload-files-cancel-button /* Represents the class for Cancel button in Status cells. */
+
+/* Miscellaneous. */
+.atala-upload-text-element /* Represents the shared class for all elements in upload control with text. */</code></pre>
 </article>
 
 </section>
-
-
-
-
 
 </div>
 

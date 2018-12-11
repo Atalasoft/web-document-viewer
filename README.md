@@ -52,9 +52,9 @@ Atalasoft HTML5 imaging controls are support following server environments
 
 ### Frontend Overview
 
-WebDocumentViewer and WebDocumentThumbnailer requires Jquery, Jquery UI, JQuery Easing libraries. If annotations support are enabled, Raphael.js library is also required.
+WebDocumentViewer and WebDocumentThumbnailer requires [Jquery](https://github.com/jquery/jquery) and [Jquery UI](https://github.com/jquery/jquery-ui) libraries. If annotations support are enabled, [Raphael.js](https://github.com/DmitryBaranovskiy/raphael) library is also required. If text support is enabled, then [Raphael.js](https://github.com/DmitryBaranovskiy/raphael) and [ClipboardJS](https://github.com/zenorocha/clipboard.js) are both required.
 
-JQuery should be included into web page by the application. If some of the other dependent libraries don't exist in the web page scope, controls are trying to automatically load them(using file names from dotImage web resources bundle shipped by installer).
+[Jquery](https://github.com/jquery/jquery) should be included into web page by the application. If some of the other dependent libraries don't exist in the web page scope, controls are trying to automatically load them(using file names from dotImage web resources bundle shipped by installer).
 When controls are delivered by NuGet or Bower it's required to manually deploy them on the page(since file names could differ for different versions).
 
 ### Sample application

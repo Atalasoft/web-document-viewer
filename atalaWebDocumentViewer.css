@@ -1,5 +1,6 @@
-﻿.atala-document-container { border: 1px solid #DDDDDD;  }
-.atala-document-toolbar { border: 1px solid #DDDDDD; background-color: #DDDDDD; }
+﻿.atala-document-container {border: 1px solid rgb(221, 221, 221);
+}
+.atala-document-toolbar { border: 1px solid rgb(221, 221, 221); background-color: rgb(221, 221, 221); }
      
 .atala-ui { font-size: 0.8em; }
 .atala-ui-button { font-size: 0.8em; margin-left:1px; }
@@ -41,6 +42,9 @@
 .atala-ui-icon-search-next { background-position: -416px 0; }
 .atala-ui-icon-search-prev { background-position: -432px 0; }
 
+.atala-ui-icon-upload { background-position: -448px 0; }
+.atala-ui-icon-upload-cancel { background-position: -464px 0; }
+
 .atala-ui-form-highlight { background-color: rgb(204, 215, 255) !important; background-color: rgba(204, 215, 255, .7) !important }
 .atala-ui-form-required { border: 3px solid red !important }
 
@@ -55,8 +59,12 @@
     vertical-align: top;    
 }
 
-.atala_search_container { float: right; overflow: hidden; white-space: nowrap; max-width: 200px;min-width: 120px; }
-.atala_search_container > span { display: table-cell;vertical-align: middle;}
+.atala_page_label{
+    padding: .25em 0;
+}
+
+.atala_search_container { float: right !important; overflow: hidden; white-space: nowrap; max-width: 200px;min-width: 120px; }
+.atala_search_container > span { display: table-cell; vertical-align: middle; }
 .atala_search_next, .atala_search_prev { margin: 0; }
 
 .atala_search_input { 
@@ -75,11 +83,11 @@
 .atala_search_input::-ms-clear {display: none; width:0; height:0;}
 .atala_search_input.atala_search_input_empty { border: 1px solid red; }
 .atala_search_input.atala_search_input_loading {	
-	background: url(data:image/gif;base64,R0lGODlhBwAHAIAAAP///5KSkiH5BAAAAAAALAAAAAAHAAcAAAIMTICmsGrIXnLxuDMLADs=) right 5px center no-repeat, url('images/atala-ui-spinner.gif') right 15px center no-repeat;
-	padding-right: 35px;
+    background: url(data:image/gif;base64,R0lGODlhBwAHAIAAAP///5KSkiH5BAAAAAAALAAAAAAHAAcAAAIMTICmsGrIXnLxuDMLADs=) right 5px center no-repeat, url('images/atala-ui-spinner.gif') right 15px center no-repeat;
+    padding-right: 35px;
     background-size: auto, 15px;
-	background-color: #fff;
-	transition: background 0	
+    background-color: #fff;
+    transition: background 0	
 }
 
 .atala_page_loading {
@@ -92,6 +100,100 @@
 
 .atala_drag_placeholder {
     /* override placeholder width/height using !important modifier if needed */
-    border: 1px solid #BBBBBB;
+    border: 1px solid rgb(187, 187, 187);
     vertical-align: middle;
+}
+
+
+.atala-upload-button {
+    margin: 5px;
+    width: 100px;
+}
+
+.atala-upload-progress-file-image {
+    background: url('images/atala-ui-spinner.gif') center no-repeat;
+    width: 40px;
+    height: 40px;
+}
+
+.atala-upload-flex-area {
+    border-bottom: 4px solid rgb(187, 187, 187)
+}
+
+
+.atala-upload-flex-area-non-table {
+    justify-content: center;
+    align-items: center;
+}
+
+.atala-upload-single-file {
+    align-items: center;
+    display: flex;
+}
+
+.atala-upload-single-file.atala-upload-single-file-no-drag-drop {
+    flex-flow: column;
+}
+
+.atala-upload-multiple-files {
+    width: 100%;
+    display: table;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.atala-upload-multiple-files.atala-upload-multiple-files-drag-and-drop {
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+
+.atala-upload-files-header-row { display: table-header-group; }
+.atala-upload-files-row { display: table-row; }
+
+.atala-upload-files-header {
+    display: table-cell;
+    padding: 10px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(187, 187, 187);
+    border-bottom-width: 2px;
+    font-weight: bold;
+}
+
+.atala-upload-files-header-size {
+    width: 90px;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-left-color: rgb(187, 187, 187);
+    border-right-color: rgb(187, 187, 187);
+}
+
+.atala-upload-files-header-status { width: 200px; }
+
+.atala-upload-files-cell {
+    display: table-cell;
+    padding: 4px 10px;
+}
+
+.atala-upload-files-cell-size { text-align: right; }
+.atala-upload-files-row:nth-child(odd) { background: rgb(187, 187, 187); }
+
+button.atala-upload-files-cancel-button {
+    width: 16px;
+    height: 16px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin-left: 10px;
+    float: right;
+}
+
+.atala-upload-drag-and-drop { margin-left: 7px;} 
+
+.atala-upload-drag-and-drop-image {
+    background: url('images/atala-ui-dragdropfile.png') center no-repeat;
+    width: 32px;
+    height: 32px;
 }
