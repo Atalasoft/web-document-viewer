@@ -42,12 +42,12 @@ Atalasoft HTML5 imaging controls are support following server environments
 * ASP.NET
 
     Server side functionality is exposed using separate HttpHandler.
-    See [ASP.NET demo application](https://atalasoft.github.io/web-document-viewer/tutorial-demo-application.html) tutorial for details.
+    See [ASP.NET demo application](https://atalasoft.github.io/web-document-viewer/tutorial-1-1-demo-application.html) tutorial for details.
 
 - ASP.NET Core on full .net platform
 
     Server side functionality is exposed using WebDocumentViewerMiddleware that is registered to handle WDV requests.
-    See [ASP.NET Core demo application](https://atalasoft.github.io/web-document-viewer/tutorial-demo-application-aspnet-core.html) tutorial for details.
+    See [ASP.NET Core demo application](https://atalasoft.github.io/web-document-viewer/tutorial-1-2-demo-application-aspnet-core.html) tutorial for details.
 
 
 ### Frontend Overview
