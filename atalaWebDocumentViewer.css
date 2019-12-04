@@ -60,7 +60,7 @@
 }
 
 .atala_page_label{
-    padding: .25em 0;
+    vertical-align: middle;
 }
 
 .atala_search_container { float: right !important; overflow: hidden; white-space: nowrap; max-width: 200px;min-width: 120px; }
@@ -173,6 +173,7 @@
 .atala-upload-files-header-status { width: 200px; }
 
 .atala-upload-files-cell {
+    line-height: 100%;
     display: table-cell;
     padding: 4px 10px;
 }

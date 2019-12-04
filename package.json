@@ -1,6 +1,6 @@
 {
   "name": "web-document-viewer",
-  "version": "11.1.7",
+  "version": "11.2.0",
   "description": "Atalasoft JavaScript library for presenting images and documents, including PDF Forms, on a web page.",
   "main": "atalaWebDocumentViewer.js",
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/Atalasoft/web-document-viewer#readme",
   "dependencies": {
-    "jquery": ">=3.3.1",
+    "jquery": "^3.4.1",
     "jquery-ui-dist": "~1.12.1",
     "raphael": "^2.1.4",
     "clipboard": "^2.0.0"

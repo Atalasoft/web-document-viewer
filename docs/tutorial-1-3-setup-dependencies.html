@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge" >
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Tutorial: Programming Document Viewer Server - Documentation</title>
+    <title>Tutorial: Setup dependencies - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -36,177 +36,201 @@
 
 <div id="main">
     
-    <h1 class="page-title">Tutorial: Programming Document Viewer Server</h1>
+    <h1 class="page-title">Tutorial: Setup dependencies</h1>
     
 
     <section>
 
 <header>
     
-    <ul>
-        <li><a href="tutorial-2-1-programming-wdv-server-save-doc.html">Saving Document</a></li>
-    </ul>
-    
 
-    <h2>Programming Document Viewer Server</h2>
+    <h2>Setup dependencies</h2>
 </header>
 
 <article>
-    <h2>Web Document Viewer Server Side programming model</h2><p><code>Atalasoft.Imaging.WebControls.WebDocumentRequestHandler</code> HttpHandler is responsible for WDV and WDT backend logic.
-The default handler is completely functional and could be used out of the box to setup document imaging controls displaying documents from the server file system.</p>
-<p>To customize default behavior it's recommended for application to</p>
-<ul>
-<li>for ASP.NET application - derive it's own class from <code>Atalasoft.Imaging.WebControls.WebDocumentRequestHandler</code> and subscribe to base class events.</li>
-<li>for ASP.NET Core application - to register WebDocumentViewerMiddleware and provide <code>IWebDocumentViewerCallbacks</code> implementation as the <code>RunWebDocumentViewerMiddleware</code> method parameter. You can derive it's own class from <code>Atalasoft.Imaging.WebControls.Core.WebDocumentViewerCallbacks</code>, which, in fact, is default implementation of the <code>IWebDocumentViewerCallbacks</code> interface.</li>
-</ul>
-<p><code>WebDocumentRequestHandler</code> default behavior relies on globally registered image decoders when opening image documents.
-Those decoders are available through <code>Atalasoft.Imaging.Codec.RegisteredDecoders</code> class so the application control which types of the documents are supported by WDV.
-Note that by default PDF and Office decoders are not added to <code>RegisteredDecoders</code>, so that should be done by the application to support those types of documents.</p>
-<pre class="prettyprint source lang-c#"><code>public class WebDocViewerHandler : Atalasoft.Imaging.WebControls.WebDocumentRequestHandler
-{
-    static WebDocViewerHandler()
-    {
-        Atalasoft.Imaging.Codec.RegisteredDecoders.Decoders.Add(new Atalasoft.Imaging.Codec.Pdf.PdfDecoder());
-        Atalasoft.Imaging.Codec.RegisteredDecoders.Decoders.Add(new Atalasoft.Imaging.Codec.Office.OfficeDecoder());
-    }
-}</code></pre><h2>Document Lifecycle Events</h2><p>Displaying document in WDV consist of multiple operations, each of which is represented with corresponding WebDocumentRequestHandler event that could be used for behavior customization.</p>
-<p>Below is the common order of document lifetime events.</p>
-<h3><code>WebDocumentRequestHandler.DocumentInfoRequested</code></h3><p>Occurs when document is being opened, for example by calling <code> openUrl</code> method or passing <a href="WebDocumentViewerConfig.html#.documenturl"><code> document identifier</code></a> to control constructor.</p>
-<p>The purpose of this step is to load document metadata. No images are requested here.</p>
-<p> There are two required metadata property that should be filled</p>
-<ul>
-<li><p><code>DocumentInfoRequestedEventArgs.PageCount</code>
-  Count of the pages in the document. Page images will be loaded on demand when control will be scrolled to corresponding position.</p>
-</li>
-<li><p><code>DocumentInfoRequestedEventArgs.PageSize</code>
-  Estimated size of the document pages. It's used to calculate scrollbars, zoom values, indexes of the page to display when scrolling into unloaded area.
-  It's not required that all document page have same size. When image data is loaded control will adjust it's internal state. But it's recommended to set this size close to majority of the document pages. If not set explicitly, size of the firs document page is taken for this property.</p>
-</li>
-</ul>
-<p>Default implementation is trying to map <code>DocumentInfoRequestedEventArgs.FilePath</code> to the file on the server file system, find appropriate decoder to read the image and fill required metadata.</p>
-<p><strong><em>Note, since DotImage 11.1 default implementation forbids absolute paths including network shares.</em></strong>
-It's application responsibility to include them if needed.</p>
-<p>Application could override default behavior by either directly setting document metadata to <code>DocumentInfoRequestedEventArgs</code> or by modifying <code>DocumentInfoRequestedEventArgs.FilePath</code> point to file on the server file system.
-In this case, <code>documenturl</code> value passed from the JavaScript could have arbitrary application specific values, for example id of the document in the database of even base64 encoded json.</p>
-<p>There are additional optional document metadata properties that could be set by event handler. For example,</p>
-<ul>
-<li><p><code>DocumentInfoRequestedEventArgs.AnnotationFilePath</code><br>  Similar to <code>DocumentInfoRequestedEventArgs.FilePath</code> but applies to annotations file.</p>
-</li>
-<li><p><code>DocumentInfoRequestedEventArgs.AnnotationLayers</code><br>  Allows to set annotations data using object model. If layers is not set by handler and  <code>AnnotationFilePath</code> is present, default handler implementation will try to deserialize annotations from the specified file.<br>  This property could be used to provide annotations from external source, for example to load from database, create on fly or to convert from application-specific format.</p>
-</li>
-<li><p><code>DocumentInfoRequestedEventArgs.IsVector</code><br>  Flag indicating whether document images could be scaled to zoom values greater then 1.</p>
-</li>
-<li><p><code>DocumentInfoRequestedEventArgs.FormFilePath</code></p>
-</li>
-<li><p><code>DocumentInfoRequestedEventArgs.PdfDocument</code><br>  Similar to annotations data source but applies to pdf forms.<br>  It's recommended to omit those properties and proceed with default behavior. In this case, <code>DocumentInfoRequestedEventArgs.FilePath</code> will be treated as PDF forms data source it's a PDF file.<br>  Although it's possible to load pdf forms data from external PDF documents, saving forms back to original document could cause forms structure conflict, or just missing form fields.<br>  Additionally if <code>DocumentInfoRequestedEventArgs.PdfDocument</code> is provided by the handler, <code>PageCount</code> and <code>PageSize</code> will be automatically extracted from it.</p>
-</li>
-<li><p><code>DocumentInfoRequestedEventArgs.ThumbCaptionFormat</code><br>  Could be used to specify thumbnail captions mask that will be used in WDT to generate thumbnail caption.<br>  Default <code>DocumentInfoRequestedEventArgs.ThumbCaptionFormat</code> value is the value passed from JavaScript side(as configured in WDT).<br>  There are two optional tokens allowed in the format string.</p>
-<ul>
-<li>{0} - will be substituted with page number.</li>
-<li>{1} - will be substituted with the document file name.</li>
-</ul>
-</li>
-</ul>
-<p>Application could add additional document-specific static information if needed.</p>
-<h3><code>WebDocumentRequestHandler.AnnotationDataRequested/PdfFormRequested</code></h3><p>Those event are similar and used to request annotations and forms data respectively.
-They could be thrown either along with <code>DocumentInfoRequested</code> if <code>AnnotationLayers</code> and <code>PdfDocument</code> are not provided by the application. Or they could be fired if forms and annotations data is requested separately from opening document.</p>
-<h3><code>WebDocumentRequestHandler.ImageRequested</code></h3><p>This event is fired each time control requires page image.
-Default implementation is trying to map <code>ImageRequestedEventArgs.FilePath</code> to the file on the server file system and get image for the requested document page, using requested zoom value.</p>
-<p>Application could either set <code>ImageRequestedEventArgs.Image</code> property to provide prepared image for sending back to browser, or override <code>ImageRequestedEventArgs.FilePath</code> to point to particular image file according to application logic.</p>
-<p>Note that this event will be fired if page reload is requested via <code> reloadPage</code> call.
-In this case <code>ImageRequestedEventArgs.Params</code> will contain parameters passed by from JavaScript side. And thus it's possible to modify document image on fly.</p>
-<p>For example following snippet demonstrates fow to change page color format on fly.</p>
-<pre class="prettyprint source lang-javascript"><code>// assume we have combo box with list of available color format and user could choose desired.
-let colorFormat = cbFormat.val();
+    <p>WebDocumentViewer and WebDocumentThumbnailer controls can be used as JS modules, or as controls in a global namespace. This tutorial shows how to configure your web application to use Atalasoft controls the desired way.</p>
+<h2>Global namespace</h2><p>When no module systems are used then approach for WDV initialization is very straightforward. You should manually add scripts with WDV control and all its dependencies on a page and run the application.</p>
+<p>Assume that application has an <code>index.html</code> page in <code>wwwroot</code> folder and all JS scripts for WDV and dependencies located in <code>wwwroot\lib</code> folder in separate subfolders, server handler is exposed on <code>&lt;application web address&gt;/wdv</code>, and image with a name <code>Test.tif</code> is placed in <code>wwwroot\images</code> folder. More details about how to gather dependencies and setup server handler can be found in tutorials <a href="tutorial-1-1-demo-application.html">Demo Application</a> and <a href="tutorial-1-2-demo-application-aspnet-core.html">Demo Application (ASP.NET Core)</a>.</p>
+<p><em><strong>Note</strong></em> The optional dependencies like <a href="https://github.com/DmitryBaranovskiy/raphael">Raphaël</a> or <a href="https://github.com/zenorocha/clipboard.js">ClipboardJS</a> can be skipped only with this approach. AMD and CommonJS modules requires to setup all dependencies whether or not you plan to use text extraction or annotations features in WDV.</p>
+<p><code>index.html</code></p>
+<pre class="prettyprint source lang-html"><code>&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+    &lt;!-- Scripts for Web Viewing -->
+    &lt;script src=&quot;lib/jquery/jquery.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
+    &lt;script src=&quot;lib/jquery-ui/jquery-ui.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
+    &lt;script src=&quot;lib/raphael/raphael.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
+    &lt;script src=&quot;lib/clipboard/clipboard.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
+    &lt;script src=&quot;lib/web-document-viewer/atalaWebDocumentViewer.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
 
-// request only page image reload
-viewer.reloadPage(index,
-    false, // don't need to modify annotations
-    false, // don't need to reset filled pdf forms
-    {
-        format: colorFormat
+    &lt;!-- Style for Web Viewer -->
+    &lt;link href=&quot;lib/jquery-ui/css/jquery-ui.min.css&quot; rel=&quot;stylesheet&quot; />
+    &lt;link href=&quot;lib/web-document-viewer/atalaWebDocumentViewer.css&quot; rel=&quot;stylesheet&quot; />
+
+    &lt;script type=&quot;text/javascript&quot;>
+
+        var _viewer;
+
+        $(function() {
+            RunApp();
+        });
+
+        function RunApp() {
+            // Initialize Web Document Viewer
+            _viewer = new Atalasoft.Controls.WebDocumentViewer({
+                parent: $('.atala-document-container'),
+                toolbarparent: $('.atala-document-toolbar'),
+                serverurl: '/wdv',
+                documenturl: 'images/Test.tif'
+            });
+        }
+
+    &lt;/script>
+&lt;/head>
+&lt;body>
+    &lt;div class=&quot;atala-document-toolbar&quot; style=&quot;width: 800px;&quot;>&lt;/div>
+    &lt;div class=&quot;atala-document-container&quot; style=&quot;width: 800px; height: 600px;&quot;>&lt;/div>
+&lt;/body>
+&lt;/html></code></pre><h2>AMD configuration using <a href="https://requirejs.org/">RequireJS</a></h2><p>When you use AMD module, then all dependencies should be presented because Atalasoft library will try to load them all regardless of WDV/WDT configuration. To do this, you should create a separate JS file, where all dependencies paths are set, and which is contains an entry point for the web application.</p>
+<p>So, we should modify the previously created web page the following way. Let's create an <code>app.js</code> file and place it near <code>index.html</code> page. Then we add the <a href="https://requirejs.org/">RequireJS</a> config to it, and copy our <code>RunApp</code> function to it.</p>
+<p><code>app.js</code></p>
+<pre class="prettyprint source lang-javascript"><code>requirejs.config({
+    baseUrl: 'lib',
+    paths: {
+        'jquery': 'jquery/dist/jquery.min',
+        'jquery-ui': 'jquery-ui/jquery-ui.min',
+        'raphael': 'raphael/raphael.min',
+        'clipboard': 'clipboard/dist/clipboard.min',
+        'web-document-viewer': 'web-document-viewer/atalaWebDocumentViewer'
+    }
+});
+
+requirejs([&quot;web-document-viewer&quot;, &quot;jquery&quot;], function RunApp(Atalasoft, jQuery) {
+
+    // Initialize Web Document Viewer
+    var _viewer = new Atalasoft.Controls.WebDocumentViewer({
+        parent: jQuery('.atala-document-container'),
+        toolbarparent: jQuery('.atala-document-toolbar'),
+        serverurl: '/wdv',
+        documenturl: 'images/Test.tif'
+    });
+
+});</code></pre><p>The next step is to setup <code>index.html</code> to load <a href="https://requirejs.org/">RequireJS</a> and to specify <code>app.js</code> as entry point. To do this, you should write the following code:</p>
+<p><code>index.html</code></p>
+<pre class="prettyprint source lang-html"><code>&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+    &lt;!-- Style for Web Viewer -->
+    &lt;link href=&quot;lib/jquery-ui/themes/base/jquery-ui.min.css&quot; rel=&quot;stylesheet&quot; />
+    &lt;link href=&quot;lib/web-document-viewer/atalaWebDocumentViewer.css&quot; rel=&quot;stylesheet&quot; />
+
+    &lt;!-- data-main attribute tells require.js to load app.js after require.js loads. -->
+    &lt;script data-main=&quot;app&quot; src=&quot;lib/requirejs/require.js&quot; defer=&quot;defer&quot;>&lt;/script>
+
+&lt;/head>
+&lt;body>
+    &lt;div class=&quot;atala-document-toolbar&quot; style=&quot;width: 800px;&quot;>&lt;/div>
+    &lt;div class=&quot;atala-document-container&quot; style=&quot;width: 800px; height: 600px;&quot;>&lt;/div>
+&lt;/body>
+&lt;/html></code></pre><p>That's all. Now the browser will load <a href="https://requirejs.org/">RequireJS</a> and this framework will the rest job and load WDV script and all its dependencies. It also will notify you about missing dependencies, if you forgot mention some of them, or mention incorrectly with the following error in browser console:</p>
+<p><code>Error text about missing 'clipboard' dependency</code></p>
+<pre class="prettyprint source lang-xml"><code>require.js:168 Uncaught Error: Script error for &quot;clipboard&quot;, needed by: web-document-viewer
+https://requirejs.org/docs/errors.html#scripterror
+    at makeError (require.js:168)
+    at HTMLScriptElement.onScriptError (require.js:1738)</code></pre><h2>CommonJS configuration using <a href="https://webpack.js.org/">webpack</a></h2><p>While CommonJS modules can't be used in browser directly but they are supported by popular bundling systems like <a href="http://browserify.org/">Browserify</a> or <a href="https://webpack.js.org/">webpack</a>. In this section a simple sample how to create web application using <a href="https://webpack.js.org/">webpack</a> is shown.</p>
+<p>Since <a href="https://webpack.js.org/">webpack</a> usually installed using npm and because it by default looking for modules in <code>node_modules</code> folder, let's assume that Atalasoft library installed via npm too. It simplifies our <code>webpack.config.js</code> file for this tutorial, but you can install libraries using any other way and locate them in different folder. The <code>package.json</code> file for this application looks the following way:</p>
+<p><code>package.json</code></p>
+<pre class="prettyprint source lang-json"><code>{
+  &quot;name&quot;: &quot;atalasoft-webpack-tutorial&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Demo application to show Atalasoft WDV webpack support&quot;,
+  &quot;main&quot;: &quot;app.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; && exit 1&quot;
+  },
+  &quot;author&quot;: &quot;Atalasoft&quot;,
+  &quot;devDependencies&quot;: {
+    &quot;css-loader&quot;: &quot;^2.1.1&quot;,
+    &quot;mini-css-extract-plugin&quot;: &quot;^0.5.0&quot;,
+    &quot;style-loader&quot;: &quot;^0.23.1&quot;,
+    &quot;url-loader&quot;: &quot;^1.1.2&quot;,
+    &quot;web-document-viewer&quot;: &quot;^11.2.0&quot;,
+    &quot;webpack&quot;: &quot;^4.29.6&quot;,
+    &quot;webpack-cli&quot;: &quot;^3.3.0&quot;
+  }
+}</code></pre><p>Now we are ready to create demo application. First of all, we create an application entry file with the same function <code>RunApp</code> and store it in <code>src</code> folder of our project. So it looks like this</p>
+<p><code>./src/app.js</code></p>
+<pre class="prettyprint source lang-javascript"><code>require('web-document-viewer/atalaWebDocumentViewer.css');
+require('jquery-ui-dist/jquery-ui.css');
+
+var Atalasoft = require('web-document-viewer');
+var jQuery = require('jquery');
+
+// Initialize Web Document Viewer
+var _viewer = new Atalasoft.Controls.WebDocumentViewer({
+    parent: jQuery('.atala-document-container'),
+    toolbarparent: jQuery('.atala-document-toolbar'),
+    serverurl: '/wdv',
+    documenturl: 'images/Test.tif'
+});
+</code></pre><p>The first two lines are needed to create a bundle files not only for JS code but also for CSS data.</p>
+<p>The next step is to create <code>index.html</code> file with the same layout as we use in previous samples and save it in <code>wwwroot</code> folder.</p>
+<p><code>./wwwroot/index.html</code></p>
+<pre class="prettyprint source lang-html"><code>&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+    &lt;!-- Scripts for Web Viewing -->
+    &lt;script src=&quot;bundle.js&quot; type=&quot;text/javascript&quot; defer=&quot;defer&quot;>&lt;/script>
+
+    &lt;!-- Style for Web Viewer -->
+    &lt;link href=&quot;bundle.css&quot; rel=&quot;stylesheet&quot; />
+&lt;/head>
+&lt;body>
+&lt;div class=&quot;atala-document-toolbar&quot; style=&quot;width: 800px;&quot;>&lt;/div>
+&lt;div class=&quot;atala-document-container&quot; style=&quot;width: 800px; height: 600px;&quot;>&lt;/div>
+&lt;/body>
+&lt;/html></code></pre><p>The final step is to add a webpack magic, and create a bundle from our <code>app.js</code> file, WebDocumentViewer and all its dependencies. For this we create a configuration file for webpack and place it in the project root.</p>
+<p><code>webpack.config.js</code></p>
+<pre class="prettyprint source lang-javascript"><code>var path = require('path');
+var extractCss = require('mini-css-extract-plugin');
+
+module.exports = {
+    entry: './src/app.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'wwwroot'),
     },
-    function() {
-        console.log('page reloaded');
-    });</code></pre><pre class="prettyprint source lang-c#"><code>public WebDocViewerHandler()
-{
-    // subscribe WDV backend handler to handle image request.
-    ImageRequested += OnImageRequested;
-}
 
-// simple implementation that opens image through `Workspace` class which relies on `RegisteredDecoder` collection internally.
-private void OnImageRequested(object sender, ImageRequestedEventArgs imageRequestedEventArgs)
-{
-    string format;
-    // if no format requested - don't change imageRequestedEventArgs and thus proceed with default behavior
-    if (imageRequestedEventArgs.Params.TryGetValue(&quot;format&quot;, out format))
-    {
-        var path = HttpContext.Current.Server.MapPath(imageRequestedEventArgs.FilePath);
-        if (File.Exists(path))
-        {
-            using (var ws = new Workspace())
-            {
-                ws.AutoDispose = true;
-                ws.Open(path);
-                ws.Image = ws.Images[imageRequestedEventArgs.FrameIndex];
-                if (ws.Image.ColorDepth != bppParsed)
-                {
-                    // assume MapPixelFormat maps application format identifier to `PixelFormat`
-                    imageRequestedEventArgs.Image = ws.Image.GetChangedPixelFormat(MapPixelFormat(format));
-                }
-            }
+    resolve: {
+        alias: {
+            'jquery-ui': 'jquery-ui-dist/jquery-ui',
+            'jquery': 'jquery/dist/jquery',
+            'raphael': 'raphael/raphael',
+            'clipboard': 'clipboard/dist/clipboard',
+            'webDocumentViewer': 'web-document-viewer/atalaWebDocumentViewer'
         }
-    }
-}</code></pre><h3><code>WebDocumentRequestHandler.PageTextRequested</code></h3><p> Occurs when text data requested for the page. This event could be used to customize built-in text data extraction, or pass pre-generated text data to the WDV.</p>
-<p> As with other similar events above, event arguments allow to modify path to document file path by changing <code>PageTextRequestedEventArgs.FilePath</code> or provide prepared text data using <code>PageTextRequestedEventArgs.Page</code> for object model and <code>PageTextRequestedEventArgs.JsonData</code> serialized json representation.</p>
-<p>Default implementation support on-fly text data extraction only for PDF and MS Office documents. For image documents it's expected that application will prepare OCR data outside of WDV scope, transform it to <code>Atalasoft.Imaging.WebControls.Text.PageObject</code> and pass to viewer control when requester.</p>
-<p>It's also possible to modify text extraction algorithm for PDF and Office documents.</p>
-<h4>Text selection model</h4><p>The main problem with text extraction is to correctly organize text into regions. Region, in terms of WDV is a set of text lines, within which selection is performed independently from other text objects on the page.</p>
-<p>For example, if we have two text columns each of which is a separate region.</p>
-<p><img src="img/wdv-text-columns.png" alt="text columns"></p>
-<p>Text selection within first column won't select any text on the second one.</p>
-<p>But if selection starts within first column, and ends within second one, then all text from selection start point up to end of region will be selected for the first column and all text from the beginning of the region up to selection end point will be selected for the second column, as shown on the picture above.</p>
-<p>By default, text segmentation relies on the implementation on the underlying extraction engine segmentation and on practice splits text into lines making each line to be a separate segment. It works well fo plain text documents, but could be not completely suitable for documents having complex structure, like tables, columns, forms.</p>
-<h4>Modifying text segmentation</h4><p>It's possible to change default text segmentation in <code>WebDocumentRequestHandler.PageTextRequested</code> event handler using <code>Atalasoft.Imaging.WebControls.Text.SegmentedTextTranslator</code> class.</p>
-<pre class="prettyprint source lang-c#"><code>private void OnPageTextRequested(object sender, PageTextRequestedEventArgs pageTextRequestedEventArgs)
-{
-    var serverPath = HttpContext.Current.Server.MapPath(pageTextRequestedEventArgs.FilePath);
-    if (File.Exists(serverPath))
-    {
-        using (var stream = File.OpenRead(serverPath))
-        {
-            try
-            {
-                var decoder = RegisteredDecoders.GetDecoder(stream) as ITextFormatDecoder;
-                if (decoder != null)
-                {
-                    using (var extractor = new SegmentedTextTranslator(decoder.GetTextDocument(stream)))
-                    {
-                        // change default segmentation method.
-                        extractor.RegionDetection = TextRegionDetectionMode.BlockDetection;
+    },
 
-                        // each block boundaries inflated to one average character
-                        // width and two average character height.
-                        // All intersecting blocks are combined into single segment.
-                        // Having vertical ratio bigger then horizontal behaves better on column-layout documents.
-                        extractor.BlockDetectionDistance = new System.Drawing.SizeF(1, 2);
-                        pageTextRequestedEventArgs.Page = extractor.ExtractPageText(pageTextRequestedEventArgs.Index);
-                    }
-                }
-            }
-            catch (ImageReadException imagingException)
+    module: {
+        rules: [
             {
-                // RegisteredDecoders.GetDecoder could throws exception if no appropriate decoder were found.
-                Debug.WriteLine(&quot;Text extraction: image type is not recognized. {0}&quot;, imagingException);
+                test: /\.css$/,
+                loader: [extractCss.loader, 'css-loader']
+            },
+            {
+                test:/\.(png|gif)$/,
+                loader: 'url-loader'
             }
-        }
-    }
-}
-</code></pre><p>In the example above we are changing region detection method to <code>TextRegionDetectionMode.BlockDetection</code> which means that text objects will be grouped into regions based on the distance between them. The boundaries of the text objects will be inflated by the <code>BlockDetectionDistance</code> times the average block character size in corresponding dimension. The intersecting bocks will be grouped into single segment.</p>
-<p>Such algorithm heavily depends on the document structure, for example for columns layout text objects should be joined primarily in a vertical direction(reading direction), and on the same time for table layout text objects should be joined in horizontal direction, even though horizontal distance between them is usually bigger then vertical.</p>
-<p>Such blocks detection algorithm depends on the document structure and so it became useful when application deals with the set of documents having similar structure or documents could be divided to the finite set of classes according to their structure.</p>
-<h2><code>WebDocumentRequestHandler.DocumentSave</code></h2><p>This event is fired before document save operation is performed.</p>
-<p>Save workflow is quite complex in case if document have pages from the other documents that has inserted using JavaScript API. Such scenarios will be discussed in details in a <a href="tutorial-programming-wdv-server-save-doc.html">DocumentSave</a> tutorial.</p>
+        ]
+    },
+
+    plugins: [
+        new extractCss({filename: 'bundle.css'})
+    ],
+
+    devtool: 'source-map',
+    stats: 'verbose'
+};</code></pre><p>After this, we should run webpack from command line, or from your build system and, as result of the operation, the files <code>./wwwroot/bundle.js</code> and <code>./wwwroot/bundle.css</code> will be created. These file will contain all scripts and styles necessary for our application.</p>
 </article>
 
 </section>
