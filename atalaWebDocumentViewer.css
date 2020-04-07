@@ -3,6 +3,7 @@
 .atala-document-toolbar { border: 1px solid rgb(221, 221, 221); background-color: rgb(221, 221, 221); }
      
 .atala-ui { font-size: 0.8em; }
+.atala-ui-dialog { font-size: 0.8em; margin-left: 0; margin-right: 0; }
 .atala-ui-button { font-size: 0.8em; margin-left:1px; }
 
 .atala-ui-icon { width: 16px; height: 16px; background-image: url('images/atala-ui-icons-16.png') !important; }
