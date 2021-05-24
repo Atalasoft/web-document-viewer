@@ -7,7 +7,7 @@
 //  Permission for usage and modification of this code is only permitted 
 //  with the purchase of a source code license.
 //-------------------------------------------------------------------------------------------------
-// Version 11,2,0,540
+// Version 11,2,0,578
 
 export as namespace Atalasoft;
 interface NotificationCallback {

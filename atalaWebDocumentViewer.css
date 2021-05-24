@@ -90,6 +90,7 @@
     background-color: #fff;
     transition: background 0	
 }
+.atala_search_input.atala_search_input_empty:focus { outline: none;}
 
 .atala_page_loading {
     background: url('images/atala-ui-spinner.gif') center no-repeat;
