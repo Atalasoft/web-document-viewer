@@ -200,3 +200,14 @@ button.atala-upload-files-cancel-button {
     width: 32px;
     height: 32px;
 }
+
+.atala_tiled_page_image {
+    display: flex;
+    flex-direction: row;
+}
+
+.atala_tile_column {
+    flex-direction: column;
+    padding: 0px;
+    font-size: 0;
+}

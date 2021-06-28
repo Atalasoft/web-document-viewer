@@ -7,7 +7,7 @@
 //  Permission for usage and modification of this code is only permitted 
 //  with the purchase of a source code license.
 //-------------------------------------------------------------------------------------------------
-// Version 11,2,0,578
+// Version 11,2,0,591
 
 export as namespace Atalasoft;
 interface NotificationCallback {
@@ -579,6 +579,7 @@ export namespace Controls {
         showstatus?: boolean;
         singlepage?: boolean;
         tabular?: boolean;
+        tiling?: boolean;
         toolbarbuttons?: ToolbarButtonConfig[];
         toolbarparent?: Record<string, any>;
         upload?: FileUploadConfig;
