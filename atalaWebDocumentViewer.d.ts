@@ -7,7 +7,7 @@
 //  Permission for usage and modification of this code is only permitted 
 //  with the purchase of a source code license.
 //-------------------------------------------------------------------------------------------------
-// Version 11,2,0,591
+// Version 11,2,0,629
 
 export as namespace Atalasoft;
 interface NotificationCallback {
@@ -1146,6 +1146,11 @@ export namespace Controls {
     }
     interface AnnotationTextChangedEvent{
         annotation: AnnotationData;
+    }
+
+    interface AnnotationChangedEvent{
+        annotation: AnnotationData;
+        annobefore: AnnotationData;
     }
 
     interface AnnotationsLoadedEvent{
