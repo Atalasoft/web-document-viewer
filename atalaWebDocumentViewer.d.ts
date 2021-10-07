@@ -7,7 +7,7 @@
 //  Permission for usage and modification of this code is only permitted 
 //  with the purchase of a source code license.
 //-------------------------------------------------------------------------------------------------
-// Version 11,2,0,629
+// Version 11,3,0,668
 
 export as namespace Atalasoft;
 interface NotificationCallback {
@@ -56,6 +56,14 @@ interface TextSearchResult{
 interface DocumentPageReference{
     uri:  string;
     index:  number;
+}
+
+interface BookmarkData{
+    id: number;
+    Page: number;
+    Top: number;
+    Text: string;
+    Children: BookmarkData[];
 }
 
 interface DocumentInfo{
@@ -414,8 +422,33 @@ export namespace Controls {
          * @param callback Function to execute when the operation has completed.
          */
         public rotatePages(indices: number[]|string[], angles: number|number[]|string[], callback?: NotificationCallback): void;
-        //#endregion
+        
+        /**
+        * Gets all bookmarks for PDF document.
+        */
+        public getBookmarks(): BookmarkData[];
 
+        /**
+        * Gets an array of child bookmarks relative to specified.
+        * @param {BookmarkData} bookmark - the bookmark object for which children are searched.
+        */
+        public getChildBookmarks(bookmark: BookmarkData): BookmarkData[];
+
+        /**
+        * Scrolls viewer to the specified bookmark.
+        * @param {BookmarkData} bookmark - the bookmark object to scroll to.
+        * @param {NotificationCallback} [callback] - Function to be called when the operation has completed.
+        */
+        public scrollToBookmark(bookmark: BookmarkData, callback?: NotificationCallback): void;
+
+            
+        /**
+        * Removes whole information about the bookmarks from PDF document.
+        * @param {NotificationCallback} [callback] - Function to be called when the operation has completed.
+        */
+        public removeAllBookmarks(callback?: NotificationCallback): void;
+        
+        //#endregion
     }
    
     /**
@@ -568,6 +601,8 @@ export namespace Controls {
         savefileformat?: string;
         savepath?: string;
         scripturl?: string;
+        savepreviouslysigneddocument?: boolean;
+        showbookmarks?: boolean;
         showbuttontext?: boolean;
         showerrors?: boolean;
         showpageborder?: boolean;
