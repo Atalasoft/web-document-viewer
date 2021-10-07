@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge" >
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>AnnotationData - Documentation</title>
+    <title>Tutorial: Demo Application Typescript - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -36,1005 +36,462 @@
 
 <div id="main">
     
-    <h1 class="page-title">AnnotationData</h1>
+    <h1 class="page-title">Tutorial: Demo Application Typescript</h1>
     
 
-    
-
-
-
-
-<section>
+    <section>
 
 <header>
     
-    
+
+    <h2>Demo Application Typescript</h2>
 </header>
 
 <article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Represents generic annotation data object.</p>
-<p>This basic object structure is applied to all annotations. Individual types of annotation could ignored some of those properties.
-This structure is used when configuring default values for particular annotation types using <a href="WebDocumentViewerConfig.html#.annotations"><code>WebDocumentViewerConfig.annotations</code></a>, creating annotations using <a href="Atalasoft.Controls.WebDocumentViewer-AnnotationController.html#createOnPage"><code>annotations.createOnPage</code></a> or retrieving annotations data using corresponding api.</p>
-<p><em>Note</em>, Annotation could have only one of two positioning models</p>
+    <p>Starting with DotImage 11.2 Web Document Viewer supports a module loaders. It can be used as an Asynchronous Module Definition (<a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a>) or the <a href="http://www.commonjs.org/">CommonJS</a> module. You can read more about this functionality in the previous tutorial <a href="tutorial-1-3-setup-dependencies.html">Setup dependencies</a>.</p>
+<p>Since version 11.2.0.2 Web Document Viewer has a <a href="https://www.typescriptlang.org/">TypeScript</a> declaration file in the package contents. These new features allows using of Web Document Viewer in <a href="https://www.typescriptlang.org/">TypeScript</a> projects, such as <a href="https://angular.io/">Angular</a>.</p>
+<p>In this topic, we will provide two examples of using the Atalasoft Web Document Viewer in the <a href="https://www.typescriptlang.org/">TypeScript</a> projects. In the first sample, we describe the creation of an ASP.NET Core 2.1 application, in which <a href="https://www.typescriptlang.org/">TypeScript</a> file will be used to manage the Web Document Viewer and Web Document Thumbnailer controls. Then the client-side of application will be compiled using <a href="https://webpack.js.org/">webpack</a> package. This sample is quite similar to the described in <a href="tutorial-1-3-setup-dependencies.html">Setup dependencies</a>, we outline some things, which are specific for using the <a href="https://www.typescriptlang.org/">TypeScript</a>.
+The second part of the article will tell you how to create an ASP.NET Core application using <a href="https://angular.io/">Angular</a> for building a client part of the project.
+The projects created as a result of this tutorial do not claim to be full-fledged applications and it is not supposed to give you the solutions that are ready to deploy. Once you have succeeded in building the example projects, you can begin modifying it to fit your organization.</p>
+<h1>Simple <a href="https://www.typescriptlang.org/">TypeScript</a> application</h1>
+<p>In this sample, we will use the <a href="https://webpack.js.org/">webpack</a> package to build the client part of the application.</p>
+<h2>Set up a project and configure a server-side</h2>
+<p>The server-side configuration in this case is the same as it is described in the <a href="tutorial-1-2-demo-application-aspnet-core.html">Demo Application (ASP.NET Core)</a>. So to configure it, you should repeat the following steps from this tutorial:</p>
+<ol>
+<li>Create a new empty <code>ASP.NET Core Web Application (.NET Framework)</code> in Visual Studio.</li>
+<li>Add NuGet packages for server-side.</li>
+<li>Prepare Startup class.</li>
+<li>Add the necessary decoders to <code>Program.cs</code> file.</li>
+<li>If it is necessary, tune-up the application by adding the Response caching, Response compression or CORS support</li>
+</ol>
+<h2>Client-side configuration</h2>
+<h3>Install npm packages</h3>
+<p>The first step in the client-side configuration is to install the necessary npm packages, include <a href="https://webpack.js.org/">webpack</a>, <a href="https://www.typescriptlang.org/">TypeScript</a>, <a href="https://www.npmjs.com/package/web-document-viewer">Atalasoft Web Document Viewer</a> and some auxiliary packages. To do that create a <code>package.json</code> from <code>npm Configuration file</code> template in the root folder of the Visual Studio project and change it to look like this:</p>
+<pre class="prettyprint source lang-javascript"><code>{
+  &quot;name&quot;: &quot;atalasoft-typescript-tutorial&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Demo application&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; && exit 1&quot;
+  },
+  &quot;author&quot;: &quot;Atalasoft&quot;,
+  &quot;devDependencies&quot;: {
+    &quot;@types/jquery&quot;: &quot;^3.5.1&quot;,
+    &quot;@types/webpack-env&quot;: &quot;^1.15.2&quot;,
+    &quot;css-loader&quot;: &quot;^2.1.1&quot;,
+    &quot;mini-css-extract-plugin&quot;: &quot;^0.5.0&quot;,
+    &quot;style-loader&quot;: &quot;^0.23.1&quot;,
+    &quot;ts-loader&quot;: &quot;^8.0.1&quot;,
+    &quot;typescript&quot;: &quot;^3.9.7&quot;,
+    &quot;url-loader&quot;: &quot;^1.1.2&quot;,
+    &quot;web-document-viewer&quot;: &quot;^11.3.0&quot;,
+    &quot;webpack&quot;: &quot;^4.44.1&quot;,
+    &quot;webpack-cli&quot;: &quot;^3.3.12&quot;
+  }
+}
+</code></pre>
+<p>After you save this file, all specified npm packages will be loaded and installed by Visual Studio. Some packages are familiar to you from <a href="tutorial-1-3-setup-dependencies.html">Setup dependencies</a> tutorial, some are specific for <a href="https://www.typescriptlang.org/">TypeScript</a>:</p>
 <ul>
-<li>
-<p>Box model, i.e. annotation position and size is defined by <code> X</code>, <code> Y</code>, <code> width</code> and <code> height</code> properties.
-For example, <code>rectangle</code> or <code>text</code> annotations.</p>
-</li>
-<li>
-<p>Points model, which means that annotation consist of an array of individual points stored in <code> points</code> property.
-For example, <code>lines</code> or <code>freehand</code> annotations.</p>
-</li>
+<li><code>typescript</code> - <a href="https://www.typescriptlang.org/">TypeScript</a> compiler.</li>
+<li><code>ts-loader</code> - <a href="https://www.typescriptlang.org/">TypeScript</a> loader for <a href="https://webpack.js.org/">webpack</a>.</li>
+<li><code>@types/jquery</code> and <code>@types/webpack-env</code> - declaration packages for <em>jquery</em> and <em>webpack</em> modules. They represent a mechanism for supplying the type's information from JavaScript written modules for <a href="https://www.typescriptlang.org/">TypeScript</a>.</li>
 </ul>
-<p>It's expected that annotation have only one of positioning model, and often rendering is performed basing on existence or absence of <code> points</code> value. I.e. in case if <code> points</code> is set, <code> X</code>, <code> Y</code>, <code> width</code> and <code> height</code> values could be ignored.</p></div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-        
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th class="name">Name</th>
-        
-
-        <th class="type">Type</th>
-
-        
-        <th class="default">Default</th>
-        
-
-        <th class="description last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr id=".name">
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Annotation type title. This will be shown as a caption for toolbar buttons representing &quot;extended&quot; types annotations. This applies to <code>stamp</code> and <code>image</code> types of annotation. I.e. name should be set to annotations defined by application using <a href="WebDocumentViewerConfig.html#.annotations"><code> annotations.stamps</code></a> and <a href="WebDocumentViewerConfig.html#.annotations"><code> annotations.images</code></a>.</p></td>
-        </tr>
-
-    
-
-        <tr id=".type">
-            
-                <td class="name"><code>type</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Atalasoft.Annotations.html#.AnnotationTypes">AnnotationTypes</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Annotation type.</p></td>
-        </tr>
-
-    
-
-        <tr id=".rotation">
-            
-                <td class="name"><code>[rotation]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last"><p>Represents annotation rotation angle.</p>
-<p>Note, this property is ignored when annotation is created from UI, i.e. when specified in <a href="WebDocumentViewerConfig.html#.annotations"><code>WebDocumentViewerConfig.annotations</code></a> configurations.</p></td>
-        </tr>
-
-    
-
-        <tr id=".burn">
-            
-                <td class="name"><code>[burn]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Indicates whether this annotation should be &quot;burned&quot; to output document on save. If set to true, annotation will be rendered on top of the image for all output formats except PDF. For PDF documents, annotations will be rendered and added as a separate layer on top of the document content.</p></td>
-        </tr>
-
-    
-
-        <tr id=".extra">
-            
-                <td class="name"><code>[extra]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Additional data that could be stored along with annotation. Application specific properties is expected to be inserted into this object.
-Those data will be transacted to extra properties of the server-side <code>AnnotationData</code> object.</p></td>
-        </tr>
-
-    
-
-        <tr id=".fill">
-            
-                <td class="name"><code>[fill]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#AnnotationFill">AnnotationFill</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Represents annotation fill.</p></td>
-        </tr>
-
-    
-
-        <tr id=".height">
-            
-                <td class="name"><code>[height]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last"><p>Height of the annotation box.</p></td>
-        </tr>
-
-    
-
-        <tr id=".movable">
-            
-                <td class="name"><code>[movable]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Indicates whether annotation could be moved through UI.</p></td>
-        </tr>
-
-    
-
-        <tr id=".outline">
-            
-                <td class="name"><code>[outline]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#AnnotationOutline">AnnotationOutline</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Annotation outline.</p></td>
-        </tr>
-
-    
-
-        <tr id=".points">
-            
-                <td class="name"><code>[points]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;<a href="global.html#Point">Point</a>></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Array of annotation points.</p></td>
-        </tr>
-
-    
-
-        <tr id=".readonly">
-            
-                <td class="name"><code>[readonly]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Indicates whether annotation is readonly. If set to true annotation couldn't be modified through UI and context menu couldn't be shown for it.</p></td>
-        </tr>
-
-    
-
-        <tr id=".resizable">
-            
-                <td class="name"><code>[resizable]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Indicates whether annotation could be resized through UI.</p></td>
-        </tr>
-
-    
-
-        <tr id=".rotatable">
-            
-                <td class="name"><code>[rotatable]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Indicates whether annotation could be rotated through UI.</p></td>
-        </tr>
-
-    
-
-        <tr id=".cornerradius">
-            
-                <td class="name"><code>[cornerradius]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last"><p>Represents corner rounding radius for Stamp annotations.</p></td>
-        </tr>
-
-    
-
-        <tr id=".selectable">
-            
-                <td class="name"><code>[selectable]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Indicates whether annotation is selectable.</p></td>
-        </tr>
-
-    
-
-        <tr id=".selected">
-            
-                <td class="name"><code>[selected]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>Indicates whether annotation is currently selected.</p></td>
-        </tr>
-
-    
-
-        <tr id=".src">
-            
-                <td class="name"><code>[src]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Url of the image displayed by the &quot;image&quot; annotation.</p></td>
-        </tr>
-
-    
-
-        <tr id=".text">
-            
-                <td class="name"><code>[text]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#AnnotationTextConfig">AnnotationTextConfig</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Annotation text configuration.</p></td>
-        </tr>
-
-    
-
-        <tr id=".tooltip">
-            
-                <td class="name"><code>[tooltip]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Annotation tooltip.</p></td>
-        </tr>
-
-    
-
-        <tr id=".username">
-            
-                <td class="name"><code>[username]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Corresponds to server side <code>AnnotationData.UserName</code> property.</p></td>
-        </tr>
-
-    
-
-        <tr id=".visible">
-            
-                <td class="name"><code>[visible]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last"><p>Indicates whether annotation is visible.</p></td>
-        </tr>
-
-    
-
-        <tr id=".width">
-            
-                <td class="name"><code>[width]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last"><p>Width of the annotation box.</p></td>
-        </tr>
-
-    
-
-        <tr id=".x">
-            
-                <td class="name"><code>[x]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last"><p>X axis annotation coordinate in document coordinate space.</p></td>
-        </tr>
-
-    
-
-        <tr id=".y">
-            
-                <td class="name"><code>[y]</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last"><p>Y axis annotation coordinate in document coordinate space.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="getPageIndex"><span class="type-signature"></span>getPageIndex<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span>
-	</h4>
-
-    
-
-
-
-<div class="description">
-    <p>Returns the page index for particular annotation.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">()</span><span class="type-signature"></span>
-	</h4>
-
-    
-
-
-
-<div class="description">
-    <p>Synchronizes user instance of the annotation data with corresponding internal state. Triggers UI invalidation if necessary.</p>
-<p>This method should be called to apply any property changes made by application.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-    
-
-    
-
-    
+<h3>TypeScript configuration</h3>
+<p>The next step is to configure the <a href="https://www.typescriptlang.org/">TypeScript</a> part of the project. Create the new folder <code>Scripts</code> in the root of the Visual Studio project and add the new file <code>tsconfig.json</code> to it using the <code>TypeScript JSON Configuration File</code> template. This file will contain the settings for the <a href="https://www.typescriptlang.org/">TypeScript</a> compiler. Let's set up a simple configuration for our project:</p>
+<pre class="prettyprint source lang-javascript"><code>{
+  &quot;compilerOptions&quot;: {
+    &quot;outDir&quot;: &quot;./dist/&quot;,
+    &quot;noImplicitAny&quot;: false,
+    &quot;noEmitOnError&quot;: true,
+    &quot;removeComments&quot;: false,
+    &quot;sourceMap&quot;: true,
+    &quot;module&quot;: &quot;CommonJS&quot;,
+    &quot;target&quot;: &quot;es5&quot;,
+    &quot;types&quot;: [
+      &quot;webpack-env&quot;
+    ]
+  },
+  &quot;exclude&quot;: [
+    &quot;node_modules&quot;,
+    &quot;wwwroot&quot;
+  ]
+}
+</code></pre>
+<p><em><strong>Note</strong></em> See <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html">TypeScript's documentation</a> to learn more about tsconfig.json configuration options.</p>
+<p>Create the new file <code>app.ts</code> in the <code>Scripts</code> folder using the <code>TypeScript File</code> template. In this file we will determine the behavior of the web viewing control: initialization, connection settings to the right middleware, events handling, and so forth. Add the following TypeScript code to this file:</p>
+<pre class="prettyprint source lang-typescript"><code>import * as Atalasoft from &quot;web-document-viewer&quot;;
+import * as jQuery from &quot;jquery&quot;;
+
+require('web-document-viewer/atalaWebDocumentViewer.css');
+require('jquery-ui-dist/jquery-ui.css');
+
+let maxUploadSizeMb = 1;
+let handler = 'wdv';
+let viewer = new Atalasoft.Controls.WebDocumentViewer({
+    parent: jQuery('#viewer'),
+    toolbarparent: jQuery('.atala-document-toolbar'),
+    allowforms: true,
+    allowannotations: true,
+    allowtext: true,
+    savepath: 'saved',
+    serverurl: handler,
+    direction: Atalasoft.Utils.ScrollDirection.Vertical,
+    upload: {
+        enabled: true,
+        uploadpath: 'uploaded',
+        allowedfiletypes: '.jpg,.pdf,.png,.jpeg,image/tiff',
+        allowedmaxfilesize: maxUploadSizeMb * 1024 * 1024,
+        allowmultiplefiles: true,
+        allowdragdrop: true,
+        filesuploadconcurrency: 2
+    },
+});
+
+let thumb = new Atalasoft.Controls.WebDocumentThumbnailer({
+    parent: jQuery('#thumb'),
+    serverurl: handler,
+    maxwidth: 240,
+    minwidth: 60,
+    viewer: viewer,
+    allowannotations: true,
+    allowforms: true,
+    showthumbcaption: true,
+    thumbcaptionformat: 'p. {0}',
+    documenturl: 'images/sample.pdf'
+});
+</code></pre>
+<p>In this code the first two lines import <code>web-document-viewer</code> and <code>jquery</code> as the <a href="https://github.com/umdjs/umd">UMD</a> modules to the <a href="https://www.typescriptlang.org/">TypeScript</a> application. The next two lines are needed to give <a href="https://webpack.js.org/">webpack</a> a signal to search the <em>CSS</em> files in <em>web-document-viewer</em> and <em>jquery</em> modules and add them to the CSS file which will be bundled by <a href="https://webpack.js.org/">webpack</a>.</p>
+<p><em><strong>Note</strong></em> The option tags 'value' property points to real files in 'wwwroot/images' folder. Thus, you need to create this folder and to add manually files with the same names to this folder.</p>
+<h3>Webpack configuration</h3>
+<p>Now let's configure <a href="https://webpack.js.org/">webpack</a> to handle <a href="https://www.typescriptlang.org/">TypeScript</a>. For this, we create a configuration file for webpack and place it in the project root.</p>
+<p><code>webpack.config.js</code></p>
+<pre class="prettyprint source lang-javascript"><code>const path = require('path');
+var extractCss = require('mini-css-extract-plugin');
+
+module.exports = {
+    entry: './Scripts/app.ts',
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                loader: [extractCss.loader, 'css-loader']
+            },
+            {
+                test: /\.(png|gif)$/,
+                loader: 'url-loader'
+            }
+        ],
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+        alias: {
+            'jquery-ui': 'jquery-ui-dist/jquery-ui',
+            'webDocumentViewer': 'web-document-viewer/atalaWebDocumentViewer',
+            'jquery': 'jquery/dist/jquery',
+            'raphael': 'raphael/raphael',
+            'clipboard': 'clipboard/dist/clipboard'
+        }
+    },
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'wwwroot/scripts')
+    },
+    plugins: [
+        new extractCss({filename: 'bundle.css'})
+    ],
+    optimization: {
+        minimize: false,
+    },
+    devtool: 'inline-source-map'
+};
+</code></pre>
+<p>This will direct <a href="https://webpack.js.org/">webpack</a> to enter through <code>./Scripts/app.ts</code>, load all .ts and .tsx files through the <code>ts-loader</code>, and output a <code>bundle.js</code> file in <code>wwwroot/scripts</code> directory. Also, <a href="https://webpack.js.org/">webpack</a> should find the used <em>CSS</em> files, combine and output a <code>bundle.css</code> to the same output directory.</p>
+<h3>Setup UI</h3>
+<p>We just need to add the UI to the application. Create <code>index.html</code> file in the <code>wwwroot</code> folder using <code>HTML Page</code> template and modify it in the following way:</p>
+<pre class="prettyprint source lang-html"><code>&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+    &lt;meta charset=&quot;utf-8&quot; />
+    &lt;title>Type Script Sample&lt;/title>
+    &lt;script src=&quot;scripts/bundle.js&quot; defer=&quot;defer&quot;>&lt;/script>
+
+    &lt;link href=&quot;scripts/bundle.css&quot; rel=&quot;stylesheet&quot; />
+&lt;/head>
+&lt;body>
+&lt;h1>Web Document Viewer Demo&lt;/h1>
+    &lt;div style=&quot;width: 900px;&quot;>
+            &lt;div class=&quot;atala-document-toolbar&quot;>&lt;/div>
+            &lt;div id=&quot;thumb&quot; class=&quot;atala-document-thumbnailer&quot; style=&quot;width: 180px; height: 600px; display: inline-block;&quot;>&lt;/div>
+            &lt;div id=&quot;viewer&quot; class=&quot;atala-document-container&quot; style=&quot;width: 710px; height: 600px; display: inline-block;&quot;>&lt;/div>
+    &lt;/div>
+&lt;/body>
+&lt;/html>
+</code></pre>
+<h3>Build project and run</h3>
+<p>To build the client-side scripts, open the command line, navigate to the project root folder and run the command <code>npx webpack</code>. As a result of the operation, the files <code>./wwwroot/scripts/bundle.js</code> and <code>./wwwroot/scripts/bundle.css</code> will be created. These files will contain all scripts and styles necessary for our application.
+Press <code>F5</code> in Visual Studio to launch the entire application.</p>
+<h1><a href="https://angular.io/">Angular</a> application</h1>
+<p>In this sample we will build a client-side of application using the <a href="https://angular.io/">Angular</a> framework.</p>
+<h2>Configure Server-side</h2>
+<p>As in the previous example, let's start from creating the new empty <code>ASP.NET Core Web Application (.NET Framework)</code> in Visual Studio.</p>
+<h3>Add NuGet packages for server-side</h3>
+<p>Then add the <a href="https://www.nuget.org/packages/Atalasoft.dotImage.WebControls.Core.x86/">Atalasoft.dotImage.WebControls.Core.x86</a> NuGet package. If you plan to run your application on a 64-bit server, you should use the package <a href="https://www.nuget.org/packages/Atalasoft.dotImage.WebControls.Core.x64/">Atalasoft.dotImage.WebControls.Core.x64</a>.</p>
+<p>By default, the new ASP.NET Core does not have any support for working with Angular. To integrate Angular into ASP.NET Core project we need to install <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.SpaServices.Extensions/2.1.1">Microsoft.AspNetCore.SpaServices.Extensions</a> Nuget package.</p>
+<h3>Configure Program.cs file</h3>
+<p>As usually, add a <code>PdfDecoder</code> for rendering PDF files by writing the next line of code at the beginning of <code>Program.Main</code> method in <code>Program.cs</code> file:</p>
+<pre class="prettyprint source lang-csharp"><code>RegisteredDecoders.Decoders.Add(new PdfDecoder());
+</code></pre>
+<h3>Configure Startup.cs file</h3>
+<p>At first, add the call for method <code>AddSpaStaticFiles()</code> to the <code>ConfigureServices()</code> method:</p>
+<pre class="prettyprint source lang-csharp"><code>services.AddSpaStaticFiles(configuration =>
+{
+    configuration.RootPath = &quot;wdv-app/dist&quot;;
+});
+</code></pre>
+<p>This service allows to work with the static files of the <a href="https://angular.io/">Angular</a> application. The parameter <code>configuration.RootPath</code> defines the location of these files. Later we will configure the <a href="https://angular.io/">Angular</a> application to place his compiled <em>javascript</em> files to this directory.</p>
+<p>Then, change the code of <code>Configure()</code> method on the following:</p>
+<pre class="prettyprint source lang-csharp"><code>public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
+
+            app.Map(&quot;/wdv&quot;, wdvApp => { wdvApp.RunWebDocumentViewerMiddleware(); });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = &quot;wdv-app&quot;;
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: &quot;start&quot;);
+                }
+            });
+        }
+</code></pre>
+<p>If development is complete and the application is already being deployed, the method <code>app.UseSpaStaticFiles()</code> is called. This method redirects the requests to the <a href="https://angular.io/">Angular</a> application.
+The method <code>app.UseSpa()</code> allows to send a default web page <code>index.html</code> in response to requests. This method should be the last in the pipe.
+If the app is in development mode, ASP .NET Core application will start <a href="https://angular.io/">Angular</a> CLI server by the <code>spa.UseAngularCliServer(npmScript: &quot;start&quot;)</code> method. As a parameter, the method accepts the command from <code>package.json</code> file. We will configure this command later, when we will configure <a href="https://angular.io/">Angular</a> CLI server.</p>
+<p>That is all with server part of our application</p>
+<h2>Configure client-side</h2>
+<p>The client part of our application will be built by Angular. At first, we need to install Angular CLI globally, so open the command prompt and run this command (node.js should be installed):</p>
+<p><code>npm install -g @angular/cli</code></p>
+<h3>Create Angular application skeleton</h3>
+<p>The next step is to create the new Angular project. First, in a command prompt navigate to the project folder and run the following command:</p>
+<p><code>ng new wdv-app</code></p>
+<p>The Angular CLI will ask some questions: choose the default answers. The all necessary <a href="https://angular.io/">Angular</a> npm packages and other dependencies will be installed and an initial skeleton of application will be created in the <strong>wdv-app</strong> subfolder. This can take a few minutes.</p>
+<p><em><strong>Note</strong></em> As it was mentioned in the section which is devoted to server-side configuration, ASP.NET Core application will look for the necessary<a href="https://angular.io/">Angular</a> files in the <strong>wdv-app</strong> folder and it subfolders. So it is important to give to the new <a href="https://angular.io/">Angular</a> application the same name as we used at in the server-side configuration.</p>
+<h3>Install Web Document Viewer package</h3>
+<p>To install Web Document Viewer package the <a href="https://npmjs.com">npm</a> can be used.</p>
+<p><code>npm install web-document-viewer</code></p>
+<p><em><strong>Note</strong></em> You should navigate to <em>wdv-app</em> folder before this command execution.</p>
+<h3>Configure Angular components</h3>
+<p>In Angular world the common practice to split application to small components, each focused on a specific task or workflow. It helps to keep application to be maintainable as it grows. The application already has one component, which is called <em>main</em> component. Let's create a separate component for Web Document Viewer. To do this navigate to the <em><strong>wdv-app</strong></em> folder, which was created by <code>ng new</code> command and run the following command in the terminal:</p>
+<p><code>ng generate component doc-viewer</code></p>
+<p><em><strong>Note</strong></em> See <a href="https://angular.io/guide/architecture-components">Angular documentation</a> to learn more about the components.</p>
+<h4>Main component</h4>
+<p>Now, when all necessary packages for client path are installed, we can configure our application. At first, remove all from file <code>wdv-app\src\app\app.component.html</code> and when add the following code:</p>
+<p><code>&lt;app-doc-viewer style=&quot;width: 100%; height: 600px;&quot;&gt;&lt;/app-doc-viewer&gt;</code></p>
+<p>This code set the boundaries of <code>doc-viewer</code> component inside the main component.</p>
+<p>In the file <code>wdv-app\src\app\app.component.ts</code> replace the generated title to <code>Web Document Viewer Demo</code>. That's all with main configuration, let's move on to doc-viewer component configuration.</p>
+<h4>Add UI</h4>
+<p>Replace the contents of <em><strong>doc-viewer.component.html</strong></em> by the following code:</p>
+<pre class="prettyprint source lang-html"><code>&lt;h1>Web Document Viewer Demo&lt;/h1>
+&lt;form id=&quot;WDVForm&quot; runat=&quot;server&quot;>
+    &lt;div id=&quot;mainContainer&quot; >
+        &lt;div id=&quot;thumbContainer&quot;>
+            &lt;h4>Select File to display:&lt;/h4>
+            &lt;select (change)=&quot;changeFile($event.target.value)&quot;>
+                &lt;option *ngFor=&quot;let file of files&quot; [value] = &quot;file.source&quot;>{{ file.name }}&lt;/option>
+            &lt;/select>
+            &lt;div id=&quot;thumbLeft&quot; class=&quot;atala-document-thumbnailer&quot;>&lt;/div>
+        &lt;/div>
+        &lt;div>
+            &lt;div class=&quot;atala-document-toolbar&quot;>&lt;/div>
+            &lt;div class=&quot;atala-document-container&quot; id=&quot;viewer&quot;>&lt;/div>
+        &lt;/div>
+    &lt;/div>
+&lt;/form>
+</code></pre>
+<p>Also add the following lines to the file <em><strong>doc-viewer.component.css</strong></em> to add the necessary styles for Web Document Viewer:</p>
+<pre class="prettyprint source lang-css"><code>div#mainContainer {
+    display: flex;
+    flex-direction:row;
+    justify-content: flex-start;
+}
+
+div#thumbContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.atala-document-thumbnailer{
+    width: 240px;
+    height: 700px;
+    float: left;
+}
+
+.atala-document-toolbar{
+    width: 800px;
+}
+
+.atala-document-container{
+    width: 800px;
+    height: 600px;
+}
+</code></pre>
+<h3>Configure the control</h3>
+<p>The configuration of web viewing control can be done with block of TypeScript code which should be placed to <em><strong>doc-viewer.component.ts</strong></em> file. Open this file and add the imports for <em>jquery</em> and <em>web-document-viewer</em> to the top of the file.</p>
+<pre class="prettyprint source lang-TypeScript"><code>import * as jQuery from 'jquery';
+import * as Atalasoft from 'web-document-viewer';
+</code></pre>
+<p>Then change the code of <em>DocViewerComponent</em> that it will look like this:</p>
+<pre class="prettyprint source lang-TypeScript"><code>export class DocViewerComponent implements OnInit {
+    files = files;
+    maxUploadSizeMb: number;
+    handler: string;
+    viewer: Atalasoft.Controls.WebDocumentViewer;
+    thumb: Atalasoft.Controls.WebDocumentThumbnailer;
+
+    constructor() {
+        this.maxUploadSizeMb = 1;
+        this.handler = 'wdv';
+     }
+
+  ngOnInit(): void {
+    this.viewer = new Atalasoft.Controls.WebDocumentViewer({
+            parent: jQuery('#viewer'),
+            toolbarparent: jQuery('.atala-document-toolbar'),
+            allowforms: true,
+            allowannotations: true,
+            allowtext: true,
+            savepath: 'saved',
+            serverurl: this.handler,
+            direction: Atalasoft.Utils.ScrollDirection.Vertical,
+            upload: {
+                enabled: true,
+                uploadpath: 'uploaded',
+                allowedfiletypes: '.jpg,.pdf,.png,.jpeg,image/tiff',
+                allowedmaxfilesize: this.maxUploadSizeMb * 1024 * 1024,
+                allowmultiplefiles: true,
+                allowdragdrop: true,
+                filesuploadconcurrency: 2
+            },
+            annotations: {
+                stamps: [
+                    {
+                        name: 'Approved',
+                        type: Atalasoft.Annotations.AnnotationTypes.stamp,
+                        fill: {
+                            color: 'green',
+                            opacity: 0.5
+                        },
+                        outline: {
+                            color: '#43BC6F'
+                        },
+                        text: {
+                            value: 'This document has been approved',
+                            align: 'left',
+                            font: {
+                                bold: false,
+                                color: '#B9C89D',
+                                family: 'Georgia',
+                                size: 24
+                            }
+                        }
+
+                    },
+                    {
+                        name: 'Approved2',
+                        type: Atalasoft.Annotations.AnnotationTypes,
+                        fill: {
+                                color: 'green',
+                                opacity: 0.5
+                            },
+                        outline: {
+                                color: 'Black'
+                            },
+                        text: {
+                                value: 'Approved',
+                                align: 'left',
+                                font: {
+                                    bold: false,
+                                    color: 'black',
+                                    family: 'Arial',
+                                    size: 24
+                                }
+                            },
+                        cornerradius: 50,
+                        burn: false
+                    }
+                ]
+            },
+        });
+
+    this.thumb = new Atalasoft.Controls.WebDocumentThumbnailer({
+        parent: jQuery('#thumbLeft'),
+        serverurl: this.handler,
+        maxwidth: 240,
+        minwidth: 60,
+        viewer: this.viewer,
+        allowannotations: true,
+        allowforms: true,
+        allowdragdrop: true,
+        showthumbcaption: true,
+        thumbcaptionformat: 'p. {0}',
+        tabular: true,
+        documenturl: 'images/Test.pdf',
+    });
+  }
+
+  changeFile(path: string) {
+    this.thumb.openUrl(path);
+  }
+}
+</code></pre>
+<p>You can notice that Web Document Viewer is defined by TypeScript as a regular module.
+As <em>web-document-viewer</em> package is shipped with slightly modified <em>jquery</em> package called as <em>jquery-ui-dist</em>, so it is necessary to tell the <a href="https://angular.io/">Angular</a> module loader to search for <em>jquery</em> module in the folder <em>node_modules/jquery-ui-dist</em>. To do this, we need to slightly modify the file <em>tsconfig.json</em> in the root folder of Angular application. Add the following setting to the <em>compilerOptions</em> section of this file:</p>
+<pre class="prettyprint source lang-javascript"><code>&quot;paths&quot;: {
+      &quot;jquery-ui&quot;:[&quot;node_modules/jquery-ui-dist/jquery-ui.min.js&quot;]
+    }
+</code></pre>
+<h4>Add image files</h4>
+<p>We should provide our application with files to display and specify where to search them. We can do it in the following way: at first, create a subdirectory of <code>wwwroot</code> with name <strong>images</strong> and place few test files here (We placed files <em>Test.pdf</em> and <em>Test.tif</em> here). Then in the <code>wdv-app\src\app</code> directory create the file <code>files.ts</code> with the following content:</p>
+<pre class="prettyprint source lang-TypeScript"><code>export const files = [
+    {
+        name: 'Test.pdf',
+        source: 'images/Test.pdf'
+    },
+    {
+        name: 'Test.tif',
+        source: 'images/Test.tif'
+    }
+];
+</code></pre>
+<p>After that we tell <code>doc-viewer</code> component where to search our file list. Add the following line to the <em><strong>doc-viewer.component.ts</strong></em> file.</p>
+<pre class="prettyprint source lang-TypeScript"><code>import {files} from '../files';
+</code></pre>
+<h4>Add styles</h4>
+<p>The last thing that we should to do is to import <em>CSS</em> styles from <em>jquery-ui-dist</em> and <em>web-document-viewer</em> packages to our project. One of the ways this can be done is coping files <code>wdv-app\node_modules\jquery-ui-dist\jquery-ui.min.css</code> and <code>wdv-app\node_modules\web-document-viewer\atalaWebDocumentViewer.css</code> to the <code>wdv-app\src\assets</code> folder (Also copy the <code>wdv-app\node_modules\web-document-viewer\images</code> folder here). Then add the following lines to the <code>wdv-app\src\index.html</code> file:</p>
+<pre class="prettyprint source lang-html"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;./assets/atalaWebDocumentViewer.css&quot;>
+&lt;link rel=&quot;stylesheet&quot; href=&quot;./assets/jquery-ui.min.css&quot;>
+</code></pre>
+<p>Now the client-side part is ready and you can try it out separately by running <code>ng serve</code> from the command line. It will compile the <a href="https://angular.io/">Angular</a> project and run the Angular CLI server. Then open the browser and navigate to <code>http://localhost:4200/</code> (the default destination for <a href="https://angular.io/">Angular</a> server). The browser should show Web Document Viewer UI, but without the opened document.</p>
+<p>To run the entire application start Asp.NET Core application from Visual Studio.</p>
 </article>
 
 </section>
-
-
-
-
 
 </div>
 

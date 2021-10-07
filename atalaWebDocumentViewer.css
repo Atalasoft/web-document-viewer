@@ -46,6 +46,7 @@
 .atala-ui-icon-upload { background-position: -448px 0; }
 .atala-ui-icon-upload-cancel { background-position: -464px 0; }
 
+.atala-ui-icon-bookmarks { background-position: -480px 0; }
 .atala-ui-form-highlight { background-color: rgb(204, 215, 255) !important; background-color: rgba(204, 215, 255, .7) !important }
 .atala-ui-form-required { border: 3px solid red !important }
 
@@ -90,6 +91,7 @@
     background-color: #fff;
     transition: background 0	
 }
+.atala_search_input.atala_search_input_empty:focus { outline: none;}
 
 .atala_page_loading {
     background: url('images/atala-ui-spinner.gif') center no-repeat;
@@ -199,3 +201,74 @@ button.atala-upload-files-cancel-button {
     width: 32px;
     height: 32px;
 }
+
+.atala_bookmark_content{
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 150px;
+    max-width: 350px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 11;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 1em;
+    overflow: auto;
+}
+
+.atala_bookmark_header{
+    font-size: 1.3em;
+}
+
+.atala_bookmark_content li,ul {
+    color: black;
+    padding: 9px 9px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    user-select: none;
+  }
+
+ .atala_bookmark_content a:hover {background-color: #ddd}
+  
+  /* Create the caret/arrow with a unicode, and style it */
+  .atala-bookmark-caret::before {
+    content: "\25BA";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+  }
+  
+  /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+  .atala-bookmark-caret-down::before {
+    transform: rotate(90deg);
+  }
+  
+  /* Hide the nested list */
+  .atala-bookmark-nested {
+    display: none;
+  }
+
+  /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.atala-bookmark-active {
+    display: block;
+  }
+
+.atala_tiled_page_image {
+    display: flex;
+    flex-direction: row;
+}
+
+.atala_tile_column {
+    flex-direction: column;
+    padding: 0px;
+    font-size: 0;
+}
+
+/* .atala_cover_for_tiled_page_image{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+} */
