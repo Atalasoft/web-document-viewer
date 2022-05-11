@@ -219,14 +219,22 @@ button.atala-upload-files-cancel-button {
     font-size: 1.3em;
 }
 
-.atala_bookmark_content li,ul {
+.atala_bookmark_content li {
     color: black;
     padding: 9px 9px;
     text-decoration: none;
     display: block;
     cursor: pointer;
     user-select: none;
-  }
+}
+
+.atala_bookmark_content ul {
+    color: black;
+    padding: 9px 9px;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+}
 
  .atala_bookmark_content a:hover {background-color: #ddd}
   

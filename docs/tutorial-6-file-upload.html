@@ -50,7 +50,15 @@
 <article>
     <p>Web Document Viewer (WDV) supports uploading files on a server. It can be done using WDV JavaScript API or WDV UI.</p>
 <h2>Enabling file upload</h2>
-<p>File upload is disabled by default. By setting an 'upload' configuration section to any value, including the 'empty object,' you can enable it.</p>
+<p>File upload is disabled by default. To enable upload it is necessary to:</p>
+<ol>
+<li>
+<p>Set an 'upload' configuration section in client Javascript part to any value, including the 'empty object'.</p>
+</li>
+<li>
+<p>Override <code>FileUpload</code> event handler and set <code>false</code> for <code>Cancel</code> flag. An example of method overloading will be given below.</p>
+</li>
+</ol>
 <h3>Minimal config to enable upload with default parameters and uploading to web application root</h3>
 <pre class="prettyprint source lang-js"><code>var viewer = new Atalasoft.Controls.WebDocumentViewer({
     //... other viewer settings
@@ -105,11 +113,13 @@
 
     private void MyWdv_FileUpload(object sender, FileUploadEventArgs e)
     {
-        // Files that should be uploaded in wrong folder
-        // or have incorrect extension should be rejected
-        if (e.SaveFolder.Contains(&quot;StopWord&quot;) ||
-            e.FileName.EndsWith(&quot;.exe&quot;))
+        // Allow upload, except when the wrong folder is specified or file has incorrect extension
+        if (e.SaveFolder.Contains(&quot;StopWord&quot;) || e.FileName.EndsWith(&quot;.exe&quot;)){
             e.Cancel = true;
+        }else{
+            e.Cancel = false;
+        }
+            
 
         // Some files, for instance, we want to save in MemoryStream and not on
         // file system. Probably then we would like to move them to another storage.
