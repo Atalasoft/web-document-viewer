@@ -49,7 +49,7 @@
 
 <article>
     <p>Starting with DotImage 11.0 Web Document Viewer supports <a href="https://www.asp.net/core">ASP.NET Core</a> framework.
-This topic tells you how to create a sample application using <a href="https://nuget.org">Nuget</a> and <a href="https://bower.io">Bower</a> packages.
+This topic tells you how to create a sample application using <a href="https://nuget.org">Nuget</a>.
 It's quite similar to the <a href="tutorial-1-1-demo-application.html">Demo Application</a>, but with some differences specific to the new framework.</p>
 <p>Follow these steps to create a new web project.
 This guide takes you through setting up a basic web page containing an embedded Web Document Viewer and displaying an initial document in it.</p>
@@ -76,27 +76,7 @@ you should use the package <a href="https://www.nuget.org/packages/Atalasoft.dot
 <p>Since the Web Document Viewer uses a file system to access the images to show on the page,
 you also need the package <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles">Microsoft.AspNetCore.StaticFiles</a>.</p>
 <h3>Add packages for client-side</h3>
-<p>Web Document Viewer JS package can be downloaded using <a href="https://npmjs.com">npm</a> or <a href="https://bower.io/">Bower</a>. Since the Bower is maintained  and its support was deprecated in VS 2017 15.5 update it's highly recommended to use npm packages, however, using of Bower with VS2017 is easier than npm and requires less additional actions. You can choose any package manager and read only section that is related to it.</p>
-<h4>Add Bower packages for client-side</h4>
-<p>First of all, you need to manually add two empty javascript files to the project root. First of them is <code>bower.json</code> and it will contains
-our project bower dependencies. The second one is <code>.bowerrc</code>, we need it to configure where we want store bower packages and from where they should
-be downloaded.</p>
-<p>Now we should fill these javascript files. We will start from <code>.bowerrc</code> file, in this file we add the folder where bower should download all packages and, since Microsoft doesn't update their bower executable, we need to manually setup where packages should be found. The result file will be looked like this</p>
-<pre class="prettyprint source lang-javascript"><code>{
-  &quot;directory&quot;: &quot;wwwroot/lib&quot;,
-  &quot;registry&quot;: &quot;https://registry.bower.io&quot;
-}
-</code></pre>
-<p>Now you can add a Bower package <code>web-document-viewer</code>, it also automatically adds all necessary dependencies. To do this, open the <code>bower.json</code> file, and write its contents like this</p>
-<pre class="prettyprint source lang-javascript"><code>{
-  &quot;name&quot;: &quot;asp.net&quot;,
-  &quot;private&quot;: true,
-  &quot;dependencies&quot;: {
-    &quot;web-document-viewer&quot;: &quot;~11.3.0&quot;
-  }
-}
-</code></pre>
-<p>In this file we setup package name, made it private, in order to do not publish it accidentally, and added a one dependency to a <a href="https://github.com/Atalasoft/web-document-viewer">web-document-viewer</a> package. The <code>~</code> symbol before the version allows us to download latest patch version of the package.</p>
+<p>Web Document Viewer JS package can be downloaded using <a href="https://npmjs.com">npm</a>. (Bower is maintained  and its support was deprecated in DotImage 11.4 update. It's highly recommended to use npm packages).</p>
 <h4>Add npm packages for client-side</h4>
 <p>To add npm packages you need to create a <code>package.json</code> from <code>npm Configuration file</code> template, add there a <a href="https://www.npmjs.com/package/web-document-viewer">web-document-viewer</a> package, and save the file. After that the Visual Studio installs this package with all dependencies to <code>node_modules</code> folder in project root. This folder can not be accessed from the web application without additional code modifications on server-side, but for security reasons it's totally okay. You need to place all necessary files from this folder to <code>wwwroot\&lt;subfolder&gt;</code> path, it can be done manually of with using help of scripts.
 Also, if you use npm version 5 or higher, don't forget to commit <code>package-lock.json</code> file in order to be sure, that every time the same set of packages with same versions will be installed.</p>
@@ -107,13 +87,13 @@ Also, if you use npm version 5 or higher, don't forget to commit <code>package-l
   &quot;name&quot;: &quot;web-document-viewer-basic&quot;,
   &quot;private&quot;: true,
   &quot;devDependencies&quot;: {
-    &quot;web-document-viewer&quot;: &quot;~11.3.0&quot;,
+    &quot;web-document-viewer&quot;: &quot;~11.4.0&quot;,
     &quot;gulp&quot;: &quot;^4.0.0&quot;,
     &quot;rimraf&quot;: &quot;^2.0.0&quot;
   }
 }
 </code></pre>
-<p>After that, when all packages are installed, you need to add a <code>gulpfile.js</code>, VS2017 doesn't provide a special template for it, so you can use a generic template for JavaScript files, or don't use anything. And there we add all necessary code, that will help us to manipulate with scripts files from <code>node_modules</code> folder and copy them to <code>wwwroot\lib</code>. See the code below:</p>
+<p>After that, when all packages are installed, you need to add a <code>gulpfile.js</code>, Visual Studio doesn't provide a special template for it, so you can use a generic template for JavaScript files, or don't use anything. And there we add all necessary code, that will help us to manipulate with scripts files from <code>node_modules</code> folder and copy them to <code>wwwroot\lib</code>. See the code below:</p>
 <pre class="prettyprint source lang-javascript"><code>/// &lt;binding BeforeBuild='build' Clean='clean' />
 &quot;use strict&quot;;
 
@@ -208,21 +188,7 @@ embedded in your page.</p>
 <h2>Set up the viewer control</h2>
 <p>The setup for web document viewing just requires placing some JavaScript, CSS, and HTML into your page. And the first step is to add the new page to your web application. To do this, add a new HTML file with name <code>index.html</code> to the <code>wwwroot</code> folder.</p>
 <h3>Include the web resources</h3>
-<p>Open <code>index.html</code> and replace its <code>head</code> section with the following script and link tags to include the necessary Web Document Viewer code and dependencies. There are some differences in scripts locations if you using Bower or nmp. Choose the code that corresponds to selected package manager system:</p>
-<h4>Bower resources location</h4>
-<pre class="prettyprint source lang-html"><code>&lt;head>
-    &lt;!-- Scripts for Web Viewing -->
-    &lt;script src=&quot;lib/jquery/dist/jquery.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
-    &lt;script src=&quot;lib/jquery-ui/jquery-ui.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
-    &lt;script src=&quot;lib/raphael/raphael.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
-    &lt;script src=&quot;lib/clipboard/dist/clipboard.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
-    &lt;script src=&quot;lib/web-document-viewer/atalaWebDocumentViewer.js&quot; type=&quot;text/javascript&quot;>&lt;/script>
-
-    &lt;!-- Style for Web Viewer -->
-    &lt;link href=&quot;lib/jquery-ui/themes/base/jquery-ui.min.css&quot; rel=&quot;stylesheet&quot; />
-    &lt;link href=&quot;lib/web-document-viewer/atalaWebDocumentViewer.css&quot; rel=&quot;stylesheet&quot; />
-&lt;/head>
-</code></pre>
+<p>Open <code>index.html</code> and replace its <code>head</code> section with the following script and link tags to include the necessary Web Document Viewer code and dependencies.</p>
 <h4>npm resources location</h4>
 <pre class="prettyprint source lang-html"><code>&lt;head>
     &lt;!-- Scripts for Web Viewing -->
@@ -567,7 +533,7 @@ Now we can supply our custom implementation of <code>IWebDocumentViewerCallbacks
     ...
 </code></pre>
 <p>Now, if you can start the application and check that it save Pdf files in the Pdf/A format if <code>Save as PdfA</code> checkbox is checked in.
-For more information about methods available through <code>IWebDocumentViewerCallbacks</code> interface read the documentation shipped with Atalasoft DotImage or <a href="https://www.atalasoft.com/docs/dotimage/docs/html/T_Atalasoft_Imaging_WebControls_Core_IWebDocumentViewerCallbacks.htm">its online version</a>.</p>
+For more information about methods available through <code>IWebDocumentViewerCallbacks</code> interface read the documentation shipped with Atalasoft DotImage or <a href="https://www.atalasoft.com/Support/APIs-Dev-Guides">its online version</a>.</p>
 </article>
 
 </section>
