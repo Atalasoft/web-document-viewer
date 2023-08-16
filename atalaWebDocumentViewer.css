@@ -272,6 +272,73 @@ button.atala-upload-files-cancel-button {
     font-size: 0;
 }
 
+.atala_draw_layer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background: #F00;
+    opacity: 0.0;
+}
+
+.atala_scrollbar_x {
+    overflow: scroll;
+    position: absolute;
+    background-color: Transparent;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 10;
+}
+
+.atala_scrollbar_firefox_x {
+    overflow-x: scroll;
+    position: absolute;
+    background-color: Transparent;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 10;
+}
+
+.atala_scrollbar_y {
+    overflow: scroll;
+    position: absolute;
+    background-color: Transparent;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    z-index: 10
+}
+
+.atala_scrollbar_firefox_y {
+    overflow-y: scroll;
+    position: absolute;
+    background-color: Transparent;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    z-index: 10
+}
+
+.atala_pg_num {
+    position: absolute;
+    right: 20px;
+    bottom: 16px;
+    z-index: 1;
+}
+
+.atala_title_span {
+    display: none;
+}
+
+.atala_span {
+    position: absolute;
+    visibility: hidden;
+    left: -5000px;
+}
+
 /* .atala_cover_for_tiled_page_image{
     width: 100%;
     height: 100%;
