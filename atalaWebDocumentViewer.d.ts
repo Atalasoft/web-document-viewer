@@ -1,13 +1,13 @@
 //-------------------------------------------------------------------------------------------------
 //
 //  Type definition file for Atalasoft Web Document Viewer. 
-//  (C) 2003-2023 Kofax. All Rights Reserved.
+//  (C) 2003-2024 Kofax. All Rights Reserved.
 //
 //  This source code is property of Atalasoft, Inc. (http://www.atalasoft.com/)
 //  Permission for usage and modification of this code is only permitted 
 //  with the purchase of a source code license.
 //-------------------------------------------------------------------------------------------------
-// Version 11,4,0,410
+// Version 11,4,0,458
 
 export as namespace Atalasoft;
 interface NotificationCallback {
