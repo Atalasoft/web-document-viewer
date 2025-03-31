@@ -1,13 +1,13 @@
 //-------------------------------------------------------------------------------------------------
 //
 //  Type definition file for Atalasoft Web Document Viewer. 
-//  (C) 2000-2024 Tungsten Automation. All Rights Reserved.
+//  (C) 2000-2025 Tungsten Automation. All Rights Reserved.
 //
 //  This source code is property of Atalasoft, Inc. (http://www.atalasoft.com/)
 //  Permission for usage and modification of this code is only permitted 
 //  with the purchase of a source code license.
 //-------------------------------------------------------------------------------------------------
-// Version 11,5,0,230
+// Version 11,5,0,243
 
 export as namespace Atalasoft;
 interface NotificationCallback {
