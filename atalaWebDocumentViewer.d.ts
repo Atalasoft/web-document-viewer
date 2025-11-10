@@ -7,7 +7,7 @@
 //  Permission for usage and modification of this code is only permitted 
 //  with the purchase of a source code license.
 //-------------------------------------------------------------------------------------------------
-// Version 11,5,0,329
+// Version 11,5,0,342
 
 export as namespace Atalasoft;
 interface NotificationCallback {
@@ -1290,6 +1290,7 @@ export namespace Utils{
         dialogButtonCancel: string;
         rectangleDialogTitle: string;
         textDialogTitle: string;
+        stampDialogTitle: string;
         ellipseDialogTitle: string;
         lineDialogTitle: string;
         linesDialogTitle: string;

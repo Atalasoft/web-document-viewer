@@ -2300,7 +2300,8 @@
 
 
 <div class="description">
-    <p>Reloads the specified page.</p>
+    <p>Reloads the specified page. If the thumbnailer is linked with viewer, viewer page is reloaded and callback is called when both viewer and thumbnailer completely reloaded, including image data itself.</p>
+<p>Viewer page won't be reloaded if the viewer is currently controller by other thumbnailer and requested page was not loaded in viewer before. In such case page will be lazy-loaded as usual. If special parameters should be passed, <a href="Atalasoft.Controls.WebDocumentViewer.html#event:beforehandlerrequest"><code> beforehandlerrequest</code></a> event to modify request parameters.</p>
 </div>
 
 
@@ -2437,9 +2438,7 @@
                 </td>
             
 
-            <td class="description last"><p>A plain object containing optional parameters that will be passed to server.</p>
-<p>Params could contain any application specific information that should be passed to server.
-For example, this could be the aggregated list of the parameters that was used in <a href="Atalasoft.Controls.WebDocumentViewer.html#reloadPage"><code>reloadPage</code></a> calls for different pages.</p></td>
+            <td class="description last"><p>A plain object containing optional reload parameters that will be passed to server.</p></td>
         </tr>
 
     
@@ -4888,8 +4887,7 @@ It's possible to call this method multiple times for the same document to load d
 
 
 <div class="description">
-    <p>Reloads the specified page. If the thumbnailer is linked with viewer, viewer page is reloaded and callback is called when both viewer and thumbnailer completely reloaded, including image data itself.</p>
-<p>Viewer page won't be reloaded if the viewer is currently controller by other thumbnailer and requested page was not loaded in viewer before. In such case page will be lazy-loaded as usual. If special parameters should be passed, <a href="Atalasoft.Controls.WebDocumentViewer.html#event:beforehandlerrequest"><code> beforehandlerrequest</code></a> event to modify request parameters.</p>
+    <p>Reloads the specified page.</p>
 </div>
 
 
@@ -5026,7 +5024,9 @@ It's possible to call this method multiple times for the same document to load d
                 </td>
             
 
-            <td class="description last"><p>A plain object containing optional reload parameters that will be passed to server.</p></td>
+            <td class="description last"><p>A plain object containing optional parameters that will be passed to server.</p>
+<p>Params could contain any application specific information that should be passed to server.
+For example, this could be the aggregated list of the parameters that was used in <a href="Atalasoft.Controls.WebDocumentViewer.html#reloadPage"><code>reloadPage</code></a> calls for different pages.</p></td>
         </tr>
 
     
