@@ -57,38 +57,41 @@
 
     <section class="readme">
         <article><h1>Atalasoft Web Document Viewer API Reference</h1>
-<p>The Atalasoft Web Document Viewer API reference contains information about Atalasoft HTML5 imaging controls.</p>
+<p>The Atalasoft Web Document Viewer API reference contains information about Atalasoft HTML5 imaging controls (WebDocumentViewer and WebDocumentThumbnailer). This documentation does not cover the legacy web controls (WebAnnotationViewer, WebImageViewer, WebThumbnailViewer)</p>
 <h2>Introduction</h2>
-<p>There currently is a gap of functionality on the internet in that browsers currently only display &quot;web native&quot; image formats (PNG, JPEG, GIF, and SVG). Popular multipage document formats like PDF, TIFF and Office formats (like Excel and Word), all cannot be displayed natively on a web page. Atalasoft web controls solves this problem and provide JavaScript APIs to build viewer apps that:</p>
+<p>There currently is a gap of functionality on the internet in that browsers currently only display &quot;web native&quot; image formats (PNG, JPEG, GIF, WEBP, and SVG). Popular multipage document formats like PDF, TIFF and Office formats (like Excel and Word), all cannot be displayed natively on a web page. Atalasoft web controls solves this problem and provide JavaScript APIs to build viewer apps that:</p>
 <ul>
 <li>Work on every HTML5 browser (including mobile browsers).</li>
-<li>Display different types of images. PDF, TIFF, PNG, JPEG, BMP, GIF, PCX, PSD, PCD, RAW, WMF/EMF, TGA, JBIG2, Jpeg2000, DICOM, DWG, Xps, etc.</li>
+<li>Display different types of images. PDF*, TIFF, PNG, JPEG, BMP, GIF, PCX, PSD, PCD, RAW**, WMF/EMF**,  TGA, JBIG2**, Jpeg2000**, DICOM**, DWG**, XPS**, MS Office files* (DOCX, DOC, RTF, XLSX, XLS, PPT, MSG), HTML**, TXT**, EML**, WEBP**, etc.
+<ul>
+<li>* with appropriate licensing and extra configuration</li>
+<li>** with appropriate extra configuration</li>
+</ul>
+</li>
 <li>Modify document structure and save modified documents.</li>
 <li>Enable annotations, thumbnails, and mobile support for a document.</li>
-<li>Display and fill PDF forms.</li>
-<li>Support text selection basing on PDF text layer or OCR data.</li>
+<li>Display and fill PDF forms (with DotPdf add-on).</li>
+<li>Support text selection basing on PDF text layer or OCR data. (With PDFReader and OCR add-ons)</li>
 <li>Effectively work with big documents - make it possible to stream individual pages on demand without downloading the entire document first.</li>
 <li>Can be embedded into an existing web page or application.</li>
 </ul>
 <h2>Related documentation</h2>
 <p>In addition to this guide, the Atalasoft documentation set includes the following:</p>
 <ul>
-<li>Atalasoft CHM API Reference gives the complete Atalasoft server-side class library for offline use. The latest version is available on <a href="https://www.atalasoft.com/Support/APIs-Dev-Guides">Atalasoft's APIs &amp; Developer Guides page</a>.</li>
-<li>You can also refer to the following Atalasoft information resources:
+<li>API Reference (.chm file) gives the complete Atalasoft WingScan server-side class library for offline use. The latest version is available on <a href="https://www.atalasoft.com/Support/APIs-Dev-Guides">Atalasoft's APIs &amp; Developer Guides page</a>.</li>
+<li>You can also refer to the following Atalasoft WingScan information resources:
 <ul>
-<li><a href="https://www.atalasoft.com/support/">Atalasoft Support</a></li>
-<li><a href="https://www.atalasoft.com/kb2">Atalasoft Knowledgebase</a></li>
-<li><a href="https://atalasoft.github.io/">Atalasoft Development Team Blog</a></li>
-<li><a href="http://atalasoft-viewer-demo.azurewebsites.net/">Web Document Viewer Demo</a></li>
+<li><a href="http://www.atalasoft.com/support/">Atalasoft Support</a></li>
+<li><a href="http://www.atalasoft.com/kb2">Atalasoft Knowledgebase</a></li>
+<li><a href="https://docshield.tungstenautomation.com/Portal/Products/en_US/WebCapture/2026.2-ka91n6eq9e/print/AtalasoftDotImageDevelopersGuide_EN.pdf">DotImage Developers Guide</a></li>
+<li>Web Document Viewer Demo: <a href="http://atalasoft-viewer-demo.azurewebsites.net/">live demo</a>, <a href="https://www.atalasupport.net/demos/LegacyDemos-11.5/WebViewingDemo.zip">download source</a></li>
 </ul>
 </li>
 </ul>
-<h2>Training</h2>
-<p>Kofax offers both classroom and computer-based training to help you make the most of your Atalasoft solution. Visit the <a href="https://www.kofax.com">Kofax website</a> for details about the available training options and schedules.</p>
-<h2>Getting Help for Kofax products</h2>
-<p>Kofax regularly updates the Kofax Support site with the latest information about Kofax products.
-To access some resources, you must have a valid Support Agreement with an authorized Kofax Reseller/Partner or with Kofax directly.
-Use the tools that Kofax provides for researching and identifying issues. For example, use the <a href="https://knowledge.kofax.com/General_Support/Contact_Support/00_Support_Portal_Information">Kofax Support</a> site to search for answers about messages, keywords, and product issues.</p></article>
+<h2>Getting Help for Atalasoft products</h2>
+<p>Atalasoft regularly updates our support <a href="http://www.atalasoft.com/kb2">Knowledgebase</a> with the latest information about our products. To access some resources, you must have a valid Support Agreement with an authorized Atalasoft Reseller/Partner or with Atalasoft directly. Use the tools that Atalasoft provides for researching and identifying issues.</p>
+<p>Customers with an active evaluation, or those with active support / maintenance may <a href="https://www.atalasoft.com/Support/my-portal/Cases/Create-Case">create a support case</a> 24/7, or call in to support (<a href="tel:19492366510">+1 949 236-6510</a> ) during our normal support hours (Monday - Friday 8:00 a.m. to 5:00 p.m. Eastern (New York) time).</p>
+<p>Customers who are unable to create a case or call in may <a href="email:sales@atalasoft.com">email our Sales Team</a>.</p></article>
     </section>
 
 
@@ -102,7 +105,7 @@ Use the tools that Kofax provides for researching and identifying issues. For ex
 <br class="clear">
 
 <footer>
-    Copyright 2003 - 2025<?js?>  Atalasoft, Inc. All Rights Reserved.
+    Copyright 2003 - 2026<?js?>  Atalasoft, Inc. All Rights Reserved.
 
 </footer>
 
